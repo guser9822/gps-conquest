@@ -11,6 +11,7 @@ namespace TC.GPConquest {
 
         private void Start()
         {
+            //Instantiate Player
             NetworkManager.Instance.InstantiatePlayerDestinationController(0);
         }
     }
