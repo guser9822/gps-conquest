@@ -335,6 +335,47 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ff1a372d150d3417b9c91db4d23a77a4, type: 2}
     - {fileID: 11400000, guid: e9d6beaf94c814eb6b723f198f42c62a, type: 2}
   additionalRecipes: []
+--- !u!1 &824745309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 824745310}
+  - component: {fileID: 824745311}
+  m_Layer: 0
+  m_Name: Client
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &824745310
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 824745309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.068931, y: 0.8342035, z: -8.151034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &824745311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 824745309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5e5684ba01b5d40ba8b521cecabf12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkManager: {fileID: 186558, guid: 79adc0da5b6caf74990d862696696ecd, type: 2}
 --- !u!1 &832602813
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,10 +982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177f39f8f4d266c46b25881921d7c7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirdPersonController: {fileID: 0}
-  umaCharactersAsset: {fileID: 0}
-  generator: {fileID: 0}
-  context: {fileID: 0}
 --- !u!1 &2102734278
 GameObject:
   m_ObjectHideFlags: 0
