@@ -8,6 +8,14 @@ namespace TC.GPConquest {
 
     public class GameStatusController : MonoBehaviour
     {
+        public ClientNetworkController ClientNetworkController;
+        public ConnectionInfo ConnectionInfo;
+
+        private void Awake()
+        {
+            ConnectionInfo.SetConnectionInfo();
+            ClientNetworkController.StartCustomNetworkController(ConnectionInfo);
+        }
 
         private void Start()
         {

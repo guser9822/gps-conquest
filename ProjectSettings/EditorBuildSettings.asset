@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/MarkLight4GPConquest/Scenes/ServerScene.unity
     guid: 7c30daac5ee0a7648a9a17399e58a354
-  - enabled: 0
+  - enabled: 1
     path: Assets/MarkLight4GPConquest/Scenes/LoginScene.unity
     guid: f4894b8cf8e2e944b831635a6383e81a
-  - enabled: 0
+  - enabled: 1
     path: Assets/GPConquest/Scenes/GameScene.unity
     guid: 2114a17aac1c9a94992eb4099e39505f

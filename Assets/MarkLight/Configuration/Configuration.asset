@@ -15,4 +15,5 @@ MonoBehaviour:
   - Assets/Views/
   - Assets/MarkLight/Views/
   - Assets/MarkLight/Examples/Views/
+  - Assets/MarkLight4GPConquest/Views/
   SchemaFile: Assets/MarkLight/Views/Schemas/MarkLight.xsd

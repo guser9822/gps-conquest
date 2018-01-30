@@ -344,6 +344,8 @@ GameObject:
   m_Component:
   - component: {fileID: 824745310}
   - component: {fileID: 824745311}
+  - component: {fileID: 824745312}
+  - component: {fileID: 824745313}
   m_Layer: 0
   m_Name: Client
   m_TagString: Untagged
@@ -376,6 +378,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkManager: {fileID: 186558, guid: 79adc0da5b6caf74990d862696696ecd, type: 2}
+--- !u!114 &824745312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 824745309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece2d9cae1edb9846b1123f274c50f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IpAddress: 
+  ServerPort: 
+  InternetProtocol: 
+--- !u!114 &824745313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 824745309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f559e605b7a7c47914fd6be7a22432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClientNetworkController: {fileID: 824745311}
+  ConnectionInfo: {fileID: 824745312}
 --- !u!1 &832602813
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +910,6 @@ GameObject:
   - component: {fileID: 2066261508}
   - component: {fileID: 2066261507}
   - component: {fileID: 2066261506}
-  - component: {fileID: 2066261511}
   - component: {fileID: 2066261512}
   m_Layer: 0
   m_Name: Main Camera
@@ -960,17 +988,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2066261511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2066261505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3f559e605b7a7c47914fd6be7a22432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2066261512
 MonoBehaviour:
   m_ObjectHideFlags: 0
