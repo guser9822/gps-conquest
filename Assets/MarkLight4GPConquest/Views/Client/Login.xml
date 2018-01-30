@@ -1,0 +1,6 @@
+<Login xmlns="MarkLight">
+  <UserInterface>
+    <LoginUI BackgroundColor="gray"/>
+  </UserInterface>
+  <EventSystem />
+</Login>
