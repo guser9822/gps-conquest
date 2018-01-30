@@ -1,0 +1,32 @@
+ManifestFileVersion: 0
+CRC: 4003479760
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4b9593a999d8e78abe62cf10d3dc0492
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8d1c48a1f52504077809b58af43f969c
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9448878e2e40f1a4c9f8fd2b56832b13, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 2.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 1.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 4.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 3.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 2.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 4.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 3.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 1.asset
+- Assets/Standard Assets/Characters/ThirdPersonCharacter/Animator/ThirdPersonAnimatorController.controller
+Dependencies: []
