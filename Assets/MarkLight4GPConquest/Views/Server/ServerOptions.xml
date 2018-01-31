@@ -1,0 +1,12 @@
+<ServerOptions xmlns="MarkLight">
+  <Group Spacing="8px">
+    <Label Text="IP Address" />
+    <InputField Id="InputIp"/>
+    <Label Text="Server Port" />
+    <InputField Id="InputPort"/>
+    <Label Text="Server Protocol"/>
+    <ComboBox Id="ComboBoxProtocols" Items="{InternetProtocols}">
+      <ComboBoxItem IsTemplate="True" Text="{#Item}"/>
+    </ComboBox>
+  </Group>
+</ServerOptions>

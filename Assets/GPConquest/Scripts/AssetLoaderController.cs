@@ -19,12 +19,12 @@ namespace TC.GPConquest.Player {
 
         private void Awake()
         {
-            CacheAllUMA("umacharactersasset");
-            generator = MonoBehaviour.FindObjectOfType<UMAGenerator>();
-            context = MonoBehaviour.FindObjectOfType<UMAContext>();
+            //CacheAllUMA("umacharactersasset");
+            //generator = MonoBehaviour.FindObjectOfType<UMAGenerator>();
+            //context = MonoBehaviour.FindObjectOfType<UMAContext>();
         }
 
-        void CacheAllUMA(string assetName)
+        public void CacheAllUMA(string assetName)
         {
             umaCharactersAsset = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/"+assetName);
             Object[] allAssets = umaCharactersAsset.LoadAllAssets();
@@ -39,6 +39,9 @@ namespace TC.GPConquest.Player {
                 }
                 else { thirdPersonController = (RuntimeAnimatorController)asset; }
             }
+
+            generator = MonoBehaviour.FindObjectOfType<UMAGenerator>();
+            context = MonoBehaviour.FindObjectOfType<UMAContext>();
         }
     }
 

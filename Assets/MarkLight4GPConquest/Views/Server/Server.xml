@@ -1,0 +1,6 @@
+<Server xmlns="MarkLight">
+  <UserInterface>
+    <ServerUI />
+  </UserInterface>
+  <EventSystem />
+</Server>

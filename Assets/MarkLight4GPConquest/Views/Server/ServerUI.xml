@@ -1,0 +1,24 @@
+<ServerUI xmlns="MarkLight" BackgroundColor="grey">
+  <Region Width="25%" Alignment="Left">
+      <Group Id="ButtonsGroup" Spacing="10px" Alignment="Center">
+        <Button Id="StartServerButton" Text="Start Server" Click="StartServerActivation" />
+        <Button Id="ServerOptionsButton" Text="Server Options" Click="CallServerOptions" />
+        <Button Id="ServerDisconnectButton" Text="Disconnect server" Click="CallServerDisconnect" />  
+        <Button Id="CloseServerButton" Text="Exit" Click="CallCloseServer" />
+      </Group>
+  </Region>
+  <Region Width="75%" Alignment="Right">
+    <ViewSwitcher Id="ContentViewSwitcher">
+      <Region /><!-->Default view-->
+      <Region>
+        <ServerStart Id="ServerStart"/>
+      </Region>
+      <Region>
+        <ServerStop Id="ServerStop"/>
+      </Region>
+      <Region>
+        <ServerOptions Id="ServerOptions"/>
+      </Region>
+    </ViewSwitcher>
+  </Region>
+</ServerUI>

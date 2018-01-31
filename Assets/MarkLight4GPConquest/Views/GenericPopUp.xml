@@ -1,0 +1,5 @@
+<GenericPopUp xmlns="MarkLight">
+  <Window Id="GenericWindow" Title="Infomation" Width="300px" Height="200px">
+    <Label Style="ShowcaseDescription" Text="{GenericPopUpMessage}" Width="60%" Height="60%" TextAlignment="Center" Margin="50px" />
+  </Window>
+</GenericPopUp>
