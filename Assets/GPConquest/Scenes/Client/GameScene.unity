@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 824745312}
   - component: {fileID: 824745313}
   - component: {fileID: 824745314}
+  - component: {fileID: 824745315}
   m_Layer: 0
   m_Name: Client
   m_TagString: Untagged
@@ -407,6 +408,7 @@ MonoBehaviour:
   ClientNetworkController: {fileID: 824745311}
   ConnectionInfo: {fileID: 824745312}
   AssetLoaderController: {fileID: 824745314}
+  TileGen: {fileID: 824745315}
 --- !u!114 &824745314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +420,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177f39f8f4d266c46b25881921d7c7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &824745315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 824745309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569bf506145a7204ba6db321d5f06983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 125134, guid: a27f19263659e5b46b808096839917b0, type: 2}
+  LatLng: {x: 0, y: 0}
+  Center: {x: 0, y: 0}
+  startTile: {x: 0, y: 0}
+  editorMode: 0
 --- !u!1 &832602813
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,11 @@ namespace TC.GPConquest {
         public ClientNetworkController ClientNetworkController;
         public ConnectionInfo ConnectionInfo;
         public AssetLoaderController AssetLoaderController;
+        public tileGen TileGen;
 
         private void Awake()
         {
+            
             AssetLoaderController.CacheAllUMA("umacharactersasset");
             ConnectionInfo.SetConnectionInfo();
             ClientNetworkController.StartCustomNetworkController(ConnectionInfo);
