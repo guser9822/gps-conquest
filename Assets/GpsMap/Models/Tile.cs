@@ -135,8 +135,7 @@ namespace Assets
 
         private void constructTiles(JSONObject mapData, Vector2 realPos, int zoom, Vector2 worldCenter) {
 
-            gameObject.AddComponent<BoxCollider>();
-
+            //gameObject.AddComponent<BoxCollider>();
             Rect = GM.TileBounds(realPos, zoom);
 
             //make em

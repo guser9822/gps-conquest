@@ -50,6 +50,7 @@ namespace TC.GPConquest.Player
         {
             base.NetworkStart();
             InitDestinationController();
+
         }
 
         protected void InitDestinationController()

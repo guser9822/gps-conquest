@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
-using Assets.Helpers;
 using Assets;
-
+using BeardedManStudios.Forge.Networking.Generated;
+using TC.GPConquest.Player;
 /// <summary>
 /// Breve introduzione : Il seguente progetto è in sostanza un clone di Pokemon-Go / Ingress con diverse aggiunte e personalizzazioni.
 /// Come funziona in breve ? 
@@ -21,7 +21,7 @@ using Assets;
 /// di MapZen per ricavare un file di tipo JSON (del tile in cui è geolocalizzato il giocatore) contentente una descrizione matematica e metadati di
 /// palazzi,strade e altre caratteristiche del layer di base di OpenStreetMap(vedere la classe Tile per ulteriori informazioni).
 /// </summary>
-public class tileGen : MonoBehaviour
+public class tileGen : NetworkTileGenBehavior
 {
     Vector2[,] localTerrain = new Vector2[3, 3];
     GameObject[,] tiles = new GameObject[3, 3];
@@ -37,11 +37,23 @@ public class tileGen : MonoBehaviour
     private Vector2 Position;
     private int Zoom = 16;
     string status = "start";
-    bool isReady;//Indica se il client è connesso al server
     public bool editorMode;
 
-    private void Start()
+    //private void Start()
+    //{
+    //    if (!networkObject.IsOwner)
+    //        return;
+
+    //    StartCoroutine(StartTiling());
+    //}
+
+    protected override void NetworkStart()
     {
+        if (!networkObject.IsOwner)
+        {
+            gameObject.GetComponent<tileGen>().enabled = false;
+            return;
+        }
         StartCoroutine(StartTiling());
     }
 
@@ -53,7 +65,6 @@ public class tileGen : MonoBehaviour
         SimplePool.Preload(tile, 15);
         currX = oldX = Mathf.Floor(transform.position.x);
         currZ = oldZ = Mathf.Floor(transform.position.z);
-        isReady = true; //Il client si è connesso al server
         // First, check if user has location service enabled
         // No location then fallback coordinates
         if (!Input.location.isEnabledByUser||editorMode)
@@ -155,17 +166,14 @@ public class tileGen : MonoBehaviour
     // checks if movement is greate than a single tile space, if so update the board
     void Update()
     {
-        if (isReady)
+        currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
+        currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
+        if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
         {
-            currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
-            currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
-            if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
-            {
-                Debug.Log("UPDATE BOARD");
-                updateBoard();
-                oldX = currX;
-                oldZ = currZ;
-            }
+            Debug.Log("UPDATE BOARD");
+            updateBoard();
+            oldX = currX;
+            oldZ = currZ;
         }
     }
 
