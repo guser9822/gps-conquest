@@ -27,7 +27,11 @@ namespace TC.GPConquest.Player {
         public void CacheAllUMA(string assetName)
         {
             umaCharactersAsset = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/"+assetName);
-            Object[] allAssets = umaCharactersAsset.LoadAllAssets();
+            Object[] allAssets = null;
+
+            if (umaCharactersAsset != null)
+                allAssets = umaCharactersAsset.LoadAllAssets();
+            else Debug.Log("Uma assets already loaded");
 
             //Cache all available UMAs
             foreach (Object asset in allAssets)
