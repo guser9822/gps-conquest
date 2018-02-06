@@ -226,6 +226,7 @@ namespace TC.GPConquest.Player
 
         public void MovePlayerDestination(Vector3 _position)
         {
+
             // If we are not the owner of this network object then we should
             // move this cube to the position/rotation dictated by the owner
             if (!networkObject.IsOwner)
