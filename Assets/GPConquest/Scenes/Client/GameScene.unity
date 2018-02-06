@@ -407,6 +407,7 @@ MonoBehaviour:
   ClientNetworkController: {fileID: 824745311}
   ConnectionInfo: {fileID: 824745312}
   AssetLoaderController: {fileID: 824745314}
+  TileGen: {fileID: 0}
 --- !u!114 &824745314
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ namespace TC.GPConquest.Player
         public AssetLoaderController AssetLoaderController { get; private set; }
         private Renderer sphereRend;
         public Camera cam { get; private set; }
+        protected tileGen TileGen;
         #endregion
 
         #region Attributes dedicated to the avator
@@ -44,6 +45,7 @@ namespace TC.GPConquest.Player
         {
             AssetLoaderController = FindObjectOfType<AssetLoaderController>();
             sphereRend = sphere.GetComponent<Renderer>();
+            TileGen = GetComponent<tileGen>();
         }
 
         protected override void NetworkStart()
@@ -174,10 +176,55 @@ namespace TC.GPConquest.Player
             var avatorController = behavior.GetComponent<AvatorController>();
             //Passes this destination controller in order to set up correctly the avator
             avatorController.CreateAndSpawnAvator(this);
+            /*
+             * After that destination and avator controller are generated on the network,
+             * we can start the map creation. NOTE: tileGen.cs script will dictate the
+             * destination controller position and so that of the avator.
+             * **/
+            StartCoroutine(TileGen.StartTiling());
         }
 
         // Update is called once per frame
         void Update()
+        {
+            /*
+             * We pass here a dummy vector as position for movement because
+             * when the the real movement will be implemented (tileGen.cs with GPS) 
+             * this Update will not be used anymore. MovePlayerDestination
+             * will recalculate the movement if we are in editor mode i.e.
+             * we are moving the DestinationController with our keyboard
+             * and not through GPS; in fact, this function is also invoked 
+             * by the tileGen.cs script
+             * 
+             *  Not working IDK, why???
+             *
+             */
+            //MovePlayerDestination(transform.position);
+            
+
+            // If we are not the owner of this network object then we should
+            // move this cube to the position/rotation dictated by the owner
+            if (!networkObject.IsOwner)
+            {
+                transform.position = networkObject.destNetPosition;
+                transform.rotation = networkObject.destNetRotation;
+                return;
+            }
+
+            if (editorMode)
+            {
+                transform.position = new Vector3(Input.GetAxis("Horizontal") * networkObject.destCursorSpeed * Time.deltaTime
+                                                , transform.position.y
+                                                , Input.GetAxis("Vertical") * networkObject.destCursorSpeed * Time.deltaTime) +
+                                                transform.position;
+            }
+
+            networkObject.destNetPosition = transform.position;
+            networkObject.destNetRotation = transform.rotation;
+
+        }
+
+        public void MovePlayerDestination(Vector3 _position)
         {
             // If we are not the owner of this network object then we should
             // move this cube to the position/rotation dictated by the owner
@@ -188,17 +235,16 @@ namespace TC.GPConquest.Player
                 return;
             }
 
-            //TODO : To add code for moving the character utilizing GEO LOCALIZATION
-            if (editorMode)
-            {
-                transform.position = new Vector3(Input.GetAxis("Horizontal") * networkObject.destCursorSpeed * Time.deltaTime
-                                                , transform.position.y
-                                                , Input.GetAxis("Vertical") * networkObject.destCursorSpeed * Time.deltaTime) + transform.position;
-            }
+            //if (editorMode)
+            //{
+            //    _position = new Vector3(Input.GetAxis("Horizontal") * networkObject.destCursorSpeed * Time.deltaTime
+            //                                    , transform.position.y
+            //                                    , Input.GetAxis("Vertical") * networkObject.destCursorSpeed * Time.deltaTime) +
+            //                                    transform.position;
+            //}
 
-            networkObject.destNetPosition = transform.position;
+            networkObject.destNetPosition = _position;
             networkObject.destNetRotation = transform.rotation;
-
         }
 
         void OnGUI()

@@ -13,7 +13,9 @@ namespace TC.Common {
         public static readonly string umaFolderGeneratorPrefabPath = "Assets/UM4GPConquest/Prefab/UMAGenerator.prefab";
         public static readonly string standardAssetThirdPersonControllerPath =
             "Assets/Standard"+" "+"Assets/Characters/ThirdPersonCharacter/Animator/";
-
+        /*this is the name used by uma characters stored in the StreamingAssets folder
+         * **/
+        public static readonly string assetsNameStreamingFolder = "umacharactersasset";
     }
 
 }

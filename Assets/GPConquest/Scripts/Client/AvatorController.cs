@@ -22,6 +22,12 @@ namespace TC.GPConquest.Player
 
         private void Awake()
         {
+            /*NOTE For the Server process : 
+            * The server process doesn't have AssetLoaderController object in it's scene
+            * because we don't need any player in that process, so, basically,
+            * assetLoaderController will always null
+            * TO DO : Find a better solution to isolate the server from the rest of the client
+            * **/
             assetLoaderController = FindObjectOfType<AssetLoaderController>();
             characterController = GetComponent<CharacterController>();
             characterController.center = new Vector3(0, 1.0f, 0);
@@ -92,19 +98,26 @@ namespace TC.GPConquest.Player
         //Updates the UMA avator attached to this game object
         private void UpdateUMA_Avator()
         {
-            //Set/spawn a UMA Avator
-            GameObject thisUma = gameObject.GetComponent<UMADynamicAvatar>().gameObject;
-            UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
+            /**
+             * Here we check assetLoadController against null because the server process,
+             * which doesn't need any player, don't have anyone of this object.
+             * **/
+            if (assetLoaderController != null)
+            {
+                //Set/spawn a UMA Avator
+                GameObject thisUma = gameObject.GetComponent<UMADynamicAvatar>().gameObject;
+                UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
 
-            thisUmaDynamicAvator.context = assetLoaderController.context;
-            thisUmaDynamicAvator.umaGenerator = assetLoaderController.generator;
-            thisUmaDynamicAvator.loadOnStart = false;
-            thisUmaDynamicAvator.Initialize();
-            thisUmaDynamicAvator.animationController = assetLoaderController.thirdPersonController;
-            UMATextRecipe recipe = assetLoaderController.umaCharactersTemplates[selectedUma];
-            thisUmaDynamicAvator.Load(recipe);
+                thisUmaDynamicAvator.context = assetLoaderController.context;
+                thisUmaDynamicAvator.umaGenerator = assetLoaderController.generator;
+                thisUmaDynamicAvator.loadOnStart = false;
+                thisUmaDynamicAvator.Initialize();
+                thisUmaDynamicAvator.animationController = assetLoaderController.thirdPersonController;
+                UMATextRecipe recipe = assetLoaderController.umaCharactersTemplates[selectedUma];
+                thisUmaDynamicAvator.Load(recipe);
 
-            thisUma.GetComponent<UMAData>().OnCharacterCreated += AvatorController_OnCharacterCreated;
+                thisUma.GetComponent<UMAData>().OnCharacterCreated += AvatorController_OnCharacterCreated;
+            }
         }
 
         //Sets up settings after the creation of the UMA character
