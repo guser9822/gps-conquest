@@ -38,14 +38,13 @@ public class tileGen : NetworkTileGenBehavior
     private int Zoom = 16;
     string status = "start";
     public bool editorMode;
+    protected DestinationController DestinationController;
 
-    //private void Start()
-    //{
-    //    if (!networkObject.IsOwner)
-    //        return;
 
-    //    StartCoroutine(StartTiling());
-    //}
+    private void Awake()
+    {
+        DestinationController = GetComponent<DestinationController>();
+    }
 
     protected override void NetworkStart()
     {
@@ -54,7 +53,6 @@ public class tileGen : NetworkTileGenBehavior
             gameObject.GetComponent<tileGen>().enabled = false;
             return;
         }
-        StartCoroutine(StartTiling());
     }
 
     // Use this for initialization
@@ -83,7 +81,10 @@ public class tileGen : NetworkTileGenBehavior
             Debug.Log(Position);
             //Posiziona il giocatore rispetto al centro del tile. La grandeza del tile in pixel è 256, ovvero 611 unità in Unity
             Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
-            transform.position = pos;
+            /*
+             * Move the destination controller on the network
+             * **/
+            DestinationController.MovePlayerDestination(pos);
             Debug.Log(pos);
             status = "no location service";
 
@@ -140,7 +141,10 @@ public class tileGen : NetworkTileGenBehavior
             status = "Creating tile " + Center.x + ", " + Center.y;
             status = "Pos tile " + Position.x + ", " + Position.y;
             Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
-            transform.position = pos;
+            /*
+             * Move the destination controller on the network
+             * **/
+            DestinationController.MovePlayerDestination(pos);
 
             tiles[0,0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
             StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
@@ -160,7 +164,10 @@ public class tileGen : NetworkTileGenBehavior
         Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
         Debug.Log(Position);
         Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
-        transform.position = pos;
+        /*
+         * Move the destination controller on the network
+         * **/
+        DestinationController.MovePlayerDestination(pos);
     }
 
     // checks if movement is greate than a single tile space, if so update the board
