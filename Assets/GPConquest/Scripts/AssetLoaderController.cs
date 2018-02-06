@@ -17,18 +17,15 @@ namespace TC.GPConquest.Player {
         public UMAGenerator generator { get; protected set; }
         public UMAContext context { get; protected set; }
 
-        private void Awake()
-        {
-            //CacheAllUMA("umacharactersasset");
-            //generator = MonoBehaviour.FindObjectOfType<UMAGenerator>();
-            //context = MonoBehaviour.FindObjectOfType<UMAContext>();
-        }
-
         public void CacheAllUMA(string assetName)
         {
             umaCharactersAsset = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/"+assetName);
             Object[] allAssets = null;
-
+            /*
+             * The first process that execute AssetBundle.LoadFromFile will load the asset,
+             * so we nned to check this before calling LoadAllAssets() or an exception
+             * will be thrown.
+             * **/
             if (umaCharactersAsset != null)
                 allAssets = umaCharactersAsset.LoadAllAssets();
             else Debug.Log("Uma assets already loaded");
