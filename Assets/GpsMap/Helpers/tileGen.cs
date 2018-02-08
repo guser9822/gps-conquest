@@ -40,12 +40,6 @@ public class tileGen : NetworkTileGenBehavior
     public bool editorMode;
     protected DestinationController DestinationController;
 
-
-    private void Awake()
-    {
-        DestinationController = GetComponent<DestinationController>();
-    }
-
     protected override void NetworkStart()
     {
         if (!networkObject.IsOwner)
@@ -84,7 +78,7 @@ public class tileGen : NetworkTileGenBehavior
             /*
              * Move the destination controller on the network
              * **/
-            DestinationController.MovePlayerDestination(pos);
+            //DestinationController.MovePlayerDestination(pos);
             Debug.Log(pos);
             status = "no location service";
 
@@ -144,7 +138,7 @@ public class tileGen : NetworkTileGenBehavior
             /*
              * Move the destination controller on the network
              * **/
-            DestinationController.MovePlayerDestination(pos);
+            //DestinationController.MovePlayerDestination(pos);
 
             tiles[0,0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
             StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
@@ -164,10 +158,10 @@ public class tileGen : NetworkTileGenBehavior
         Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
         Debug.Log(Position);
         Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
-        /*
-         * Move the destination controller on the network
-         * **/
-        DestinationController.MovePlayerDestination(pos);
+        ///*
+        // * Move the destination controller on the network
+        // * **/
+        //DestinationController.MovePlayerDestination(pos);
     }
 
     // checks if movement is greate than a single tile space, if so update the board

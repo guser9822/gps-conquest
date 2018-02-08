@@ -45,7 +45,6 @@ namespace TC.GPConquest.Player
         {
             AssetLoaderController = FindObjectOfType<AssetLoaderController>();
             sphereRend = sphere.GetComponent<Renderer>();
-            TileGen = GetComponent<tileGen>();
         }
 
         protected override void NetworkStart()
@@ -176,12 +175,6 @@ namespace TC.GPConquest.Player
             var avatorController = behavior.GetComponent<AvatorController>();
             //Passes this destination controller in order to set up correctly the avator
             avatorController.CreateAndSpawnAvator(this);
-            /*
-             * After that destination and avator controller are generated on the network,
-             * we can start the map creation. NOTE: tileGen.cs script will dictate the
-             * destination controller position and so that of the avator.
-             * **/
-            StartCoroutine(TileGen.StartTiling());
         }
 
         // Update is called once per frame

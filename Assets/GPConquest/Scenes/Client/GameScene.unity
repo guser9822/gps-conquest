@@ -404,10 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f559e605b7a7c47914fd6be7a22432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClientNetworkController: {fileID: 824745311}
-  ConnectionInfo: {fileID: 824745312}
-  AssetLoaderController: {fileID: 824745314}
-  TileGen: {fileID: 0}
 --- !u!114 &824745314
 MonoBehaviour:
   m_ObjectHideFlags: 0
