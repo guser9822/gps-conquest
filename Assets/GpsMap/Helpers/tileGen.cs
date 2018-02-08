@@ -4,6 +4,8 @@ using System.Linq;
 using Assets;
 using BeardedManStudios.Forge.Networking.Generated;
 using TC.GPConquest.Player;
+using BeardedManStudios.Forge.Networking.Unity;
+
 /// <summary>
 /// Breve introduzione : Il seguente progetto è in sostanza un clone di Pokemon-Go / Ingress con diverse aggiunte e personalizzazioni.
 /// Come funziona in breve ? 
@@ -38,7 +40,10 @@ public class tileGen : NetworkTileGenBehavior
     private int Zoom = 16;
     string status = "start";
     public bool editorMode;
-    protected DestinationController DestinationController;
+
+    protected PlayerDestinationControllerBehavior DestinationController;
+    protected Vector3 CalcPlayerPosition;
+    protected bool isReady;
 
     protected override void NetworkStart()
     {
@@ -47,6 +52,28 @@ public class tileGen : NetworkTileGenBehavior
             gameObject.GetComponent<tileGen>().enabled = false;
             return;
         }
+        StartCoroutine(InitProcess());
+     }
+
+    /*
+     * This coroutine instantiates PlayerDestinationController with the proper
+     * position in the map.
+     * **/
+    protected IEnumerator InitProcess() {
+        StartCoroutine(StartTiling());
+        while (!isReady)
+            yield return new WaitForSeconds(0.6f);
+        /* When tiling process is finished and player position is calculated (CalcPlayerPos)
+        *  instantiates the player on the network.
+        */
+        DestinationController = NetworkManager.
+            Instance.
+            InstantiatePlayerDestinationController(0, CalcPlayerPosition);
+        /*
+         * Sets the DestinationController transform as parent of this object
+         * in order to regenarates tiles as the player is moving
+         * **/
+        transform.SetParent(DestinationController.transform);
     }
 
     // Use this for initialization
@@ -74,12 +101,12 @@ public class tileGen : NetworkTileGenBehavior
             
             Debug.Log(Position);
             //Posiziona il giocatore rispetto al centro del tile. La grandeza del tile in pixel è 256, ovvero 611 unità in Unity
-            Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
+            CalcPlayerPosition = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
             /*
              * Move the destination controller on the network
              * **/
             //DestinationController.MovePlayerDestination(pos);
-            Debug.Log(pos);
+            Debug.Log(CalcPlayerPosition);
             status = "no location service";
 
             //Il terreno di gioco attuale è composto da 9 tile. Il Tile centrale è quello iniziale, dato dalle coordinate geografiche
@@ -91,9 +118,12 @@ public class tileGen : NetworkTileGenBehavior
             updateBoard();
             //Enable player UI after the scene is loaded
 
+            isReady = true;
+
             yield break;
         }
 
+        //THE REST OF THIS CODE NEED TO BE FIXED, IT DOESN'T UPDATES THE PLAYER POSITION THROUGH GPS COORDINATES
 
         // Start service before querying location
         Input.location.Start(5,5f);
@@ -167,16 +197,19 @@ public class tileGen : NetworkTileGenBehavior
     // checks if movement is greate than a single tile space, if so update the board
     void Update()
     {
-        currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
-        currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
-        if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
+        if (isReady)
         {
-            Debug.Log("UPDATE BOARD");
-            updateBoard();
-            oldX = currX;
-            oldZ = currZ;
+            currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
+            currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
+            if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
+            {
+                Debug.Log("UPDATE BOARD");
+                updateBoard();
+                oldX = currX;
+                oldZ = currZ;
+            }
         }
-    }
+     }
 
     //checks if theres a tile in that location, if not then put one down
     void updateBoard()
