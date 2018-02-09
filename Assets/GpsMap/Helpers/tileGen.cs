@@ -23,7 +23,7 @@ using BeardedManStudios.Forge.Networking.Unity;
 /// di MapZen per ricavare un file di tipo JSON (del tile in cui è geolocalizzato il giocatore) contentente una descrizione matematica e metadati di
 /// palazzi,strade e altre caratteristiche del layer di base di OpenStreetMap(vedere la classe Tile per ulteriori informazioni).
 /// </summary>
-public class tileGen : NetworkTileGenBehavior
+public class tileGen : MonoBehaviour
 {
     Vector2[,] localTerrain = new Vector2[3, 3];
     GameObject[,] tiles = new GameObject[3, 3];
@@ -45,34 +45,41 @@ public class tileGen : NetworkTileGenBehavior
     protected Vector3 CalcPlayerPosition;
     protected bool isReady;
 
-    protected override void NetworkStart()
+    //protected override void NetworkStart()
+    //{
+    //    if (!networkObject.IsOwner)
+    //    {
+    //        gameObject.GetComponent<tileGen>().enabled = false;
+    //        return;
+    //    }
+    //    StartCoroutine(InitTileGen());
+    // }
+
+    void Start()
     {
-        if (!networkObject.IsOwner)
-        {
-            gameObject.GetComponent<tileGen>().enabled = false;
-            return;
-        }
-        StartCoroutine(InitProcess());
-     }
+        StartCoroutine(InitTileGen());
+    }
 
     /*
      * This coroutine instantiates PlayerDestinationController with the proper
      * position in the map.
      * **/
-    protected IEnumerator InitProcess() {
+    protected IEnumerator InitTileGen() {
         StartCoroutine(StartTiling());
         while (!isReady)
             yield return new WaitForSeconds(0.6f);
+
         /* When tiling process is finished and player position is calculated (CalcPlayerPos)
         *  instantiates the player on the network.
         */
         DestinationController = NetworkManager.
             Instance.
             InstantiatePlayerDestinationController(0, CalcPlayerPosition);
+
         /*
-         * Sets the DestinationController transform as parent of this object
-         * in order to regenarates tiles as the player is moving
-         * **/
+        * Sets the DestinationController transform as parent of this object
+        * in order to regenarates tiles as the player move
+        * **/
         transform.SetParent(DestinationController.transform);
     }
 

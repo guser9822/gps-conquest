@@ -152,7 +152,6 @@ namespace TC.GPConquest.Player
             //Sets up cursor attributes
             networkObject.destCursorSpeed = _cursorSpeed;
             networkObject.destCursorDims = _cursorDimensions;
-
         }
 
         //Init the destination controller over the network

@@ -12,6 +12,7 @@ namespace TC.GPConquest {
         protected ClientNetworkController ClientNetworkController;
         protected ConnectionInfo ConnectionInfo;
         protected AssetLoaderController AssetLoaderController;
+        public tileGen TileGen;
 
         private void Awake()
         {
@@ -32,7 +33,8 @@ namespace TC.GPConquest {
              * PlayerDestinationController instantiates AvatorController because of the old design 
              * of the game, it should be changed.
              */
-            NetworkManager.Instance.InstantiateNetworkTileGen(0);
+            //NetworkManager.Instance.InstantiateNetworkTileGen(0);
+            Instantiate<tileGen>(TileGen);
         }
     }
 
