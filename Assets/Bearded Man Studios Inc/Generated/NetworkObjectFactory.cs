@@ -51,10 +51,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 						availableCallback = true;
 						obj = new TestNetworkObject(networker, id, frame);
 						break;
-					case NetworkTileGenNetworkObject.IDENTITY:
-						availableCallback = true;
-						obj = new NetworkTileGenNetworkObject(networker, id, frame);
-						break;
 				}
 
 				if (!availableCallback)

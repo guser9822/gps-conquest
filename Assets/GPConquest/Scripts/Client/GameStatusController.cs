@@ -26,13 +26,7 @@ namespace TC.GPConquest {
 
         private void Start()
         {
-            /*
-             * Chain of Events : 
-             * NetworkTileGen instantiates PlayerDestinationController because it dictate player position 
-             * PlayerDestinationController instantiates AvatorController because of the old design 
-             * of the game, it should be changed.
-             */
-            NetworkManager.Instance.InstantiateNetworkTileGen(0);
+            NetworkManager.Instance.InstantiatePlayerDestinationController(0);
         }
     }
 

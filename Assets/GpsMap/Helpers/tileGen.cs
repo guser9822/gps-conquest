@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Linq;
 using Assets;
-using BeardedManStudios.Forge.Networking.Generated;
 using TC.GPConquest.Player;
-using BeardedManStudios.Forge.Networking.Unity;
 
 /// <summary>
 /// Breve introduzione : Il seguente progetto è in sostanza un clone di Pokemon-Go / Ingress con diverse aggiunte e personalizzazioni.
@@ -23,7 +21,7 @@ using BeardedManStudios.Forge.Networking.Unity;
 /// di MapZen per ricavare un file di tipo JSON (del tile in cui è geolocalizzato il giocatore) contentente una descrizione matematica e metadati di
 /// palazzi,strade e altre caratteristiche del layer di base di OpenStreetMap(vedere la classe Tile per ulteriori informazioni).
 /// </summary>
-public class tileGen : NetworkTileGenBehavior
+public class tileGen : MonoBehaviour
 {
     Vector2[,] localTerrain = new Vector2[3, 3];
     GameObject[,] tiles = new GameObject[3, 3];
@@ -41,39 +39,18 @@ public class tileGen : NetworkTileGenBehavior
     string status = "start";
     public bool editorMode;
 
-    protected PlayerDestinationControllerBehavior DestinationController;
+    protected DestinationController DestinationController;
     protected Vector3 CalcPlayerPosition;
-    protected bool isReady;
+    public bool isReady;
 
-    protected override void NetworkStart()
+    private void Awake()
     {
-        if (!networkObject.IsOwner)
-        {
-            gameObject.GetComponent<tileGen>().enabled = false;
-            return;
-        }
-        StartCoroutine(InitProcess());
-     }
+        DestinationController = GetComponent<DestinationController>();
+    }
 
-    /*
-     * This coroutine instantiates PlayerDestinationController with the proper
-     * position in the map.
-     * **/
-    protected IEnumerator InitProcess() {
+    public void StartBuildingMap()
+    {
         StartCoroutine(StartTiling());
-        while (!isReady)
-            yield return new WaitForSeconds(0.6f);
-        /* When tiling process is finished and player position is calculated (CalcPlayerPos)
-        *  instantiates the player on the network.
-        */
-        DestinationController = NetworkManager.
-            Instance.
-            InstantiatePlayerDestinationController(0, CalcPlayerPosition);
-        /*
-         * Sets the DestinationController transform as parent of this object
-         * in order to regenarates tiles as the player is moving
-         * **/
-        transform.SetParent(DestinationController.transform);
     }
 
     // Use this for initialization
@@ -105,8 +82,8 @@ public class tileGen : NetworkTileGenBehavior
             /*
              * Move the destination controller on the network
              * **/
-            //DestinationController.MovePlayerDestination(pos);
-            Debug.Log(CalcPlayerPosition);
+            DestinationController.MovePlayerDestination(CalcPlayerPosition);
+            Debug.Log("Calculated player position in the tile :"+CalcPlayerPosition);
             status = "no location service";
 
             //Il terreno di gioco attuale è composto da 9 tile. Il Tile centrale è quello iniziale, dato dalle coordinate geografiche
@@ -126,56 +103,56 @@ public class tileGen : NetworkTileGenBehavior
         //THE REST OF THIS CODE NEED TO BE FIXED, IT DOESN'T UPDATES THE PLAYER POSITION THROUGH GPS COORDINATES
 
         // Start service before querying location
-        Input.location.Start(5,5f);
-        status = "rev up";
+        //Input.location.Start(5,5f);
+        //status = "rev up";
 
-        // Wait until service initializes
-        int maxWait = 20;
-        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
-        {
-            yield return new WaitForSeconds(1);
-            maxWait--;
-        }
+        //// Wait until service initializes
+        //int maxWait = 20;
+        //while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        //{
+        //    yield return new WaitForSeconds(1);
+        //    maxWait--;
+        //}
 
-        // Service didn't initialize in 20 seconds
-        if (maxWait < 1)
-        {
-            status = "timed out";
-            print("Timed out");
-            yield break;
-        }
+        //// Service didn't initialize in 20 seconds
+        //if (maxWait < 1)
+        //{
+        //    status = "timed out";
+        //    print("Timed out");
+        //    yield break;
+        //}
 
-        // Connection has failed
-        if (Input.location.status == LocationServiceStatus.Failed)
-        {
-            status = "Unable to determine device location";
-            print("Unable to determine device location");
-            yield break;
-        }
-        else
-        {
-            // Access granted and location value could be retrieved
-            print("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
-            LatLng = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
-            Center = calcTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
-            Debug.Log(Center);
-            startTile = Center;
-            Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
-            Debug.Log(Position);
-            status = "Creating tile " + Center.x + ", " + Center.y;
-            status = "Pos tile " + Position.x + ", " + Position.y;
-            Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
-            /*
-             * Move the destination controller on the network
-             * **/
-            //DestinationController.MovePlayerDestination(pos);
+        //// Connection has failed
+        //if (Input.location.status == LocationServiceStatus.Failed)
+        //{
+        //    status = "Unable to determine device location";
+        //    print("Unable to determine device location");
+        //    yield break;
+        //}
+        //else
+        //{
+        //    // Access granted and location value could be retrieved
+        //    print("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
+        //    LatLng = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+        //    Center = calcTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
+        //    Debug.Log(Center);
+        //    startTile = Center;
+        //    Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
+        //    Debug.Log(Position);
+        //    status = "Creating tile " + Center.x + ", " + Center.y;
+        //    status = "Pos tile " + Position.x + ", " + Position.y;
+        //    Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
+        //    /*
+        //     * Move the destination controller on the network
+        //     * **/
+        //    //DestinationController.MovePlayerDestination(pos);
 
-            tiles[0,0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
-            StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
+        //    tiles[0,0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
+        //    StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
 
-            updateBoard();
-            InvokeRepeating("updateLoc", 2f, 2f);
-        }
+        //    updateBoard();
+        //    InvokeRepeating("updateLoc", 2f, 2f);
+        //}
     }
 
     void updateLoc()

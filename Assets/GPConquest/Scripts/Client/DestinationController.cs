@@ -81,11 +81,6 @@ namespace TC.GPConquest.Player
                 //The assigning of the dimensions of the cursor change based on the choosen dimension
                 networkObject.destCursorDims = new Vector3(10, 10, 10);
 
-                //Assign the spawn position for the avator
-                avatorSpawnPosition = new Vector3(gameObject.transform.position.x - 20,
-                gameObject.transform.position.y,
-                gameObject.transform.position.z - 20);
-
                 UpdateDestinationAttributes(new Vector3(0, 100, -70),
                     Quaternion.AngleAxis(-50.0f, Vector3.left),
                     50.0f,
@@ -98,10 +93,6 @@ namespace TC.GPConquest.Player
             {
                 networkObject.destCursorDims = new Vector3(0.4f, 0.4f, 0.4f);
 
-                avatorSpawnPosition = new Vector3(gameObject.transform.position.x - 2,
-                    gameObject.transform.position.y,
-                    gameObject.transform.position.z - 2);
-
                 UpdateDestinationAttributes(new Vector3(0, 4.45f, -5),
                     Quaternion.AngleAxis(-40.0f, Vector3.left),
                     10.0f,
@@ -110,9 +101,12 @@ namespace TC.GPConquest.Player
                     networkObject.destNetColor);
             }
 
-            //Spawn the avator on the network
-            var avatorController = NetworkManager.Instance.InstantiatePlayerAvatorController(0, avatorSpawnPosition);
+            //Create the map
+            TileGen = gameObject.GetComponent<tileGen>();
+            TileGen.StartBuildingMap();
 
+            //Spawn the avator on the network
+            var avatorController = NetworkManager.Instance.InstantiatePlayerAvatorController(0, transform.position);
             avatorController.networkStarted += AvatorController_networkStarted;
 
             networkObject.SendRpc(RPC_INIT_NET_DESTINATION,
@@ -180,23 +174,8 @@ namespace TC.GPConquest.Player
         // Update is called once per frame
         void Update()
         {
-            /*
-             * We pass here a dummy vector as position for movement because
-             * when the the real movement will be implemented (tileGen.cs with GPS) 
-             * this Update will not be used anymore. MovePlayerDestination
-             * will recalculate the movement if we are in editor mode i.e.
-             * we are moving the DestinationController with our keyboard
-             * and not through GPS; in fact, this function is also invoked 
-             * by the tileGen.cs script
-             * 
-             *  Not working IDK, why???
-             *
-             */
-            //MovePlayerDestination(transform.position);
-            
-
-            // If we are not the owner of this network object then we should
-            // move this cube to the position/rotation dictated by the owner
+            //If we are not the owner of this network object then we should
+            // move this cube to the position/ rotation dictated by the owner
             if (!networkObject.IsOwner)
             {
                 transform.position = networkObject.destNetPosition;
@@ -204,6 +183,11 @@ namespace TC.GPConquest.Player
                 return;
             }
 
+            /*
+            * If we are in editorMode it means that we are testing the game
+            * withouth GPS support, so we recalculate the vector _position
+            * with acquired commands-
+            * **/
             if (editorMode)
             {
                 transform.position = new Vector3(Input.GetAxis("Horizontal") * networkObject.destCursorSpeed * Time.deltaTime
@@ -214,9 +198,14 @@ namespace TC.GPConquest.Player
 
             networkObject.destNetPosition = transform.position;
             networkObject.destNetRotation = transform.rotation;
-
         }
 
+        /*
+         * This function, now is used mainly for initializing the player position
+         * through the tileGens script.
+         * For moving the character we will use the Update untill the movement with
+         * the GPS are off. So Update and this function needs to be refactored into ONE.
+         * **/
         public void MovePlayerDestination(Vector3 _position)
         {
 
@@ -229,15 +218,8 @@ namespace TC.GPConquest.Player
                 return;
             }
 
-            //if (editorMode)
-            //{
-            //    _position = new Vector3(Input.GetAxis("Horizontal") * networkObject.destCursorSpeed * Time.deltaTime
-            //                                    , transform.position.y
-            //                                    , Input.GetAxis("Vertical") * networkObject.destCursorSpeed * Time.deltaTime) +
-            //                                    transform.position;
-            //}
-
-            networkObject.destNetPosition = _position;
+            transform.position = _position;
+            networkObject.destNetPosition = transform.position;
             networkObject.destNetRotation = transform.rotation;
         }
 
@@ -254,8 +236,10 @@ namespace TC.GPConquest.Player
         //Function used to destroy this object. NOTE : It will also destroy the avator connected
         private void DestroyDestinationController()
         {
+            AssetBundle.UnloadAllAssetBundles(true);
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
+            Application.Quit();
         }
     }
 }
