@@ -12,6 +12,7 @@ namespace TC.GPConquest {
         protected ClientNetworkController ClientNetworkController;
         protected ConnectionInfo ConnectionInfo;
         protected AssetLoaderController AssetLoaderController;
+        public tileGen TileGen;
 
         private void Awake()
         {
