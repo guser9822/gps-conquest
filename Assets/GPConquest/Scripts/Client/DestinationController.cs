@@ -103,7 +103,7 @@ namespace TC.GPConquest.Player
 
             //Create the map
             TileGen = gameObject.GetComponent<tileGen>();
-            TileGen.StartBuildingMap();
+            StartCoroutine(TileGen.StartTiling());
 
             //Spawn the avator on the network
             var avatorController = NetworkManager.Instance.InstantiatePlayerAvatorController(0, transform.position);

@@ -48,15 +48,10 @@ public class tileGen : MonoBehaviour
         DestinationController = GetComponent<DestinationController>();
     }
 
-    public void StartBuildingMap()
-    {
-        StartCoroutine(StartTiling());
-    }
-
     // Use this for initialization
     // Punto di partenza del gioco. La funzione Start() può essere una coroutine.
     public IEnumerator StartTiling()
-    { 
+    {
         Screen.sleepTimeout = (int)SleepTimeout.NeverSleep;
         SimplePool.Preload(tile, 15);
         currX = oldX = Mathf.Floor(transform.position.x);
@@ -277,11 +272,8 @@ public class tileGen : MonoBehaviour
         return new Vector2(xtile - (int)xtile, ytile - (int)ytile);
     }
 
-    //Mostra a schermo informazioni di debug
     //void OnGUI()
     //{
-    //    GUI.Label(new Rect(10, 10, 500, 30), Input.location.lastData.latitude.ToString());
-    //    GUI.Label(new Rect(10, 50, 500, 30), Input.location.lastData.longitude.ToString());
-    //    GUI.Label(new Rect(10, 100, 500, 30), status);
+    //    GUI.Label(new Rect(10, 70, 500, 30),debugString);
     //}
 }
