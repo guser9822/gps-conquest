@@ -21,7 +21,7 @@ namespace Assets
 
         private void Awake()
         {
-            DownlaodTiles = true;
+            DownlaodTiles = false;
         }
 
         public Tile()

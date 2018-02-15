@@ -38,6 +38,7 @@ public class tileGen : MonoBehaviour
     private int Zoom = 16;
     string status = "start";
     public bool editorMode;
+    private bool canStartUpdate;
 
     protected DestinationController DestinationController;
     protected Vector3 CalcPlayerPosition;
@@ -45,6 +46,7 @@ public class tileGen : MonoBehaviour
     private void Awake()
     {
         DestinationController = GetComponent<DestinationController>();
+        canStartUpdate = false;
     }
 
     // Use this for initialization
@@ -87,10 +89,12 @@ public class tileGen : MonoBehaviour
             //del giocatore ottenute all'avvio del gioco
             tiles[0, 0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
             //Coroutine che andrà a popolare direttamente il tile iniziale con le proprie costruzioni,strade,acque e parchi
-            StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
+            //StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
 
             updateBoard();
             //Enable player UI after the scene is loaded
+            canStartUpdate = true;
+
             yield break;
         }
 
@@ -143,6 +147,8 @@ public class tileGen : MonoBehaviour
             StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
 
             updateBoard();
+            canStartUpdate = true;
+
             InvokeRepeating("updateLoc", 2f, 2f);
         }
     }
@@ -167,16 +173,20 @@ public class tileGen : MonoBehaviour
     void Update()
     {
         if (!DestinationController.networkObject.IsOwner) return;
-    
-        currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
-        currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
-        if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
+
+        if (canStartUpdate)
         {
-            Debug.Log("UPDATE BOARD");
-            updateBoard();
-            oldX = currX;
-            oldZ = currZ;
+            currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
+            currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
+            if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
+            {
+                Debug.Log("UPDATE BOARD");
+                updateBoard();
+                oldX = currX;
+                oldZ = currZ;
+            }
         }
+
      }
 
     //checks if theres a tile in that location, if not then put one down

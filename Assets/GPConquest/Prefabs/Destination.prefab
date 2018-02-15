@@ -128,7 +128,6 @@ MonoBehaviour:
   Center: {x: 0, y: 0}
   startTile: {x: 0, y: 0}
   editorMode: 1
-  isReady: 0
 --- !u!114 &114133944727064398
 MonoBehaviour:
   m_ObjectHideFlags: 1
