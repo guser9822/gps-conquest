@@ -41,7 +41,6 @@ public class tileGen : MonoBehaviour
 
     protected DestinationController DestinationController;
     protected Vector3 CalcPlayerPosition;
-    public bool isReady;
 
     private void Awake()
     {
@@ -52,6 +51,9 @@ public class tileGen : MonoBehaviour
     // Punto di partenza del gioco. La funzione Start() può essere una coroutine.
     public IEnumerator StartTiling()
     {
+        if (!DestinationController.networkObject.IsOwner)
+            yield return null;
+
         Screen.sleepTimeout = (int)SleepTimeout.NeverSleep;
         SimplePool.Preload(tile, 15);
         currX = oldX = Mathf.Floor(transform.position.x);
@@ -89,65 +91,60 @@ public class tileGen : MonoBehaviour
 
             updateBoard();
             //Enable player UI after the scene is loaded
-
-            isReady = true;
-
             yield break;
         }
 
-        //THE REST OF THIS CODE NEED TO BE FIXED, IT DOESN'T UPDATES THE PLAYER POSITION THROUGH GPS COORDINATES
+        //Start service before querying location
+        Input.location.Start(5, 5f);
+        status = "rev up";
 
-        // Start service before querying location
-        //Input.location.Start(5,5f);
-        //status = "rev up";
+        // Wait until service initializes
+        int maxWait = 20;
+        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        {
+            yield return new WaitForSeconds(1);
+            maxWait--;
+        }
 
-        //// Wait until service initializes
-        //int maxWait = 20;
-        //while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
-        //{
-        //    yield return new WaitForSeconds(1);
-        //    maxWait--;
-        //}
+        // Service didn't initialize in 20 seconds
+        if (maxWait < 1)
+        {
+            status = "timed out";
+            print("Timed out");
+            yield break;
+        }
 
-        //// Service didn't initialize in 20 seconds
-        //if (maxWait < 1)
-        //{
-        //    status = "timed out";
-        //    print("Timed out");
-        //    yield break;
-        //}
+        // Connection has failed
+        if (Input.location.status == LocationServiceStatus.Failed)
+        {
+            status = "Unable to determine device location";
+            print("Unable to determine device location");
+            yield break;
+        }
+        else
+        {
+            // Access granted and location value could be retrieved
+            print("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
+            LatLng = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+            Center = calcTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
+            Debug.Log(Center);
+            startTile = Center;
+            Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
+            Debug.Log(Position);
+            status = "Creating tile " + Center.x + ", " + Center.y;
+            status = "Pos tile " + Position.x + ", " + Position.y;
+            CalcPlayerPosition = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
+            /*
+             * Move the destination controller on the network
+             * **/
+            DestinationController.MovePlayerDestination(CalcPlayerPosition);
 
-        //// Connection has failed
-        //if (Input.location.status == LocationServiceStatus.Failed)
-        //{
-        //    status = "Unable to determine device location";
-        //    print("Unable to determine device location");
-        //    yield break;
-        //}
-        //else
-        //{
-        //    // Access granted and location value could be retrieved
-        //    print("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
-        //    LatLng = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
-        //    Center = calcTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
-        //    Debug.Log(Center);
-        //    startTile = Center;
-        //    Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
-        //    Debug.Log(Position);
-        //    status = "Creating tile " + Center.x + ", " + Center.y;
-        //    status = "Pos tile " + Position.x + ", " + Position.y;
-        //    Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
-        //    /*
-        //     * Move the destination controller on the network
-        //     * **/
-        //    //DestinationController.MovePlayerDestination(pos);
+            tiles[0, 0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
+            StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
 
-        //    tiles[0,0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
-        //    StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
-
-        //    updateBoard();
-        //    InvokeRepeating("updateLoc", 2f, 2f);
-        //}
+            updateBoard();
+            InvokeRepeating("updateLoc", 2f, 2f);
+        }
     }
 
     void updateLoc()
@@ -159,27 +156,26 @@ public class tileGen : MonoBehaviour
         Debug.Log(Center);
         Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
         Debug.Log(Position);
-        Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
-        ///*
-        // * Move the destination controller on the network
-        // * **/
-        //DestinationController.MovePlayerDestination(pos);
+        CalcPlayerPosition = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
+        /*
+         * Move the destination controller on the network
+         * **/
+        DestinationController.MovePlayerDestination(CalcPlayerPosition);
     }
 
     // checks if movement is greate than a single tile space, if so update the board
     void Update()
     {
-        if (isReady)
+        if (!DestinationController.networkObject.IsOwner) return;
+    
+        currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
+        currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
+        if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
         {
-            currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
-            currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
-            if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
-            {
-                Debug.Log("UPDATE BOARD");
-                updateBoard();
-                oldX = currX;
-                oldZ = currZ;
-            }
+            Debug.Log("UPDATE BOARD");
+            updateBoard();
+            oldX = currX;
+            oldZ = currZ;
         }
      }
 
