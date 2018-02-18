@@ -135,7 +135,13 @@ namespace Assets
 
         private void constructTiles(JSONObject mapData, Vector2 realPos, int zoom, Vector2 worldCenter) {
 
-            //gameObject.AddComponent<BoxCollider>();
+            /*
+             * N.B We need to add a BoxCollider because when tileGen.cs  checks
+             * if there's already a tile in this position (where with 'position' we 
+             * mean the center of this tile) it uses a a sphere with a small radius to
+             * check if ther's a collider. 
+             * ***/
+            gameObject.AddComponent<BoxCollider>();
             Rect = GM.TileBounds(realPos, zoom);
 
             //make em
