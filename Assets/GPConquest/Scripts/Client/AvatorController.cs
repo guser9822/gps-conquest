@@ -95,7 +95,7 @@ namespace TC.GPConquest.Player
             characterController.center = new Vector3(0, 1.0f, 0);
         }
 
-        //Updates the UMA avator attached to this game object
+        // Updates the UMA avator attached to this game object
         private void UpdateUMA_Avator()
         {
             /**
