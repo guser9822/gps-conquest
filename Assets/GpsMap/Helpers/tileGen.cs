@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Linq;
 using Assets;
-using BeardedManStudios.Forge.Networking.Generated;
 using TC.GPConquest.Player;
+
 /// <summary>
 /// Breve introduzione : Il seguente progetto è in sostanza un clone di Pokemon-Go / Ingress con diverse aggiunte e personalizzazioni.
 /// Come funziona in breve ? 
@@ -21,7 +21,7 @@ using TC.GPConquest.Player;
 /// di MapZen per ricavare un file di tipo JSON (del tile in cui è geolocalizzato il giocatore) contentente una descrizione matematica e metadati di
 /// palazzi,strade e altre caratteristiche del layer di base di OpenStreetMap(vedere la classe Tile per ulteriori informazioni).
 /// </summary>
-public class tileGen : NetworkTileGenBehavior
+public class tileGen : MonoBehaviour
 {
     Vector2[,] localTerrain = new Vector2[3, 3];
     GameObject[,] tiles = new GameObject[3, 3];
@@ -38,27 +38,24 @@ public class tileGen : NetworkTileGenBehavior
     private int Zoom = 16;
     string status = "start";
     public bool editorMode;
-    protected DestinationController DestinationController;
+    private bool canStartUpdate;
 
+    protected DestinationController DestinationController;
+    protected Vector3 CalcPlayerPosition;
 
     private void Awake()
     {
         DestinationController = GetComponent<DestinationController>();
-    }
-
-    protected override void NetworkStart()
-    {
-        if (!networkObject.IsOwner)
-        {
-            gameObject.GetComponent<tileGen>().enabled = false;
-            return;
-        }
+        canStartUpdate = false;
     }
 
     // Use this for initialization
     // Punto di partenza del gioco. La funzione Start() può essere una coroutine.
     public IEnumerator StartTiling()
-    { 
+    {
+        if (!DestinationController.networkObject.IsOwner)
+            yield return null;
+
         Screen.sleepTimeout = (int)SleepTimeout.NeverSleep;
         SimplePool.Preload(tile, 15);
         currX = oldX = Mathf.Floor(transform.position.x);
@@ -80,29 +77,29 @@ public class tileGen : NetworkTileGenBehavior
             
             Debug.Log(Position);
             //Posiziona il giocatore rispetto al centro del tile. La grandeza del tile in pixel è 256, ovvero 611 unità in Unity
-            Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
+            CalcPlayerPosition = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
             /*
              * Move the destination controller on the network
              * **/
-            DestinationController.MovePlayerDestination(pos);
-            Debug.Log(pos);
+            DestinationController.MovePlayerDestination(CalcPlayerPosition);
+            Debug.Log("Calculated player position in the tile :"+CalcPlayerPosition);
             status = "no location service";
 
             //Il terreno di gioco attuale è composto da 9 tile. Il Tile centrale è quello iniziale, dato dalle coordinate geografiche
             //del giocatore ottenute all'avvio del gioco
             tiles[0, 0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
             //Coroutine che andrà a popolare direttamente il tile iniziale con le proprie costruzioni,strade,acque e parchi
-            StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
+            //StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
 
             updateBoard();
             //Enable player UI after the scene is loaded
+            canStartUpdate = true;
 
             yield break;
         }
 
-
-        // Start service before querying location
-        Input.location.Start(5,5f);
+        //Start service before querying location
+        Input.location.Start(5, 5f);
         status = "rev up";
 
         // Wait until service initializes
@@ -140,16 +137,18 @@ public class tileGen : NetworkTileGenBehavior
             Debug.Log(Position);
             status = "Creating tile " + Center.x + ", " + Center.y;
             status = "Pos tile " + Position.x + ", " + Position.y;
-            Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
+            CalcPlayerPosition = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
             /*
              * Move the destination controller on the network
              * **/
-            DestinationController.MovePlayerDestination(pos);
+            DestinationController.MovePlayerDestination(CalcPlayerPosition);
 
-            tiles[0,0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
+            tiles[0, 0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
             StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
 
             updateBoard();
+            canStartUpdate = true;
+
             InvokeRepeating("updateLoc", 2f, 2f);
         }
     }
@@ -163,26 +162,32 @@ public class tileGen : NetworkTileGenBehavior
         Debug.Log(Center);
         Position = posInTile(Input.location.lastData.latitude, Input.location.lastData.longitude);
         Debug.Log(Position);
-        Vector3 pos = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
+        CalcPlayerPosition = new Vector3((Position.x - 0.5f) * 611, 0, (0.5f - Position.y) * 611);
         /*
          * Move the destination controller on the network
          * **/
-        DestinationController.MovePlayerDestination(pos);
+        DestinationController.MovePlayerDestination(CalcPlayerPosition);
     }
 
     // checks if movement is greate than a single tile space, if so update the board
     void Update()
     {
-        currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
-        currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
-        if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
+        if (!DestinationController.networkObject.IsOwner) return;
+
+        if (canStartUpdate)
         {
-            Debug.Log("UPDATE BOARD");
-            updateBoard();
-            oldX = currX;
-            oldZ = currZ;
+            currX = Mathf.Floor(transform.position.x) - Mathf.Floor(transform.position.x) % 612;
+            currZ = Mathf.Floor(transform.position.z) - Mathf.Floor(transform.position.z) % 612;
+            if (Mathf.Abs(currX - oldX) > 306 || Mathf.Abs(currZ - oldZ) > 306)
+            {
+                Debug.Log("UPDATE BOARD");
+                updateBoard();
+                oldX = currX;
+                oldZ = currZ;
+            }
         }
-    }
+
+     }
 
     //checks if theres a tile in that location, if not then put one down
     void updateBoard()
@@ -273,11 +278,8 @@ public class tileGen : NetworkTileGenBehavior
         return new Vector2(xtile - (int)xtile, ytile - (int)ytile);
     }
 
-    //Mostra a schermo informazioni di debug
     //void OnGUI()
     //{
-    //    GUI.Label(new Rect(10, 10, 500, 30), Input.location.lastData.latitude.ToString());
-    //    GUI.Label(new Rect(10, 50, 500, 30), Input.location.lastData.longitude.ToString());
-    //    GUI.Label(new Rect(10, 100, 500, 30), status);
+    //    GUI.Label(new Rect(10, 70, 500, 30),debugString);
     //}
 }

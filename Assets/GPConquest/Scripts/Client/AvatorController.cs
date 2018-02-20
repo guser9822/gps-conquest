@@ -201,6 +201,7 @@ namespace TC.GPConquest.Player
         //When the destination controller is destroyed, destroys the avator
         private void NetworkObject_onDestroy(NetWorker sender)
         {
+            animator = null;
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
         }

@@ -52,6 +52,7 @@ MonoBehaviour:
   PlayerDestinationControllerNetworkObject:
   - {fileID: 1539067134247076, guid: 0f18cfaf807b36f4b98e0865d423f638, type: 2}
   TestNetworkObject: []
+  NetworkTileGenNetworkObject: []
   automaticScenes: 1
 --- !u!1001 &100100000
 Prefab:
