@@ -6,6 +6,7 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
+using TC.Common;
 
 namespace TC.GPConquest.Player
 {
@@ -38,9 +39,6 @@ namespace TC.GPConquest.Player
         private string[] nameParts = new string[] { "crazy", "cat", "dog", "homie",
             "bobble", "mr", "ms", "mrs", "castle", "flip", "flop" };
 
-        private string[] avators = new string[] { "HumanMale", "HumanMale 1", "HumanMale 2", "HumanMale 3", "HumanMale 4"
-            , "HumanFemale" , "HumanFemale 1", "HumanFemale 2", "HumanFemale 3", "HumanFemale 4"};
-
         private void Awake()
         {
             AssetLoaderController = FindObjectOfType<AssetLoaderController>();
@@ -69,8 +67,8 @@ namespace TC.GPConquest.Player
             int last = UnityEngine.Random.Range(0, nameParts.Length - 1);
 
             //Selected UMA
-            int randomAvator = UnityEngine.Random.Range(0, avators.Length - 1);
-            selectedUma = avators[randomAvator];
+            int randomAvator = UnityEngine.Random.Range(0, CommonNames.avators.Length - 1);
+            selectedUma = CommonNames.avators[randomAvator];
 
             //Assign the color
             networkObject.destNetColor = UnityEngine.Random.ColorHSV();

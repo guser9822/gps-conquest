@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 268059193}
   - component: {fileID: 268059195}
   m_Layer: 0
-  m_Name: umaSelectionObject
+  m_Name: UmaSelectionObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
