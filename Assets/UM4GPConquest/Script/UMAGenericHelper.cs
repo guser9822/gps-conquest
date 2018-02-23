@@ -19,7 +19,8 @@ namespace TC.UM4GPConquest.Utility
             UMADynamicAvatar umaDynamicAvator,
             Action<UMAData> onCharacterCreatedCallback)
         {
-            if (assetLoaderController != null && umaAvatorName != null)
+            if (assetLoaderController != null && umaAvatorName != null
+                && umaDynamicAvator!=null)
             {
                 //Set/spawn a UMA Avator
                 GameObject thisUma = umaDynamicAvator.gameObject;
@@ -38,10 +39,14 @@ namespace TC.UM4GPConquest.Utility
             }
             else
             {
-                if(assetLoaderController==null)
-                    throw new System.ArgumentException("AssetLoader given in input is null");
+                string partOfTheError = "given in input is null";
+                if (assetLoaderController==null)
+                    throw new System.ArgumentException("AssetLoader "+partOfTheError);
                 else if (umaAvatorName == null)
-                    throw new System.ArgumentException("UMA's avator name given in input is null");
+                    throw new System.ArgumentException("UMA's avator name " + partOfTheError);
+                else if(umaDynamicAvator==null)
+                    throw new System.ArgumentException("DyanamicAvator " + partOfTheError);
+
             }
             return new GameObject();
         }

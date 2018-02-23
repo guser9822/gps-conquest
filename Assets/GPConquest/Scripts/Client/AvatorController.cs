@@ -5,6 +5,7 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using UMA;
+using TC.UM4GPConquest.Utility;
 using System;
 
 namespace TC.GPConquest.Player
@@ -98,26 +99,9 @@ namespace TC.GPConquest.Player
         // Updates the UMA avator attached to this game object
         private void UpdateUMA_Avator()
         {
-            /**
-             * Here we check assetLoadController against null because the server process,
-             * which doesn't need any player, don't have anyone of this object.
-             * **/
-            if (assetLoaderController != null)
-            {
-                //Set/spawn a UMA Avator
-                GameObject thisUma = gameObject.GetComponent<UMADynamicAvatar>().gameObject;
-                UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
-
-                thisUmaDynamicAvator.context = assetLoaderController.context;
-                thisUmaDynamicAvator.umaGenerator = assetLoaderController.generator;
-                thisUmaDynamicAvator.loadOnStart = false;
-                thisUmaDynamicAvator.Initialize();
-                thisUmaDynamicAvator.animationController = assetLoaderController.thirdPersonController;
-                UMATextRecipe recipe = assetLoaderController.umaCharactersTemplates[selectedUma];
-                thisUmaDynamicAvator.Load(recipe);
-
-                thisUma.GetComponent<UMAData>().OnCharacterCreated += AvatorController_OnCharacterCreated;
-            }
+            UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
+            //Create a UMA avator and bind it to the DynamicAvator of this object
+            UMAGenericHelper.createUMAAvator(assetLoaderController, selectedUma, thisUmaDynamicAvator, AvatorController_OnCharacterCreated);
         }
 
         //Sets up settings after the creation of the UMA character
