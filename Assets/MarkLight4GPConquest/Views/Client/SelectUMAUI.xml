@@ -1,0 +1,8 @@
+<SelectUMAUI xmlns="MarkLight">
+  <Group>
+    <Group Spacing="8px">
+      <Button Id="NextButton" Text="Next" Click="NextUMA"></Button>
+      <Button Id="PrevButton" Text="Previous" Click="PrevUMA"></Button>
+    </Group>
+  </Group>
+</SelectUMAUI>

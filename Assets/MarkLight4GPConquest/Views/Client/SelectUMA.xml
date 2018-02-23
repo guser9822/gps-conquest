@@ -1,3 +1,6 @@
 <SelectUMA xmlns="MarkLight">
-  
+  <UserInterface>
+    <SelectUMAUI/>
+  </UserInterface>
+  <EventSystem />
 </SelectUMA>
