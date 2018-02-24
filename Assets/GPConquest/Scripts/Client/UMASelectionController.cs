@@ -54,18 +54,19 @@ public class UMASelectionController : MonoBehaviour {
 
     public bool ChangeUMA(VERSE verse)
     {
-        if (verse == VERSE.NEXT)
-            currentIndexOfTheSelection++;
-        else currentIndexOfTheSelection--;
+        return UMAGenericHelper.ToggleUmasActivation(createdUmas,
+            ApplyVerse(verse, currentIndexOfTheSelection)) ?
+            true :
+            false;
+    }
 
-        if (currentIndexOfTheSelection < 0)
-            currentIndexOfTheSelection = createdUmas.Length-1;
-        else if (currentIndexOfTheSelection > createdUmas.Length-1)
-            currentIndexOfTheSelection = 0;
-
-        UMAGenericHelper.ToggleUmasActivation(createdUmas, currentIndexOfTheSelection);
-
-        return true;
+    /*
+     * Cycle the index circularly between 0 and the number of the uma's
+     * **/
+    private int ApplyVerse(VERSE verse,int _index)
+    {
+        int v = (verse == VERSE.NEXT ) ? currentIndexOfTheSelection++ : currentIndexOfTheSelection--;
+        return v < 0 ? createdUmas.Length - 1 : v > createdUmas.Length - 1 ? 0 : v;
     }
 
     
