@@ -18,7 +18,7 @@ namespace TC.UM4GPConquest.Utility
         public static GameObject createUMAAvator(AssetLoaderController assetLoaderController,
             string umaAvatorName,
             UMADynamicAvatar umaDynamicAvator,
-            Action<UMAData> onCharacterCreatedCallback)
+            Action<UMAData> onCharacterCreatedCallback = null)
         {
             GameObject thisUma = null;
             if (assetLoaderController != null && umaAvatorName != null
@@ -63,7 +63,8 @@ namespace TC.UM4GPConquest.Utility
             string[] arrayOfNames,
             Transform _parent,
             Vector3 umasPosition,
-            Quaternion umasRotation
+            Quaternion umasRotation,
+            Action<UMAData> onCharacterCreatedCallbac = null
             )
         {
             for (int x = 0; x < umasSet.Length; x++)
@@ -71,10 +72,12 @@ namespace TC.UM4GPConquest.Utility
                 umasSet[x] = new GameObject();
                 umasSet[x].gameObject.AddComponent<UMADynamicAvatar>();
                 umasSet[x].gameObject.name = arrayOfNames[x];
-                umasSet[x] = UMAGenericHelper.createUMAAvator(_assetLoaderController,
+
+                umasSet[x] = createUMAAvator(_assetLoaderController,
                     arrayOfNames[x],
                     umasSet[x].gameObject.GetComponent<UMADynamicAvatar>(),
-                    null);
+                    onCharacterCreatedCallbac);
+
                 umasSet[x].transform.parent = _parent;
                 umasSet[x].transform.position = umasPosition;
                 umasSet[x].transform.rotation = umasRotation;
@@ -109,7 +112,7 @@ namespace TC.UM4GPConquest.Utility
             Array.ForEach(umasSet, _action);
         }
 
-        private static bool IsIndexInUmas(GameObject[] umas, int index)
+        public static bool IsIndexInUmas(GameObject[] umas, int index)
         {
             return Enumerable.Range(0, umas.Length).Contains<int>(index);
         }
