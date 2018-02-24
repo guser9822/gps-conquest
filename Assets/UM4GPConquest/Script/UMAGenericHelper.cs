@@ -12,18 +12,19 @@ namespace TC.UM4GPConquest.Utility
         /**
          * Given an AssetLoaderController in input,a UMA avator's name and a UMADynamicAvator
          * create and spawn a new uma avator. It is possible to pass also a callback
-         * that it's executed when the uma avator is created.
+         * that it's executed after the uma avator is created.
          * */
         public static GameObject createUMAAvator(AssetLoaderController assetLoaderController,
             string umaAvatorName,
             UMADynamicAvatar umaDynamicAvator,
             Action<UMAData> onCharacterCreatedCallback)
         {
+            GameObject thisUma = null;
             if (assetLoaderController != null && umaAvatorName != null
                 && umaDynamicAvator!=null)
             {
                 //Set/spawn a UMA Avator
-                GameObject thisUma = umaDynamicAvator.gameObject;
+                thisUma = umaDynamicAvator.gameObject;
                 UMADynamicAvatar thisUmaDynamicAvator = thisUma.GetComponent<UMADynamicAvatar>();
 
                 thisUmaDynamicAvator.context = assetLoaderController.context;
@@ -48,8 +49,10 @@ namespace TC.UM4GPConquest.Utility
                     throw new System.ArgumentException("DyanamicAvator " + partOfTheError);
 
             }
-            return new GameObject();
+            return thisUma;
         }
+
+
     }
 }
 
