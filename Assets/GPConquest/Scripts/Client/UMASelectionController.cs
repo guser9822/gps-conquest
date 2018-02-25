@@ -54,10 +54,8 @@ public class UMASelectionController : MonoBehaviour {
 
     public bool ChangeUMA(VERSE verse)
     {
-        return UMAGenericHelper.ToggleUmasActivation(createdUmas,
-            ApplyVerse(verse, currentIndexOfTheSelection)) ?
-            true :
-            false;
+        currentIndexOfTheSelection = ApplyVerse(verse, currentIndexOfTheSelection);
+        return UMAGenericHelper.ToggleUmasActivation(createdUmas, currentIndexOfTheSelection);
     }
 
     /*
@@ -65,8 +63,18 @@ public class UMASelectionController : MonoBehaviour {
      * **/
     private int ApplyVerse(VERSE verse,int _index)
     {
-        int v = (verse == VERSE.NEXT ) ? currentIndexOfTheSelection++ : currentIndexOfTheSelection--;
-        return v < 0 ? createdUmas.Length - 1 : v > createdUmas.Length - 1 ? 0 : v;
+        if (verse == VERSE.NEXT)
+            _index++;
+        else _index--;
+        return StayInRange(_index);
+    }
+
+    /*
+    * Don't let the index stay outside the uma's array lenght
+    * **/
+    private int StayInRange(int _index)
+    {
+        return _index < 0 ? createdUmas.Length - 1 : _index > createdUmas.Length - 1 ? 0 : _index;
     }
 
     
