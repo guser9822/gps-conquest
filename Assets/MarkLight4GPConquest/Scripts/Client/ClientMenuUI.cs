@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using MarkLight.Views.UI;
 using UnityEngine.SceneManagement;
+using TC.Common;
 
 namespace TC.GPConquest.MarkLight4GPConquest
 {
@@ -13,7 +14,7 @@ namespace TC.GPConquest.MarkLight4GPConquest
 
         public void CallLogin()
         {
-            SceneManager.LoadScene(/*SceneManager.GetActiveScene().buildIndex + 1*/3);
+            SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.LOGIN));
         }
 
         public void CallOption()

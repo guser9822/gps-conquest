@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GPConquest/Scenes/Client/GameScene.unity
     guid: 2114a17aac1c9a94992eb4099e39505f
+  - enabled: 1
+    path: Assets/GPConquest/Scenes/Client/OptionScene.unity
+    guid: 9a68237186141ab45bb198fda111a50f

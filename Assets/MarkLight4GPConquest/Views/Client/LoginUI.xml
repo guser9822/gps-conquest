@@ -6,6 +6,7 @@
       <Label Id="UsernameLabel" Text="Password" />
       <InputField Id="InputPass"/>
       <Button Id="LogInButton" Text="Connect" Click="CallConnectToServer"></Button>
+      <Button Id="BackNutton" Text="Back" Click="CallBack"></Button>
     </Group>
   </Group>
 </LoginUI>
