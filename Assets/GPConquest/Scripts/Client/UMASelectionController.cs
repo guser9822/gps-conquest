@@ -15,7 +15,7 @@ public class UMASelectionController : MonoBehaviour {
         PREV
     }
 
-    public AssetLoaderController AssetLoaderController;
+    private AssetLoaderController AssetLoaderController;
     private GameObject[] createdUmas;
     public GameObject[] getAllSpawnedAvators
     {
@@ -25,6 +25,7 @@ public class UMASelectionController : MonoBehaviour {
 
     private void Awake()
     {
+        AssetLoaderController = GetComponent<AssetLoaderController>();
         createdUmas = new GameObject[CommonNames.avators.Length];
     }
 
@@ -39,8 +40,8 @@ public class UMASelectionController : MonoBehaviour {
             CommonNames.avators,
             transform,
             Vector3.zero,
-            Quaternion.Euler(0,180,0),
-            x => 
+            Quaternion.Euler(0, 180, 0),
+            x =>
             {
                 //Deactivate shadows production and reception
                 x.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().shadowCastingMode =
@@ -48,7 +49,7 @@ public class UMASelectionController : MonoBehaviour {
                 x.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().receiveShadows = false;
             });
 
-        //Deactivate all the uma's execept the first
+        ////Deactivate all the uma's execept the first
         UMAGenericHelper.ToggleUmasActivation(createdUmas,0);
     }
 

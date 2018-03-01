@@ -1,8 +1,25 @@
 <SelectUMAUI xmlns="MarkLight">
-  <Group Alignment="Bottom">
-    <Group Spacing="8px" Orientation	="Horizontal">
-      <Button Id="PrevButton" Text="Previous" Click="PrevUMA"></Button>
-      <Button Id="NextButton" Text="Next" Click="NextUMA"></Button>
+  <Region Width="25%" Alignment="Left">
+    <Group>
+      <Group Spacing="8px" Orientation	="Vertical">
+        <Label Id="UsernameLabel" Text="Username"></Label>
+        <InputField Id="UsernameInput"/>
+        <Label Id="PasswordLabel" Text="Password"></Label>
+        <InputField Id="PasswordInput"/>
+        <Label Id="EmailLabel" Text="Email"></Label>
+        <InputField Id="EmailInput"/>
+        <ComboBox Id="ComboBoxFaction">
+          <ComboBoxItem IsTemplate="True" Text="Esampio"/>
+        </ComboBox>
+      </Group>
     </Group>
-  </Group>
+  </Region>
+  <Region Height="20%" Alignment="Bottom">
+    <Group Alignment="Bottom">
+      <Group Spacing="8px" Orientation	="Horizontal">
+        <Button Id="PrevButton" Text="Previous" Click="PrevUMA"></Button>
+        <Button Id="NextButton" Text="Next" Click="NextUMA"></Button>
+      </Group>
+    </Group>
+  </Region>
 </SelectUMAUI>
