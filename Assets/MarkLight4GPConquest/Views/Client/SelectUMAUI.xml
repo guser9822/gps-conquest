@@ -1,20 +1,28 @@
 <SelectUMAUI xmlns="MarkLight">
-  <Region Width="25%" Alignment="Left">
-    <Group>
-      <Group Spacing="8px" Orientation	="Vertical">
-        <Label Id="UsernameLabel" Text="Username"></Label>
-        <InputField Id="UsernameInput"/>
-        <Label Id="PasswordLabel" Text="Password"></Label>
-        <InputField Id="PasswordInput"/>
-        <Label Id="EmailLabel" Text="Email"></Label>
-        <InputField Id="EmailInput"/>
-        <Label Id="FactionLabel" Text="Faction"></Label>
-        <ComboBox Id="ComboBoxFactions" Items="{FactionsList}">
-          <ComboBoxItem IsTemplate="True" Text="{#Item}"/>
-        </ComboBox>
+
+  <Region Width="25%" Alignment="Left" BackgroundColor="yellow">
+    <Region Id="UserDataRegion"  Width="98%" Height="98%" BackgroundColor="grey">
+        <Group>
+          <Group Id="UserDataGroup" Spacing="8px" Orientation	="Vertical">
+            <Label Id="UsernameLabel" Text="Username"></Label>
+            <InputField Id="UsernameInput"/>
+            <Label Id="PasswordLabel" Text="Password"></Label>
+            <InputField Id="PasswordInput"/>
+            <Label Id="EmailLabel" Text="Email"></Label>
+            <InputField Id="EmailInput"/>
+            <Label Id="FactionLabel" Text="Faction"></Label>
+            <ComboBox Id="ComboBoxFactions" Items="{FactionsList}" Width="200">
+              <ComboBoxItem IsTemplate="True" Text="{#Item}"/>
+            </ComboBox>
+            <Region Height ="170" BackgroundColor="red"></Region>
+            <Button Id="BackButton" Text="Back"></Button>
+            <Button Id="ConfirmButton" Text="Confirm"></Button>
+          </Group>
+          <!--<Region Height ="280"  BackgroundColor="red"></Region>-->
       </Group>
-    </Group>
+    </Region>                     
   </Region>
+  
   <Region Height="20%" Alignment="Bottom">
     <Group Alignment="Bottom">
       <Group Spacing="8px" Orientation	="Horizontal">
@@ -23,4 +31,5 @@
       </Group>
     </Group>
   </Region>
+
 </SelectUMAUI>

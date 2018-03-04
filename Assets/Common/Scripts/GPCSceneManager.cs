@@ -17,7 +17,7 @@ namespace TC.Common
         public enum GPCSceneEnum
         {
             CLIENT_MENU,
-            REGISTER,
+            //REGISTER,
             SELECT_UMA,
             LOGIN,
             GAME_SCENE,

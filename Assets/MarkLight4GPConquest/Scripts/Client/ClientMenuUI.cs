@@ -9,7 +9,7 @@ namespace TC.GPConquest.MarkLight4GPConquest
     {
         public void CallRegister()
         {
-            SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.REGISTER));
+            SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.SELECT_UMA));
         }
 
         public void CallLogin()

@@ -29,6 +29,8 @@ namespace TC.GPConquest.MarkLight4GPConquest
         public ComboBox ComboBoxFactions;
         [MapTo("FactionsList.SelectedItem")]
         public _object XFaction;
+        public Region UserDataRegion;
+        public Group UserDataGroup;
 
         /*
          * In order to see a default faction in the selection scene
