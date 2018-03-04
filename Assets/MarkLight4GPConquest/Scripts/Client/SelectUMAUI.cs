@@ -7,6 +7,8 @@ using MarkLight;
 using TC.GPConquest.Common;
 using TC.Common;
 using UnityEngine.SceneManagement;
+using System;
+using TC.GPConquest.MarkLight4GPConquest.Common;
 
 namespace TC.GPConquest.MarkLight4GPConquest
 {
@@ -31,6 +33,10 @@ namespace TC.GPConquest.MarkLight4GPConquest
         public ComboBox ComboBoxFactions;
         [MapTo("FactionsList.SelectedItem")]
         public _object XFaction;
+        public InputField UsernameInput;
+        public InputField PasswordInput;
+        public InputField EmailInput;
+        public Button ConfirmButton;
 
         /*
          * In order to see a default faction in the selection scene
@@ -76,6 +82,28 @@ namespace TC.GPConquest.MarkLight4GPConquest
         {
             AssetBundle.UnloadAllAssetBundles(true);
             SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
+        }
+
+        private void Update()
+        {
+            ChecksOnUI();
+        }
+
+        public void ChecksOnUI()
+        {
+            UIHelperUtility.ExecuteActionOnButton<String>(ConfirmButton,
+                new List<String>() {UsernameInput.Text.Value,
+                                        PasswordInput.Text.Value,
+                                        EmailInput.Text.Value },
+                x => x.TrueForAll(y => CheckIfToEnableButton(y)),
+               (x,y) => y.IsVisible.Value = x);
+        }
+
+        private bool CheckIfToEnableButton(String _string)
+        {
+            return UIHelperUtility.ValidateString(_string) &&
+                UIHelperUtility.ValidateString(_string) &&
+                UIHelperUtility.ValidateString(_string);
         }
 
     }

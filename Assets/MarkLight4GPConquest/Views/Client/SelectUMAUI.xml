@@ -16,7 +16,7 @@
             </ComboBox>
             <Region Height ="170" BackgroundColor="red"></Region>
             <Button Id="BackButton" Text="Back"  Click="CallBack"></Button>
-            <Button Id="ConfirmButton" Text="Confirm"></Button>
+            <Button Id="ConfirmButton" Text="Confirm" IsVisible="false"></Button>
           </Group>
           <!--<Region Height ="280"  BackgroundColor="red"></Region>-->
       </Group>
