@@ -9,8 +9,8 @@
         <Label Id="EmailLabel" Text="Email"></Label>
         <InputField Id="EmailInput"/>
         <Label Id="FactionLabel" Text="Faction"></Label>
-        <ComboBox Id="ComboBoxFaction">
-          <ComboBoxItem IsTemplate="True" Text="Esampio"/>
+        <ComboBox Id="ComboBoxFactions" Items="{FactionsList}">
+          <ComboBoxItem IsTemplate="True" Text="{#Item}"/>
         </ComboBox>
       </Group>
     </Group>
