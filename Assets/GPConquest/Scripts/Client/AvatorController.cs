@@ -26,7 +26,8 @@ namespace TC.GPConquest.Player
             /*NOTE For the Server process : 
             * The server process doesn't have AssetLoaderController object in it's scene
             * because we don't need any player in that process, so, basically,
-            * assetLoaderController will always null
+            * assetLoaderController will always be null. An Execpetion will be thrown
+            *  on the server process that it's not important to manage.
             * TO DO : Find a better solution to isolate the server from the rest of the client
             * **/
             assetLoaderController = FindObjectOfType<AssetLoaderController>();

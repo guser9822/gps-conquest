@@ -5,6 +5,8 @@ using MarkLight.Views.UI;
 using TC.GPConquest.Player;
 using MarkLight;
 using TC.GPConquest.Common;
+using TC.Common;
+using UnityEngine.SceneManagement;
 
 namespace TC.GPConquest.MarkLight4GPConquest
 {
@@ -29,8 +31,6 @@ namespace TC.GPConquest.MarkLight4GPConquest
         public ComboBox ComboBoxFactions;
         [MapTo("FactionsList.SelectedItem")]
         public _object XFaction;
-        public Region UserDataRegion;
-        public Group UserDataGroup;
 
         /*
          * In order to see a default faction in the selection scene
@@ -70,6 +70,12 @@ namespace TC.GPConquest.MarkLight4GPConquest
         public void PrevUMA()
         {
             UmaSelectionController.ChangeUMA(UMASelectionController.VERSE.PREV);
+        }
+
+        public void CallBack()
+        {
+            AssetBundle.UnloadAllAssetBundles(true);
+            SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
         }
 
     }
