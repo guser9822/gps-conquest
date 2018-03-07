@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3833,7 +3833,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 268059188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 0, z: 0.12}
+  m_LocalPosition: {x: -0.13, y: 0, z: 0.12}
   m_LocalScale: {x: 0.61, y: 1, z: 0.94}
   m_Children:
   - {fileID: 588891791}
@@ -31046,7 +31046,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 353348621}
   m_TextComponent: {fileID: 1133240244}
   m_Placeholder: {fileID: 396530693}
   m_ContentType: 0
@@ -38263,7 +38263,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 608492907}
   m_TextComponent: {fileID: 576924128}
   m_Placeholder: {fileID: 571399792}
   m_ContentType: 0
@@ -60098,7 +60098,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1917533939}
   m_TextComponent: {fileID: 424487907}
   m_Placeholder: {fileID: 441230921}
   m_ContentType: 0
@@ -63393,6 +63393,7 @@ GameObject:
   - component: {fileID: 2063391450}
   - component: {fileID: 2063391449}
   - component: {fileID: 2063391448}
+  - component: {fileID: 2063391453}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -63430,7 +63431,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.10719496, g: 0.2647059, b: 0.22301182, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -63439,7 +63440,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 54.4
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -63463,13 +63464,21 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2063391447}
-  m_LocalRotation: {x: 0.17725651, y: 0, z: 0, w: 0.9841647}
-  m_LocalPosition: {x: -0.25, y: 2.42, z: -3.76}
+  m_LocalRotation: {x: 0.056170072, y: 0, z: 0, w: 0.99842125}
+  m_LocalPosition: {x: -0.25, y: 2.42, z: -5.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20.42, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.44, y: 0, z: 0}
+--- !u!45 &2063391453
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063391447}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: d9dca9ae1786c394f9e79c637aa9a7bf, type: 2}
 --- !u!1 &2083071041
 GameObject:
   m_ObjectHideFlags: 1

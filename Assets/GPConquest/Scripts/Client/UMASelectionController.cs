@@ -39,7 +39,7 @@ public class UMASelectionController : MonoBehaviour {
             AssetLoaderController,
             CommonNames.avators,
             transform,
-            Vector3.zero,
+            Vector3.zero,      
             Quaternion.Euler(0, 180, 0),
             x =>
             {
