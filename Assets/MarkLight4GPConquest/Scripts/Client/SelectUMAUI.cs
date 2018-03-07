@@ -37,6 +37,8 @@ namespace TC.GPConquest.MarkLight4GPConquest
         public InputField PasswordInput;
         public InputField EmailInput;
         public Button ConfirmButton;
+        protected string selectedUma = "HumanMale";
+        public GenericPopUp GenericPopUp;
 
         /*
          * In order to see a default faction in the selection scene
@@ -70,18 +72,33 @@ namespace TC.GPConquest.MarkLight4GPConquest
 
         public void NextUMA()
         {
-            UmaSelectionController.ChangeUMA(UMASelectionController.VERSE.NEXT);
+           selectedUma = UmaSelectionController.ChangeUMA(UMASelectionController.VERSE.NEXT);
         }
 
         public void PrevUMA()
         {
-            UmaSelectionController.ChangeUMA(UMASelectionController.VERSE.PREV);
+            selectedUma = UmaSelectionController.ChangeUMA(UMASelectionController.VERSE.PREV);
         }
 
         public void CallBack()
         {
+            //TODO : I think that it's not correct to load/unload all the assets everytime. This is a temporary solution
             AssetBundle.UnloadAllAssetBundles(true);
             SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
+        }
+
+        public void CallConfirm()
+        {
+            //Find the object UserInformations in the scene and fill it with the informations
+            UserInformations userInformations = FindObjectOfType<UserInformations>();
+            userInformations.SetUserInformations(
+             UsernameInput.Text.Value,
+             PasswordInput.Text.Value,
+             EmailInput.Text.Value,
+             (string)XFaction.Value,
+             selectedUma);
+            GenericPopUp.ShowPopUp(UIInfoLayer.AccountCreatedMessage);
+            //CallBack();
         }
 
         private void Update()

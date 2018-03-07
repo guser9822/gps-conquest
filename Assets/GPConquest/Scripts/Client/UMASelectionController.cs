@@ -53,10 +53,13 @@ public class UMASelectionController : MonoBehaviour {
         UMAGenericHelper.ToggleUmasActivation(createdUmas,0);
     }
 
-    public bool ChangeUMA(VERSE verse)
+    /* Apply to the uma's array a verse of scrolling and return the name
+     * of the asset of the selected uma.
+     * */
+    public string ChangeUMA(VERSE verse)
     {
         currentIndexOfTheSelection = ApplyVerse(verse, currentIndexOfTheSelection);
-        return UMAGenericHelper.ToggleUmasActivation(createdUmas, currentIndexOfTheSelection);
+        return UMAGenericHelper.ToggleUmasActivation(createdUmas, currentIndexOfTheSelection).gameObject.name;
     }
 
     /*
