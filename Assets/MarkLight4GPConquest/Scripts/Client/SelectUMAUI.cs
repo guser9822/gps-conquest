@@ -98,7 +98,6 @@ namespace TC.GPConquest.MarkLight4GPConquest
              (string)XFaction.Value,
              selectedUma);
             GenericPopUp.ShowPopUp(UIInfoLayer.AccountCreatedMessage);
-            //CallBack();
         }
 
         private void Update()
