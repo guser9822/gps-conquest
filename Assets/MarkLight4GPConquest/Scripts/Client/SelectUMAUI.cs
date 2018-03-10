@@ -82,22 +82,32 @@ namespace TC.GPConquest.MarkLight4GPConquest
 
         public void CallBack()
         {
-            //TODO : I think that it's not correct to load/unload all the assets everytime. This is a temporary solution
+            //TODO : I think that it's not correct to load/unload all the assets everytime. This is a temporary solution.
             AssetBundle.UnloadAllAssetBundles(true);
             SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
         }
 
         public void CallConfirm()
         {
-            //Find the object UserInformations in the scene and fill it with the informations
-            UserInformations userInformations = FindObjectOfType<UserInformations>();
-            userInformations.SetUserInformations(
-             UsernameInput.Text.Value,
+            //Adds the new users to the User's container
+            UsersContainer userInformations = FindObjectOfType<UsersContainer>();
+
+            var res = userInformations.AddNewUser(UsernameInput.Text.Value,
              PasswordInput.Text.Value,
              EmailInput.Text.Value,
              (string)XFaction.Value,
              selectedUma);
-            GenericPopUp.ShowPopUp(UIInfoLayer.AccountCreatedMessage);
+             
+            if (res)
+            {
+                //Shows a message that states the success of the creation of the account
+                GenericPopUp.ShowPopUp(UIInfoLayer.AccountCreatedMessage);
+            }
+            else 
+            {
+                //The user already exists show an error message
+                GenericPopUp.ShowPopUp(UIInfoLayer.AccountAlreadyExistsMessage);
+            } 
         }
 
         private void Update()
