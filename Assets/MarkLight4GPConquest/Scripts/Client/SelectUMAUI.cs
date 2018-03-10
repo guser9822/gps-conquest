@@ -8,6 +8,7 @@ using TC.GPConquest.Common;
 using TC.Common;
 using UnityEngine.SceneManagement;
 using System;
+using TC.GPConquest.MarkLight4GPConquest;
 using TC.GPConquest.MarkLight4GPConquest.Common;
 
 namespace TC.GPConquest.MarkLight4GPConquest
@@ -87,6 +88,7 @@ namespace TC.GPConquest.MarkLight4GPConquest
             SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
         }
 
+
         public void CallConfirm()
         {
             //Adds the new users to the User's container
@@ -97,17 +99,27 @@ namespace TC.GPConquest.MarkLight4GPConquest
              EmailInput.Text.Value,
              (string)XFaction.Value,
              selectedUma);
-             
+
             if (res)
             {
+                ViewActionEntry callBackActioNEntry = new ViewActionEntry();
+                callBackActioNEntry.ViewActionFieldName = "Click";
+                callBackActioNEntry.ViewActionHandlerName = "CallBack";
+                callBackActioNEntry.ParentView = this;
+                callBackActioNEntry.SourceView = GenericPopUp.OkButton;
+
+                GenericPopUp.OkButton.Click.AddEntry(callBackActioNEntry);
                 //Shows a message that states the success of the creation of the account
                 GenericPopUp.ShowPopUp(UIInfoLayer.AccountCreatedMessage);
             }
-            else 
+            else
             {
+
+                GenericPopUp.OkButton.
+
                 //The user already exists show an error message
                 GenericPopUp.ShowPopUp(UIInfoLayer.AccountAlreadyExistsMessage);
-            } 
+            }
         }
 
         private void Update()

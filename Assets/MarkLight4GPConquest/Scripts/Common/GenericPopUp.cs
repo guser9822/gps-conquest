@@ -32,8 +32,8 @@ namespace TC.GPConquest.MarkLight4GPConquest
 
         public void ShowPopUp(string _message)
         {
-            GenericPopUpMessage.Value = _message;
             ToggleWindow();
+            GenericPopUpMessage.Value = _message;
         }
 
     }

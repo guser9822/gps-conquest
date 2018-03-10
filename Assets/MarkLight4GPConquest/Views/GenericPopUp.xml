@@ -2,7 +2,8 @@
   <Window Id="GenericWindow" Title="Infomation" Width="300px" Height="200px">
     <Group>
       <Group Id="UserDataGroup" Spacing="8px" Orientation	="Vertical">
-        <Label Style="ShowcaseDescription" Text="{GenericPopUpMessage}" /><!--Width="60%" Height="60%" TextAlignment="Center" Margin="50px"-->
+        <Label Style="ShowcaseDescription" AdjustToText="WidthAndHeight" 
+               TextAlignment="Left" Text="{GenericPopUpMessage}" /><!--Width="60%" Height="60%" TextAlignment="Center" Margin="50px"-->
         <Button Id="OkButton" Text="Ok"></Button>
       </Group>
     </Group>

@@ -1530,10 +1530,10 @@
     <xs:attribute name="IsDestroyed" type="xs:string" />
     <xs:attribute name="IsDynamic" type="xs:string" />
     <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
-    <xs:attribute name="Drag" type="xs:string" />
-    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
     <xs:attribute name="EndDrag" type="xs:string" />
     <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
     <xs:attribute name="Cancel" type="xs:string" />
     <xs:attribute name="Deselect" type="xs:string" />
     <xs:attribute name="Drop" type="xs:string" />
@@ -5712,6 +5712,7 @@
       <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
     <xs:attribute name="FactionsList" type="xs:string" />
+    <xs:attribute name="GoBack" type="xs:string" />
     <xs:attribute name="Id" type="xs:string" />
     <xs:attribute name="Style" type="xs:string" />
     <xs:attribute name="BasedOn" type="xs:string" />
