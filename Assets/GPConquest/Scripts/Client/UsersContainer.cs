@@ -14,7 +14,13 @@ namespace TC.GPConquest.Player
     {
         private HashSet<UserInformations> registeredUsers = new HashSet<UserInformations>();
         private static UsersContainer _instance;
-        public UserInformations UserInfos;//template for all registered users
+
+        /*
+         * This attribute is used as template for all UserInformations object, it's linked to the respective
+         * prefab. After the invocation of the method GetUserByUsernameAndPassword it will reference
+         * the account found, else null.
+         * **/
+        public UserInformations UserInfos;
 
         private void Awake()
         {
@@ -64,7 +70,8 @@ namespace TC.GPConquest.Player
 
         public UserInformations GetUserByUsernameAndPassword(string _username, string _password)
         {
-            return registeredUsers.FirstOrDefault(x=> x.username.Equals(_username) && x.password.Equals(_password));
+            UserInformations isFound = registeredUsers.FirstOrDefault(x => x.username.Equals(_username) && x.password.Equals(_password));
+            return !ReferenceEquals(isFound,null) ? (UserInfos = isFound) : isFound;
         }
 
     }

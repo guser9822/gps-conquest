@@ -36,9 +36,6 @@ namespace TC.GPConquest.Player
         public Boolean isGiantMode;
         #endregion
 
-        private string[] nameParts = new string[] { "crazy", "cat", "dog", "homie",
-            "bobble", "mr", "ms", "mrs", "castle", "flip", "flop" };
-
         private void Awake()
         {
             AssetLoaderController = FindObjectOfType<AssetLoaderController>();
@@ -61,14 +58,11 @@ namespace TC.GPConquest.Player
             cam = FindObjectOfType<Camera>();
             cam.gameObject.GetComponent<Transform>().SetParent(transform);
 
-            // Get a random index for the first name
-            int first = UnityEngine.Random.Range(0, nameParts.Length - 1);
-            // Get a random index for the last name
-            int last = UnityEngine.Random.Range(0, nameParts.Length - 1);
+            //Gets a reference to the user account informations
+            UsersContainer userInformations = FindObjectOfType<UsersContainer>();
 
             //Selected UMA
-            int randomAvator = UnityEngine.Random.Range(0, CommonNames.avators.Length - 1);
-            selectedUma = CommonNames.avators[randomAvator];
+            selectedUma = userInformations.UserInfos.selectedUma;
 
             //Assign the color
             networkObject.destNetColor = UnityEngine.Random.ColorHSV();
@@ -83,7 +77,7 @@ namespace TC.GPConquest.Player
                     Quaternion.AngleAxis(-50.0f, Vector3.left),
                     50.0f,
                     networkObject.destCursorDims,
-                    nameParts[first] + " " + nameParts[last],
+                    userInformations.UserInfos.username,
                     networkObject.destNetColor);
 
             }
@@ -95,7 +89,7 @@ namespace TC.GPConquest.Player
                     Quaternion.AngleAxis(-40.0f, Vector3.left),
                     10.0f,
                     networkObject.destCursorDims,
-                    nameParts[first] + " " + nameParts[last],
+                    userInformations.UserInfos.username,
                     networkObject.destNetColor);
             }
 
