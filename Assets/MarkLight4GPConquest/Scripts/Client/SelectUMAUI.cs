@@ -81,14 +81,6 @@ namespace TC.GPConquest.MarkLight4GPConquest
             selectedUma = UmaSelectionController.ChangeUMA(UMASelectionController.VERSE.PREV);
         }
 
-        public void CallBack()
-        {
-            //TODO : I think that it's not correct to load/unload all the assets everytime. This is a temporary solution.
-            AssetBundle.UnloadAllAssetBundles(true);
-            SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
-        }
-
-
         public void CallConfirm()
         {
             //Adds the new users to the User's container
@@ -102,24 +94,43 @@ namespace TC.GPConquest.MarkLight4GPConquest
 
             if (res)
             {
-                ViewActionEntry callBackActioNEntry = new ViewActionEntry();
-                callBackActioNEntry.ViewActionFieldName = "Click";
-                callBackActioNEntry.ViewActionHandlerName = "CallBack";
-                callBackActioNEntry.ParentView = this;
-                callBackActioNEntry.SourceView = GenericPopUp.OkButton;
+                //ViewActionEntry callBackActioNEntry = new ViewActionEntry();
+                //callBackActioNEntry.ViewActionFieldName = "Click";
+                //callBackActioNEntry.ViewActionHandlerName = "CallBack";
+                //callBackActioNEntry.ParentView = this;
+                //callBackActioNEntry.SourceView = GenericPopUp.OkButton;
 
-                GenericPopUp.OkButton.Click.AddEntry(callBackActioNEntry);
+                //GenericPopUp.OkButton.Click.AddEntry(callBackActioNEntry);
                 //Shows a message that states the success of the creation of the account
                 GenericPopUp.ShowPopUp(UIInfoLayer.AccountCreatedMessage);
             }
             else
             {
 
-                GenericPopUp.OkButton.
+                //var viewActionEntryToRemove =
+                //    GenericPopUp.OkButton.ViewActionEntries.Find(x => x.ViewActionFieldName.Equals("Click") &&
+                //x.ViewActionHandlerName.Equals("CallBack"));
+
+                //GenericPopUp.OkButton.ViewActionEntries.Remove(viewActionEntryToRemove);
 
                 //The user already exists show an error message
-                GenericPopUp.ShowPopUp(UIInfoLayer.AccountAlreadyExistsMessage);
+                GenericPopUp.ShowPopUp(UIInfoLayer.AccountAlreadyExistsMessage,false,true);
             }
+        }
+
+        public void OnClickConfirm()
+        {
+            //TODO : I think that it's not correct to load/unload all the assets everytime. This is a temporary solution.
+            AssetBundle.UnloadAllAssetBundles(true);
+            SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
+        }
+
+        public void OnClickCancel()
+        {
+            UsernameInput.Text.Value = "";
+            PasswordInput.Text.Value = "";
+            EmailInput.Text.Value = "";
+            GenericPopUp.ToggleWindow();
         }
 
         private void Update()

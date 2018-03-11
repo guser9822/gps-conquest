@@ -21,7 +21,7 @@
       </Group>
     </Region>                     
   </Region>
-  <GenericPopUp Id="GenericPopUp" Style="Reset" /><!--OkButton.Click="CallBack"-->
+  <GenericPopUp Id="GenericPopUp" Style="Reset" OkButton.Click="OnClickConfirm" CancelButton.Click="OnClickCancel"/>
   <Region Height="20%" Alignment="Bottom">
     <Group Alignment="Bottom">
       <Group Spacing="8px" Orientation	="Horizontal">

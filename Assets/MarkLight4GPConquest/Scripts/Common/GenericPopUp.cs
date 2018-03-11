@@ -12,6 +12,7 @@ namespace TC.GPConquest.MarkLight4GPConquest
         public Window GenericWindow;
         public _string GenericPopUpMessage;
         public Button OkButton;
+        public Button CancelButton;
 
         public void Start()
         {
@@ -30,9 +31,11 @@ namespace TC.GPConquest.MarkLight4GPConquest
             }
         }
 
-        public void ShowPopUp(string _message)
+        public void ShowPopUp(string _message,bool showOkButton = true,bool showCancelButton = false)
         {
             ToggleWindow();
+            OkButton.IsActive.Value = showOkButton;
+            CancelButton.IsActive.Value = showCancelButton;
             GenericPopUpMessage.Value = _message;
         }
 

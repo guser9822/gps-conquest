@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace TC.GPConquest.Player
 {
@@ -11,7 +12,7 @@ namespace TC.GPConquest.Player
  * **/
     public class UsersContainer : MonoBehaviour
     {
-        public HashSet<UserInformations> registeredUsers = new HashSet<UserInformations>();
+        private HashSet<UserInformations> registeredUsers = new HashSet<UserInformations>();
         private static UsersContainer _instance;
         public UserInformations UserInfos;//template for all registered users
 
@@ -59,6 +60,11 @@ namespace TC.GPConquest.Player
             }
 
             return true;
+        }
+
+        public UserInformations GetUserByUsernameAndPassword(string _username, string _password)
+        {
+            return registeredUsers.FirstOrDefault(x=> x.username.Equals(_username) && x.password.Equals(_password));
         }
 
     }

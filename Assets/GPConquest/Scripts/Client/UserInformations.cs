@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,7 +76,6 @@ namespace TC.GPConquest.Player
             //result = prime * result + (int)(id ^ (id >>> 32));
             return result;
         }
-
     }
 
 }
