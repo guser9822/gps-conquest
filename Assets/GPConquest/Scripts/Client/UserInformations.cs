@@ -36,10 +36,10 @@ namespace TC.GPConquest.Player
 
             UserInformations p = (UserInformations)obj;
             return username.Equals(p.username) &&
-                        password.Equals(p.password) &&
-                        email.Equals(p.email) &&
-                        faction.Equals(p.faction) &&
-                        selectedUma.Equals(p.selectedUma);
+                        password.Equals(p.password);
+                        //email.Equals(p.email) &&
+                        //faction.Equals(p.faction) &&
+                        //selectedUma.Equals(p.selectedUma);
         }
 
         public static bool operator ==(UserInformations x, UserInformations y)
@@ -70,9 +70,9 @@ namespace TC.GPConquest.Player
             int result = 1;
             result = prime * result + ((username == null) ? 0 : username.GetHashCode());
             result = prime * result + ((password == null) ? 0 : password.GetHashCode());
-            result = prime * result + ((email == null) ? 0 : email.GetHashCode());
-            result = prime * result + ((faction == null) ? 0 : faction.GetHashCode());
-            result = prime * result + ((selectedUma == null) ? 0 : selectedUma.GetHashCode());
+            //result = prime * result + ((email == null) ? 0 : email.GetHashCode());
+            //result = prime * result + ((faction == null) ? 0 : faction.GetHashCode());
+            //result = prime * result + ((selectedUma == null) ? 0 : selectedUma.GetHashCode());
             //result = prime * result + (int)(id ^ (id >>> 32));
             return result;
         }

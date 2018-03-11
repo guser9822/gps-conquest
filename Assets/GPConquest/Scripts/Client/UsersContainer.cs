@@ -7,7 +7,7 @@ namespace TC.GPConquest.Player
 {
     /*
  * This class is used to pass user informations between scenes.
- * For the moment we will mock the database, faking the registrtions.
+ * For the moment we will mock the database, faking the registrations.
  * This class will store the List of registered accounts.
  * **/
     public class UsersContainer : MonoBehaviour

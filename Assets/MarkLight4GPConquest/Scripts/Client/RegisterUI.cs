@@ -10,10 +10,11 @@ using UnityEngine.SceneManagement;
 using System;
 using TC.GPConquest.MarkLight4GPConquest;
 using TC.GPConquest.MarkLight4GPConquest.Common;
+using UnityEngine.EventSystems;
 
 namespace TC.GPConquest.MarkLight4GPConquest
 {
-    public class SelectUMAUI : UIView
+    public class RegisterUI : UIView
     {
         /*
          * NOTE : MarkLightUI have a mechanism of auto-reloading
@@ -94,6 +95,7 @@ namespace TC.GPConquest.MarkLight4GPConquest
 
             if (res)
             {
+                //This is an example to how to add a new Action to a Click event on a button
                 //ViewActionEntry callBackActioNEntry = new ViewActionEntry();
                 //callBackActioNEntry.ViewActionFieldName = "Click";
                 //callBackActioNEntry.ViewActionHandlerName = "CallBack";
@@ -106,13 +108,6 @@ namespace TC.GPConquest.MarkLight4GPConquest
             }
             else
             {
-
-                //var viewActionEntryToRemove =
-                //    GenericPopUp.OkButton.ViewActionEntries.Find(x => x.ViewActionFieldName.Equals("Click") &&
-                //x.ViewActionHandlerName.Equals("CallBack"));
-
-                //GenericPopUp.OkButton.ViewActionEntries.Remove(viewActionEntryToRemove);
-
                 //The user already exists show an error message
                 GenericPopUp.ShowPopUp(UIInfoLayer.AccountAlreadyExistsMessage,false,true);
             }
@@ -133,6 +128,13 @@ namespace TC.GPConquest.MarkLight4GPConquest
             GenericPopUp.ToggleWindow();
         }
 
+        public void OnClickBack()
+        {
+            //TODO : I think that it's not correct to load/unload all the assets everytime. This is a temporary solution.
+            AssetBundle.UnloadAllAssetBundles(true);
+            SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.CLIENT_MENU));
+        }
+
         private void Update()
         {
             ChecksOnUI();
@@ -144,15 +146,8 @@ namespace TC.GPConquest.MarkLight4GPConquest
                 new List<String>() {UsernameInput.Text.Value,
                                         PasswordInput.Text.Value,
                                         EmailInput.Text.Value },
-                x => x.TrueForAll(y => CheckIfToEnableButton(y)),
+                x => x.TrueForAll(y => UIHelperUtility.ValidateString(y)),
                (x,y) => y.IsVisible.Value = x);
-        }
-
-        private bool CheckIfToEnableButton(String _string)
-        {
-            return UIHelperUtility.ValidateString(_string) &&
-                UIHelperUtility.ValidateString(_string) &&
-                UIHelperUtility.ValidateString(_string);
         }
 
     }

@@ -11,7 +11,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Common
     {
         /*
          * Function that validate a string for
-         * account creation
+         * username,password and email field
          * **/
         public static bool ValidateString(string _string)
         {
@@ -22,7 +22,8 @@ namespace TC.GPConquest.MarkLight4GPConquest.Common
 
         /*
          * Execute an action on a button only when all arguments
-         * matches with the accepting criteria.
+         * matches with the accepting criteria. T is the type of
+         * the arguments that is passed in.
          * **/
         public static bool ExecuteActionOnButton<T>(Button _button,
             List<T> argsForPredicate,

@@ -1,4 +1,4 @@
-<SelectUMAUI xmlns="MarkLight">
+<RegisterUI xmlns="MarkLight">
 
   <Region Width="25%" Alignment="Left" BackgroundColor="yellow">
     <Region Id="UserDataRegion"  Width="98%" Height="98%" BackgroundColor="grey">
@@ -15,7 +15,7 @@
               <ComboBoxItem IsTemplate="True" Text="{#Item}"/>
             </ComboBox>
             <Region Height ="170" BackgroundColor="red"></Region>
-            <Button Id="BackButton" Text="Back"  Click="CallBack"></Button>
+            <Button Id="BackButton" Text="Back"  Click="OnClickBack"></Button>
             <Button Id="ConfirmButton" Text="Confirm" IsVisible="false"  Click="CallConfirm"></Button>
           </Group>
       </Group>
@@ -31,4 +31,4 @@
     </Group>
   </Region>
 
-</SelectUMAUI>
+</RegisterUI>
