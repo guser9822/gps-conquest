@@ -9,4 +9,5 @@
       <Button Id="BackNutton" Text="Back" Click="CallBack"></Button>
     </Group>
   </Group>
+  <GenericPopUp Id="GenericPopUp" Style="Reset" OkButton.Click="OnClickConfirm"/>
 </LoginUI>
