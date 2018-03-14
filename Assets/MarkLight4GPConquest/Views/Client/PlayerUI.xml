@@ -1,0 +1,6 @@
+<PlayerUI xmlns="MarkLight">
+  <Region Height="10%" Width="10%" BackgroundColor="red" Alignment="BottomLeft">
+  </Region>
+  <Region Height="10%" Width="80%" BackgroundColor="yellow" Alignment="Top">
+  </Region>
+</PlayerUI>

@@ -12,7 +12,7 @@ using TC.GPConquest.MarkLight4GPConquest;
 using TC.GPConquest.MarkLight4GPConquest.Common;
 using UnityEngine.EventSystems;
 
-namespace TC.GPConquest.MarkLight4GPConquest
+namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
     public class RegisterUI : UIView
     {

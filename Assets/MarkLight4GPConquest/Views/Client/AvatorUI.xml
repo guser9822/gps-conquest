@@ -1,0 +1,3 @@
+<AvatorUI xmlns="MarkLight">
+  <Label Alignment="Center" Id="NicknameLabel"  Text="Nickname"></Label>
+</AvatorUI>
