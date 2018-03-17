@@ -26,6 +26,7 @@ namespace TC.GPConquest.Player
         public string selectedUma { get; protected set; }
         public AvatorController AvatorController { get; set; }
         private Vector3 avatorSpawnPosition;
+        public UserInformations CurrentUserInformations { get; private set; }
         #endregion
 
         #region  Attributes dedicated to UnityEditor
@@ -60,6 +61,7 @@ namespace TC.GPConquest.Player
 
             //Gets a reference to the user account informations
             UsersContainer userInformations = FindObjectOfType<UsersContainer>();
+            CurrentUserInformations = userInformations.UserInfos;
 
             //Selected UMA
             selectedUma = userInformations.UserInfos.selectedUma;

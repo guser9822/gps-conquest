@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TC.GPConquest.Common;
 
 namespace TC.GPConquest.Player
 {
@@ -32,6 +33,13 @@ namespace TC.GPConquest.Player
                 Destroy(this.gameObject);
 
             DontDestroyOnLoad(this.gameObject);
+        }
+
+        private void Start()
+        {
+            //Adds two fake account for testing purpose only
+            AddNewUser("viper9","a","a",GameCommonNames.GREEN_FACTION, "HumanMale 2");
+            AddNewUser("zam72", "a", "a", GameCommonNames.RED_FACTION, "HumanFemale 3");
         }
 
         public bool AddNewUser(string _username,

@@ -20,6 +20,9 @@ namespace TC.GPConquest.Player
         private Transform destinationTransform;
         public string speedParamenter = "Forward";
         private float SpeedDampTime = .00f;
+        public GameUIController GameUIController;
+        protected UserInformations CurrentUserInfo;
+        public PlayerEntity PlayerEntity;
 
         private void Awake()
         {
@@ -28,7 +31,7 @@ namespace TC.GPConquest.Player
             * because we don't need any player in that process, so, basically,
             * assetLoaderController will always be null. An Execpetion will be thrown
             *  on the server process that it's not important to manage.
-            * TO DO : Find a better solution to isolate the server from the rest of the client
+            * TODO : Find a better solution to isolate the server from the rest of the client
             * **/
             assetLoaderController = FindObjectOfType<AssetLoaderController>();
             characterController = GetComponent<CharacterController>();
@@ -44,6 +47,8 @@ namespace TC.GPConquest.Player
         public void CreateAndSpawnAvator(DestinationController _destinationController)
         {
             if (!networkObject.IsOwner) return;
+
+            CurrentUserInfo = _destinationController.CurrentUserInformations;
 
             //Update shared attributes according the choosen size of the avator
             if (_destinationController.isGiantMode)
@@ -71,10 +76,22 @@ namespace TC.GPConquest.Player
             //Setup and spawn the UMA character
             UpdateUMA_Avator();
 
+            //Create the Player Entity in the network
+            var playerEntityModelBehavior = NetworkManager.Instance.InstantiatePlayerEntityModel();
+            playerEntityModelBehavior.networkStarted += PlayerEntityModelBehavior_networkStarted;
+
             networkObject.SendRpc(RPC_UPDATE_AVATOR_ON_NETWORK,
                 Receivers.AllBuffered,
                 selectedUma,
                 gameObject.name);
+        }
+
+        private void PlayerEntityModelBehavior_networkStarted(NetworkBehavior behavior)
+        {
+            PlayerEntity = behavior.GetComponent<PlayerEntity>();
+            PlayerEntity.InitializePlayerEntity(transform,CurrentUserInfo);
+            //Update the GameUI for this client
+            //UpdateGameUI(PlayerEntity);
         }
 
         //Sets up values for the avator controller based on isGiantMode value
@@ -97,12 +114,18 @@ namespace TC.GPConquest.Player
             characterController.center = new Vector3(0, 1.0f, 0);
         }
 
+
         // Updates the UMA avator attached to this game object
         private void UpdateUMA_Avator()
         {
             UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
             //Create a UMA avator and bind it to the DynamicAvator of this object
             UMAGenericHelper.createUMAAvator(assetLoaderController, selectedUma, thisUmaDynamicAvator, AvatorController_OnCharacterCreated);
+        }
+
+        private void UpdateGameUI(PlayerEntity _playerEntity)
+        {
+            GameUIController.CreateGameUI(_playerEntity);
         }
 
         //Sets up settings after the creation of the UMA character
