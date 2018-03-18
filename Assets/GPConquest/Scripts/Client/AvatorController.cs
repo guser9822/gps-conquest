@@ -7,6 +7,7 @@ using BeardedManStudios.Forge.Networking.Unity;
 using UMA;
 using TC.UM4GPConquest.Utility;
 using System;
+using System.Linq;
 
 namespace TC.GPConquest.Player
 {
@@ -20,19 +21,11 @@ namespace TC.GPConquest.Player
         private Transform destinationTransform;
         public string speedParamenter = "Forward";
         private float SpeedDampTime = .00f;
-        public GameUIController GameUIController;
         protected UserInformations CurrentUserInfo;
         public PlayerEntity PlayerEntity;
 
         private void Awake()
         {
-            /*NOTE For the Server process : 
-            * The server process doesn't have AssetLoaderController object in it's scene
-            * because we don't need any player in that process, so, basically,
-            * assetLoaderController will always be null. An Execpetion will be thrown
-            *  on the server process that it's not important to manage.
-            * TODO : Find a better solution to isolate the server from the rest of the client
-            * **/
             assetLoaderController = FindObjectOfType<AssetLoaderController>();
             characterController = GetComponent<CharacterController>();
             characterController.center = new Vector3(0, 1.0f, 0);
@@ -89,9 +82,7 @@ namespace TC.GPConquest.Player
         private void PlayerEntityModelBehavior_networkStarted(NetworkBehavior behavior)
         {
             PlayerEntity = behavior.GetComponent<PlayerEntity>();
-            PlayerEntity.InitializePlayerEntity(transform,CurrentUserInfo);
-            //Update the GameUI for this client
-            //UpdateGameUI(PlayerEntity);
+            PlayerEntity.InitializePlayerEntity(transform,CurrentUserInfo,networkObject.NetworkId);
         }
 
         //Sets up values for the avator controller based on isGiantMode value
@@ -123,11 +114,6 @@ namespace TC.GPConquest.Player
             UMAGenericHelper.createUMAAvator(assetLoaderController, selectedUma, thisUmaDynamicAvator, AvatorController_OnCharacterCreated);
         }
 
-        private void UpdateGameUI(PlayerEntity _playerEntity)
-        {
-            GameUIController.CreateGameUI(_playerEntity);
-        }
-
         //Sets up settings after the creation of the UMA character
         private void AvatorController_OnCharacterCreated(UMAData data)
         {
@@ -144,7 +130,6 @@ namespace TC.GPConquest.Player
 
         }
 
-
         public override void UpdateAvatorOnNetwork(RpcArgs args)
         {
 
@@ -156,13 +141,13 @@ namespace TC.GPConquest.Player
                 UpdateAvatorAttributes(selectedUma, playerName);
                 UpdateUMA_Avator();
 
-                //I'm the avator on the network, I shall find my destination in the scene using it's network id
+                ////I'm the avator on the network, I shall find my destination in the scene using it's network id
                 DestinationController[] playersInTheScene = FindObjectsOfType<DestinationController>();
-                foreach (DestinationController dst in playersInTheScene)
-                {
-                    if (dst.networkObject.NetworkId.Equals(networkObject.destNetwId))
-                        destinationTransform = dst.GetComponent<Transform>();
-                }
+
+                var destination = playersInTheScene.ToList().
+                    Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
+
+                destinationTransform = destination.GetComponent<Transform>();
             });
 
         }

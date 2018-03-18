@@ -5,6 +5,7 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
+using System.Linq;
 
 namespace TC.GPConquest.Player
 {
@@ -20,11 +21,13 @@ namespace TC.GPConquest.Player
         public string faction;
         public string selectedUma;
 
-        public bool InitializePlayerEntity(Transform parentTransform, UserInformations _user)
+        public bool InitializePlayerEntity(Transform parentTransform, UserInformations _user,uint avatorNetId)
         {
             if (!networkObject.IsOwner) return false;
 
             transform.SetParent(parentTransform);
+
+            networkObject.avatorOwnerNetId = avatorNetId;
 
             networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
                 Receivers.AllBuffered,
@@ -39,11 +42,22 @@ namespace TC.GPConquest.Player
 
         public override void UpdatePlayerEntity(RpcArgs args)
         {
-           username = args.GetNext<string>();
-           password = args.GetNext<string>();
-           email = args.GetNext<string>();
-           faction = args.GetNext<string>();
-           selectedUma = args.GetNext<string>();
+            username = args.GetNext<string>();
+            password = args.GetNext<string>();
+            email = args.GetNext<string>();
+            faction = args.GetNext<string>();
+            selectedUma = args.GetNext<string>();
+
+            //Searches the owner avator in the scene and do setups
+            MainThreadManager.Run(() =>
+            {
+                AvatorController[] avatorsInTheScene = FindObjectsOfType<AvatorController>();
+
+                 var avator = avatorsInTheScene.ToList().
+                    Find(x => x.networkObject.NetworkId.Equals(networkObject.avatorOwnerNetId));
+
+                transform.SetParent(avator.GetComponent<Transform>());
+            });
         }
     }
 }

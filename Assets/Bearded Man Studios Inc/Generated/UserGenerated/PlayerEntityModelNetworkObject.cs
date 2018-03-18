@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedInterpol("{\"inter\":[0,0]")]
+	[GeneratedInterpol("{\"inter\":[0,0,0]")]
 	public partial class PlayerEntityModelNetworkObject : NetworkObject
 	{
 		public const int IDENTITY = 7;
@@ -75,6 +75,36 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			if (IsInGameChanged != null) IsInGameChanged(_IsInGame, timestep);
 			if (fieldAltered != null) fieldAltered("IsInGame", _IsInGame, timestep);
 		}
+		private uint _avatorOwnerNetId;
+		public event FieldEvent<uint> avatorOwnerNetIdChanged;
+		public Interpolated<uint> avatorOwnerNetIdInterpolation = new Interpolated<uint>() { LerpT = 0f, Enabled = false };
+		public uint avatorOwnerNetId
+		{
+			get { return _avatorOwnerNetId; }
+			set
+			{
+				// Don't do anything if the value is the same
+				if (_avatorOwnerNetId == value)
+					return;
+
+				// Mark the field as dirty for the network to transmit
+				_dirtyFields[0] |= 0x4;
+				_avatorOwnerNetId = value;
+				hasDirtyFields = true;
+			}
+		}
+
+		public void SetavatorOwnerNetIdDirty()
+		{
+			_dirtyFields[0] |= 0x4;
+			hasDirtyFields = true;
+		}
+
+		private void RunChange_avatorOwnerNetId(ulong timestep)
+		{
+			if (avatorOwnerNetIdChanged != null) avatorOwnerNetIdChanged(_avatorOwnerNetId, timestep);
+			if (fieldAltered != null) fieldAltered("avatorOwnerNetId", _avatorOwnerNetId, timestep);
+		}
 
 		protected override void OwnershipChanged()
 		{
@@ -86,6 +116,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		{
 			PlayerLevelInterpolation.current = PlayerLevelInterpolation.target;
 			IsInGameInterpolation.current = IsInGameInterpolation.target;
+			avatorOwnerNetIdInterpolation.current = avatorOwnerNetIdInterpolation.target;
 		}
 
 		public override int UniqueIdentity { get { return IDENTITY; } }
@@ -94,6 +125,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		{
 			UnityObjectMapper.Instance.MapBytes(data, _PlayerLevel);
 			UnityObjectMapper.Instance.MapBytes(data, _IsInGame);
+			UnityObjectMapper.Instance.MapBytes(data, _avatorOwnerNetId);
 
 			return data;
 		}
@@ -108,6 +140,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			IsInGameInterpolation.current = _IsInGame;
 			IsInGameInterpolation.target = _IsInGame;
 			RunChange_IsInGame(timestep);
+			_avatorOwnerNetId = UnityObjectMapper.Instance.Map<uint>(payload);
+			avatorOwnerNetIdInterpolation.current = _avatorOwnerNetId;
+			avatorOwnerNetIdInterpolation.target = _avatorOwnerNetId;
+			RunChange_avatorOwnerNetId(timestep);
 		}
 
 		protected override BMSByte SerializeDirtyFields()
@@ -119,6 +155,8 @@ namespace BeardedManStudios.Forge.Networking.Generated
 				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _PlayerLevel);
 			if ((0x2 & _dirtyFields[0]) != 0)
 				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _IsInGame);
+			if ((0x4 & _dirtyFields[0]) != 0)
+				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _avatorOwnerNetId);
 
 			// Reset all the dirty fields
 			for (int i = 0; i < _dirtyFields.Length; i++)
@@ -161,6 +199,19 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					RunChange_IsInGame(timestep);
 				}
 			}
+			if ((0x4 & readDirtyFlags[0]) != 0)
+			{
+				if (avatorOwnerNetIdInterpolation.Enabled)
+				{
+					avatorOwnerNetIdInterpolation.target = UnityObjectMapper.Instance.Map<uint>(data);
+					avatorOwnerNetIdInterpolation.Timestep = timestep;
+				}
+				else
+				{
+					_avatorOwnerNetId = UnityObjectMapper.Instance.Map<uint>(data);
+					RunChange_avatorOwnerNetId(timestep);
+				}
+			}
 		}
 
 		public override void InterpolateUpdate()
@@ -177,6 +228,11 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			{
 				_IsInGame = (bool)IsInGameInterpolation.Interpolate();
 				//RunChange_IsInGame(IsInGameInterpolation.Timestep);
+			}
+			if (avatorOwnerNetIdInterpolation.Enabled && !avatorOwnerNetIdInterpolation.current.UnityNear(avatorOwnerNetIdInterpolation.target, 0.0015f))
+			{
+				_avatorOwnerNetId = (uint)avatorOwnerNetIdInterpolation.Interpolate();
+				//RunChange_avatorOwnerNetId(avatorOwnerNetIdInterpolation.Timestep);
 			}
 		}
 
