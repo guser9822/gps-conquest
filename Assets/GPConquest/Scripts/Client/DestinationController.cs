@@ -15,7 +15,7 @@ namespace TC.GPConquest.Player
         #region Mix
         public AssetLoaderController AssetLoaderController { get; private set; }
         private Renderer sphereRend;
-        public Camera cam { get; private set; }
+        public Camera DestinationCamera { get; private set; }
         protected tileGen TileGen;
         #endregion
 
@@ -56,8 +56,8 @@ namespace TC.GPConquest.Player
                 return;
 
             //Set up camera for GPConquest view
-            cam = FindObjectOfType<Camera>();
-            cam.gameObject.GetComponent<Transform>().SetParent(transform);
+            DestinationCamera = FindObjectOfType<Camera>();
+            DestinationCamera.gameObject.GetComponent<Transform>().SetParent(transform);
 
             //Gets a reference to the user account informations
             UsersContainer userInformations = FindObjectOfType<UsersContainer>();
@@ -134,8 +134,8 @@ namespace TC.GPConquest.Player
             UpdateDestinationAttributes(_playerName, _cursorColor, _cursorDimensions);
 
             //Sets up the camera attributes
-            cam.gameObject.GetComponent<Transform>().position = _cameraPosition;
-            cam.gameObject.GetComponent<Transform>().rotation = _cameraRotation;
+            DestinationCamera.gameObject.GetComponent<Transform>().position = _cameraPosition;
+            DestinationCamera.gameObject.GetComponent<Transform>().rotation = _cameraRotation;
 
             //Sets up cursor attributes
             networkObject.destCursorSpeed = _cursorSpeed;

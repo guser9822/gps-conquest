@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114968922958424096}
   - component: {fileID: 114579335110956614}
   - component: {fileID: 143818969398987818}
+  - component: {fileID: 114146702085823842}
   m_Layer: 0
   m_Name: UMABaseAvator
   m_TagString: Untagged
@@ -42,6 +43,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114146702085823842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1363974529018422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac544c8ab55b3d8418c81a2c7a3322f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerUI: {fileID: 1883274793934354, guid: c8e7dffdc877e6040b2cb0c8c36b4244, type: 2}
+  Camera: {fileID: 0}
 --- !u!114 &114579335110956614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,16 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a152bb66aea83a44acd6c96362733a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationControllerNetworkID: 0
-  distanceFromDestination: 0.6
-  avatorDimensions: {x: 25, y: 25, z: 25}
-  avatorRootDimensions: {x: 1.1, y: 1.1, z: 1.1}
   selectedUma: 
-  destinationController: {fileID: 0}
   animator: {fileID: 0}
   characterController: {fileID: 0}
-  speed: 0.5
   speedParamenter: Forward
+  PlayerEntity: {fileID: 0}
 --- !u!114 &114968922958424096
 MonoBehaviour:
   m_ObjectHideFlags: 1

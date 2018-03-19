@@ -23,12 +23,14 @@ namespace TC.GPConquest.Player
         private float SpeedDampTime = .00f;
         protected UserInformations CurrentUserInfo;
         public PlayerEntity PlayerEntity;
+        public GameUIController GameUIController;
 
         private void Awake()
         {
             assetLoaderController = FindObjectOfType<AssetLoaderController>();
             characterController = GetComponent<CharacterController>();
             characterController.center = new Vector3(0, 1.0f, 0);
+            GameUIController = GetComponent<GameUIController>();
         }
 
         void Update()
@@ -42,6 +44,9 @@ namespace TC.GPConquest.Player
             if (!networkObject.IsOwner) return;
 
             CurrentUserInfo = _destinationController.CurrentUserInformations;
+
+            //Sets the camera for the GameUI for the client
+            GameUIController.CameraOnDestination = _destinationController.DestinationCamera;
 
             //Update shared attributes according the choosen size of the avator
             if (_destinationController.isGiantMode)
@@ -148,6 +153,9 @@ namespace TC.GPConquest.Player
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
 
                 destinationTransform = destination.GetComponent<Transform>();
+
+                //Sets the camera for the GameUI for the client on the network
+                GameUIController.CameraOnDestination = destination.DestinationCamera;
             });
 
         }
