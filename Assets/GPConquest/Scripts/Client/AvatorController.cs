@@ -88,6 +88,9 @@ namespace TC.GPConquest.Player
         {
             PlayerEntity = behavior.GetComponent<PlayerEntity>();
             PlayerEntity.InitializePlayerEntity(transform,CurrentUserInfo,networkObject.NetworkId);
+
+            //After that the PlayerEntity is created on the netwrok we can create GameUI
+            GameUIController.CreateGameUI(PlayerEntity);
         }
 
         //Sets up values for the avator controller based on isGiantMode value

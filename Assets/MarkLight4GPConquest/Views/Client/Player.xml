@@ -3,7 +3,7 @@
     <PlayerUI />
   </UserInterface>
   <UserInterface RenderMode="WorldSpace">
-    <AvatorUI Scale="0.1"/>
+    <AvatorUI Scale="0.01"/>
   </UserInterface>
   <EventSystem />
 </Player>
