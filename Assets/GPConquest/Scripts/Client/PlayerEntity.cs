@@ -45,7 +45,7 @@ namespace TC.GPConquest.Player
             UpdatePlayerEntityAttributes(parentTransform);
 
             //Create the GameUI on the client
-            GameUIController.InitializeGameUI(networkObject.IsOwner,_cameraOnDestination);
+            GameUIController.InitializeGameUI(_cameraOnDestination, networkObject.IsOwner);
 
             networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
                 Receivers.AllBuffered,
@@ -107,7 +107,7 @@ namespace TC.GPConquest.Player
                 UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
 
                 //Create the GameUI
-                //GameUIController.InitializeGameUI(networkObject.IsOwner,avator.CameraOnDestination);
+                GameUIController.InitializeGameUI(avator.CameraOnDestination);
 
             });
         }

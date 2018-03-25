@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using MarkLight.Views;
+using TC.GPConquest.MarkLight4GPConquest.Player;
 
 namespace TC.GPConquest.Player
 {
@@ -14,7 +17,7 @@ namespace TC.GPConquest.Player
 
         //This function initialize the GameUI. isTheOwnerOnNetwork states if the caller
         //of this function it's the client owner of the object on the network
-        public bool InitializeGameUI(bool isTheOwnerOnNetwork,Camera _camerOnDestination)
+        public bool InitializeGameUI(Camera _camerOnDestination,bool isTheOwnerOnNetwork = false)
         {
             //Instantiates the GameUI
             AvatorUIViewPresenter = Instantiate<GameObject>(PlayerUI,
@@ -33,8 +36,11 @@ namespace TC.GPConquest.Player
             if (!isTheOwnerOnNetwork)
             {
                 //Deactivates static parts of the UI
-                //AvatorUIViewPresenter.GetComponentInChildren<EventSy>
+                var playerUI = AvatorUIViewPresenter.GetComponentInChildren<PlayerUI>();
+                playerUI.gameObject.SetActive(false);
                 //Deactivates the EventSystem
+                var eventSystem = AvatorUIViewPresenter.GetComponentInChildren<EventSystem>();
+                eventSystem.gameObject.SetActive(false);
             }
 
             canUpdate = true;
