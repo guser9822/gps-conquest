@@ -14,23 +14,23 @@ namespace TC.GPConquest.Player
 
     public class AvatorController : PlayerAvatorControllerBehavior
     {
-        public string selectedUma;
-        private AssetLoaderController assetLoaderController;
-        public Animator animator;
-        public CharacterController characterController;
-        private Transform destinationTransform;
-        public string speedParamenter = "Forward";
+        protected string SelectedUma;
+        protected AssetLoaderController AssetLoaderController;
+        protected Animator Animator;
+        protected CharacterController CharacterController;
+        private Transform DestinationTransform;
+        public string SpeedParamenter = "Forward";
         private float SpeedDampTime = .00f;
         protected UserInformations CurrentUserInfo;
-        public PlayerEntity PlayerEntity;
-        public GameUIController GameUIController;
+        protected PlayerEntity PlayerEntity;
+
+        public Camera CameraOnDestination { get; set; }
 
         private void Awake()
         {
-            assetLoaderController = FindObjectOfType<AssetLoaderController>();
-            characterController = GetComponent<CharacterController>();
-            characterController.center = new Vector3(0, 1.0f, 0);
-            GameUIController = GetComponent<GameUIController>();
+            AssetLoaderController = FindObjectOfType<AssetLoaderController>();
+            CharacterController = GetComponent<CharacterController>();
+            CharacterController.center = new Vector3(0, 1.0f, 0);
         }
 
         void Update()
@@ -42,11 +42,6 @@ namespace TC.GPConquest.Player
         public void CreateAndSpawnAvator(DestinationController _destinationController)
         {
             if (!networkObject.IsOwner) return;
-
-            CurrentUserInfo = _destinationController.CurrentUserInformations;
-
-            //Sets the camera for the GameUI for the client
-            GameUIController.CameraOnDestination = _destinationController.DestinationCamera;
 
             //Update shared attributes according the choosen size of the avator
             if (_destinationController.isGiantMode)
@@ -64,15 +59,18 @@ namespace TC.GPConquest.Player
                         0.6f);
             }
 
-            UpdateAvatorAttributes(_destinationController.gameObject.name + " avator - " + networkObject.NetworkId, _destinationController.selectedUma);
+            //Setups the AvatorController attributes that cames from the DestinationController 
+            UpdateAvatorAttributes(_destinationController.gameObject.name + " avator - " + networkObject.NetworkId, 
+                _destinationController.selectedUma, 
+                _destinationController.CurrentUserInformations,
+                _destinationController.gameObject.GetComponent<Transform>(),
+                _destinationController.DestinationCamera);
 
-            //Bind this Avator to the calling destination controller
-            _destinationController.AvatorController = this;
+            //When the destination controller is destroyed, destroy also the realated Avator.
             _destinationController.networkObject.onDestroy += NetworkObject_onDestroy;
-            destinationTransform = _destinationController.gameObject.GetComponent<Transform>();
 
             //Setup and spawn the UMA character
-            UpdateUMA_Avator();
+            CreateAndSpawnUMA();
 
             //Create the Player Entity in the network
             var playerEntityModelBehavior = NetworkManager.Instance.InstantiatePlayerEntityModel();
@@ -80,17 +78,17 @@ namespace TC.GPConquest.Player
 
             networkObject.SendRpc(RPC_UPDATE_AVATOR_ON_NETWORK,
                 Receivers.AllBuffered,
-                selectedUma,
+                SelectedUma,
                 gameObject.name);
         }
 
         private void PlayerEntityModelBehavior_networkStarted(NetworkBehavior behavior)
         {
             PlayerEntity = behavior.GetComponent<PlayerEntity>();
-            PlayerEntity.InitializePlayerEntity(transform,CurrentUserInfo,networkObject.NetworkId);
-
-            //After that the PlayerEntity is created on the netwrok we can create GameUI
-            GameUIController.CreateGameUI(PlayerEntity);
+            PlayerEntity.InitializePlayerEntity(transform,
+                CurrentUserInfo,
+                networkObject.NetworkId,
+                CameraOnDestination);
         }
 
         //Sets up values for the avator controller based on isGiantMode value
@@ -106,20 +104,30 @@ namespace TC.GPConquest.Player
             networkObject.avatorNetDestDistance = _avatorDestDist;
         }
 
-        protected void UpdateAvatorAttributes(string _playerName, string _selectedAvator)
+        protected void UpdateAvatorAttributes(string _playerName, 
+            string _selectedAvator,
+            UserInformations _userInformations,
+            Transform _destinationTransform,
+            Camera _cameraOnDestination)
         {
             gameObject.name = _playerName;
-            selectedUma = _selectedAvator;
-            characterController.center = new Vector3(0, 1.0f, 0);
+            SelectedUma = _selectedAvator;
+            CharacterController.center = new Vector3(0, 1.0f, 0);
+            CurrentUserInfo = _userInformations;
+            DestinationTransform = _destinationTransform;
+            CameraOnDestination = _cameraOnDestination;
         }
 
 
         // Updates the UMA avator attached to this game object
-        private void UpdateUMA_Avator()
+        private void CreateAndSpawnUMA()
         {
             UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
             //Create a UMA avator and bind it to the DynamicAvator of this object
-            UMAGenericHelper.createUMAAvator(assetLoaderController, selectedUma, thisUmaDynamicAvator, AvatorController_OnCharacterCreated);
+            UMAGenericHelper.createUMAAvator(AssetLoaderController, 
+                SelectedUma, 
+                thisUmaDynamicAvator, 
+                AvatorController_OnCharacterCreated);
         }
 
         //Sets up settings after the creation of the UMA character
@@ -131,13 +139,14 @@ namespace TC.GPConquest.Player
             data.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().receiveShadows = false;
 
             //Once the Avator is created grab the animator
-            animator = GetComponent<Animator>();
+            Animator = GetComponent<Animator>();
 
             //Assign choosen dimensions for this avator. NOTE: It doesn't works correctly, sometimes the avator doesn't show up
             gameObject.transform.localScale = networkObject.avatorNetDims;
 
         }
 
+        //This function updates the avators of the other players that you can see by your client
         public override void UpdateAvatorOnNetwork(RpcArgs args)
         {
 
@@ -146,8 +155,6 @@ namespace TC.GPConquest.Player
 
             MainThreadManager.Run(() =>
             {
-                UpdateAvatorAttributes(selectedUma, playerName);
-                UpdateUMA_Avator();
 
                 ////I'm the avator on the network, I shall find my destination in the scene using it's network id
                 DestinationController[] playersInTheScene = FindObjectsOfType<DestinationController>();
@@ -155,57 +162,60 @@ namespace TC.GPConquest.Player
                 var destination = playersInTheScene.ToList().
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
 
-                destinationTransform = destination.GetComponent<Transform>();
+                UpdateAvatorAttributes(selectedUma, 
+                    playerName,
+                    destination.CurrentUserInformations, 
+                    destination.GetComponent<Transform>(),
+                    destination.DestinationCamera);
 
-                //Sets the camera for the GameUI for the client on the network
-                GameUIController.CameraOnDestination = destination.DestinationCamera;
+                CreateAndSpawnUMA();
             });
 
         }
 
         private void MoveAvator()
         {
-            if (animator && destinationTransform)
+            if (Animator && DestinationTransform)
             {
-                if (Vector3.Distance(destinationTransform.position, animator.rootPosition) > networkObject.avatorNetDestDistance)
+                if (Vector3.Distance(DestinationTransform.position, Animator.rootPosition) > networkObject.avatorNetDestDistance)
                 {
-                    animator.SetFloat(speedParamenter, networkObject.avatorNetSpeed, SpeedDampTime, Time.deltaTime);
+                    Animator.SetFloat(SpeedParamenter, networkObject.avatorNetSpeed, SpeedDampTime, Time.deltaTime);
 
-                    Vector3 curentDir = animator.rootRotation * Vector3.forward;
-                    Vector3 wantedDir = (destinationTransform.position - animator.rootPosition).normalized;
+                    Vector3 curentDir = Animator.rootRotation * Vector3.forward;
+                    Vector3 wantedDir = (DestinationTransform.position - Animator.rootPosition).normalized;
 
                     if (Vector3.Dot(curentDir, wantedDir) > 0)
                     {
-                        transform.LookAt(destinationTransform);
+                        transform.LookAt(DestinationTransform);
                         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
                     }
                     else
                     {
-                        transform.LookAt(destinationTransform);
+                        transform.LookAt(DestinationTransform);
                         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
                     }
 
                 }
                 else
                 {
-                    animator.SetFloat(speedParamenter, 0, SpeedDampTime, Time.deltaTime);
+                    Animator.SetFloat(SpeedParamenter, 0, SpeedDampTime, Time.deltaTime);
                 }
             }
         }
 
         void OnAnimatorMove()
         {
-            if (characterController)
+            if (CharacterController)
             {
-                characterController.Move(animator.deltaPosition);
-                transform.rotation = animator.rootRotation;
+                CharacterController.Move(Animator.deltaPosition);
+                transform.rotation = Animator.rootRotation;
             }
         }
 
         //When the destination controller is destroyed, destroys the avator
         private void NetworkObject_onDestroy(NetWorker sender)
         {
-            animator = null;
+            Animator = null;
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
         }

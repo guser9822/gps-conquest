@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4153166194868102}
   - component: {fileID: 114105120922221046}
+  - component: {fileID: 114181676657475974}
   m_Layer: 0
   m_Name: PlayerEntityPrefab
   m_TagString: Untagged
@@ -56,3 +57,17 @@ MonoBehaviour:
   email: 
   faction: 
   selectedUma: 
+  GameUIController: {fileID: 0}
+--- !u!114 &114181676657475974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1822585560048946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac544c8ab55b3d8418c81a2c7a3322f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerUI: {fileID: 1883274793934354, guid: c8e7dffdc877e6040b2cb0c8c36b4244, type: 2}
+  CameraOnDestination: {fileID: 0}

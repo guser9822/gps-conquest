@@ -24,7 +24,6 @@ namespace TC.GPConquest.Player
         public float destAvatorSpeed { get; protected set; }
         public float destAvatorDestDist { get; protected set; }
         public string selectedUma { get; protected set; }
-        public AvatorController AvatorController { get; set; }
         private Vector3 avatorSpawnPosition;
         public UserInformations CurrentUserInformations { get; private set; }
         #endregion
@@ -146,6 +145,11 @@ namespace TC.GPConquest.Player
         public override void InitNetDestination(RpcArgs args)
         {
             string playerName = args.GetNext<string>();
+
+            //Find the main camera. For my entity on the network, the camera will be the same
+            //of the owner of the client in order to let the UI (e.g. nickname labels) to point towards
+            //the players owning the clients. 
+            DestinationCamera = FindObjectOfType<Camera>();
 
             MainThreadManager.Run(() =>
             {
