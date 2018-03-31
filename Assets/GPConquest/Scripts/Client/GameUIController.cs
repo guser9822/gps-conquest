@@ -31,8 +31,6 @@ namespace TC.GPConquest.Player
             //Puts the UI under the hieararchy of the GameUIController object
             AvatorUIViewPresenter.transform.SetParent(_parentTransform);
 
-            AvatorUIViewPresenter.transform.position = new Vector3(0f,2.5f,0.4f);
-
             //Rotates the UI towards the player camera
             AvatorUIViewPresenter.transform.rotation =
                 Quaternion.RotateTowards(PlayerUI.transform.rotation, CameraOnDestination.transform.rotation, 360);
