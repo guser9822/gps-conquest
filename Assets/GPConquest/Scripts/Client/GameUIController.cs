@@ -17,7 +17,9 @@ namespace TC.GPConquest.Player
 
         //This function initialize the GameUI. isTheOwnerOnNetwork states if the caller
         //of this function it's the client owner of the object on the network
-        public bool InitializeGameUI(Camera _camerOnDestination,bool isTheOwnerOnNetwork = false)
+        public bool InitializeGameUI(Transform _parentTransform,
+            Camera _camerOnDestination,
+            bool isTheOwnerOnNetwork = false)
         {
             //Instantiates the GameUI
             AvatorUIViewPresenter = Instantiate<GameObject>(PlayerUI,
@@ -27,7 +29,9 @@ namespace TC.GPConquest.Player
             CameraOnDestination = _camerOnDestination;
 
             //Puts the UI under the hieararchy of the GameUIController object
-            AvatorUIViewPresenter.transform.SetParent(transform);
+            AvatorUIViewPresenter.transform.SetParent(_parentTransform);
+
+            AvatorUIViewPresenter.transform.position = new Vector3(0f,2.5f,0.4f);
 
             //Rotates the UI towards the player camera
             AvatorUIViewPresenter.transform.rotation =
@@ -50,7 +54,7 @@ namespace TC.GPConquest.Player
 
         private void Update()
         {
-            if(canUpdate)
+            if (canUpdate)
                 AvatorUIViewPresenter.transform.rotation =
                     Quaternion.RotateTowards(PlayerUI.transform.rotation, CameraOnDestination.transform.rotation, 360);
         }

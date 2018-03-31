@@ -35,7 +35,8 @@ namespace TC.GPConquest.Player
             if (!networkObject.IsOwner) return false;
 
             //Updates attributes of this networkObject
-            UpdatePlayerEntityNetworkAttributes(avatorNetId,_user.username,
+            UpdatePlayerEntityNetworkAttributes(avatorNetId,
+            _user.username,
             _user.password,
             _user.email,
             _user.faction,
@@ -45,7 +46,7 @@ namespace TC.GPConquest.Player
             UpdatePlayerEntityAttributes(parentTransform);
 
             //Create the GameUI on the client
-            GameUIController.InitializeGameUI(_cameraOnDestination, networkObject.IsOwner);
+            GameUIController.InitializeGameUI(parentTransform,_cameraOnDestination, networkObject.IsOwner);
 
             networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
                 Receivers.AllBuffered,
@@ -53,7 +54,8 @@ namespace TC.GPConquest.Player
             _user.password,
             _user.email,
             _user.faction,
-            _user.selectedUma);
+            _user.selectedUma,
+            new Vector3(0.0f,0.0f,0.0f));
 
             return true;
         }
@@ -83,11 +85,11 @@ namespace TC.GPConquest.Player
         public override void UpdatePlayerEntity(RpcArgs args)
         {
             //Update attributes on the network
-           string _username = args.GetNext<string>();
-           string _password = args.GetNext<string>();
-           string _email = args.GetNext<string>();
-           string _faction = args.GetNext<string>();
-           string _selectedUma = args.GetNext<string>();
+            string _username = args.GetNext<string>();
+            string _password = args.GetNext<string>();
+            string _email = args.GetNext<string>();
+            string _faction = args.GetNext<string>();
+            string _selectedUma = args.GetNext<string>();
 
             UpdatePlayerEntityNetworkAttributes(networkObject.avatorOwnerNetId,
                 _username,
@@ -105,9 +107,8 @@ namespace TC.GPConquest.Player
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.avatorOwnerNetId));
 
                 UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
-
                 //Create the GameUI
-                GameUIController.InitializeGameUI(avator.CameraOnDestination);
+                //GameUIController.InitializeGameUI(avator.CameraOnDestination);
 
             });
         }

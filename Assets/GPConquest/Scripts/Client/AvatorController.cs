@@ -73,7 +73,7 @@ namespace TC.GPConquest.Player
             CreateAndSpawnUMA();
 
             //Create the Player Entity in the network
-            var playerEntityModelBehavior = NetworkManager.Instance.InstantiatePlayerEntityModel();
+            var playerEntityModelBehavior = NetworkManager.Instance.InstantiatePlayerEntityModel(0,transform.position);
             playerEntityModelBehavior.networkStarted += PlayerEntityModelBehavior_networkStarted;
 
             networkObject.SendRpc(RPC_UPDATE_AVATOR_ON_NETWORK,
