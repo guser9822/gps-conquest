@@ -8,6 +8,8 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
     public class AvatorUI : UIView
     {
 
+        public Label NicknameLabel;
+
         // Use this for initialization
         void Start()
         {
@@ -19,5 +21,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
         {
 
         }
+
+
     }
 }

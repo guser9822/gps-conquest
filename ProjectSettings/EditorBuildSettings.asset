@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/GPConquest/Scenes/Server/ServerScene.unity
     guid: 7c30daac5ee0a7648a9a17399e58a354
   - enabled: 1
