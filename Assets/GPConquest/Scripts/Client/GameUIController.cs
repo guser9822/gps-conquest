@@ -30,18 +30,15 @@ namespace TC.GPConquest.Player
             //Puts the UI under the hieararchy of the GameUIController object
             AvatorUIViewPresenter.transform.SetParent(_parentTransform);
 
-            //Sets the correct position (atm just for testing the nickname label)
+            //Sets the correct position for the UI
             AvatorUIViewPresenter.transform.localPosition =
                 new Vector3(0.0f,
                 0,
                 0f);
 
+            //Gets the AvatorUI and initialize it with the camera that it must follow
             AvatorUI = AvatorUIViewPresenter.GetComponentInChildren<AvatorUI>();
-
-            AvatorUI.NicknameLabel.transform.localPosition = new Vector3(0, 220, 0);
-            //Rotates the UI towards the player camera
-            //AvatorUIViewPresenter.transform.rotation =
-            //    Quaternion.RotateTowards(PlayerUI.transform.rotation, CameraOnDestination.transform.rotation, 360);
+            AvatorUI.AvatorUIInitializator(CameraOnDestination);
 
             //if (!isTheOwnerOnNetwork)
             //{
@@ -60,9 +57,7 @@ namespace TC.GPConquest.Player
 
         private void Update()
         {
-            //if (canUpdate)
-            //    AvatorUIViewPresenter.transform.rotation =
-            //        Quaternion.RotateTowards(PlayerUI.transform.rotation, CameraOnDestination.transform.rotation, 360);
+
         }
 
     }
