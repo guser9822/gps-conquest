@@ -1,3 +1,5 @@
 <AvatorUI xmlns="MarkLight">
-  <Label Id="NicknameLabel" Alignment="Left" Text="Nickname"></Label>
+  <Label Id="NicknameLabel" 
+        AdjustToText="WidthAndHeight"          
+        Text="{UsernameText}"></Label>
 </AvatorUI>

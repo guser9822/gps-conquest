@@ -46,7 +46,7 @@ namespace TC.GPConquest.Player
             UpdatePlayerEntityAttributes(parentTransform);
 
             //Create the GameUI on the client
-            GameUIController.InitializeGameUI(parentTransform,_cameraOnDestination, networkObject.IsOwner);
+            GameUIController.InitializeGameUI(parentTransform,_cameraOnDestination,this,networkObject.IsOwner);
 
             networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
                 Receivers.AllBuffered,

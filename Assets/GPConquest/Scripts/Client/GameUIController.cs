@@ -20,6 +20,7 @@ namespace TC.GPConquest.Player
         //of this function it's the client owner of the object on the network
         public bool InitializeGameUI(Transform _parentTransform,
             Camera _camerOnDestination,
+            PlayerEntity _playerEntity,
             bool isTheOwnerOnNetwork = false)
         {
             //Instantiates the GameUI
@@ -38,7 +39,7 @@ namespace TC.GPConquest.Player
 
             //Gets the AvatorUI and initialize it with the camera that it must follow
             AvatorUI = AvatorUIViewPresenter.GetComponentInChildren<AvatorUI>();
-            AvatorUI.AvatorUIInitializator(CameraOnDestination);
+            AvatorUI.AvatorUIInitializator(CameraOnDestination, _playerEntity);
 
             //if (!isTheOwnerOnNetwork)
             //{

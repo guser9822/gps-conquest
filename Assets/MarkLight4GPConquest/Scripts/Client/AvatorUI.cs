@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MarkLight.Views.UI;
+using TC.GPConquest.Player;
+using MarkLight;
 
 namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
@@ -10,27 +12,38 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
 
         public Label NicknameLabel;
         private Camera CameraOnDestination = null;
+        private PlayerEntity PlayerEntity;
+        [MapTo("NicknameLabel.Text")]
+        public _string UsernameText;
+        private bool canUpdate;
 
-        // Use this for initialization
-        void Start()
+        public override void Initialize()
         {
-            NicknameLabel.transform.localPosition = new Vector3(0, 220, 0);
+            base.Initialize();
+            NicknameLabel.Position.Value = new Vector3(0, 220, 0);
         }
 
         // This method must be called with the appropriate parameters in order to
         // ensure correct work of the AvatorUI
-        public void AvatorUIInitializator(Camera _cameraOnDestination) {
+        public void AvatorUIInitializator(Camera _cameraOnDestination, PlayerEntity _playerEntity)
+        {
             CameraOnDestination = _cameraOnDestination;
+            PlayerEntity = _playerEntity;
+            UsernameText.Value =  PlayerEntity.username;
+            canUpdate = true;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (CameraOnDestination != null)
+            if (CameraOnDestination != null && canUpdate)
             {
-               NicknameLabel.transform.rotation =
-                    Quaternion.RotateTowards(NicknameLabel.transform.rotation, 
-                    CameraOnDestination.transform.rotation, 360);
+                NicknameLabel.transform.rotation =
+                     Quaternion.RotateTowards(NicknameLabel.transform.rotation,
+                     CameraOnDestination.transform.rotation, 360);
+
+                NicknameLabel.RectTransform.localPosition = new Vector3(0, 220, 0);
+
             }
         }
 
