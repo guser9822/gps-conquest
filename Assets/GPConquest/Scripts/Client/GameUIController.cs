@@ -13,15 +13,13 @@ namespace TC.GPConquest.Player
         public GameObject PlayerUI;//prefabs of the UI, used only for instantiation
         protected GameObject AvatorUIViewPresenter;//instantiated UI
         public Camera CameraOnDestination;//camera of the DestinationController object
-        private bool canUpdate;
         public AvatorUI AvatorUI;
 
         //This function initialize the GameUI. isTheOwnerOnNetwork states if the caller
         //of this function it's the client owner of the object on the network
         public bool InitializeGameUI(Transform _parentTransform,
             Camera _camerOnDestination,
-            PlayerEntity _playerEntity,
-            bool isTheOwnerOnNetwork = false)
+            PlayerEntity _playerEntity)
         {
             //Instantiates the GameUI
             AvatorUIViewPresenter = Instantiate<GameObject>(PlayerUI);
@@ -41,25 +39,19 @@ namespace TC.GPConquest.Player
             AvatorUI = AvatorUIViewPresenter.GetComponentInChildren<AvatorUI>();
             AvatorUI.AvatorUIInitializator(CameraOnDestination, _playerEntity);
 
-            //if (!isTheOwnerOnNetwork)
-            //{
-            //    //Deactivates static parts of the UI
-            //    var playerUI = AvatorUIViewPresenter.GetComponentInChildren<PlayerUI>();
-            //    playerUI.gameObject.SetActive(false);
-            //    //Deactivates the EventSystem
-            //    var eventSystem = AvatorUIViewPresenter.GetComponentInChildren<EventSystem>();
-            //    eventSystem.gameObject.SetActive(false);
-            //}
+            if (!_playerEntity.networkObject.IsOwner)
+            {
+                //Deactivates static parts of the UI
+                var playerUI = AvatorUIViewPresenter.GetComponentInChildren<PlayerUI>();
+                playerUI.gameObject.SetActive(false);
+                //Deactivates the EventSystem
+                var eventSystem = AvatorUIViewPresenter.GetComponentInChildren<EventSystem>();
+                eventSystem.gameObject.SetActive(false);
+            }
 
-            canUpdate = true;
-
-            return canUpdate;
+            return true;
         }
 
-        private void Update()
-        {
-
-        }
 
     }
 }

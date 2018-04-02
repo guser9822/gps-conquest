@@ -34,28 +34,27 @@ namespace TC.GPConquest.Player
         {
             if (!networkObject.IsOwner) return false;
 
-            //Updates attributes of this networkObject
-            UpdatePlayerEntityNetworkAttributes(avatorNetId,
-            _user.username,
-            _user.password,
-            _user.email,
-            _user.faction,
-            _user.selectedUma);
+                //Updates attributes of this networkObject
+                UpdatePlayerEntityNetworkAttributes(avatorNetId,
+                _user.username,
+                _user.password,
+                _user.email,
+                _user.faction,
+                _user.selectedUma);
 
-            //Updates attributes of this GameObject
-            UpdatePlayerEntityAttributes(parentTransform);
+                //Updates attributes of this GameObject
+                UpdatePlayerEntityAttributes(parentTransform);
 
-            //Create the GameUI on the client
-            GameUIController.InitializeGameUI(parentTransform,_cameraOnDestination,this,networkObject.IsOwner);
+                //Init and create the game UI
+                GameUIController.InitializeGameUI(parentTransform, _cameraOnDestination, this);
 
-            networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
-                Receivers.AllBuffered,
-            _user.username,
-            _user.password,
-            _user.email,
-            _user.faction,
-            _user.selectedUma,
-            new Vector3(0.0f,0.0f,0.0f));
+                networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
+                    Receivers.AllBuffered,
+                _user.username,
+                _user.password,
+                _user.email,
+                _user.faction,
+                _user.selectedUma);
 
             return true;
         }
@@ -108,7 +107,9 @@ namespace TC.GPConquest.Player
 
                 UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
                 //Create the GameUI
-                //GameUIController.InitializeGameUI(avator.CameraOnDestination);
+                GameUIController.InitializeGameUI(avator.transform,
+                    avator.CameraOnDestination,
+                    this);
 
             });
         }

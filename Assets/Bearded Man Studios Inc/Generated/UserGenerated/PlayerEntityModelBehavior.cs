@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"string\", \"string\", \"string\", \"string\", \"string\", \"Vector3\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"username\", \"password\", \"email\", \"faction\", \"selectedUma\", \"playerNetPos\"]]")]
+	[GeneratedRPC("{\"types\":[[\"string\", \"string\", \"string\", \"string\", \"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"username\", \"password\", \"email\", \"faction\", \"selectedUma\"]]")]
 	public abstract partial class PlayerEntityModelBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_PLAYER_ENTITY = 0 + 5;
@@ -22,7 +22,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			networkObject.AttachedBehavior = this;
 
 			base.SetupHelperRpcs(networkObject);
-			networkObject.RegisterRpc("UpdatePlayerEntity", UpdatePlayerEntity, typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(Vector3));
+			networkObject.RegisterRpc("UpdatePlayerEntity", UpdatePlayerEntity, typeof(string), typeof(string), typeof(string), typeof(string), typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -104,7 +104,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// string email
 		/// string faction
 		/// string selectedUma
-		/// Vector3 playerNetPos
 		/// </summary>
 		public abstract void UpdatePlayerEntity(RpcArgs args);
 
