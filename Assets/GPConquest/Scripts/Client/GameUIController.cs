@@ -17,6 +17,8 @@ namespace TC.GPConquest.Player
 
         private void Awake()
         {
+            //AvatorUI conflict with the UI that reside on the server process.
+            //For this particular case  we don't make this UI visible on the server process.
             var server = FindObjectOfType<ServerNetworkController>();
             if (ReferenceEquals(server,null) || server.gameObject.tag != "ServerController")
                 AvatorUIViewPresenter = Instantiate<GameObject>(PlayerUI);
@@ -28,9 +30,9 @@ namespace TC.GPConquest.Player
             Camera _camerOnDestination,
             PlayerEntity _playerEntity)
         {
-
+            //AvatorUI conflict with the UI that reside on the server process.
+            //For this particular case  we don't make this UI visible on the server process.
             var server = FindObjectOfType<ServerNetworkController>();
-
             if ((!ReferenceEquals(server, null) && server.gameObject.tag == "ServerController"))
                 return false;
 
