@@ -32,10 +32,11 @@ namespace TC.GPConquest.Player
             uint avatorNetId, 
             Camera _cameraOnDestination)
         {
-            if (!networkObject.IsOwner) return false;
+            if (!networkObject.IsOwner)
+                return true;
 
-                //Updates attributes of this networkObject
-                UpdatePlayerEntityNetworkAttributes(avatorNetId,
+            //Updates attributes of this networkObject
+            UpdatePlayerEntityNetworkAttributes(avatorNetId,
                 _user.username,
                 _user.password,
                 _user.email,
@@ -106,10 +107,13 @@ namespace TC.GPConquest.Player
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.avatorOwnerNetId));
 
                 UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
-                //Create the GameUI
-                GameUIController.InitializeGameUI(avator.transform,
-                    avator.CameraOnDestination,
-                    this);
+
+                //Create the GameUI only for clients
+                //var server = FindObjectOfType<ServerNetworkController>();
+                //if(server!=null)
+                    GameUIController.InitializeGameUI(avator.transform,
+                        avator.CameraOnDestination,
+                        this);
 
             });
         }

@@ -50,7 +50,6 @@ namespace TC.GPConquest.Player
 
         protected void InitDestinationController()
         {
-
             if (!networkObject.IsOwner)
                 return;
 

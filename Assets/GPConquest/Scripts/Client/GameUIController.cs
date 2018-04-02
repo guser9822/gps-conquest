@@ -15,15 +15,26 @@ namespace TC.GPConquest.Player
         public Camera CameraOnDestination;//camera of the DestinationController object
         public AvatorUI AvatorUI;
 
+        private void Awake()
+        {
+            var server = FindObjectOfType<ServerNetworkController>();
+            if (ReferenceEquals(server,null) || server.gameObject.tag != "ServerController")
+                AvatorUIViewPresenter = Instantiate<GameObject>(PlayerUI);
+        }
+
         //This function initialize the GameUI. isTheOwnerOnNetwork states if the caller
         //of this function it's the client owner of the object on the network
         public bool InitializeGameUI(Transform _parentTransform,
             Camera _camerOnDestination,
             PlayerEntity _playerEntity)
         {
-            //Instantiates the GameUI
-            AvatorUIViewPresenter = Instantiate<GameObject>(PlayerUI);
 
+            var server = FindObjectOfType<ServerNetworkController>();
+
+            if ((!ReferenceEquals(server, null) && server.gameObject.tag == "ServerController"))
+                return false;
+
+            //assign the camera that ui should point to
             CameraOnDestination = _camerOnDestination;
 
             //Puts the UI under the hieararchy of the GameUIController object

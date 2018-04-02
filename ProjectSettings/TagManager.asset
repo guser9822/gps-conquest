@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Destination
+  - ServerController
+  - Tile
+  - ClientController
   layers:
   - Default
   - TransparentFX
