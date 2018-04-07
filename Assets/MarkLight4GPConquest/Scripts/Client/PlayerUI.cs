@@ -7,8 +7,13 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
     public class PlayerUI : UIView
     {
-        public Region PlayerUIRegion;
 
+        public Button MenuButton;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
 
 
     }
