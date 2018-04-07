@@ -11,17 +11,54 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1883274793934354}
   m_IsPrefabParent: 1
---- !u!1 &1044833305355530
+--- !u!1 &1094182070293434
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224753606695235868}
-  - component: {fileID: 114496696660051984}
-  - component: {fileID: 222884725008864794}
-  - component: {fileID: 114654227282386752}
+  - component: {fileID: 224462266348979200}
+  - component: {fileID: 114065191368916924}
+  - component: {fileID: 222981011361842926}
+  - component: {fileID: 114925744771660496}
+  m_Layer: 0
+  m_Name: Image (GameMenuIcon)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1179386799979152
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224048172021456504}
+  - component: {fileID: 114090342219977990}
+  - component: {fileID: 223659136088569910}
+  - component: {fileID: 114278043800693920}
+  - component: {fileID: 114685973022163968}
+  m_Layer: 0
+  m_Name: UserInterface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1236745965738904
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224846502363308782}
+  - component: {fileID: 114511420127008588}
+  - component: {fileID: 222723682091964146}
+  - component: {fileID: 114605392073663266}
   m_Layer: 0
   m_Name: Label (NicknameLabel)
   m_TagString: Untagged
@@ -29,55 +66,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1066315556600322
+--- !u!1 &1304303282450520
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224113609234898084}
-  - component: {fileID: 114570648395973904}
-  - component: {fileID: 223964512526334698}
-  - component: {fileID: 114774869823854340}
-  - component: {fileID: 114101094816874848}
-  m_Layer: 0
-  m_Name: UserInterface
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1160973753347656
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 224746255412927618}
-  - component: {fileID: 114543683456208564}
-  - component: {fileID: 223296471577835296}
-  - component: {fileID: 114169315601705252}
-  - component: {fileID: 114811437150698448}
-  m_Layer: 0
-  m_Name: UserInterface
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1238584292231976
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 224875159822738182}
-  - component: {fileID: 114708962837340596}
-  - component: {fileID: 222797704018227852}
-  - component: {fileID: 114466364279343824}
+  - component: {fileID: 224146279472155122}
+  - component: {fileID: 114192324325983498}
+  - component: {fileID: 222721368496508310}
+  - component: {fileID: 114460098724967640}
   m_Layer: 0
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -85,35 +84,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1287369781991914
+--- !u!1 &1398858967030976
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4953539401011978}
-  - component: {fileID: 114451308161582468}
-  - component: {fileID: 114682913564263428}
-  - component: {fileID: 114780346443910614}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1655419239344964
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 224316773250240020}
-  - component: {fileID: 114945094154088164}
-  - component: {fileID: 222807918905693784}
-  - component: {fileID: 114678584120481624}
+  - component: {fileID: 224676212175971030}
+  - component: {fileID: 114929221217982946}
+  - component: {fileID: 222071610952972718}
+  - component: {fileID: 114769989547864436}
   m_Layer: 0
   m_Name: Region
   m_TagString: Untagged
@@ -121,17 +102,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1656689453739154
+--- !u!1 &1636988832001024
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224434059974033984}
-  - component: {fileID: 114420330616321976}
-  - component: {fileID: 222945518992496306}
-  - component: {fileID: 114203403245752098}
+  - component: {fileID: 4187424468065998}
+  - component: {fileID: 114233468632317128}
+  - component: {fileID: 114758335576949724}
+  - component: {fileID: 114242802835958730}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1652644998981254
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224946690006706560}
+  - component: {fileID: 114302917282784998}
+  - component: {fileID: 222376102980503244}
+  - component: {fileID: 114380145490984060}
   m_Layer: 0
   m_Name: AvatorUI
   m_TagString: Untagged
@@ -155,15 +154,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1975317776297928
+--- !u!1 &1883288476345294
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4894476974218300}
-  - component: {fileID: 114595013830937562}
+  - component: {fileID: 4887849323432234}
+  - component: {fileID: 114479557318338228}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -171,6 +170,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1990998156177866
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224790321370260268}
+  - component: {fileID: 114456986790491344}
+  - component: {fileID: 223048162927903838}
+  - component: {fileID: 114981817060648374}
+  - component: {fileID: 114115871603686910}
+  m_Layer: 0
+  m_Name: UserInterface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4187424468065998
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636988832001024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4887849323432234}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4853667326755284
 Transform:
   m_ObjectHideFlags: 1
@@ -181,45 +212,1077 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4894476974218300}
+  - {fileID: 4887849323432234}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4894476974218300
+--- !u!4 &4887849323432234
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1975317776297928}
+  m_GameObject: {fileID: 1883288476345294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224746255412927618}
-  - {fileID: 224113609234898084}
-  - {fileID: 4953539401011978}
+  - {fileID: 224790321370260268}
+  - {fileID: 224048172021456504}
+  - {fileID: 4187424468065998}
   m_Father: {fileID: 4853667326755284}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4953539401011978
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287369781991914}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4894476974218300}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114101094816874848
+--- !u!114 &114065191368916924
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1066315556600322}
+  m_GameObject: {fileID: 1094182070293434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1c599a6c3aecc64fae4dfc34cd25b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: GameMenuIcon
+  Style: 
+  BasedOn: 
+  Theme: Toon
+  BaseDirectory: 
+  UnitSize: {x: 0, y: 0, z: 0}
+  LayoutParent: {fileID: 114929221217982946}
+  Parent: {fileID: 114192324325983498}
+  Content: {fileID: 114065191368916924}
+  State:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: State
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: Default
+  IsActive:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: IsActive
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  HideFlags:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: HideFlags
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  GameObject: {fileID: 1094182070293434}
+  Transform: {fileID: 224462266348979200}
+  Position:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Position
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Rotation:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Rotation
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0, w: 0}
+  Scale:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Scale
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Cancel:
+    Name: Cancel
+    TriggeredByEventSystem: 1
+    EventTriggerType: 16
+    IsDisabled: 0
+  Deselect:
+    Name: Deselect
+    TriggeredByEventSystem: 1
+    EventTriggerType: 10
+    IsDisabled: 0
+  Drop:
+    Name: Drop
+    TriggeredByEventSystem: 1
+    EventTriggerType: 6
+    IsDisabled: 0
+  Move:
+    Name: Move
+    TriggeredByEventSystem: 1
+    EventTriggerType: 11
+    IsDisabled: 0
+  Click:
+    Name: Click
+    TriggeredByEventSystem: 1
+    EventTriggerType: 4
+    IsDisabled: 0
+  BeginDrag:
+    Name: BeginDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 13
+    IsDisabled: 0
+  EndDrag:
+    Name: EndDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 14
+    IsDisabled: 0
+  Drag:
+    Name: Drag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 5
+    IsDisabled: 0
+  InitializePotentialDrag:
+    Name: InitializePotentialDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 12
+    IsDisabled: 0
+  MouseDown:
+    Name: MouseDown
+    TriggeredByEventSystem: 1
+    EventTriggerType: 2
+    IsDisabled: 0
+  MouseEnter:
+    Name: MouseEnter
+    TriggeredByEventSystem: 1
+    EventTriggerType: 0
+    IsDisabled: 0
+  MouseExit:
+    Name: MouseExit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 1
+    IsDisabled: 0
+  MouseUp:
+    Name: MouseUp
+    TriggeredByEventSystem: 1
+    EventTriggerType: 3
+    IsDisabled: 0
+  Scroll:
+    Name: Scroll
+    TriggeredByEventSystem: 1
+    EventTriggerType: 7
+    IsDisabled: 0
+  Select:
+    Name: Select
+    TriggeredByEventSystem: 1
+    EventTriggerType: 9
+    IsDisabled: 0
+  Submit:
+    Name: Submit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 15
+    IsDisabled: 0
+  UpdateSelected:
+    Name: UpdateSelected
+    TriggeredByEventSystem: 1
+    EventTriggerType: 8
+    IsDisabled: 0
+  Item:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Item
+    IsMapped: 0
+    _isSet: 0
+  IsTemplate:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: IsTemplate
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Activated:
+    Name: Activated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  Deactivated:
+    Name: Deactivated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  IsDestroyed:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: IsDestroyed
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  IsDynamic:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: IsDynamic
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  PropagateChildLayoutChanges:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: PropagateChildLayoutChanges
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  ViewTypeName: Image
+  ViewXumlName: Image
+  ViewFieldBindings: []
+  ViewActionEntries: []
+  ViewFieldStateValues: []
+  SetViewFieldNames:
+  - Id
+  ValueConverterContext:
+    BaseDirectory: 
+    UnitSize: {x: 40, y: 40, z: 40}
+  Width:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Width
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  Height:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Height
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  OverrideWidth:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: OverrideWidth
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  OverrideHeight:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: OverrideHeight
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  Alignment:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Alignment
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  Margin:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Margin
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Offset:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Offset
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  OffsetFromParent:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: OffsetFromParent
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Pivot:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Pivot
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0}
+  RectTransform: {fileID: 224462266348979200}
+  RaycastBlockMode:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: RaycastBlockMode
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Alpha:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Alpha
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  IsVisible:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: IsVisible
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  SortIndex:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: SortIndex
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  UpdateRectTransform:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: UpdateRectTransform
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  UpdateBackground:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: UpdateBackground
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  ImageComponent: {fileID: 114925744771660496}
+  BackgroundImageEventAlphaThreshold:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageEventAlphaThreshold
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillAmount:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageFillAmount
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillCenter:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageFillCenter
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillClockwise:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageFillClockwise
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillMethod:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageFillMethod
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillOrigin:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageFillOrigin
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageOverrideSprite:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageOverrideSprite
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImagePreserveAspect:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImagePreserveAspect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImage:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImage
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImageType:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageType
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundMaterial:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundMaterial
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {fileID: 0}
+  BackgroundImageMaskable:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundImageMaskable
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundColor:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: BackgroundColor
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+  EventAlphaThreshold:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: EventAlphaThreshold
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  FillAmount:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: FillAmount
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  FillCenter:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: FillCenter
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  FillClockwise:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: FillClockwise
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  FillMethod:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: FillMethod
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  FillOrigin:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: FillOrigin
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  OverrideSprite:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: OverrideSprite
+    IsMapped: 1
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  PreserveAspect:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: PreserveAspect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  Sprite:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Sprite
+    IsMapped: 1
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  Type:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Type
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  Material:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Material
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {fileID: 0}
+  Maskable:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Maskable
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  Color:
+    ParentView: {fileID: 114065191368916924}
+    ViewFieldPath: Color
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &114090342219977990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179386799979152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f784e23c0423ffc48a1a2d542d36f123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 
+  Style: 
+  BasedOn: 
+  Theme: Toon
+  BaseDirectory: 
+  UnitSize: {x: 0, y: 0, z: 0}
+  LayoutParent: {fileID: 114479557318338228}
+  Parent: {fileID: 114479557318338228}
+  Content: {fileID: 114090342219977990}
+  State:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: State
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: Default
+  IsActive:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: IsActive
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  HideFlags:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: HideFlags
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  GameObject: {fileID: 1179386799979152}
+  Transform: {fileID: 224048172021456504}
+  Position:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Position
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Rotation:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Rotation
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0, w: 0}
+  Scale:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Scale
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Cancel:
+    Name: Cancel
+    TriggeredByEventSystem: 1
+    EventTriggerType: 16
+    IsDisabled: 0
+  Deselect:
+    Name: Deselect
+    TriggeredByEventSystem: 1
+    EventTriggerType: 10
+    IsDisabled: 0
+  Drop:
+    Name: Drop
+    TriggeredByEventSystem: 1
+    EventTriggerType: 6
+    IsDisabled: 0
+  Move:
+    Name: Move
+    TriggeredByEventSystem: 1
+    EventTriggerType: 11
+    IsDisabled: 0
+  Click:
+    Name: Click
+    TriggeredByEventSystem: 1
+    EventTriggerType: 4
+    IsDisabled: 0
+  BeginDrag:
+    Name: BeginDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 13
+    IsDisabled: 0
+  EndDrag:
+    Name: EndDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 14
+    IsDisabled: 0
+  Drag:
+    Name: Drag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 5
+    IsDisabled: 0
+  InitializePotentialDrag:
+    Name: InitializePotentialDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 12
+    IsDisabled: 0
+  MouseDown:
+    Name: MouseDown
+    TriggeredByEventSystem: 1
+    EventTriggerType: 2
+    IsDisabled: 0
+  MouseEnter:
+    Name: MouseEnter
+    TriggeredByEventSystem: 1
+    EventTriggerType: 0
+    IsDisabled: 0
+  MouseExit:
+    Name: MouseExit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 1
+    IsDisabled: 0
+  MouseUp:
+    Name: MouseUp
+    TriggeredByEventSystem: 1
+    EventTriggerType: 3
+    IsDisabled: 0
+  Scroll:
+    Name: Scroll
+    TriggeredByEventSystem: 1
+    EventTriggerType: 7
+    IsDisabled: 0
+  Select:
+    Name: Select
+    TriggeredByEventSystem: 1
+    EventTriggerType: 9
+    IsDisabled: 0
+  Submit:
+    Name: Submit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 15
+    IsDisabled: 0
+  UpdateSelected:
+    Name: UpdateSelected
+    TriggeredByEventSystem: 1
+    EventTriggerType: 8
+    IsDisabled: 0
+  Item:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Item
+    IsMapped: 0
+    _isSet: 0
+  IsTemplate:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: IsTemplate
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Activated:
+    Name: Activated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  Deactivated:
+    Name: Deactivated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  IsDestroyed:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: IsDestroyed
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  IsDynamic:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: IsDynamic
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  PropagateChildLayoutChanges:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: PropagateChildLayoutChanges
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  ViewTypeName: UserInterface
+  ViewXumlName: UserInterface
+  ViewFieldBindings: []
+  ViewActionEntries: []
+  ViewFieldStateValues: []
+  SetViewFieldNames:
+  - Canvas.renderMode
+  ValueConverterContext:
+    BaseDirectory: 
+    UnitSize: {x: 40, y: 40, z: 40}
+  Width:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Width
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  Height:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Height
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  OverrideWidth:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: OverrideWidth
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  OverrideHeight:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: OverrideHeight
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  Alignment:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Alignment
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  Margin:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Margin
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Offset:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Offset
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  OffsetFromParent:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: OffsetFromParent
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Pivot:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Pivot
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0}
+  RectTransform: {fileID: 224048172021456504}
+  RaycastBlockMode:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: RaycastBlockMode
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Alpha:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: Alpha
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  IsVisible:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: IsVisible
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  SortIndex:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: SortIndex
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  UpdateRectTransform:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: UpdateRectTransform
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  UpdateBackground:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: UpdateBackground
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  ImageComponent: {fileID: 0}
+  BackgroundImageEventAlphaThreshold:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageEventAlphaThreshold
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillAmount:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageFillAmount
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillCenter:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageFillCenter
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillClockwise:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageFillClockwise
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillMethod:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageFillMethod
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillOrigin:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageFillOrigin
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageOverrideSprite:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageOverrideSprite
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImagePreserveAspect:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImagePreserveAspect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImage:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImage
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImageType:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageType
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundMaterial:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundMaterial
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {fileID: 0}
+  BackgroundImageMaskable:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundImageMaskable
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundColor:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BackgroundColor
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+  RenderMode:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: RenderMode
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  PixelPerfect:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: PixelPerfect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  SortingOrder:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: SortingOrder
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  RenderCamera:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: RenderCamera
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {fileID: 0}
+  PlaneDistance:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: PlaneDistance
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  SortingLayerId:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: SortingLayerId
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  SortingLayerName:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: SortingLayerName
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 
+  OverrideSorting:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: OverrideSorting
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  OverridePixelPerfect:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: OverridePixelPerfect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  Canvas: {fileID: 223659136088569910}
+  UIScaleMode:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: UIScaleMode
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  ScaleFactor:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: ScaleFactor
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  ReferencePixelsPerUnit:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: ReferencePixelsPerUnit
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  DynamicPixelsPerUnit:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: DynamicPixelsPerUnit
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  ReferenceResolution:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: ReferenceResolution
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0}
+  MatchWidthOrHeight:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: MatchWidthOrHeight
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  CanvasScaler: {fileID: 114278043800693920}
+  IgnoreReversedGraphics:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: IgnoreReversedGraphics
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BlockingObjects:
+    ParentView: {fileID: 114090342219977990}
+    ViewFieldPath: BlockingObjects
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  GraphicRaycaster: {fileID: 114685973022163968}
+--- !u!114 &114115871603686910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990998156177866}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -23729,9 +24792,10 @@ MonoBehaviour:
     - PlayerUI
     ReplacesViewModel: 
     Xuml: "<PlayerUI xmlns=\"MarkLight\">\r\n  <Region Height=\"5%\" Width=\"5%\"
-      Alignment=\"TopLeft\">\r\n  </Region>\r\n</PlayerUI>"
+      Alignment=\"TopLeft\">\r\n    <Image Id=\"GameMenuIcon\"></Image>\r\n  </Region>\r\n</PlayerUI>"
     DependencyNames:
     - Region
+    - Image
     ViewActionFields:
     - Cancel
     - Deselect
@@ -27151,7 +28215,7 @@ MonoBehaviour:
   - Flat
   - Neat
   - Toon
-  RootView: {fileID: 1975317776297928}
+  RootView: {fileID: 1883288476345294}
   DisableAutomaticReload: 0
   UpdateXsdSchema: 0
   AssetDictionary:
@@ -27159,7 +28223,7 @@ MonoBehaviour:
     _HashCodes: 0f5449640000000000000000
     _Next: ffffffff0000000000000000
     _Count: 1
-    _Version: 111
+    _Version: 113
     _FreeList: -1
     _FreeCount: 0
     _Keys:
@@ -27173,63 +28237,15 @@ MonoBehaviour:
       Path: 
     - Asset: {fileID: 0}
       Path: 
---- !u!114 &114169315601705252
+--- !u!114 &114192324325983498
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160973753347656}
+  m_GameObject: {fileID: 1304303282450520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
---- !u!114 &114203403245752098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1656689453739154}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!114 &114420330616321976
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1656689453739154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf8bbe2dbbaa7274eba8a668614c736d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ba823a589709da46a5f53f074335454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 
@@ -27238,43 +28254,43 @@ MonoBehaviour:
   Theme: Toon
   BaseDirectory: 
   UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114570648395973904}
-  Parent: {fileID: 114595013830937562}
-  Content: {fileID: 114420330616321976}
+  LayoutParent: {fileID: 114456986790491344}
+  Parent: {fileID: 114479557318338228}
+  Content: {fileID: 114192324325983498}
   State:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: State
     IsMapped: 0
     _isSet: 1
     _internalValue: Default
   IsActive:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: IsActive
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   HideFlags:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: HideFlags
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
-  GameObject: {fileID: 1656689453739154}
-  Transform: {fileID: 224434059974033984}
+  GameObject: {fileID: 1304303282450520}
+  Transform: {fileID: 224146279472155122}
   Position:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Position
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0}
   Rotation:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Rotation
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0, w: 0}
   Scale:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Scale
     IsMapped: 1
     _isSet: 0
@@ -27365,12 +28381,12 @@ MonoBehaviour:
     EventTriggerType: 8
     IsDisabled: 0
   Item:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Item
     IsMapped: 0
     _isSet: 0
   IsTemplate:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: IsTemplate
     IsMapped: 0
     _isSet: 0
@@ -27386,35 +28402,34 @@ MonoBehaviour:
     EventTriggerType: 0
     IsDisabled: 0
   IsDestroyed:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: IsDestroyed
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   IsDynamic:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: IsDynamic
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   PropagateChildLayoutChanges:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: PropagateChildLayoutChanges
     IsMapped: 0
     _isSet: 1
     _internalValue: 0
-  ViewTypeName: AvatorUI
-  ViewXumlName: AvatorUI
+  ViewTypeName: PlayerUI
+  ViewXumlName: PlayerUI
   ViewFieldBindings: []
   ViewActionEntries: []
   ViewFieldStateValues: []
-  SetViewFieldNames:
-  - Transform.localScale
+  SetViewFieldNames: []
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
   Width:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Width
     IsMapped: 0
     _isSet: 1
@@ -27423,7 +28438,7 @@ MonoBehaviour:
       _unit: 1
       _fill: 0
   Height:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Height
     IsMapped: 0
     _isSet: 1
@@ -27432,7 +28447,7 @@ MonoBehaviour:
       _unit: 1
       _fill: 0
   OverrideWidth:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: OverrideWidth
     IsMapped: 0
     _isSet: 1
@@ -27441,7 +28456,7 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   OverrideHeight:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: OverrideHeight
     IsMapped: 0
     _isSet: 1
@@ -27450,13 +28465,13 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   Alignment:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Alignment
     IsMapped: 0
     _isSet: 1
     _internalValue: 0
   Margin:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Margin
     IsMapped: 0
     _isSet: 1
@@ -27478,7 +28493,7 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   Offset:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Offset
     IsMapped: 0
     _isSet: 1
@@ -27500,7 +28515,7 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   OffsetFromParent:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: OffsetFromParent
     IsMapped: 0
     _isSet: 1
@@ -27522,87 +28537,87 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   Pivot:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Pivot
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0}
-  RectTransform: {fileID: 224434059974033984}
+  RectTransform: {fileID: 224146279472155122}
   RaycastBlockMode:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: RaycastBlockMode
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   Alpha:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: Alpha
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   IsVisible:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: IsVisible
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   SortIndex:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: SortIndex
     IsMapped: 0
     _isSet: 1
     _internalValue: 0
   UpdateRectTransform:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: UpdateRectTransform
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   UpdateBackground:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: UpdateBackground
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
-  ImageComponent: {fileID: 114203403245752098}
+  ImageComponent: {fileID: 114460098724967640}
   BackgroundImageEventAlphaThreshold:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageEventAlphaThreshold
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillAmount:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageFillAmount
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillCenter:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageFillCenter
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillClockwise:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageFillClockwise
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillMethod:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageFillMethod
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillOrigin:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageFillOrigin
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageOverrideSprite:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageOverrideSprite
     IsMapped: 0
     _isSet: 0
@@ -27611,13 +28626,13 @@ MonoBehaviour:
         Asset: {fileID: 0}
         Path: 
   BackgroundImagePreserveAspect:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImagePreserveAspect
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImage:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImage
     IsMapped: 0
     _isSet: 0
@@ -27626,42 +28641,35 @@ MonoBehaviour:
         Asset: {fileID: 0}
         Path: 
   BackgroundImageType:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageType
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundMaterial:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundMaterial
     IsMapped: 1
     _isSet: 0
     _internalValue: {fileID: 0}
   BackgroundImageMaskable:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundImageMaskable
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundColor:
-    ParentView: {fileID: 114420330616321976}
+    ParentView: {fileID: 114192324325983498}
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
     _internalValue: {r: 0, g: 0, b: 0, a: 0}
-  NicknameLabel: {fileID: 114496696660051984}
-  UsernameText:
-    ParentView: {fileID: 114420330616321976}
-    ViewFieldPath: UsernameText
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 
---- !u!114 &114451308161582468
+--- !u!114 &114233468632317128
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287369781991914}
+  m_GameObject: {fileID: 1636988832001024}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62927ca247eef584bb4732c67bbc2c46, type: 3}
@@ -27673,43 +28681,43 @@ MonoBehaviour:
   Theme: Toon
   BaseDirectory: 
   UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114595013830937562}
-  Parent: {fileID: 114595013830937562}
-  Content: {fileID: 114451308161582468}
+  LayoutParent: {fileID: 114479557318338228}
+  Parent: {fileID: 114479557318338228}
+  Content: {fileID: 114233468632317128}
   State:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: State
     IsMapped: 0
     _isSet: 1
     _internalValue: Default
   IsActive:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: IsActive
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   HideFlags:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: HideFlags
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
-  GameObject: {fileID: 1287369781991914}
-  Transform: {fileID: 4953539401011978}
+  GameObject: {fileID: 1636988832001024}
+  Transform: {fileID: 4187424468065998}
   Position:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: Position
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0}
   Rotation:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: Rotation
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0, w: 0}
   Scale:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: Scale
     IsMapped: 1
     _isSet: 0
@@ -27800,12 +28808,12 @@ MonoBehaviour:
     EventTriggerType: 8
     IsDisabled: 0
   Item:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: Item
     IsMapped: 0
     _isSet: 0
   IsTemplate:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: IsTemplate
     IsMapped: 0
     _isSet: 0
@@ -27821,19 +28829,19 @@ MonoBehaviour:
     EventTriggerType: 0
     IsDisabled: 0
   IsDestroyed:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: IsDestroyed
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   IsDynamic:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: IsDynamic
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   PropagateChildLayoutChanges:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: PropagateChildLayoutChanges
     IsMapped: 0
     _isSet: 1
@@ -27848,73 +28856,547 @@ MonoBehaviour:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
   FirstSelectedGameObject:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: FirstSelectedGameObject
     IsMapped: 1
     _isSet: 0
     _internalValue: {fileID: 0}
   CurrentSelectedGameObject:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: CurrentSelectedGameObject
     IsMapped: 1
     _isSet: 0
     _internalValue: {fileID: 0}
   PixelDragThreshold:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: PixelDragThreshold
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   SendNavigationEvents:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: SendNavigationEvents
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
-  UnityEventSystem: {fileID: 114682913564263428}
+  UnityEventSystem: {fileID: 114758335576949724}
   HorizontalAxis:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: HorizontalAxis
     IsMapped: 1
     _isSet: 0
     _internalValue: 
   VerticalAxis:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: VerticalAxis
     IsMapped: 1
     _isSet: 0
     _internalValue: 
   SubmitButton:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: SubmitButton
     IsMapped: 1
     _isSet: 0
     _internalValue: 
   CancelButton:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: CancelButton
     IsMapped: 1
     _isSet: 0
     _internalValue: 
   InputActionsPerSecond:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: InputActionsPerSecond
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   AllowActivationOnMobileDevice:
-    ParentView: {fileID: 114451308161582468}
+    ParentView: {fileID: 114233468632317128}
     ViewFieldPath: AllowActivationOnMobileDevice
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
-  StandaloneInputModule: {fileID: 114780346443910614}
---- !u!114 &114466364279343824
+  StandaloneInputModule: {fileID: 114242802835958730}
+--- !u!114 &114242802835958730
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1238584292231976}
+  m_GameObject: {fileID: 1636988832001024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &114278043800693920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179386799979152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!114 &114302917282784998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1652644998981254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8bbe2dbbaa7274eba8a668614c736d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 
+  Style: 
+  BasedOn: 
+  Theme: Toon
+  BaseDirectory: 
+  UnitSize: {x: 0, y: 0, z: 0}
+  LayoutParent: {fileID: 114090342219977990}
+  Parent: {fileID: 114479557318338228}
+  Content: {fileID: 114302917282784998}
+  State:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: State
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: Default
+  IsActive:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: IsActive
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  HideFlags:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: HideFlags
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  GameObject: {fileID: 1652644998981254}
+  Transform: {fileID: 224946690006706560}
+  Position:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Position
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Rotation:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Rotation
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0, w: 0}
+  Scale:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Scale
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Cancel:
+    Name: Cancel
+    TriggeredByEventSystem: 1
+    EventTriggerType: 16
+    IsDisabled: 0
+  Deselect:
+    Name: Deselect
+    TriggeredByEventSystem: 1
+    EventTriggerType: 10
+    IsDisabled: 0
+  Drop:
+    Name: Drop
+    TriggeredByEventSystem: 1
+    EventTriggerType: 6
+    IsDisabled: 0
+  Move:
+    Name: Move
+    TriggeredByEventSystem: 1
+    EventTriggerType: 11
+    IsDisabled: 0
+  Click:
+    Name: Click
+    TriggeredByEventSystem: 1
+    EventTriggerType: 4
+    IsDisabled: 0
+  BeginDrag:
+    Name: BeginDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 13
+    IsDisabled: 0
+  EndDrag:
+    Name: EndDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 14
+    IsDisabled: 0
+  Drag:
+    Name: Drag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 5
+    IsDisabled: 0
+  InitializePotentialDrag:
+    Name: InitializePotentialDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 12
+    IsDisabled: 0
+  MouseDown:
+    Name: MouseDown
+    TriggeredByEventSystem: 1
+    EventTriggerType: 2
+    IsDisabled: 0
+  MouseEnter:
+    Name: MouseEnter
+    TriggeredByEventSystem: 1
+    EventTriggerType: 0
+    IsDisabled: 0
+  MouseExit:
+    Name: MouseExit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 1
+    IsDisabled: 0
+  MouseUp:
+    Name: MouseUp
+    TriggeredByEventSystem: 1
+    EventTriggerType: 3
+    IsDisabled: 0
+  Scroll:
+    Name: Scroll
+    TriggeredByEventSystem: 1
+    EventTriggerType: 7
+    IsDisabled: 0
+  Select:
+    Name: Select
+    TriggeredByEventSystem: 1
+    EventTriggerType: 9
+    IsDisabled: 0
+  Submit:
+    Name: Submit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 15
+    IsDisabled: 0
+  UpdateSelected:
+    Name: UpdateSelected
+    TriggeredByEventSystem: 1
+    EventTriggerType: 8
+    IsDisabled: 0
+  Item:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Item
+    IsMapped: 0
+    _isSet: 0
+  IsTemplate:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: IsTemplate
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Activated:
+    Name: Activated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  Deactivated:
+    Name: Deactivated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  IsDestroyed:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: IsDestroyed
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  IsDynamic:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: IsDynamic
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  PropagateChildLayoutChanges:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: PropagateChildLayoutChanges
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  ViewTypeName: AvatorUI
+  ViewXumlName: AvatorUI
+  ViewFieldBindings: []
+  ViewActionEntries: []
+  ViewFieldStateValues: []
+  SetViewFieldNames:
+  - Transform.localScale
+  ValueConverterContext:
+    BaseDirectory: 
+    UnitSize: {x: 40, y: 40, z: 40}
+  Width:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Width
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  Height:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Height
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  OverrideWidth:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: OverrideWidth
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  OverrideHeight:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: OverrideHeight
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  Alignment:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Alignment
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  Margin:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Margin
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Offset:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Offset
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  OffsetFromParent:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: OffsetFromParent
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Pivot:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Pivot
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0}
+  RectTransform: {fileID: 224946690006706560}
+  RaycastBlockMode:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: RaycastBlockMode
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Alpha:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: Alpha
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  IsVisible:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: IsVisible
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  SortIndex:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: SortIndex
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  UpdateRectTransform:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: UpdateRectTransform
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  UpdateBackground:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: UpdateBackground
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  ImageComponent: {fileID: 114380145490984060}
+  BackgroundImageEventAlphaThreshold:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageEventAlphaThreshold
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillAmount:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageFillAmount
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillCenter:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageFillCenter
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillClockwise:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageFillClockwise
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillMethod:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageFillMethod
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillOrigin:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageFillOrigin
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageOverrideSprite:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageOverrideSprite
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImagePreserveAspect:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImagePreserveAspect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImage:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImage
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImageType:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageType
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundMaterial:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundMaterial
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {fileID: 0}
+  BackgroundImageMaskable:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundImageMaskable
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundColor:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: BackgroundColor
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+  NicknameLabel: {fileID: 114511420127008588}
+  UsernameText:
+    ParentView: {fileID: 114302917282784998}
+    ViewFieldPath: UsernameText
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 
+--- !u!114 &114380145490984060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1652644998981254}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -27936,60 +29418,60 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114496696660051984
+--- !u!114 &114456986790491344
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1044833305355530}
+  m_GameObject: {fileID: 1990998156177866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4f5c160c071d84ea1ddcd51caca4fc, type: 3}
+  m_Script: {fileID: 11500000, guid: f784e23c0423ffc48a1a2d542d36f123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: NicknameLabel
+  Id: 
   Style: 
   BasedOn: 
   Theme: Toon
   BaseDirectory: 
   UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114420330616321976}
-  Parent: {fileID: 114420330616321976}
-  Content: {fileID: 114496696660051984}
+  LayoutParent: {fileID: 114479557318338228}
+  Parent: {fileID: 114479557318338228}
+  Content: {fileID: 114456986790491344}
   State:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: State
     IsMapped: 0
     _isSet: 1
     _internalValue: Default
   IsActive:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: IsActive
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   HideFlags:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: HideFlags
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
-  GameObject: {fileID: 1044833305355530}
-  Transform: {fileID: 224753606695235868}
+  GameObject: {fileID: 1990998156177866}
+  Transform: {fileID: 224790321370260268}
   Position:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: Position
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0}
   Rotation:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: Rotation
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0, w: 0}
   Scale:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: Scale
     IsMapped: 1
     _isSet: 0
@@ -28080,12 +29562,12 @@ MonoBehaviour:
     EventTriggerType: 8
     IsDisabled: 0
   Item:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: Item
     IsMapped: 0
     _isSet: 0
   IsTemplate:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: IsTemplate
     IsMapped: 0
     _isSet: 0
@@ -28101,19 +29583,770 @@ MonoBehaviour:
     EventTriggerType: 0
     IsDisabled: 0
   IsDestroyed:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: IsDestroyed
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   IsDynamic:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
     ViewFieldPath: IsDynamic
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   PropagateChildLayoutChanges:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: PropagateChildLayoutChanges
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  ViewTypeName: UserInterface
+  ViewXumlName: UserInterface
+  ViewFieldBindings: []
+  ViewActionEntries: []
+  ViewFieldStateValues: []
+  SetViewFieldNames:
+  - Canvas.renderMode
+  ValueConverterContext:
+    BaseDirectory: 
+    UnitSize: {x: 40, y: 40, z: 40}
+  Width:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: Width
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  Height:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: Height
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 1
+      _unit: 1
+      _fill: 0
+  OverrideWidth:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: OverrideWidth
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  OverrideHeight:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: OverrideHeight
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _value: 0
+      _unit: 0
+      _fill: 0
+  Alignment:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: Alignment
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  Margin:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: Margin
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Offset:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: Offset
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  OffsetFromParent:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: OffsetFromParent
+    IsMapped: 0
+    _isSet: 1
+    _internalValue:
+      _left:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _top:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _right:
+        _value: 0
+        _unit: 0
+        _fill: 0
+      _bottom:
+        _value: 0
+        _unit: 0
+        _fill: 0
+  Pivot:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: Pivot
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0}
+  RectTransform: {fileID: 224790321370260268}
+  RaycastBlockMode:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: RaycastBlockMode
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Alpha:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: Alpha
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  IsVisible:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: IsVisible
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  SortIndex:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: SortIndex
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  UpdateRectTransform:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: UpdateRectTransform
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  UpdateBackground:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: UpdateBackground
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  ImageComponent: {fileID: 0}
+  BackgroundImageEventAlphaThreshold:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageEventAlphaThreshold
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillAmount:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageFillAmount
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillCenter:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageFillCenter
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillClockwise:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageFillClockwise
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillMethod:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageFillMethod
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageFillOrigin:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageFillOrigin
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImageOverrideSprite:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageOverrideSprite
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImagePreserveAspect:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImagePreserveAspect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundImage:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImage
+    IsMapped: 0
+    _isSet: 0
+    _internalValue:
+      UnityAsset:
+        Asset: {fileID: 0}
+        Path: 
+  BackgroundImageType:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageType
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundMaterial:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundMaterial
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {fileID: 0}
+  BackgroundImageMaskable:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundImageMaskable
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BackgroundColor:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BackgroundColor
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+  RenderMode:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: RenderMode
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  PixelPerfect:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: PixelPerfect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  SortingOrder:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: SortingOrder
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  RenderCamera:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: RenderCamera
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {fileID: 0}
+  PlaneDistance:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: PlaneDistance
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  SortingLayerId:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: SortingLayerId
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  SortingLayerName:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: SortingLayerName
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 
+  OverrideSorting:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: OverrideSorting
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  OverridePixelPerfect:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: OverridePixelPerfect
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  Canvas: {fileID: 223048162927903838}
+  UIScaleMode:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: UIScaleMode
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  ScaleFactor:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: ScaleFactor
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  ReferencePixelsPerUnit:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: ReferencePixelsPerUnit
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  DynamicPixelsPerUnit:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: DynamicPixelsPerUnit
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  ReferenceResolution:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: ReferenceResolution
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0}
+  MatchWidthOrHeight:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: MatchWidthOrHeight
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  CanvasScaler: {fileID: 114981817060648374}
+  IgnoreReversedGraphics:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: IgnoreReversedGraphics
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  BlockingObjects:
+    ParentView: {fileID: 114456986790491344}
+    ViewFieldPath: BlockingObjects
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  GraphicRaycaster: {fileID: 114115871603686910}
+--- !u!114 &114460098724967640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1304303282450520}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &114479557318338228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883288476345294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c4831cd1904c948a376f11cd358dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 
+  Style: 
+  BasedOn: 
+  Theme: Toon
+  BaseDirectory: 
+  UnitSize: {x: 0, y: 0, z: 0}
+  LayoutParent: {fileID: 114166749382212184}
+  Parent: {fileID: 114166749382212184}
+  Content: {fileID: 114479557318338228}
+  State:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: State
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: Default
+  IsActive:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: IsActive
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  HideFlags:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: HideFlags
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  GameObject: {fileID: 1883288476345294}
+  Transform: {fileID: 4887849323432234}
+  Position:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: Position
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Rotation:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: Rotation
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0, w: 0}
+  Scale:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: Scale
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Cancel:
+    Name: Cancel
+    TriggeredByEventSystem: 1
+    EventTriggerType: 16
+    IsDisabled: 0
+  Deselect:
+    Name: Deselect
+    TriggeredByEventSystem: 1
+    EventTriggerType: 10
+    IsDisabled: 0
+  Drop:
+    Name: Drop
+    TriggeredByEventSystem: 1
+    EventTriggerType: 6
+    IsDisabled: 0
+  Move:
+    Name: Move
+    TriggeredByEventSystem: 1
+    EventTriggerType: 11
+    IsDisabled: 0
+  Click:
+    Name: Click
+    TriggeredByEventSystem: 1
+    EventTriggerType: 4
+    IsDisabled: 0
+  BeginDrag:
+    Name: BeginDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 13
+    IsDisabled: 0
+  EndDrag:
+    Name: EndDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 14
+    IsDisabled: 0
+  Drag:
+    Name: Drag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 5
+    IsDisabled: 0
+  InitializePotentialDrag:
+    Name: InitializePotentialDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 12
+    IsDisabled: 0
+  MouseDown:
+    Name: MouseDown
+    TriggeredByEventSystem: 1
+    EventTriggerType: 2
+    IsDisabled: 0
+  MouseEnter:
+    Name: MouseEnter
+    TriggeredByEventSystem: 1
+    EventTriggerType: 0
+    IsDisabled: 0
+  MouseExit:
+    Name: MouseExit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 1
+    IsDisabled: 0
+  MouseUp:
+    Name: MouseUp
+    TriggeredByEventSystem: 1
+    EventTriggerType: 3
+    IsDisabled: 0
+  Scroll:
+    Name: Scroll
+    TriggeredByEventSystem: 1
+    EventTriggerType: 7
+    IsDisabled: 0
+  Select:
+    Name: Select
+    TriggeredByEventSystem: 1
+    EventTriggerType: 9
+    IsDisabled: 0
+  Submit:
+    Name: Submit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 15
+    IsDisabled: 0
+  UpdateSelected:
+    Name: UpdateSelected
+    TriggeredByEventSystem: 1
+    EventTriggerType: 8
+    IsDisabled: 0
+  Item:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: Item
+    IsMapped: 0
+    _isSet: 0
+  IsTemplate:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: IsTemplate
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Activated:
+    Name: Activated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  Deactivated:
+    Name: Deactivated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  IsDestroyed:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: IsDestroyed
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  IsDynamic:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: IsDynamic
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  PropagateChildLayoutChanges:
+    ParentView: {fileID: 114479557318338228}
+    ViewFieldPath: PropagateChildLayoutChanges
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 0
+  ViewTypeName: View
+  ViewXumlName: Player
+  ViewFieldBindings: []
+  ViewActionEntries: []
+  ViewFieldStateValues: []
+  SetViewFieldNames: []
+  ValueConverterContext:
+    BaseDirectory: 
+    UnitSize: {x: 40, y: 40, z: 40}
+--- !u!114 &114511420127008588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236745965738904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4f5c160c071d84ea1ddcd51caca4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: NicknameLabel
+  Style: 
+  BasedOn: 
+  Theme: Toon
+  BaseDirectory: 
+  UnitSize: {x: 0, y: 0, z: 0}
+  LayoutParent: {fileID: 114302917282784998}
+  Parent: {fileID: 114302917282784998}
+  Content: {fileID: 114511420127008588}
+  State:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: State
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: Default
+  IsActive:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: IsActive
+    IsMapped: 0
+    _isSet: 1
+    _internalValue: 1
+  HideFlags:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: HideFlags
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: 0
+  GameObject: {fileID: 1236745965738904}
+  Transform: {fileID: 224846502363308782}
+  Position:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: Position
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Rotation:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: Rotation
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0, w: 0}
+  Scale:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: Scale
+    IsMapped: 1
+    _isSet: 0
+    _internalValue: {x: 0, y: 0, z: 0}
+  Cancel:
+    Name: Cancel
+    TriggeredByEventSystem: 1
+    EventTriggerType: 16
+    IsDisabled: 0
+  Deselect:
+    Name: Deselect
+    TriggeredByEventSystem: 1
+    EventTriggerType: 10
+    IsDisabled: 0
+  Drop:
+    Name: Drop
+    TriggeredByEventSystem: 1
+    EventTriggerType: 6
+    IsDisabled: 0
+  Move:
+    Name: Move
+    TriggeredByEventSystem: 1
+    EventTriggerType: 11
+    IsDisabled: 0
+  Click:
+    Name: Click
+    TriggeredByEventSystem: 1
+    EventTriggerType: 4
+    IsDisabled: 0
+  BeginDrag:
+    Name: BeginDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 13
+    IsDisabled: 0
+  EndDrag:
+    Name: EndDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 14
+    IsDisabled: 0
+  Drag:
+    Name: Drag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 5
+    IsDisabled: 0
+  InitializePotentialDrag:
+    Name: InitializePotentialDrag
+    TriggeredByEventSystem: 1
+    EventTriggerType: 12
+    IsDisabled: 0
+  MouseDown:
+    Name: MouseDown
+    TriggeredByEventSystem: 1
+    EventTriggerType: 2
+    IsDisabled: 0
+  MouseEnter:
+    Name: MouseEnter
+    TriggeredByEventSystem: 1
+    EventTriggerType: 0
+    IsDisabled: 0
+  MouseExit:
+    Name: MouseExit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 1
+    IsDisabled: 0
+  MouseUp:
+    Name: MouseUp
+    TriggeredByEventSystem: 1
+    EventTriggerType: 3
+    IsDisabled: 0
+  Scroll:
+    Name: Scroll
+    TriggeredByEventSystem: 1
+    EventTriggerType: 7
+    IsDisabled: 0
+  Select:
+    Name: Select
+    TriggeredByEventSystem: 1
+    EventTriggerType: 9
+    IsDisabled: 0
+  Submit:
+    Name: Submit
+    TriggeredByEventSystem: 1
+    EventTriggerType: 15
+    IsDisabled: 0
+  UpdateSelected:
+    Name: UpdateSelected
+    TriggeredByEventSystem: 1
+    EventTriggerType: 8
+    IsDisabled: 0
+  Item:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: Item
+    IsMapped: 0
+    _isSet: 0
+  IsTemplate:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: IsTemplate
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  Activated:
+    Name: Activated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  Deactivated:
+    Name: Deactivated
+    TriggeredByEventSystem: 0
+    EventTriggerType: 0
+    IsDisabled: 0
+  IsDestroyed:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: IsDestroyed
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  IsDynamic:
+    ParentView: {fileID: 114511420127008588}
+    ViewFieldPath: IsDynamic
+    IsMapped: 0
+    _isSet: 0
+    _internalValue: 0
+  PropagateChildLayoutChanges:
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: PropagateChildLayoutChanges
     IsMapped: 0
     _isSet: 1
@@ -28138,7 +30371,7 @@ MonoBehaviour:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
   Width:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Width
     IsMapped: 0
     _isSet: 1
@@ -28147,7 +30380,7 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   Height:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Height
     IsMapped: 0
     _isSet: 1
@@ -28156,7 +30389,7 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   OverrideWidth:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: OverrideWidth
     IsMapped: 0
     _isSet: 1
@@ -28165,7 +30398,7 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   OverrideHeight:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: OverrideHeight
     IsMapped: 0
     _isSet: 1
@@ -28174,13 +30407,13 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   Alignment:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Alignment
     IsMapped: 0
     _isSet: 1
     _internalValue: 0
   Margin:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Margin
     IsMapped: 0
     _isSet: 1
@@ -28202,7 +30435,7 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   Offset:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Offset
     IsMapped: 0
     _isSet: 1
@@ -28224,7 +30457,7 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   OffsetFromParent:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: OffsetFromParent
     IsMapped: 0
     _isSet: 1
@@ -28246,87 +30479,87 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   Pivot:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Pivot
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0}
-  RectTransform: {fileID: 224753606695235868}
+  RectTransform: {fileID: 224846502363308782}
   RaycastBlockMode:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: RaycastBlockMode
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   Alpha:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Alpha
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   IsVisible:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: IsVisible
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   SortIndex:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: SortIndex
     IsMapped: 0
     _isSet: 1
     _internalValue: 0
   UpdateRectTransform:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: UpdateRectTransform
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   UpdateBackground:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: UpdateBackground
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   ImageComponent: {fileID: 0}
   BackgroundImageEventAlphaThreshold:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageEventAlphaThreshold
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillAmount:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageFillAmount
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillCenter:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageFillCenter
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillClockwise:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageFillClockwise
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillMethod:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageFillMethod
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillOrigin:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageFillOrigin
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageOverrideSprite:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageOverrideSprite
     IsMapped: 0
     _isSet: 0
@@ -28335,13 +30568,13 @@ MonoBehaviour:
         Asset: {fileID: 0}
         Path: 
   BackgroundImagePreserveAspect:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImagePreserveAspect
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImage:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImage
     IsMapped: 0
     _isSet: 0
@@ -28350,1407 +30583,150 @@ MonoBehaviour:
         Asset: {fileID: 0}
         Path: 
   BackgroundImageType:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageType
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundMaterial:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundMaterial
     IsMapped: 1
     _isSet: 0
     _internalValue: {fileID: 0}
   BackgroundImageMaskable:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundImageMaskable
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundColor:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
     _internalValue: {r: 0, g: 0, b: 0, a: 0}
   Text:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Text
     IsMapped: 1
     _isSet: 0
     _internalValue: 
   Font:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: Font
     IsMapped: 1
     _isSet: 0
     _internalValue: {fileID: 0}
   FontSize:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: FontSize
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   LineSpacing:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: LineSpacing
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   SupportRichText:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: SupportRichText
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   FontColor:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: FontColor
     IsMapped: 1
     _isSet: 0
     _internalValue: {r: 0, g: 0, b: 0, a: 0}
   FontStyle:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: FontStyle
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   AlignByGeometry:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: AlignByGeometry
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   ResizeTextForBestFit:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: ResizeTextForBestFit
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   ResizeTextMaxSize:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: ResizeTextMaxSize
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   ResizeTextMinSize:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: ResizeTextMinSize
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   HorizontalOverflow:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: HorizontalOverflow
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   VerticalOverflow:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: VerticalOverflow
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
-  TextComponent: {fileID: 114654227282386752}
+  TextComponent: {fileID: 114605392073663266}
   TextAlignment:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: TextAlignment
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   ShadowColor:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: ShadowColor
     IsMapped: 0
     _isSet: 0
     _internalValue: {r: 0, g: 0, b: 0, a: 0}
   ShadowDistance:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: ShadowDistance
     IsMapped: 0
     _isSet: 0
     _internalValue: {x: 0, y: 0}
   OutlineColor:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: OutlineColor
     IsMapped: 0
     _isSet: 0
     _internalValue: {r: 0, g: 0, b: 0, a: 0}
   OutlineDistance:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: OutlineDistance
     IsMapped: 0
     _isSet: 0
     _internalValue: {x: 0, y: 0}
   AdjustToText:
-    ParentView: {fileID: 114496696660051984}
+    ParentView: {fileID: 114511420127008588}
     ViewFieldPath: AdjustToText
     IsMapped: 0
     _isSet: 0
     _internalValue: 3
---- !u!114 &114543683456208564
+--- !u!114 &114605392073663266
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160973753347656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f784e23c0423ffc48a1a2d542d36f123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 
-  Style: 
-  BasedOn: 
-  Theme: Toon
-  BaseDirectory: 
-  UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114595013830937562}
-  Parent: {fileID: 114595013830937562}
-  Content: {fileID: 114543683456208564}
-  State:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: State
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: Default
-  IsActive:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: IsActive
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  HideFlags:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: HideFlags
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  GameObject: {fileID: 1160973753347656}
-  Transform: {fileID: 224746255412927618}
-  Position:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Position
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Rotation:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Rotation
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0, w: 0}
-  Scale:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Scale
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Cancel:
-    Name: Cancel
-    TriggeredByEventSystem: 1
-    EventTriggerType: 16
-    IsDisabled: 0
-  Deselect:
-    Name: Deselect
-    TriggeredByEventSystem: 1
-    EventTriggerType: 10
-    IsDisabled: 0
-  Drop:
-    Name: Drop
-    TriggeredByEventSystem: 1
-    EventTriggerType: 6
-    IsDisabled: 0
-  Move:
-    Name: Move
-    TriggeredByEventSystem: 1
-    EventTriggerType: 11
-    IsDisabled: 0
-  Click:
-    Name: Click
-    TriggeredByEventSystem: 1
-    EventTriggerType: 4
-    IsDisabled: 0
-  BeginDrag:
-    Name: BeginDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 13
-    IsDisabled: 0
-  EndDrag:
-    Name: EndDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 14
-    IsDisabled: 0
-  Drag:
-    Name: Drag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 5
-    IsDisabled: 0
-  InitializePotentialDrag:
-    Name: InitializePotentialDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 12
-    IsDisabled: 0
-  MouseDown:
-    Name: MouseDown
-    TriggeredByEventSystem: 1
-    EventTriggerType: 2
-    IsDisabled: 0
-  MouseEnter:
-    Name: MouseEnter
-    TriggeredByEventSystem: 1
-    EventTriggerType: 0
-    IsDisabled: 0
-  MouseExit:
-    Name: MouseExit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 1
-    IsDisabled: 0
-  MouseUp:
-    Name: MouseUp
-    TriggeredByEventSystem: 1
-    EventTriggerType: 3
-    IsDisabled: 0
-  Scroll:
-    Name: Scroll
-    TriggeredByEventSystem: 1
-    EventTriggerType: 7
-    IsDisabled: 0
-  Select:
-    Name: Select
-    TriggeredByEventSystem: 1
-    EventTriggerType: 9
-    IsDisabled: 0
-  Submit:
-    Name: Submit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 15
-    IsDisabled: 0
-  UpdateSelected:
-    Name: UpdateSelected
-    TriggeredByEventSystem: 1
-    EventTriggerType: 8
-    IsDisabled: 0
-  Item:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Item
-    IsMapped: 0
-    _isSet: 0
-  IsTemplate:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: IsTemplate
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  Activated:
-    Name: Activated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  Deactivated:
-    Name: Deactivated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  IsDestroyed:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: IsDestroyed
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  IsDynamic:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: IsDynamic
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  PropagateChildLayoutChanges:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: PropagateChildLayoutChanges
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  ViewTypeName: UserInterface
-  ViewXumlName: UserInterface
-  ViewFieldBindings: []
-  ViewActionEntries: []
-  ViewFieldStateValues: []
-  SetViewFieldNames:
-  - Canvas.renderMode
-  ValueConverterContext:
-    BaseDirectory: 
-    UnitSize: {x: 40, y: 40, z: 40}
-  Width:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Width
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 1
-      _unit: 1
-      _fill: 0
-  Height:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Height
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 1
-      _unit: 1
-      _fill: 0
-  OverrideWidth:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: OverrideWidth
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 0
-      _unit: 0
-      _fill: 0
-  OverrideHeight:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: OverrideHeight
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 0
-      _unit: 0
-      _fill: 0
-  Alignment:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Alignment
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  Margin:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Margin
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  Offset:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Offset
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  OffsetFromParent:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: OffsetFromParent
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  Pivot:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Pivot
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0}
-  RectTransform: {fileID: 224746255412927618}
-  RaycastBlockMode:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: RaycastBlockMode
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  Alpha:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: Alpha
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  IsVisible:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: IsVisible
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  SortIndex:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: SortIndex
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  UpdateRectTransform:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: UpdateRectTransform
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  UpdateBackground:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: UpdateBackground
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  ImageComponent: {fileID: 0}
-  BackgroundImageEventAlphaThreshold:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageEventAlphaThreshold
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillAmount:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageFillAmount
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillCenter:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageFillCenter
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillClockwise:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageFillClockwise
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillMethod:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageFillMethod
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillOrigin:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageFillOrigin
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageOverrideSprite:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageOverrideSprite
-    IsMapped: 0
-    _isSet: 0
-    _internalValue:
-      UnityAsset:
-        Asset: {fileID: 0}
-        Path: 
-  BackgroundImagePreserveAspect:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImagePreserveAspect
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImage:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImage
-    IsMapped: 0
-    _isSet: 0
-    _internalValue:
-      UnityAsset:
-        Asset: {fileID: 0}
-        Path: 
-  BackgroundImageType:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageType
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundMaterial:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundMaterial
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {fileID: 0}
-  BackgroundImageMaskable:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundImageMaskable
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundColor:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BackgroundColor
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
-  RenderMode:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: RenderMode
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  PixelPerfect:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: PixelPerfect
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  SortingOrder:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: SortingOrder
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  RenderCamera:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: RenderCamera
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {fileID: 0}
-  PlaneDistance:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: PlaneDistance
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  SortingLayerId:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: SortingLayerId
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  SortingLayerName:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: SortingLayerName
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 
-  OverrideSorting:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: OverrideSorting
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  OverridePixelPerfect:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: OverridePixelPerfect
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  Canvas: {fileID: 223296471577835296}
-  UIScaleMode:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: UIScaleMode
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  ScaleFactor:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: ScaleFactor
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  ReferencePixelsPerUnit:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: ReferencePixelsPerUnit
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  DynamicPixelsPerUnit:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: DynamicPixelsPerUnit
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  ReferenceResolution:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: ReferenceResolution
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0}
-  MatchWidthOrHeight:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: MatchWidthOrHeight
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  CanvasScaler: {fileID: 114169315601705252}
-  IgnoreReversedGraphics:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: IgnoreReversedGraphics
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BlockingObjects:
-    ParentView: {fileID: 114543683456208564}
-    ViewFieldPath: BlockingObjects
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  GraphicRaycaster: {fileID: 114811437150698448}
---- !u!114 &114570648395973904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1066315556600322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f784e23c0423ffc48a1a2d542d36f123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 
-  Style: 
-  BasedOn: 
-  Theme: Toon
-  BaseDirectory: 
-  UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114595013830937562}
-  Parent: {fileID: 114595013830937562}
-  Content: {fileID: 114570648395973904}
-  State:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: State
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: Default
-  IsActive:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: IsActive
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  HideFlags:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: HideFlags
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  GameObject: {fileID: 1066315556600322}
-  Transform: {fileID: 224113609234898084}
-  Position:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Position
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Rotation:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Rotation
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0, w: 0}
-  Scale:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Scale
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Cancel:
-    Name: Cancel
-    TriggeredByEventSystem: 1
-    EventTriggerType: 16
-    IsDisabled: 0
-  Deselect:
-    Name: Deselect
-    TriggeredByEventSystem: 1
-    EventTriggerType: 10
-    IsDisabled: 0
-  Drop:
-    Name: Drop
-    TriggeredByEventSystem: 1
-    EventTriggerType: 6
-    IsDisabled: 0
-  Move:
-    Name: Move
-    TriggeredByEventSystem: 1
-    EventTriggerType: 11
-    IsDisabled: 0
-  Click:
-    Name: Click
-    TriggeredByEventSystem: 1
-    EventTriggerType: 4
-    IsDisabled: 0
-  BeginDrag:
-    Name: BeginDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 13
-    IsDisabled: 0
-  EndDrag:
-    Name: EndDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 14
-    IsDisabled: 0
-  Drag:
-    Name: Drag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 5
-    IsDisabled: 0
-  InitializePotentialDrag:
-    Name: InitializePotentialDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 12
-    IsDisabled: 0
-  MouseDown:
-    Name: MouseDown
-    TriggeredByEventSystem: 1
-    EventTriggerType: 2
-    IsDisabled: 0
-  MouseEnter:
-    Name: MouseEnter
-    TriggeredByEventSystem: 1
-    EventTriggerType: 0
-    IsDisabled: 0
-  MouseExit:
-    Name: MouseExit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 1
-    IsDisabled: 0
-  MouseUp:
-    Name: MouseUp
-    TriggeredByEventSystem: 1
-    EventTriggerType: 3
-    IsDisabled: 0
-  Scroll:
-    Name: Scroll
-    TriggeredByEventSystem: 1
-    EventTriggerType: 7
-    IsDisabled: 0
-  Select:
-    Name: Select
-    TriggeredByEventSystem: 1
-    EventTriggerType: 9
-    IsDisabled: 0
-  Submit:
-    Name: Submit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 15
-    IsDisabled: 0
-  UpdateSelected:
-    Name: UpdateSelected
-    TriggeredByEventSystem: 1
-    EventTriggerType: 8
-    IsDisabled: 0
-  Item:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Item
-    IsMapped: 0
-    _isSet: 0
-  IsTemplate:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: IsTemplate
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  Activated:
-    Name: Activated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  Deactivated:
-    Name: Deactivated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  IsDestroyed:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: IsDestroyed
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  IsDynamic:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: IsDynamic
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  PropagateChildLayoutChanges:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: PropagateChildLayoutChanges
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  ViewTypeName: UserInterface
-  ViewXumlName: UserInterface
-  ViewFieldBindings: []
-  ViewActionEntries: []
-  ViewFieldStateValues: []
-  SetViewFieldNames:
-  - Canvas.renderMode
-  ValueConverterContext:
-    BaseDirectory: 
-    UnitSize: {x: 40, y: 40, z: 40}
-  Width:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Width
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 1
-      _unit: 1
-      _fill: 0
-  Height:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Height
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 1
-      _unit: 1
-      _fill: 0
-  OverrideWidth:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: OverrideWidth
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 0
-      _unit: 0
-      _fill: 0
-  OverrideHeight:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: OverrideHeight
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 0
-      _unit: 0
-      _fill: 0
-  Alignment:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Alignment
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  Margin:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Margin
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  Offset:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Offset
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  OffsetFromParent:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: OffsetFromParent
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  Pivot:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Pivot
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0}
-  RectTransform: {fileID: 224113609234898084}
-  RaycastBlockMode:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: RaycastBlockMode
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  Alpha:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: Alpha
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  IsVisible:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: IsVisible
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  SortIndex:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: SortIndex
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  UpdateRectTransform:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: UpdateRectTransform
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  UpdateBackground:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: UpdateBackground
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  ImageComponent: {fileID: 0}
-  BackgroundImageEventAlphaThreshold:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageEventAlphaThreshold
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillAmount:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageFillAmount
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillCenter:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageFillCenter
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillClockwise:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageFillClockwise
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillMethod:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageFillMethod
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillOrigin:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageFillOrigin
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageOverrideSprite:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageOverrideSprite
-    IsMapped: 0
-    _isSet: 0
-    _internalValue:
-      UnityAsset:
-        Asset: {fileID: 0}
-        Path: 
-  BackgroundImagePreserveAspect:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImagePreserveAspect
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImage:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImage
-    IsMapped: 0
-    _isSet: 0
-    _internalValue:
-      UnityAsset:
-        Asset: {fileID: 0}
-        Path: 
-  BackgroundImageType:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageType
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundMaterial:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundMaterial
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {fileID: 0}
-  BackgroundImageMaskable:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundImageMaskable
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundColor:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BackgroundColor
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
-  RenderMode:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: RenderMode
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  PixelPerfect:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: PixelPerfect
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  SortingOrder:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: SortingOrder
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  RenderCamera:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: RenderCamera
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {fileID: 0}
-  PlaneDistance:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: PlaneDistance
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  SortingLayerId:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: SortingLayerId
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  SortingLayerName:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: SortingLayerName
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 
-  OverrideSorting:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: OverrideSorting
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  OverridePixelPerfect:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: OverridePixelPerfect
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  Canvas: {fileID: 223964512526334698}
-  UIScaleMode:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: UIScaleMode
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  ScaleFactor:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: ScaleFactor
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  ReferencePixelsPerUnit:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: ReferencePixelsPerUnit
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  DynamicPixelsPerUnit:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: DynamicPixelsPerUnit
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  ReferenceResolution:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: ReferenceResolution
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0}
-  MatchWidthOrHeight:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: MatchWidthOrHeight
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  CanvasScaler: {fileID: 114774869823854340}
-  IgnoreReversedGraphics:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: IgnoreReversedGraphics
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BlockingObjects:
-    ParentView: {fileID: 114570648395973904}
-    ViewFieldPath: BlockingObjects
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  GraphicRaycaster: {fileID: 114101094816874848}
---- !u!114 &114595013830937562
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1975317776297928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c4831cd1904c948a376f11cd358dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 
-  Style: 
-  BasedOn: 
-  Theme: Toon
-  BaseDirectory: 
-  UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114166749382212184}
-  Parent: {fileID: 114166749382212184}
-  Content: {fileID: 114595013830937562}
-  State:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: State
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: Default
-  IsActive:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: IsActive
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  HideFlags:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: HideFlags
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  GameObject: {fileID: 1975317776297928}
-  Transform: {fileID: 4894476974218300}
-  Position:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: Position
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Rotation:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: Rotation
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0, w: 0}
-  Scale:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: Scale
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Cancel:
-    Name: Cancel
-    TriggeredByEventSystem: 1
-    EventTriggerType: 16
-    IsDisabled: 0
-  Deselect:
-    Name: Deselect
-    TriggeredByEventSystem: 1
-    EventTriggerType: 10
-    IsDisabled: 0
-  Drop:
-    Name: Drop
-    TriggeredByEventSystem: 1
-    EventTriggerType: 6
-    IsDisabled: 0
-  Move:
-    Name: Move
-    TriggeredByEventSystem: 1
-    EventTriggerType: 11
-    IsDisabled: 0
-  Click:
-    Name: Click
-    TriggeredByEventSystem: 1
-    EventTriggerType: 4
-    IsDisabled: 0
-  BeginDrag:
-    Name: BeginDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 13
-    IsDisabled: 0
-  EndDrag:
-    Name: EndDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 14
-    IsDisabled: 0
-  Drag:
-    Name: Drag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 5
-    IsDisabled: 0
-  InitializePotentialDrag:
-    Name: InitializePotentialDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 12
-    IsDisabled: 0
-  MouseDown:
-    Name: MouseDown
-    TriggeredByEventSystem: 1
-    EventTriggerType: 2
-    IsDisabled: 0
-  MouseEnter:
-    Name: MouseEnter
-    TriggeredByEventSystem: 1
-    EventTriggerType: 0
-    IsDisabled: 0
-  MouseExit:
-    Name: MouseExit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 1
-    IsDisabled: 0
-  MouseUp:
-    Name: MouseUp
-    TriggeredByEventSystem: 1
-    EventTriggerType: 3
-    IsDisabled: 0
-  Scroll:
-    Name: Scroll
-    TriggeredByEventSystem: 1
-    EventTriggerType: 7
-    IsDisabled: 0
-  Select:
-    Name: Select
-    TriggeredByEventSystem: 1
-    EventTriggerType: 9
-    IsDisabled: 0
-  Submit:
-    Name: Submit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 15
-    IsDisabled: 0
-  UpdateSelected:
-    Name: UpdateSelected
-    TriggeredByEventSystem: 1
-    EventTriggerType: 8
-    IsDisabled: 0
-  Item:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: Item
-    IsMapped: 0
-    _isSet: 0
-  IsTemplate:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: IsTemplate
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  Activated:
-    Name: Activated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  Deactivated:
-    Name: Deactivated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  IsDestroyed:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: IsDestroyed
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  IsDynamic:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: IsDynamic
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  PropagateChildLayoutChanges:
-    ParentView: {fileID: 114595013830937562}
-    ViewFieldPath: PropagateChildLayoutChanges
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  ViewTypeName: View
-  ViewXumlName: Player
-  ViewFieldBindings: []
-  ViewActionEntries: []
-  ViewFieldStateValues: []
-  SetViewFieldNames: []
-  ValueConverterContext:
-    BaseDirectory: 
-    UnitSize: {x: 40, y: 40, z: 40}
---- !u!114 &114654227282386752
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1044833305355530}
+  m_GameObject: {fileID: 1236745965738904}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -29778,12 +30754,42 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &114678584120481624
+--- !u!114 &114685973022163968
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655419239344964}
+  m_GameObject: {fileID: 1179386799979152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &114758335576949724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636988832001024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!114 &114769989547864436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398858967030976}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -29805,508 +30811,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114682913564263428
+--- !u!114 &114925744771660496
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287369781991914}
-  m_Enabled: 1
+  m_GameObject: {fileID: 1094182070293434}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
---- !u!114 &114708962837340596
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &114929221217982946
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1238584292231976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba823a589709da46a5f53f074335454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 
-  Style: 
-  BasedOn: 
-  Theme: Toon
-  BaseDirectory: 
-  UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114543683456208564}
-  Parent: {fileID: 114595013830937562}
-  Content: {fileID: 114708962837340596}
-  State:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: State
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: Default
-  IsActive:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: IsActive
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  HideFlags:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: HideFlags
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  GameObject: {fileID: 1238584292231976}
-  Transform: {fileID: 224875159822738182}
-  Position:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Position
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Rotation:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Rotation
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0, w: 0}
-  Scale:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Scale
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0, z: 0}
-  Cancel:
-    Name: Cancel
-    TriggeredByEventSystem: 1
-    EventTriggerType: 16
-    IsDisabled: 0
-  Deselect:
-    Name: Deselect
-    TriggeredByEventSystem: 1
-    EventTriggerType: 10
-    IsDisabled: 0
-  Drop:
-    Name: Drop
-    TriggeredByEventSystem: 1
-    EventTriggerType: 6
-    IsDisabled: 0
-  Move:
-    Name: Move
-    TriggeredByEventSystem: 1
-    EventTriggerType: 11
-    IsDisabled: 0
-  Click:
-    Name: Click
-    TriggeredByEventSystem: 1
-    EventTriggerType: 4
-    IsDisabled: 0
-  BeginDrag:
-    Name: BeginDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 13
-    IsDisabled: 0
-  EndDrag:
-    Name: EndDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 14
-    IsDisabled: 0
-  Drag:
-    Name: Drag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 5
-    IsDisabled: 0
-  InitializePotentialDrag:
-    Name: InitializePotentialDrag
-    TriggeredByEventSystem: 1
-    EventTriggerType: 12
-    IsDisabled: 0
-  MouseDown:
-    Name: MouseDown
-    TriggeredByEventSystem: 1
-    EventTriggerType: 2
-    IsDisabled: 0
-  MouseEnter:
-    Name: MouseEnter
-    TriggeredByEventSystem: 1
-    EventTriggerType: 0
-    IsDisabled: 0
-  MouseExit:
-    Name: MouseExit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 1
-    IsDisabled: 0
-  MouseUp:
-    Name: MouseUp
-    TriggeredByEventSystem: 1
-    EventTriggerType: 3
-    IsDisabled: 0
-  Scroll:
-    Name: Scroll
-    TriggeredByEventSystem: 1
-    EventTriggerType: 7
-    IsDisabled: 0
-  Select:
-    Name: Select
-    TriggeredByEventSystem: 1
-    EventTriggerType: 9
-    IsDisabled: 0
-  Submit:
-    Name: Submit
-    TriggeredByEventSystem: 1
-    EventTriggerType: 15
-    IsDisabled: 0
-  UpdateSelected:
-    Name: UpdateSelected
-    TriggeredByEventSystem: 1
-    EventTriggerType: 8
-    IsDisabled: 0
-  Item:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Item
-    IsMapped: 0
-    _isSet: 0
-  IsTemplate:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: IsTemplate
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  Activated:
-    Name: Activated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  Deactivated:
-    Name: Deactivated
-    TriggeredByEventSystem: 0
-    EventTriggerType: 0
-    IsDisabled: 0
-  IsDestroyed:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: IsDestroyed
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  IsDynamic:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: IsDynamic
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  PropagateChildLayoutChanges:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: PropagateChildLayoutChanges
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  ViewTypeName: PlayerUI
-  ViewXumlName: PlayerUI
-  ViewFieldBindings: []
-  ViewActionEntries: []
-  ViewFieldStateValues: []
-  SetViewFieldNames: []
-  ValueConverterContext:
-    BaseDirectory: 
-    UnitSize: {x: 40, y: 40, z: 40}
-  Width:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Width
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 1
-      _unit: 1
-      _fill: 0
-  Height:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Height
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 1
-      _unit: 1
-      _fill: 0
-  OverrideWidth:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: OverrideWidth
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 0
-      _unit: 0
-      _fill: 0
-  OverrideHeight:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: OverrideHeight
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _value: 0
-      _unit: 0
-      _fill: 0
-  Alignment:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Alignment
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  Margin:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Margin
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  Offset:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Offset
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  OffsetFromParent:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: OffsetFromParent
-    IsMapped: 0
-    _isSet: 1
-    _internalValue:
-      _left:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _top:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _right:
-        _value: 0
-        _unit: 0
-        _fill: 0
-      _bottom:
-        _value: 0
-        _unit: 0
-        _fill: 0
-  Pivot:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Pivot
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {x: 0, y: 0}
-  RectTransform: {fileID: 224875159822738182}
-  RaycastBlockMode:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: RaycastBlockMode
-    IsMapped: 0
-    _isSet: 0
-    _internalValue: 0
-  Alpha:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: Alpha
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  IsVisible:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: IsVisible
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  SortIndex:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: SortIndex
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 0
-  UpdateRectTransform:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: UpdateRectTransform
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  UpdateBackground:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: UpdateBackground
-    IsMapped: 0
-    _isSet: 1
-    _internalValue: 1
-  ImageComponent: {fileID: 114466364279343824}
-  BackgroundImageEventAlphaThreshold:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageEventAlphaThreshold
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillAmount:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageFillAmount
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillCenter:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageFillCenter
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillClockwise:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageFillClockwise
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillMethod:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageFillMethod
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageFillOrigin:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageFillOrigin
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImageOverrideSprite:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageOverrideSprite
-    IsMapped: 0
-    _isSet: 0
-    _internalValue:
-      UnityAsset:
-        Asset: {fileID: 0}
-        Path: 
-  BackgroundImagePreserveAspect:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImagePreserveAspect
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundImage:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImage
-    IsMapped: 0
-    _isSet: 0
-    _internalValue:
-      UnityAsset:
-        Asset: {fileID: 0}
-        Path: 
-  BackgroundImageType:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageType
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundMaterial:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundMaterial
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {fileID: 0}
-  BackgroundImageMaskable:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundImageMaskable
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: 0
-  BackgroundColor:
-    ParentView: {fileID: 114708962837340596}
-    ViewFieldPath: BackgroundColor
-    IsMapped: 1
-    _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &114774869823854340
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1066315556600322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
---- !u!114 &114780346443910614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287369781991914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &114811437150698448
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160973753347656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &114945094154088164
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655419239344964}
+  m_GameObject: {fileID: 1398858967030976}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c90c40001ad76014aa327d10a89ef125, type: 3}
@@ -30318,43 +30855,43 @@ MonoBehaviour:
   Theme: Toon
   BaseDirectory: 
   UnitSize: {x: 0, y: 0, z: 0}
-  LayoutParent: {fileID: 114708962837340596}
-  Parent: {fileID: 114708962837340596}
-  Content: {fileID: 114945094154088164}
+  LayoutParent: {fileID: 114192324325983498}
+  Parent: {fileID: 114192324325983498}
+  Content: {fileID: 114929221217982946}
   State:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: State
     IsMapped: 0
     _isSet: 1
     _internalValue: Default
   IsActive:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: IsActive
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   HideFlags:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: HideFlags
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
-  GameObject: {fileID: 1655419239344964}
-  Transform: {fileID: 224316773250240020}
+  GameObject: {fileID: 1398858967030976}
+  Transform: {fileID: 224676212175971030}
   Position:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Position
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0}
   Rotation:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Rotation
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0, z: 0, w: 0}
   Scale:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Scale
     IsMapped: 1
     _isSet: 0
@@ -30445,12 +30982,12 @@ MonoBehaviour:
     EventTriggerType: 8
     IsDisabled: 0
   Item:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Item
     IsMapped: 0
     _isSet: 0
   IsTemplate:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: IsTemplate
     IsMapped: 0
     _isSet: 0
@@ -30466,19 +31003,19 @@ MonoBehaviour:
     EventTriggerType: 0
     IsDisabled: 0
   IsDestroyed:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: IsDestroyed
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   IsDynamic:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: IsDynamic
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   PropagateChildLayoutChanges:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: PropagateChildLayoutChanges
     IsMapped: 0
     _isSet: 1
@@ -30496,7 +31033,7 @@ MonoBehaviour:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
   Width:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Width
     IsMapped: 0
     _isSet: 1
@@ -30505,7 +31042,7 @@ MonoBehaviour:
       _unit: 1
       _fill: 0
   Height:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Height
     IsMapped: 0
     _isSet: 1
@@ -30514,7 +31051,7 @@ MonoBehaviour:
       _unit: 1
       _fill: 0
   OverrideWidth:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: OverrideWidth
     IsMapped: 0
     _isSet: 1
@@ -30523,7 +31060,7 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   OverrideHeight:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: OverrideHeight
     IsMapped: 0
     _isSet: 1
@@ -30532,13 +31069,13 @@ MonoBehaviour:
       _unit: 0
       _fill: 0
   Alignment:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Alignment
     IsMapped: 0
     _isSet: 1
     _internalValue: 3
   Margin:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Margin
     IsMapped: 0
     _isSet: 1
@@ -30560,7 +31097,7 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   Offset:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Offset
     IsMapped: 0
     _isSet: 1
@@ -30582,7 +31119,7 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   OffsetFromParent:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: OffsetFromParent
     IsMapped: 0
     _isSet: 1
@@ -30604,87 +31141,87 @@ MonoBehaviour:
         _unit: 0
         _fill: 0
   Pivot:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Pivot
     IsMapped: 1
     _isSet: 0
     _internalValue: {x: 0, y: 0}
-  RectTransform: {fileID: 224316773250240020}
+  RectTransform: {fileID: 224676212175971030}
   RaycastBlockMode:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: RaycastBlockMode
     IsMapped: 0
     _isSet: 0
     _internalValue: 0
   Alpha:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: Alpha
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   IsVisible:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: IsVisible
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   SortIndex:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: SortIndex
     IsMapped: 0
     _isSet: 1
     _internalValue: 0
   UpdateRectTransform:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: UpdateRectTransform
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
   UpdateBackground:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: UpdateBackground
     IsMapped: 0
     _isSet: 1
     _internalValue: 1
-  ImageComponent: {fileID: 114678584120481624}
+  ImageComponent: {fileID: 114769989547864436}
   BackgroundImageEventAlphaThreshold:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageEventAlphaThreshold
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillAmount:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageFillAmount
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillCenter:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageFillCenter
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillClockwise:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageFillClockwise
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillMethod:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageFillMethod
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageFillOrigin:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageFillOrigin
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImageOverrideSprite:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageOverrideSprite
     IsMapped: 0
     _isSet: 0
@@ -30693,13 +31230,13 @@ MonoBehaviour:
         Asset: {fileID: 0}
         Path: 
   BackgroundImagePreserveAspect:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImagePreserveAspect
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundImage:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImage
     IsMapped: 0
     _isSet: 0
@@ -30708,59 +31245,86 @@ MonoBehaviour:
         Asset: {fileID: 0}
         Path: 
   BackgroundImageType:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageType
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundMaterial:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundMaterial
     IsMapped: 1
     _isSet: 0
     _internalValue: {fileID: 0}
   BackgroundImageMaskable:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundImageMaskable
     IsMapped: 1
     _isSet: 0
     _internalValue: 0
   BackgroundColor:
-    ParentView: {fileID: 114945094154088164}
+    ParentView: {fileID: 114929221217982946}
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
     _internalValue: {r: 0, g: 0, b: 0, a: 0}
---- !u!222 &222797704018227852
+--- !u!114 &114981817060648374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990998156177866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!222 &222071610952972718
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1238584292231976}
---- !u!222 &222807918905693784
+  m_GameObject: {fileID: 1398858967030976}
+--- !u!222 &222376102980503244
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655419239344964}
---- !u!222 &222884725008864794
+  m_GameObject: {fileID: 1652644998981254}
+--- !u!222 &222721368496508310
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1044833305355530}
---- !u!222 &222945518992496306
+  m_GameObject: {fileID: 1304303282450520}
+--- !u!222 &222723682091964146
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1656689453739154}
---- !u!223 &223296471577835296
+  m_GameObject: {fileID: 1236745965738904}
+--- !u!222 &222981011361842926
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094182070293434}
+--- !u!223 &223048162927903838
 Canvas:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160973753347656}
+  m_GameObject: {fileID: 1990998156177866}
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
@@ -30775,12 +31339,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!223 &223964512526334698
+--- !u!223 &223659136088569910
 Canvas:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1066315556600322}
+  m_GameObject: {fileID: 1179386799979152}
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
@@ -30795,18 +31359,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!224 &224113609234898084
+--- !u!224 &224048172021456504
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1066315556600322}
+  m_GameObject: {fileID: 1179386799979152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224434059974033984}
-  m_Father: {fileID: 4894476974218300}
+  - {fileID: 224946690006706560}
+  m_Father: {fileID: 4887849323432234}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30814,36 +31378,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224316773250240020
+--- !u!224 &224146279472155122
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655419239344964}
+  m_GameObject: {fileID: 1304303282450520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224875159822738182}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.95}
-  m_AnchorMax: {x: 0.05, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224434059974033984
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1656689453739154}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
-  - {fileID: 224753606695235868}
-  m_Father: {fileID: 224113609234898084}
+  - {fileID: 224676212175971030}
+  m_Father: {fileID: 224790321370260268}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30851,18 +31397,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224746255412927618
+--- !u!224 &224462266348979200
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160973753347656}
+  m_GameObject: {fileID: 1094182070293434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224676212175971030}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224676212175971030
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398858967030976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 224462266348979200}
+  m_Father: {fileID: 224146279472155122}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.95}
+  m_AnchorMax: {x: 0.05, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224790321370260268
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990998156177866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 224875159822738182}
-  m_Father: {fileID: 4894476974218300}
+  - {fileID: 224146279472155122}
+  m_Father: {fileID: 4887849323432234}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30870,17 +31453,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!224 &224753606695235868
+--- !u!224 &224846502363308782
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1044833305355530}
+  m_GameObject: {fileID: 1236745965738904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 224434059974033984}
+  m_Father: {fileID: 224946690006706560}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -30888,18 +31471,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 27}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224875159822738182
+--- !u!224 &224946690006706560
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1238584292231976}
+  m_GameObject: {fileID: 1652644998981254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
-  - {fileID: 224316773250240020}
-  m_Father: {fileID: 224746255412927618}
+  - {fileID: 224846502363308782}
+  m_Father: {fileID: 224048172021456504}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

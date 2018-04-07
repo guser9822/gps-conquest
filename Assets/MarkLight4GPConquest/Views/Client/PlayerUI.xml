@@ -1,4 +1,5 @@
 <PlayerUI xmlns="MarkLight">
   <Region Height="5%" Width="5%" Alignment="TopLeft">
+    <Image Id="GameMenuIcon"></Image>
   </Region>
 </PlayerUI>
