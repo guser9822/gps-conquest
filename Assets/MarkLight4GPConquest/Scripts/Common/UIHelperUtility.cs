@@ -21,9 +21,9 @@ namespace TC.GPConquest.MarkLight4GPConquest.Common
         }
 
         /*
-         * Execute an action on a button only when all arguments
-         * matches with the accepting criteria. T is the type of
-         * the arguments that is passed in.
+         * Execute an action on a button only when all arguments 'argsForPredicate'
+         * matches with the accepting criteria 'p' . T is the type of
+         * the arguments 'argsForPredicate' that are passed in.
          * **/
         public static bool ExecuteActionOnButton<T>(Button _button,
             List<T> argsForPredicate,

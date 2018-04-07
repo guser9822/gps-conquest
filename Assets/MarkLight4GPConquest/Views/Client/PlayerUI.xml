@@ -1,5 +1,9 @@
 <PlayerUI xmlns="MarkLight">
     <Button Id="MenuButton" 
             Style="Round"
-            Alignment="TopLeft"></Button>
+            Alignment="Bottom"
+            Click="TogglePlayerMenuWindow"></Button>
+  <PlayerMenuWindow Id="PlayerMenuWind" 
+                    Style="Reset"
+                    BasePlayerMenuWindow.CloseButton.Click="OnClickCloseButton"></PlayerMenuWindow>
 </PlayerUI>
