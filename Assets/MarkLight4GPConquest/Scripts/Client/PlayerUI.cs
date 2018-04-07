@@ -20,10 +20,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
 
         public void ToggleMenuButtonVisibility()
         {
-            UIHelperUtility.ExecuteActionOnButton<bool>(MenuButton,
-                new List<bool> { MenuButton.IsVisible.Value },
-                x => x.TrueForAll(y => y.Equals(!y)),
-                (x, y) => y.IsVisible.Value = x);
+            MenuButton.IsVisible.Value = MenuButton.IsVisible.Value ? false : true; 
         }
 
         public void OnClickCloseButton()
