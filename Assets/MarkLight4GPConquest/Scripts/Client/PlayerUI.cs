@@ -7,6 +7,9 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
     public class PlayerUI : UIView
     {
+        public Region PlayerUIRegion;
+
+
 
     }
 }
