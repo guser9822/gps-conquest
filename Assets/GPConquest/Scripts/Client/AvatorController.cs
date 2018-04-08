@@ -26,8 +26,8 @@ namespace TC.GPConquest.Player
         protected UserInformations CurrentUserInfo;
         [HideInInspector]
         public PlayerEntity PlayerEntity;
-
-        public Camera CameraOnDestination { get; set; }
+        [HideInInspector]
+        public Camera CameraOnDestination;
 
         private void Awake()
         {
@@ -85,7 +85,6 @@ namespace TC.GPConquest.Player
         {
             PlayerEntity = behavior.GetComponent<PlayerEntity>();
             PlayerEntity.InitializePlayerEntity(this,
-                DestinationControllerReference,
                 CurrentUserInfo,
                 networkObject.NetworkId,
                 CameraOnDestination);
@@ -157,7 +156,6 @@ namespace TC.GPConquest.Player
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
 
                 UpdateAvatorAttributes(destination);
-
                 CreateAndSpawnUMA(_selectedUma);
             });
 

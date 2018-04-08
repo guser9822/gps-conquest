@@ -24,7 +24,7 @@ namespace TC.GPConquest.Player
             //AvatorUI conflict with the UI that reside on the server process.
             //For this particular case  we don't make this UI visible on the server process.
             var server = FindObjectOfType<ServerNetworkController>();
-            if (ReferenceEquals(server,null) || server.gameObject.tag != "ServerController")
+            if (ReferenceEquals(server, null) || server.gameObject.tag != "ServerController")
                 AvatorUIViewPresenter = Instantiate<GameObject>(PrefabPlayerUI);
         }
 
@@ -55,9 +55,9 @@ namespace TC.GPConquest.Player
 
             //Gets the AvatorUI and initialize it with the camera that it must follow
             AvatorUI = AvatorUIViewPresenter.GetComponentInChildren<AvatorUI>();
-            AvatorUI.InitAvatorUI(CameraOnDestination, _avatorControllerReference.PlayerEntity);
+            AvatorUI.InitAvatorUI(CameraOnDestination, _playerEntity);
 
-            //Gets the AvatorUI and initialize it with the camera that it must follow
+            //Gets the PlayerUI 
             PlayerUI = AvatorUIViewPresenter.GetComponentInChildren<PlayerUI>();
 
             //If the code isn't executed by the owner, deactivate the 2D GUI

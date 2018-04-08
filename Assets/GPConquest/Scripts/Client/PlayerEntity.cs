@@ -30,7 +30,6 @@ namespace TC.GPConquest.Player
         }
 
         public bool InitializePlayerEntity(AvatorController _avatorControllerReference, 
-            DestinationController _destinationReference,
             UserInformations _user, 
             uint avatorNetId, 
             Camera _cameraOnDestination)
@@ -58,13 +57,13 @@ namespace TC.GPConquest.Player
             //Init and create the game UI
             GameUIController.InitializeGameUI(_avatorControllerReference);
 
-                networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
-                    Receivers.AllBuffered,
-                _user.username,
-                _user.password,
-                _user.email,
-                _user.faction,
-                _user.selectedUma);
+            networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
+                Receivers.AllBuffered,
+            _user.username,
+            _user.password,
+            _user.email,
+            _user.faction,
+            _user.selectedUma);
 
             return true;
         }
@@ -115,9 +114,10 @@ namespace TC.GPConquest.Player
                  var avator = avatorsInTheScene.ToList().
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.avatorOwnerNetId));
 
+                //sets this player entity as reference for the Avator founded
+                avator.PlayerEntity = this;
                 UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
-
-                    GameUIController.InitializeGameUI(avator);
+                GameUIController.InitializeGameUI(avator);
 
             });
         }

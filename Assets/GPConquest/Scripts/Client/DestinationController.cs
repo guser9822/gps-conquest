@@ -15,7 +15,8 @@ namespace TC.GPConquest.Player
         #region Mix
         public AssetLoaderController AssetLoaderController { get; private set; }
         private Renderer sphereRend;
-        public Camera DestinationCamera { get; private set; }
+        [HideInInspector]
+        public Camera DestinationCamera;
         protected tileGen TileGen;
         #endregion
 
@@ -24,7 +25,6 @@ namespace TC.GPConquest.Player
         public float destAvatorSpeed { get; protected set; }
         public float destAvatorDestDist { get; protected set; }
         public string SelectedUma { get; protected set; }
-        private Vector3 avatorSpawnPosition;
         public UserInformations CurrentUserInformations { get; private set; }
         #endregion
 
