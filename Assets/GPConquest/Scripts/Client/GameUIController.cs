@@ -23,9 +23,9 @@ namespace TC.GPConquest.Player
         {
             //AvatorUI conflict with the UI that reside on the server process.
             //For this particular case  we don't make this UI visible on the server process.
-            var server = FindObjectOfType<ServerNetworkController>();
-            if (ReferenceEquals(server, null) || server.gameObject.tag != "ServerController")
-                AvatorUIViewPresenter = Instantiate<GameObject>(PrefabPlayerUI);
+            //var server = FindObjectOfType<ServerNetworkController>();
+            //if (ReferenceEquals(server, null) || server.gameObject.tag != "ServerController")
+            //    AvatorUIViewPresenter = Instantiate<GameObject>(PrefabPlayerUI);
         }
 
         //This function initialize the GameUI. isTheOwnerOnNetwork states if the caller
@@ -37,6 +37,9 @@ namespace TC.GPConquest.Player
             var server = FindObjectOfType<ServerNetworkController>();
             if ((!ReferenceEquals(server, null) && server.gameObject.tag == "ServerController"))
                 return false;
+
+            if(ReferenceEquals(AvatorUIViewPresenter,null))
+                AvatorUIViewPresenter = Instantiate<GameObject>(PrefabPlayerUI);
 
             Transform _parentTransform = _avatorControllerReference.gameObject.GetComponent<Transform>();
             PlayerEntity _playerEntity = _avatorControllerReference.PlayerEntity;
