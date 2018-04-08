@@ -10,7 +10,9 @@ using System.Linq;
 namespace TC.GPConquest.Player
 {
     /*
-     * This class is used to manage the player information in the network
+     * This class is used to manage the player information in the network.
+     * Instances of this class will create the main player ui through the method
+     * 'InitializePlayerEntity' .
      * **/
     public class PlayerEntity : PlayerEntityModelBehavior
     {
@@ -27,13 +29,17 @@ namespace TC.GPConquest.Player
             GameUIController = GetComponent<GameUIController>();
         }
 
-        public bool InitializePlayerEntity(Transform parentTransform, 
+        public bool InitializePlayerEntity(AvatorController _avatorControllerReference, 
+            DestinationController _destinationReference,
             UserInformations _user, 
             uint avatorNetId, 
             Camera _cameraOnDestination)
         {
             if (!networkObject.IsOwner)
                 return true;
+
+            //Gets the AvatorController transform
+            Transform parentTransform = _avatorControllerReference.gameObject.GetComponent<Transform>();
 
             //Updates attributes of this networkObject
             UpdatePlayerEntityNetworkAttributes(avatorNetId,
@@ -43,11 +49,14 @@ namespace TC.GPConquest.Player
                 _user.faction,
                 _user.selectedUma);
 
-                //Updates attributes of this GameObject
-                UpdatePlayerEntityAttributes(parentTransform);
+            //Updates attributes of this GameObject
+            UpdatePlayerEntityAttributes(parentTransform);
 
-                //Init and create the game UI
-                GameUIController.InitializeGameUI(parentTransform, _cameraOnDestination, this);
+            //When the avator controller is destroyed, destroy also the player entity
+            _avatorControllerReference.networkObject.onDestroy += NetworkObject_onDestroy;
+
+            //Init and create the game UI
+            GameUIController.InitializeGameUI(_avatorControllerReference);
 
                 networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
                     Receivers.AllBuffered,
@@ -108,14 +117,15 @@ namespace TC.GPConquest.Player
 
                 UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
 
-                //Create the GameUI only for clients
-                //var server = FindObjectOfType<ServerNetworkController>();
-                //if(server!=null)
-                    GameUIController.InitializeGameUI(avator.transform,
-                        avator.CameraOnDestination,
-                        this);
+                    GameUIController.InitializeGameUI(avator);
 
             });
+        }
+
+        private void NetworkObject_onDestroy(NetWorker sender)
+        {
+            networkObject.ClearRpcBuffer();
+            networkObject.Destroy();
         }
     }
 }

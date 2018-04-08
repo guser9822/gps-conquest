@@ -69,5 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac544c8ab55b3d8418c81a2c7a3322f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUI: {fileID: 1883274793934354, guid: c8e7dffdc877e6040b2cb0c8c36b4244, type: 2}
+  PrefabPlayerUI: {fileID: 1883274793934354, guid: c8e7dffdc877e6040b2cb0c8c36b4244,
+    type: 2}
   CameraOnDestination: {fileID: 0}
+  AvatorUI: {fileID: 0}

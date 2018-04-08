@@ -24,6 +24,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
 
         }
 
+
         public void ToggleWindow()
         {
             if (BasePlayerMenuWindow.IsOpen)

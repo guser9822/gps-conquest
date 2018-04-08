@@ -18,11 +18,14 @@ namespace TC.GPConquest.Player
         protected AssetLoaderController AssetLoaderController;
         protected Animator Animator;
         protected CharacterController CharacterController;
+        [HideInInspector]
+        public DestinationController DestinationControllerReference;
         private Transform DestinationTransform;
         public string SpeedParamenter = "Forward";
         private float SpeedDampTime = .00f;
         protected UserInformations CurrentUserInfo;
-        protected PlayerEntity PlayerEntity;
+        [HideInInspector]
+        public PlayerEntity PlayerEntity;
 
         public Camera CameraOnDestination { get; set; }
 
@@ -39,7 +42,7 @@ namespace TC.GPConquest.Player
             MoveAvator();
         }
 
-        public void CreateAndSpawnAvator(DestinationController _destinationController)
+        public void InitAvatorController(DestinationController _destinationController)
         {
             if (!networkObject.IsOwner)
                 return;
@@ -61,17 +64,13 @@ namespace TC.GPConquest.Player
             }
 
             //Setups the AvatorController attributes that cames from the DestinationController 
-            UpdateAvatorAttributes(_destinationController.gameObject.name + " avator - " + networkObject.NetworkId, 
-                _destinationController.selectedUma, 
-                _destinationController.CurrentUserInformations,
-                _destinationController.gameObject.GetComponent<Transform>(),
-                _destinationController.DestinationCamera);
+            UpdateAvatorAttributes(_destinationController);
 
             //When the destination controller is destroyed, destroy also the realated Avator.
             _destinationController.networkObject.onDestroy += NetworkObject_onDestroy;
 
             //Setup and spawn the UMA character
-            CreateAndSpawnUMA();
+            CreateAndSpawnUMA(SelectedUma);
 
             //Create the Player Entity in the network
             var playerEntityModelBehavior = NetworkManager.Instance.InstantiatePlayerEntityModel(0,transform.position);
@@ -79,14 +78,14 @@ namespace TC.GPConquest.Player
 
             networkObject.SendRpc(RPC_UPDATE_AVATOR_ON_NETWORK,
                 Receivers.AllBuffered,
-                SelectedUma,
-                gameObject.name);
+                SelectedUma);
         }
 
         private void PlayerEntityModelBehavior_networkStarted(NetworkBehavior behavior)
         {
             PlayerEntity = behavior.GetComponent<PlayerEntity>();
-            PlayerEntity.InitializePlayerEntity(transform,
+            PlayerEntity.InitializePlayerEntity(this,
+                DestinationControllerReference,
                 CurrentUserInfo,
                 networkObject.NetworkId,
                 CameraOnDestination);
@@ -105,28 +104,25 @@ namespace TC.GPConquest.Player
             networkObject.avatorNetDestDistance = _avatorDestDist;
         }
 
-        protected void UpdateAvatorAttributes(string _playerName, 
-            string _selectedAvator,
-            UserInformations _userInformations,
-            Transform _destinationTransform,
-            Camera _cameraOnDestination)
+        protected void UpdateAvatorAttributes(DestinationController _destinationController)
         {
-            gameObject.name = _playerName;
-            SelectedUma = _selectedAvator;
+            DestinationControllerReference = _destinationController;
+            gameObject.name = _destinationController.gameObject.name + " avator - " + networkObject.NetworkId;
+            SelectedUma = _destinationController.SelectedUma;
             CharacterController.center = new Vector3(0, 1.0f, 0);
-            CurrentUserInfo = _userInformations;
-            DestinationTransform = _destinationTransform;
-            CameraOnDestination = _cameraOnDestination;
+            CurrentUserInfo = _destinationController.CurrentUserInformations;
+            DestinationTransform = _destinationController.gameObject.GetComponent<Transform>();
+            CameraOnDestination = _destinationController.DestinationCamera;
         }
 
 
         // Updates the UMA avator attached to this game object
-        private void CreateAndSpawnUMA()
+        private void CreateAndSpawnUMA(String _selectedUma)
         {
             UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
             //Create a UMA avator and bind it to the DynamicAvator of this object
-            UMAGenericHelper.createUMAAvator(AssetLoaderController, 
-                SelectedUma, 
+            UMAGenericHelper.createUMAAvator(AssetLoaderController,
+                _selectedUma, 
                 thisUmaDynamicAvator, 
                 AvatorController_OnCharacterCreated);
         }
@@ -150,26 +146,19 @@ namespace TC.GPConquest.Player
         //This function updates the avators of the other players that you can see by your client
         public override void UpdateAvatorOnNetwork(RpcArgs args)
         {
-
-            string playerName = args.GetNext<string>();
-            string selectedUma = args.GetNext<string>();
+            string _selectedUma = args.GetNext<string>();
 
             MainThreadManager.Run(() =>
             {
-
-                ////I'm the avator on the network, I shall find my destination in the scene using it's network id
+                //I'm the avator on the network, I shall find my destination in the scene using it's network id
                 DestinationController[] playersInTheScene = FindObjectsOfType<DestinationController>();
 
                 var destination = playersInTheScene.ToList().
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
 
-                UpdateAvatorAttributes(selectedUma, 
-                    playerName,
-                    destination.CurrentUserInformations, 
-                    destination.GetComponent<Transform>(),
-                    destination.DestinationCamera);
+                UpdateAvatorAttributes(destination);
 
-                CreateAndSpawnUMA();
+                CreateAndSpawnUMA(_selectedUma);
             });
 
         }

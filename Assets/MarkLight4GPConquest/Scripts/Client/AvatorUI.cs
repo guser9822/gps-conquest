@@ -25,7 +25,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
 
         // This method must be called with the appropriate parameters in order to
         // ensure correct work of the AvatorUI
-        public void AvatorUIInitializator(Camera _cameraOnDestination, PlayerEntity _playerEntity)
+        public void InitAvatorUI(Camera _cameraOnDestination, PlayerEntity _playerEntity)
         {
             CameraOnDestination = _cameraOnDestination;
             PlayerEntity = _playerEntity;

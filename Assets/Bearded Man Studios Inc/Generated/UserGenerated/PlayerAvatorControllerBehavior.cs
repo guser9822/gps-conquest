@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"string\", \"string\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"_selectedUma\", \"_playerName\"]]")]
+	[GeneratedRPC("{\"types\":[[\"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"_selectedUma\"]]")]
 	public abstract partial class PlayerAvatorControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_AVATOR_ON_NETWORK = 0 + 5;
@@ -22,7 +22,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			networkObject.AttachedBehavior = this;
 
 			base.SetupHelperRpcs(networkObject);
-			networkObject.RegisterRpc("UpdateAvatorOnNetwork", UpdateAvatorOnNetwork, typeof(string), typeof(string));
+			networkObject.RegisterRpc("UpdateAvatorOnNetwork", UpdateAvatorOnNetwork, typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -100,7 +100,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// <summary>
 		/// Arguments:
 		/// string _selectedUma
-		/// string _playerName
 		/// </summary>
 		public abstract void UpdateAvatorOnNetwork(RpcArgs args);
 

@@ -5,5 +5,6 @@
             Click="TogglePlayerMenuWindow"></Button>
   <PlayerMenuWindow Id="PlayerMenuWind" 
                     Style="Reset"
-                    BasePlayerMenuWindow.CloseButton.Click="OnClickCloseButton"></PlayerMenuWindow>
+                    BasePlayerMenuWindow.CloseButton.Click="OnClickCloseMenuButton"
+                    ExitButton.Click="OnClickExitButton"></PlayerMenuWindow>
 </PlayerUI>
