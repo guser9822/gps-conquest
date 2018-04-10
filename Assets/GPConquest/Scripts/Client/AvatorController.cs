@@ -154,7 +154,7 @@ namespace TC.GPConquest.Player
 
                 var destination = playersInTheScene.ToList().
                     Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
-
+                
                 UpdateAvatorAttributes(destination);
                 CreateAndSpawnUMA(_selectedUma);
             });

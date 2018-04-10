@@ -1,7 +1,7 @@
 <RegisterUI xmlns="MarkLight">
 
-  <Region Width="25%" Alignment="Left" BackgroundColor="yellow">
-    <Region Id="UserDataRegion"  Width="98%" Height="98%" BackgroundColor="grey">
+  <Region Width="25%" Alignment="Left">
+    <Region Style="Window" Id="UserDataRegion"  Width="98%" Height="98%">
         <Group>
           <Group Id="UserDataGroup" Spacing="8px" Orientation	="Vertical">
             <Label Id="UsernameLabel" Text="Username"></Label>
@@ -14,7 +14,7 @@
             <ComboBox Id="ComboBoxFactions" Items="{FactionsList}" Width="200">
               <ComboBoxItem IsTemplate="True" Text="{#Item}"/>
             </ComboBox>
-            <Region Height ="170" BackgroundColor="red"></Region>
+            <Region Height ="170" ></Region>
             <Button Id="BackButton" Text="Back"  Click="OnClickBack"></Button>
             <Button Id="ConfirmButton" Text="Confirm" IsVisible="false"  Click="CallConfirm"></Button>
           </Group>
