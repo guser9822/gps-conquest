@@ -4,6 +4,7 @@ using UnityEngine;
 using BeardedManStudios.Forge.Networking.Unity;
 using TC.GPConquest.Player;
 using TC.Common;
+using BeardedManStudios.Forge.Networking.Generated;
 
 namespace TC.GPConquest {
 
@@ -13,6 +14,7 @@ namespace TC.GPConquest {
         protected ConnectionInfo ConnectionInfo;
         protected AssetLoaderController AssetLoaderController;
         public tileGen TileGen;
+        public PlayerDestinationControllerBehavior PlayerClient { get; private set; }
 
         private void Awake()
         {
@@ -27,8 +29,9 @@ namespace TC.GPConquest {
 
         private void Start()
         {
-            NetworkManager.Instance.InstantiatePlayerDestinationController(0);
+            PlayerClient = NetworkManager.Instance.InstantiatePlayerDestinationController(0);
         }
+
     }
 
 }

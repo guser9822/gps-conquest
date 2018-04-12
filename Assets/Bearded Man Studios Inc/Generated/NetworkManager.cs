@@ -16,6 +16,7 @@ namespace BeardedManStudios.Forge.Networking.Unity
 		public GameObject[] NetworkCameraNetworkObject = null;
 		public GameObject[] PlayerAvatorControllerNetworkObject = null;
 		public GameObject[] PlayerDestinationControllerNetworkObject = null;
+		public GameObject[] PlayerEntityModelNetworkObject = null;
 		public GameObject[] TestNetworkObject = null;
 
 		private void SetupObjectCreatedEvent()
@@ -172,6 +173,29 @@ namespace BeardedManStudios.Forge.Networking.Unity
 						objectInitialized(newObj, obj);
 				});
 			}
+			else if (obj is PlayerEntityModelNetworkObject)
+			{
+				MainThreadManager.Run(() =>
+				{
+					NetworkBehavior newObj = null;
+					if (!NetworkBehavior.skipAttachIds.TryGetValue(obj.NetworkId, out newObj))
+					{
+						if (PlayerEntityModelNetworkObject.Length > 0 && PlayerEntityModelNetworkObject[obj.CreateCode] != null)
+						{
+							var go = Instantiate(PlayerEntityModelNetworkObject[obj.CreateCode]);
+							newObj = go.GetComponent<NetworkBehavior>();
+						}
+					}
+
+					if (newObj == null)
+						return;
+						
+					newObj.Initialize(obj);
+
+					if (objectInitialized != null)
+						objectInitialized(newObj, obj);
+				});
+			}
 			else if (obj is TestNetworkObject)
 			{
 				MainThreadManager.Run(() =>
@@ -272,6 +296,18 @@ namespace BeardedManStudios.Forge.Networking.Unity
 			var netBehavior = go.GetComponent<PlayerDestinationControllerBehavior>();
 			var obj = netBehavior.CreateNetworkObject(Networker, index);
 			go.GetComponent<PlayerDestinationControllerBehavior>().networkObject = (PlayerDestinationControllerNetworkObject)obj;
+
+			FinalizeInitialization(go, netBehavior, obj, position, rotation, sendTransform);
+			
+			return netBehavior;
+		}
+		[Obsolete("Use InstantiatePlayerEntityModel instead, its shorter and easier to type out ;)")]
+		public PlayerEntityModelBehavior InstantiatePlayerEntityModelNetworkObject(int index = 0, Vector3? position = null, Quaternion? rotation = null, bool sendTransform = true)
+		{
+			var go = Instantiate(PlayerEntityModelNetworkObject[index]);
+			var netBehavior = go.GetComponent<PlayerEntityModelBehavior>();
+			var obj = netBehavior.CreateNetworkObject(Networker, index);
+			go.GetComponent<PlayerEntityModelBehavior>().networkObject = (PlayerEntityModelNetworkObject)obj;
 
 			FinalizeInitialization(go, netBehavior, obj, position, rotation, sendTransform);
 			
@@ -537,6 +573,48 @@ namespace BeardedManStudios.Forge.Networking.Unity
 			}
 
 			go.GetComponent<PlayerDestinationControllerBehavior>().networkObject = (PlayerDestinationControllerNetworkObject)obj;
+
+			FinalizeInitialization(go, netBehavior, obj, position, rotation, sendTransform);
+			
+			return netBehavior;
+		}
+		public PlayerEntityModelBehavior InstantiatePlayerEntityModel(int index = 0, Vector3? position = null, Quaternion? rotation = null, bool sendTransform = true)
+		{
+			var go = Instantiate(PlayerEntityModelNetworkObject[index]);
+			var netBehavior = go.GetComponent<PlayerEntityModelBehavior>();
+
+			NetworkObject obj = null;
+			if (!sendTransform && position == null && rotation == null)
+				obj = netBehavior.CreateNetworkObject(Networker, index);
+			else
+			{
+				metadata.Clear();
+
+				if (position == null && rotation == null)
+				{
+					metadata.Clear();
+					byte transformFlags = 0x1 | 0x2;
+					ObjectMapper.Instance.MapBytes(metadata, transformFlags);
+					ObjectMapper.Instance.MapBytes(metadata, go.transform.position, go.transform.rotation);
+				}
+				else
+				{
+					byte transformFlags = 0x0;
+					transformFlags |= (byte)(position != null ? 0x1 : 0x0);
+					transformFlags |= (byte)(rotation != null ? 0x2 : 0x0);
+					ObjectMapper.Instance.MapBytes(metadata, transformFlags);
+
+					if (position != null)
+						ObjectMapper.Instance.MapBytes(metadata, position.Value);
+
+					if (rotation != null)
+						ObjectMapper.Instance.MapBytes(metadata, rotation.Value);
+				}
+
+				obj = netBehavior.CreateNetworkObject(Networker, index, metadata.CompressBytes());
+			}
+
+			go.GetComponent<PlayerEntityModelBehavior>().networkObject = (PlayerEntityModelNetworkObject)obj;
 
 			FinalizeInitialization(go, netBehavior, obj, position, rotation, sendTransform);
 			

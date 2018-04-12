@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"string\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"playerName\"]]")]
+	[GeneratedRPC("{\"types\":[[\"string\", \"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"_playerName\", \"_selectedUma\"]]")]
 	public abstract partial class PlayerDestinationControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_INIT_NET_DESTINATION = 0 + 5;
@@ -22,7 +22,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			networkObject.AttachedBehavior = this;
 
 			base.SetupHelperRpcs(networkObject);
-			networkObject.RegisterRpc("InitNetDestination", InitNetDestination, typeof(string));
+			networkObject.RegisterRpc("InitNetDestination", InitNetDestination, typeof(string), typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -99,7 +99,8 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		/// <summary>
 		/// Arguments:
-		/// string playerName
+		/// string _playerName
+		/// string _selectedUma
 		/// </summary>
 		public abstract void InitNetDestination(RpcArgs args);
 

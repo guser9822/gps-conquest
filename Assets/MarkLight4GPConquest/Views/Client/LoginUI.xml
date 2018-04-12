@@ -5,7 +5,9 @@
       <InputField Id="InputUsername"/>
       <Label Id="UsernameLabel" Text="Password" />
       <InputField Id="InputPass"/>
-      <Button Id="LogInButton" Text="Connect" Click="CallConnectToServer"></Button>
+      <Button Id="LogInButton" Text="Connect" Click="CallConnectToServer" IsVisible="false"></Button>
+      <Button Id="BackNutton" Text="Back" Click="CallBack"></Button>
     </Group>
   </Group>
+  <GenericPopUp Id="GenericPopUp" Style="Reset" OkButton.Click="OnClickConfirm"/>
 </LoginUI>

@@ -1,0 +1,34 @@
+<RegisterUI xmlns="MarkLight">
+
+  <Region Width="25%" Alignment="Left">
+    <Region Style="Window" Id="UserDataRegion"  Width="98%" Height="98%">
+        <Group>
+          <Group Id="UserDataGroup" Spacing="8px" Orientation	="Vertical">
+            <Label Id="UsernameLabel" Text="Username"></Label>
+            <InputField Id="UsernameInput"/>
+            <Label Id="PasswordLabel" Text="Password"></Label>
+            <InputField Id="PasswordInput"/>
+            <Label Id="EmailLabel" Text="Email"></Label>
+            <InputField Id="EmailInput"/>
+            <Label Id="FactionLabel" Text="Faction"></Label>
+            <ComboBox Id="ComboBoxFactions" Items="{FactionsList}" Width="200">
+              <ComboBoxItem IsTemplate="True" Text="{#Item}"/>
+            </ComboBox>
+            <Region Height ="170" ></Region>
+            <Button Id="BackButton" Text="Back"  Click="OnClickBack"></Button>
+            <Button Id="ConfirmButton" Text="Confirm" IsVisible="false"  Click="CallConfirm"></Button>
+          </Group>
+      </Group>
+    </Region>                     
+  </Region>
+  <GenericPopUp Id="GenericPopUp" Style="Reset" OkButton.Click="OnClickConfirm" CancelButton.Click="OnClickCancel"/>
+  <Region Height="20%" Alignment="Bottom">
+    <Group Alignment="Bottom">
+      <Group Spacing="8px" Orientation	="Horizontal">
+        <Button Id="PrevButton" Text="Previous" Click="PrevUMA"></Button>
+        <Button Id="NextButton" Text="Next" Click="NextUMA"></Button>
+      </Group>
+    </Group>
+  </Region>
+
+</RegisterUI>

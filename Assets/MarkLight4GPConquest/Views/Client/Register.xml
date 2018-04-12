@@ -1,0 +1,6 @@
+<Register xmlns="MarkLight">
+  <UserInterface>
+    <RegisterUI/>
+  </UserInterface>
+  <EventSystem />
+</Register>

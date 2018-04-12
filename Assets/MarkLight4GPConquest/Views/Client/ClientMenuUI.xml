@@ -1,0 +1,10 @@
+<ClientMenuUI xmlns="MarkLight" BackgroundColor="grey">
+  <Group>
+    <Group Spacing="8px">
+      <Button Id="RegisterButton" Text="Register" Click="CallRegister"></Button>
+      <Button Id="LoginButton" Text="Login" Click="CallLogin"></Button>
+      <Button Id="OptionButton" Text="Option" Click="CallOption"></Button>
+      <Button Id="ExitButton" Text="Exit" Click="CallExit"></Button>
+    </Group>
+  </Group>
+</ClientMenuUI>

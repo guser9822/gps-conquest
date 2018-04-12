@@ -1,0 +1,5 @@
+<AvatorUI xmlns="MarkLight">
+  <Label Id="NicknameLabel" 
+        AdjustToText="WidthAndHeight"          
+        Text="{UsernameText}"></Label>
+</AvatorUI>
