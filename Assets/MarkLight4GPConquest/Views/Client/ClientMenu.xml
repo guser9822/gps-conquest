@@ -1,0 +1,6 @@
+<ClientMenu xmlns="MarkLight">
+  <UserInterface>
+    <ClientMenuUI/>
+  </UserInterface>
+  <EventSystem />
+</ClientMenu>

@@ -5,32 +5,35 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using UMA;
+using TC.UM4GPConquest.Utility;
 using System;
+using System.Linq;
 
 namespace TC.GPConquest.Player
 {
 
     public class AvatorController : PlayerAvatorControllerBehavior
     {
-        public string selectedUma;
-        private AssetLoaderController assetLoaderController;
-        public Animator animator;
-        public CharacterController characterController;
-        private Transform destinationTransform;
-        public string speedParamenter = "Forward";
+        protected string SelectedUma;
+        protected AssetLoaderController AssetLoaderController;
+        protected Animator Animator;
+        protected CharacterController CharacterController;
+        [HideInInspector]
+        public DestinationController DestinationControllerReference;
+        private Transform DestinationTransform;
+        public string SpeedParamenter = "Forward";
         private float SpeedDampTime = .00f;
+        protected UserInformations CurrentUserInfo;
+        [HideInInspector]
+        public PlayerEntity PlayerEntity;
+        [HideInInspector]
+        public Camera CameraOnDestination;
 
         private void Awake()
         {
-            /*NOTE For the Server process : 
-            * The server process doesn't have AssetLoaderController object in it's scene
-            * because we don't need any player in that process, so, basically,
-            * assetLoaderController will always null
-            * TO DO : Find a better solution to isolate the server from the rest of the client
-            * **/
-            assetLoaderController = FindObjectOfType<AssetLoaderController>();
-            characterController = GetComponent<CharacterController>();
-            characterController.center = new Vector3(0, 1.0f, 0);
+            AssetLoaderController = FindObjectOfType<AssetLoaderController>();
+            CharacterController = GetComponent<CharacterController>();
+            CharacterController.center = new Vector3(0, 1.0f, 0);
         }
 
         void Update()
@@ -39,9 +42,10 @@ namespace TC.GPConquest.Player
             MoveAvator();
         }
 
-        public void CreateAndSpawnAvator(DestinationController _destinationController)
+        public void InitAvatorController(DestinationController _destinationController)
         {
-            if (!networkObject.IsOwner) return;
+            if (!networkObject.IsOwner)
+                return;
 
             //Update shared attributes according the choosen size of the avator
             if (_destinationController.isGiantMode)
@@ -59,20 +63,31 @@ namespace TC.GPConquest.Player
                         0.6f);
             }
 
-            UpdateAvatorAttributes(_destinationController.gameObject.name + " avator - " + networkObject.NetworkId, _destinationController.selectedUma);
+            //Setups the AvatorController attributes that cames from the DestinationController 
+            UpdateAvatorAttributes(_destinationController);
 
-            //Bind this Avator to the calling destination controller
-            _destinationController.AvatorController = this;
+            //When the destination controller is destroyed, destroy also the realated Avator.
             _destinationController.networkObject.onDestroy += NetworkObject_onDestroy;
-            destinationTransform = _destinationController.gameObject.GetComponent<Transform>();
 
             //Setup and spawn the UMA character
-            UpdateUMA_Avator();
+            CreateAndSpawnUMA(SelectedUma);
+
+            //Create the Player Entity in the network
+            var playerEntityModelBehavior = NetworkManager.Instance.InstantiatePlayerEntityModel(0,transform.position);
+            playerEntityModelBehavior.networkStarted += PlayerEntityModelBehavior_networkStarted;
 
             networkObject.SendRpc(RPC_UPDATE_AVATOR_ON_NETWORK,
                 Receivers.AllBuffered,
-                selectedUma,
-                gameObject.name);
+                SelectedUma);
+        }
+
+        private void PlayerEntityModelBehavior_networkStarted(NetworkBehavior behavior)
+        {
+            PlayerEntity = behavior.GetComponent<PlayerEntity>();
+            PlayerEntity.InitializePlayerEntity(this,
+                CurrentUserInfo,
+                networkObject.NetworkId,
+                CameraOnDestination);
         }
 
         //Sets up values for the avator controller based on isGiantMode value
@@ -88,36 +103,27 @@ namespace TC.GPConquest.Player
             networkObject.avatorNetDestDistance = _avatorDestDist;
         }
 
-        protected void UpdateAvatorAttributes(string _playerName, string _selectedAvator)
+        protected void UpdateAvatorAttributes(DestinationController _destinationController)
         {
-            gameObject.name = _playerName;
-            selectedUma = _selectedAvator;
-            characterController.center = new Vector3(0, 1.0f, 0);
+            DestinationControllerReference = _destinationController;
+            gameObject.name = _destinationController.gameObject.name + " avator - " + networkObject.NetworkId;
+            SelectedUma = _destinationController.SelectedUma;
+            CharacterController.center = new Vector3(0, 1.0f, 0);
+            CurrentUserInfo = _destinationController.CurrentUserInformations;
+            DestinationTransform = _destinationController.gameObject.GetComponent<Transform>();
+            CameraOnDestination = _destinationController.DestinationCamera;
         }
 
-        //Updates the UMA avator attached to this game object
-        private void UpdateUMA_Avator()
+
+        // Updates the UMA avator attached to this game object
+        private void CreateAndSpawnUMA(String _selectedUma)
         {
-            /**
-             * Here we check assetLoadController against null because the server process,
-             * which doesn't need any player, don't have anyone of this object.
-             * **/
-            if (assetLoaderController != null)
-            {
-                //Set/spawn a UMA Avator
-                GameObject thisUma = gameObject.GetComponent<UMADynamicAvatar>().gameObject;
-                UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
-
-                thisUmaDynamicAvator.context = assetLoaderController.context;
-                thisUmaDynamicAvator.umaGenerator = assetLoaderController.generator;
-                thisUmaDynamicAvator.loadOnStart = false;
-                thisUmaDynamicAvator.Initialize();
-                thisUmaDynamicAvator.animationController = assetLoaderController.thirdPersonController;
-                UMATextRecipe recipe = assetLoaderController.umaCharactersTemplates[selectedUma];
-                thisUmaDynamicAvator.Load(recipe);
-
-                thisUma.GetComponent<UMAData>().OnCharacterCreated += AvatorController_OnCharacterCreated;
-            }
+            UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
+            //Create a UMA avator and bind it to the DynamicAvator of this object
+            UMAGenericHelper.createUMAAvator(AssetLoaderController,
+                _selectedUma, 
+                thisUmaDynamicAvator, 
+                AvatorController_OnCharacterCreated);
         }
 
         //Sets up settings after the creation of the UMA character
@@ -129,79 +135,75 @@ namespace TC.GPConquest.Player
             data.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().receiveShadows = false;
 
             //Once the Avator is created grab the animator
-            animator = GetComponent<Animator>();
+            Animator = GetComponent<Animator>();
 
             //Assign choosen dimensions for this avator. NOTE: It doesn't works correctly, sometimes the avator doesn't show up
             gameObject.transform.localScale = networkObject.avatorNetDims;
 
         }
 
-
+        //This function updates the avators of the other players that you can see by your client
         public override void UpdateAvatorOnNetwork(RpcArgs args)
         {
-
-            string playerName = args.GetNext<string>();
-            string selectedUma = args.GetNext<string>();
+            string _selectedUma = args.GetNext<string>();
 
             MainThreadManager.Run(() =>
             {
-                UpdateAvatorAttributes(selectedUma, playerName);
-                UpdateUMA_Avator();
-
                 //I'm the avator on the network, I shall find my destination in the scene using it's network id
                 DestinationController[] playersInTheScene = FindObjectsOfType<DestinationController>();
-                foreach (DestinationController dst in playersInTheScene)
-                {
-                    if (dst.networkObject.NetworkId.Equals(networkObject.destNetwId))
-                        destinationTransform = dst.GetComponent<Transform>();
-                }
+
+                var destination = playersInTheScene.ToList().
+                    Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
+                
+                UpdateAvatorAttributes(destination);
+                CreateAndSpawnUMA(_selectedUma);
             });
 
         }
 
         private void MoveAvator()
         {
-            if (animator && destinationTransform)
+            if (Animator && DestinationTransform)
             {
-                if (Vector3.Distance(destinationTransform.position, animator.rootPosition) > networkObject.avatorNetDestDistance)
+                if (Vector3.Distance(DestinationTransform.position, Animator.rootPosition) > networkObject.avatorNetDestDistance)
                 {
-                    animator.SetFloat(speedParamenter, networkObject.avatorNetSpeed, SpeedDampTime, Time.deltaTime);
+                    Animator.SetFloat(SpeedParamenter, networkObject.avatorNetSpeed, SpeedDampTime, Time.deltaTime);
 
-                    Vector3 curentDir = animator.rootRotation * Vector3.forward;
-                    Vector3 wantedDir = (destinationTransform.position - animator.rootPosition).normalized;
+                    Vector3 curentDir = Animator.rootRotation * Vector3.forward;
+                    Vector3 wantedDir = (DestinationTransform.position - Animator.rootPosition).normalized;
 
                     if (Vector3.Dot(curentDir, wantedDir) > 0)
                     {
-                        transform.LookAt(destinationTransform);
+                        transform.LookAt(DestinationTransform);
                         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
                     }
                     else
                     {
-                        transform.LookAt(destinationTransform);
+                        transform.LookAt(DestinationTransform);
                         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
                     }
 
                 }
                 else
                 {
-                    animator.SetFloat(speedParamenter, 0, SpeedDampTime, Time.deltaTime);
+                    Animator.SetFloat(SpeedParamenter, 0, SpeedDampTime, Time.deltaTime);
                 }
             }
         }
 
         void OnAnimatorMove()
         {
-            if (characterController)
+            if (CharacterController)
             {
-                characterController.Move(animator.deltaPosition);
-                transform.rotation = animator.rootRotation;
+                CharacterController.Move(Animator.deltaPosition);
+                transform.rotation = Animator.rootRotation;
             }
         }
 
         //When the destination controller is destroyed, destroys the avator
         private void NetworkObject_onDestroy(NetWorker sender)
         {
-            animator = null;
+            Animator = null;
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
         }

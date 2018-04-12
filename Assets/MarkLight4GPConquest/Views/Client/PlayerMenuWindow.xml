@@ -1,0 +1,10 @@
+<PlayerMenuWindow xmlns="MarkLight">
+  <Window Id="BasePlayerMenuWindow" Title="Menu" Width="350px" Height="250px">
+    <Group>
+      <Group Id="MenuButtonsGroup" Spacing="8px" Orientation	="Vertical">
+        <Button Id="StatsButton" Text="Stats"></Button>
+        <Button Id="ExitButton" Text="Exit"></Button>
+      </Group>
+    </Group>
+  </Window>
+</PlayerMenuWindow>

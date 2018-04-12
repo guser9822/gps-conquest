@@ -17,7 +17,10 @@ namespace TC.GPConquest.MarkLight4GPConquest
         public static readonly string ServerStatusLabel = "Server Status";
         public static readonly string UDPString = "UDP";
         public static readonly string TCPString = "TCP";
-        public static readonly string[] InternetProtocolsList = { UDPString, TCPString}; 
+        public static readonly string[] InternetProtocolsList = { UDPString, TCPString};
+        public static readonly string AccountCreatedMessage = "Account created!";
+        public static readonly string AccountAlreadyExistsMessage = "Account already exists.";
+        public static readonly string AccountNotFoundMessage = "User account not found, retry.";
         #endregion
     }
 

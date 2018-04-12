@@ -16,6 +16,9 @@ namespace TC.Common {
         /*this is the name used by uma characters stored in the StreamingAssets folder
          * **/
         public static readonly string assetsNameStreamingFolder = "umacharactersasset";
+        //uma avators name
+        public static readonly string[] avators = new string[] { "HumanMale", "HumanMale 1", "HumanMale 2", "HumanMale 3", "HumanMale 4"
+            , "HumanFemale" , "HumanFemale 1", "HumanFemale 2", "HumanFemale 3", "HumanFemale 4"};
     }
 
 }

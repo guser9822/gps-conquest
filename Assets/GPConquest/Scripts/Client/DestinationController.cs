@@ -6,6 +6,7 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
+using TC.Common;
 
 namespace TC.GPConquest.Player
 {
@@ -14,7 +15,8 @@ namespace TC.GPConquest.Player
         #region Mix
         public AssetLoaderController AssetLoaderController { get; private set; }
         private Renderer sphereRend;
-        public Camera cam { get; private set; }
+        [HideInInspector]
+        public Camera DestinationCamera;
         protected tileGen TileGen;
         #endregion
 
@@ -22,24 +24,17 @@ namespace TC.GPConquest.Player
         public Vector3 destNetAvatorDims { get; protected set; }
         public float destAvatorSpeed { get; protected set; }
         public float destAvatorDestDist { get; protected set; }
-        public string selectedUma { get; protected set; }
-        public AvatorController AvatorController { get; set; }
-        private Vector3 avatorSpawnPosition;
+        public string SelectedUma { get; protected set; }
+        public UserInformations CurrentUserInformations { get; private set; }
         #endregion
 
         #region  Attributes dedicated to UnityEditor
         public bool editorMode;
         public GameObject sphere;
         public Color cursorColor;
-        public string playerName;
+        public string PlayerName;
         public Boolean isGiantMode;
         #endregion
-
-        private string[] nameParts = new string[] { "crazy", "cat", "dog", "homie",
-            "bobble", "mr", "ms", "mrs", "castle", "flip", "flop" };
-
-        private string[] avators = new string[] { "HumanMale", "HumanMale 1", "HumanMale 2", "HumanMale 3", "HumanMale 4"
-            , "HumanFemale" , "HumanFemale 1", "HumanFemale 2", "HumanFemale 3", "HumanFemale 4"};
 
         private void Awake()
         {
@@ -55,22 +50,19 @@ namespace TC.GPConquest.Player
 
         protected void InitDestinationController()
         {
-
             if (!networkObject.IsOwner)
                 return;
 
             //Set up camera for GPConquest view
-            cam = FindObjectOfType<Camera>();
-            cam.gameObject.GetComponent<Transform>().SetParent(transform);
+            DestinationCamera = FindObjectOfType<Camera>();
+            DestinationCamera.gameObject.GetComponent<Transform>().SetParent(transform);
 
-            // Get a random index for the first name
-            int first = UnityEngine.Random.Range(0, nameParts.Length - 1);
-            // Get a random index for the last name
-            int last = UnityEngine.Random.Range(0, nameParts.Length - 1);
+            //Gets a reference to the user account informations
+            UsersContainer userInformations = FindObjectOfType<UsersContainer>();
+            CurrentUserInformations = userInformations.UserInfos;
 
             //Selected UMA
-            int randomAvator = UnityEngine.Random.Range(0, avators.Length - 1);
-            selectedUma = avators[randomAvator];
+            SelectedUma = userInformations.UserInfos.selectedUma;
 
             //Assign the color
             networkObject.destNetColor = UnityEngine.Random.ColorHSV();
@@ -85,7 +77,7 @@ namespace TC.GPConquest.Player
                     Quaternion.AngleAxis(-50.0f, Vector3.left),
                     50.0f,
                     networkObject.destCursorDims,
-                    nameParts[first] + " " + nameParts[last],
+                    CurrentUserInformations,
                     networkObject.destNetColor);
 
             }
@@ -97,7 +89,7 @@ namespace TC.GPConquest.Player
                     Quaternion.AngleAxis(-40.0f, Vector3.left),
                     10.0f,
                     networkObject.destCursorDims,
-                    nameParts[first] + " " + nameParts[last],
+                    CurrentUserInformations,
                     networkObject.destNetColor);
             }
 
@@ -111,16 +103,19 @@ namespace TC.GPConquest.Player
 
             networkObject.SendRpc(RPC_INIT_NET_DESTINATION,
                 Receivers.AllBuffered,
-                playerName);
+                PlayerName,
+                SelectedUma);
         }
 
         protected void UpdateDestinationAttributes(string _playerName,
+            string _selectedUma,
             Color _cursorColor,
             Vector3 _cursorsDimension)
         {
             //Change the name of the gameObject and make it visible in the editor
-            playerName = _playerName;
-            gameObject.name = playerName;
+            PlayerName = _playerName;
+            SelectedUma = _selectedUma;
+            gameObject.name = PlayerName;
 
             //Assign the color/dimension of the cursor and make it visible in the editor
             cursorColor = _cursorColor;
@@ -133,15 +128,18 @@ namespace TC.GPConquest.Player
             Quaternion _cameraRotation,
             float _cursorSpeed,
             Vector3 _cursorDimensions,
-            string _playerName,
+            UserInformations _currentUserInformations,
             Color _cursorColor)
         {
             //Init base attributes
-            UpdateDestinationAttributes(_playerName, _cursorColor, _cursorDimensions);
+            UpdateDestinationAttributes(_currentUserInformations.username,
+                _currentUserInformations.selectedUma,
+                _cursorColor, 
+                _cursorDimensions);
 
             //Sets up the camera attributes
-            cam.gameObject.GetComponent<Transform>().position = _cameraPosition;
-            cam.gameObject.GetComponent<Transform>().rotation = _cameraRotation;
+            DestinationCamera.gameObject.GetComponent<Transform>().position = _cameraPosition;
+            DestinationCamera.gameObject.GetComponent<Transform>().rotation = _cameraRotation;
 
             //Sets up cursor attributes
             networkObject.destCursorSpeed = _cursorSpeed;
@@ -151,11 +149,17 @@ namespace TC.GPConquest.Player
         //Init the destination controller over the network
         public override void InitNetDestination(RpcArgs args)
         {
-            string playerName = args.GetNext<string>();
+            string _playerName = args.GetNext<string>();
+            string _selectedUma = args.GetNext<string>();
+            //Find the main camera. For my entity on the network, the camera will be the same
+            //of the owner of the client in order to let the UI (e.g. nickname labels) to point towards
+            //the players owning the clients. 
+            DestinationCamera = FindObjectOfType<Camera>();
 
             MainThreadManager.Run(() =>
             {
-                UpdateDestinationAttributes(playerName,
+                UpdateDestinationAttributes(_playerName,
+                    _selectedUma,
                     networkObject.destNetColor,
                     networkObject.destCursorDims);
             });
@@ -167,7 +171,7 @@ namespace TC.GPConquest.Player
             //Sets up name and selected uma character
             var avatorController = behavior.GetComponent<AvatorController>();
             //Passes this destination controller in order to set up correctly the avator
-            avatorController.CreateAndSpawnAvator(this);
+            avatorController.InitAvatorController(this);
         }
 
         // Update is called once per frame
@@ -222,18 +226,18 @@ namespace TC.GPConquest.Player
             networkObject.destNetRotation = transform.rotation;
         }
 
-        void OnGUI()
-        {
-            if (!networkObject.IsOwner)
-                return;
+        //void OnGUI()
+        //{
+        //    if (!networkObject.IsOwner)
+        //        return;
 
-            GUI.Label(new Rect(10, 10, 100, 20), playerName);
-            if (GUI.Button(new Rect(10, 30, 100, 20), "Exit"))
-                DestroyDestinationController();
-        }
+        //    GUI.Label(new Rect(10, 10, 100, 20), playerName);
+        //    if (GUI.Button(new Rect(10, 30, 100, 20), "Exit"))
+        //        DestroyDestinationController();
+        //}
 
         //Function used to destroy this object. NOTE : It will also destroy the avator connected
-        private void DestroyDestinationController()
+        public void DestroyDestinationController()
         {
             AssetBundle.UnloadAllAssetBundles(true);
             networkObject.ClearRpcBuffer();

@@ -1,0 +1,9 @@
+<Player xmlns="MarkLight">
+  <UserInterface RenderMode="ScreenSpaceOverlay">
+    <PlayerUI />
+  </UserInterface>
+  <UserInterface RenderMode="WorldSpace">
+    <AvatorUI Scale="0.01"/>
+  </UserInterface>
+  <EventSystem />
+</Player>
