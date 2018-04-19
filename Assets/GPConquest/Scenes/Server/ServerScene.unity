@@ -14972,6 +14972,7 @@ GameObject:
   - component: {fileID: 738680166}
   - component: {fileID: 738680168}
   - component: {fileID: 738680169}
+  - component: {fileID: 738680170}
   m_Layer: 0
   m_Name: Server
   m_TagString: ServerController
@@ -15024,6 +15025,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 718e5d8c8344bed42a655425aa9ce45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &738680170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738680165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de20e2f171f366845a913fa6f3de938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &769715693
