@@ -14,12 +14,15 @@ namespace TC.GPConquest.Server
     {
 
         protected AssetLoaderController AssetLoaderController;
-
+        protected TowersController TowersController;
+        float[,] TowersGPSCoords = new float[,] { { 40.856480f, 14.277191f } };
+        private List<TowerEntityController> ListOfTowers;
 
         private void Awake()
         {
             AssetLoaderController = GetComponent<AssetLoaderController>();
             AssetLoaderController.CacheAllUMA(CommonNames.assetsNameStreamingFolder);
+            TowersController = GetComponent<TowersController>();
         }
 
         // Use this for initialization
@@ -32,6 +35,11 @@ namespace TC.GPConquest.Server
         void Update()
         {
 
+        }
+
+        public void RequestTowersSpawn()
+        {
+            ListOfTowers = TowersController.SpawnTowers(TowersGPSCoords);
         }
     }
 }

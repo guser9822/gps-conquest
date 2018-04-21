@@ -1,18 +1,42 @@
-﻿using System.Collections;
+﻿using BeardedManStudios.Forge.Networking.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowersController : MonoBehaviour {
 
-    float[,] TowersGPSCoords = new float[,] { { 40.856480f, 14.277191f}};
+namespace TC.GPConquest.Server
+{
+    public class TowersController : MonoBehaviour
+    {
+        private List<TowerEntityController> listOfTowers = new List<TowerEntityController>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        public List<TowerEntityController> ListOfTowers
+        {
+            get
+            {
+                return listOfTowers;
+            }
+
+            private set
+            {
+                listOfTowers = value;
+            }
+        }
+
+        public List<TowerEntityController> SpawnTowers(float[,] towersGPSCoords)
+        {
+            //Spawn towers on the network
+            for (int i = 0; i < towersGPSCoords.GetLength(0); i++)
+            {
+                for (int j = 0; j < towersGPSCoords.GetLength(0); j++)
+                {
+                    var //Everything You Do is a Balloon
+                        x = NetworkManager.Instance.InstantiateTowerEntityController();
+                    ListOfTowers.Add(x.GetComponent<TowerEntityController>());
+                }
+            }
+            return ListOfTowers;
+        }
+
+    }
 }

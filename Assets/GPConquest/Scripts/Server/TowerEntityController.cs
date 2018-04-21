@@ -6,22 +6,39 @@ using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
 
-public class TowerEntityController : TowerEntityControllerBehavior {
+namespace TC.GPConquest.Server {
 
-    public string ownerFaction;
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public override void UpdateTowerAttrributes(RpcArgs args)
+    public class TowerEntityController : TowerEntityControllerBehavior
     {
-        ownerFaction = args.GetNext<string>();
+
+        public string ownerFaction;
+
+        protected override void NetworkStart()
+        {
+            base.NetworkStart();
+            InitTowerEntityController();
+        }
+
+        protected void InitTowerEntityController()
+        {
+            
+        }
+
+        // Use this for initialization
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public override void UpdateTowerAttrributes(RpcArgs args)
+        {
+            ownerFaction = args.GetNext<string>();
+        }
     }
 }
