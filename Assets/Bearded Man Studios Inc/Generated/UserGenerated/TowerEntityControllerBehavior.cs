@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"string\", \"Vector2\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"_factionOwner\", \"_gpsCoords\"]]")]
+	[GeneratedRPC("{\"types\":[[\"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"_factionOwner\"]]")]
 	public abstract partial class TowerEntityControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_TOWER_ATTRRIBUTES = 0 + 5;
@@ -22,7 +22,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			networkObject.AttachedBehavior = this;
 
 			base.SetupHelperRpcs(networkObject);
-			networkObject.RegisterRpc("UpdateTowerAttrributes", UpdateTowerAttrributes, typeof(string), typeof(Vector2));
+			networkObject.RegisterRpc("UpdateTowerAttrributes", UpdateTowerAttrributes, typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -100,7 +100,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// <summary>
 		/// Arguments:
 		/// string _factionOwner
-		/// Vector2 _gpsCoords
 		/// </summary>
 		public abstract void UpdateTowerAttrributes(RpcArgs args);
 

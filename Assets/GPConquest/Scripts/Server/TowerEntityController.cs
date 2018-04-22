@@ -5,19 +5,33 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
+using TC.Common;
 
 namespace TC.GPConquest.Server {
 
     public class TowerEntityController : TowerEntityControllerBehavior,IEqualityComparer<TowerEntityController>
     {
 
-        public string ownerFaction;
+        public string OwnerFaction;
 
         public void InitTowerEntityController(Vector2 _GPSCoords)
         {
             if (!networkObject.IsOwner) return;
 
+            networkObject.towerGPSCoords = _GPSCoords;
 
+            //Calculates the tower position in Unity given the GPS coordinates
+            var _towerPos = GPSHelper.LatLongToUnityCoords(_GPSCoords.x, _GPSCoords.y);
+
+            //Updates tower position on network
+            networkObject.towerNetPosition = _towerPos;
+
+            //Update tower position on client
+            transform.position = _towerPos;
+
+            networkObject.SendRpc(RPC_UPDATE_TOWER_ATTRRIBUTES,
+               Receivers.AllBuffered,
+               OwnerFaction);
         }
 
         // Use this for initialization
@@ -34,7 +48,10 @@ namespace TC.GPConquest.Server {
 
         public override void UpdateTowerAttrributes(RpcArgs args)
         {
-            ownerFaction = args.GetNext<string>();
+            OwnerFaction = args.GetNext<string>();
+
+            //Update tower position on network
+            transform.position = networkObject.towerNetPosition;
         }
 
         public bool Equals(TowerEntityController x, TowerEntityController y)

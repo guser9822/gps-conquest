@@ -18,9 +18,9 @@ namespace TC.GPConquest.Server
 
         List<Vector2> TowersGPSCoords = new List<Vector2>
         {
-            new Vector2(40.856480f, 14.277191f),
-            new Vector2(40.856490f, 14.277192f),
-            new Vector2(40.856485f, 14.277171f)
+            new Vector2(40.856480f, 14.277191f)
+            //new Vector2(40.856490f, 14.277192f),
+            //new Vector2(40.856485f, 14.277171f)
         };
 
         private List<TowerEntityController> ListOfTowers;
