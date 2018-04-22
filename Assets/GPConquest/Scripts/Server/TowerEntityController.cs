@@ -8,20 +8,16 @@ using System;
 
 namespace TC.GPConquest.Server {
 
-    public class TowerEntityController : TowerEntityControllerBehavior
+    public class TowerEntityController : TowerEntityControllerBehavior,IEqualityComparer<TowerEntityController>
     {
 
         public string ownerFaction;
 
-        protected override void NetworkStart()
+        public void InitTowerEntityController(Vector2 _GPSCoords)
         {
-            base.NetworkStart();
-            InitTowerEntityController();
-        }
+            if (!networkObject.IsOwner) return;
 
-        protected void InitTowerEntityController()
-        {
-            
+
         }
 
         // Use this for initialization
@@ -39,6 +35,20 @@ namespace TC.GPConquest.Server {
         public override void UpdateTowerAttrributes(RpcArgs args)
         {
             ownerFaction = args.GetNext<string>();
+        }
+
+        public bool Equals(TowerEntityController x, TowerEntityController y)
+        {
+            return x.networkObject.NetworkId == y.networkObject.NetworkId &&
+                x.networkObject.towerGPSCoords == y.networkObject.towerGPSCoords;
+        }
+
+        public int GetHashCode(TowerEntityController obj)
+        {
+            int result = 89;
+            result = 13 * result + obj.networkObject.NetworkId.GetHashCode();
+            result = 13 * result + obj.networkObject.towerGPSCoords.GetHashCode();
+            return result;
         }
     }
 }

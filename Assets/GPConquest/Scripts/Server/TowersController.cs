@@ -9,6 +9,8 @@ namespace TC.GPConquest.Server
     public class TowersController : MonoBehaviour
     {
         private List<TowerEntityController> listOfTowers = new List<TowerEntityController>();
+        private Dictionary<TowerEntityController, Vector2> MAPTowerGPSCoords 
+            = new Dictionary<TowerEntityController, Vector2>();
 
         public List<TowerEntityController> ListOfTowers
         {
@@ -23,20 +25,27 @@ namespace TC.GPConquest.Server
             }
         }
 
-        public List<TowerEntityController> SpawnTowers(float[,] towersGPSCoords)
+        public List<TowerEntityController> SpawnTowers(List<Vector2> towersGPSCoords)
         {
-            //Spawn towers on the network
-            for (int i = 0; i < towersGPSCoords.GetLength(0); i++)
-            {
-                for (int j = 0; j < towersGPSCoords.GetLength(0); j++)
-                {
-                    var //Everything You Do is a Balloon
-                        x = NetworkManager.Instance.InstantiateTowerEntityController();
-                    ListOfTowers.Add(x.GetComponent<TowerEntityController>());
-                }
-            }
+
+            towersGPSCoords.ForEach(x => {
+                var //Everything You Do is a Balloon
+                   _thisTower = NetworkManager.Instance.InstantiateTowerEntityController();
+                var _thisTowerEntityController = _thisTower.GetComponent<TowerEntityController>();
+
+                MAPTowerGPSCoords.Add(_thisTowerEntityController, x);
+
+                _thisTower.networkStarted += _thisTower_networkStarted;
+                ListOfTowers.Add(_thisTowerEntityController);
+            });
+
             return ListOfTowers;
         }
 
+        private void _thisTower_networkStarted(NetworkBehavior behavior)
+        {
+            var _tower = behavior.GetComponent<TowerEntityController>();
+            _tower.InitTowerEntityController(MAPTowerGPSCoords[_tower]);
+        }
     }
 }

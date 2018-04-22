@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedInterpol("{\"inter\":[0.15]")]
+	[GeneratedInterpol("{\"inter\":[0.15,0]")]
 	public partial class TowerEntityControllerNetworkObject : NetworkObject
 	{
 		public const int IDENTITY = 9;
@@ -45,6 +45,36 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			if (towerNetPositionChanged != null) towerNetPositionChanged(_towerNetPosition, timestep);
 			if (fieldAltered != null) fieldAltered("towerNetPosition", _towerNetPosition, timestep);
 		}
+		private Vector2 _towerGPSCoords;
+		public event FieldEvent<Vector2> towerGPSCoordsChanged;
+		public InterpolateVector2 towerGPSCoordsInterpolation = new InterpolateVector2() { LerpT = 0f, Enabled = false };
+		public Vector2 towerGPSCoords
+		{
+			get { return _towerGPSCoords; }
+			set
+			{
+				// Don't do anything if the value is the same
+				if (_towerGPSCoords == value)
+					return;
+
+				// Mark the field as dirty for the network to transmit
+				_dirtyFields[0] |= 0x2;
+				_towerGPSCoords = value;
+				hasDirtyFields = true;
+			}
+		}
+
+		public void SettowerGPSCoordsDirty()
+		{
+			_dirtyFields[0] |= 0x2;
+			hasDirtyFields = true;
+		}
+
+		private void RunChange_towerGPSCoords(ulong timestep)
+		{
+			if (towerGPSCoordsChanged != null) towerGPSCoordsChanged(_towerGPSCoords, timestep);
+			if (fieldAltered != null) fieldAltered("towerGPSCoords", _towerGPSCoords, timestep);
+		}
 
 		protected override void OwnershipChanged()
 		{
@@ -55,6 +85,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		public void SnapInterpolations()
 		{
 			towerNetPositionInterpolation.current = towerNetPositionInterpolation.target;
+			towerGPSCoordsInterpolation.current = towerGPSCoordsInterpolation.target;
 		}
 
 		public override int UniqueIdentity { get { return IDENTITY; } }
@@ -62,6 +93,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		protected override BMSByte WritePayload(BMSByte data)
 		{
 			UnityObjectMapper.Instance.MapBytes(data, _towerNetPosition);
+			UnityObjectMapper.Instance.MapBytes(data, _towerGPSCoords);
 
 			return data;
 		}
@@ -72,6 +104,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			towerNetPositionInterpolation.current = _towerNetPosition;
 			towerNetPositionInterpolation.target = _towerNetPosition;
 			RunChange_towerNetPosition(timestep);
+			_towerGPSCoords = UnityObjectMapper.Instance.Map<Vector2>(payload);
+			towerGPSCoordsInterpolation.current = _towerGPSCoords;
+			towerGPSCoordsInterpolation.target = _towerGPSCoords;
+			RunChange_towerGPSCoords(timestep);
 		}
 
 		protected override BMSByte SerializeDirtyFields()
@@ -81,6 +117,8 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 			if ((0x1 & _dirtyFields[0]) != 0)
 				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _towerNetPosition);
+			if ((0x2 & _dirtyFields[0]) != 0)
+				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _towerGPSCoords);
 
 			// Reset all the dirty fields
 			for (int i = 0; i < _dirtyFields.Length; i++)
@@ -110,6 +148,19 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					RunChange_towerNetPosition(timestep);
 				}
 			}
+			if ((0x2 & readDirtyFlags[0]) != 0)
+			{
+				if (towerGPSCoordsInterpolation.Enabled)
+				{
+					towerGPSCoordsInterpolation.target = UnityObjectMapper.Instance.Map<Vector2>(data);
+					towerGPSCoordsInterpolation.Timestep = timestep;
+				}
+				else
+				{
+					_towerGPSCoords = UnityObjectMapper.Instance.Map<Vector2>(data);
+					RunChange_towerGPSCoords(timestep);
+				}
+			}
 		}
 
 		public override void InterpolateUpdate()
@@ -121,6 +172,11 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			{
 				_towerNetPosition = (Vector3)towerNetPositionInterpolation.Interpolate();
 				//RunChange_towerNetPosition(towerNetPositionInterpolation.Timestep);
+			}
+			if (towerGPSCoordsInterpolation.Enabled && !towerGPSCoordsInterpolation.current.UnityNear(towerGPSCoordsInterpolation.target, 0.0015f))
+			{
+				_towerGPSCoords = (Vector2)towerGPSCoordsInterpolation.Interpolate();
+				//RunChange_towerGPSCoords(towerGPSCoordsInterpolation.Timestep);
 			}
 		}
 
