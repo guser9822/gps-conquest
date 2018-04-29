@@ -50,5 +50,13 @@ namespace TC.GPConquest.Server
             var _tower = behavior.GetComponent<TowerEntityController>();
             _tower.InitTowerEntityController(MAPTowerGPSCoords[_tower]);
         }
+
+        public void DestroyTowers() {
+            listOfTowers.ForEach(x =>
+            {
+                x.networkObject.ClearRpcBuffer();
+                x.networkObject.Destroy();
+            });
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace TC.GPConquest.Server
         protected AssetLoaderController AssetLoaderController;
         protected TowersController TowersController;
         private List<TowerEntityController> ListOfTowers;
+        private ServerNetworkController ServerNetworkController;
 
         List<Vector2> TowersGPSCoords = new List<Vector2>
         {
@@ -28,6 +29,7 @@ namespace TC.GPConquest.Server
             AssetLoaderController = GetComponent<AssetLoaderController>();
             AssetLoaderController.CacheAllUMA(CommonNames.assetsNameStreamingFolder);
             TowersController = GetComponent<TowersController>();
+            ServerNetworkController = GetComponent<ServerNetworkController>();
         }
 
         // Use this for initialization
@@ -46,6 +48,16 @@ namespace TC.GPConquest.Server
         {
             ListOfTowers = TowersController.SpawnTowers(TowersGPSCoords);
         }
+
+        public void RequestServerConnection(ConnectionInfo _connectionInfo) {
+            ServerNetworkController.StartCustomNetworkController(_connectionInfo);
+        }
+
+        public void RequestServerDisconnection() {
+            TowersController.DestroyTowers();
+            ServerNetworkController.CloseMultiplayerBase();
+        }
+
     }
 }
 
