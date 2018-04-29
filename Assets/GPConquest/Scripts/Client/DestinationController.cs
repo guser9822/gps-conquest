@@ -13,7 +13,6 @@ namespace TC.GPConquest.Player
     public class DestinationController : PlayerDestinationControllerBehavior
     {
         #region Mix
-        public AssetLoaderController AssetLoaderController { get; private set; }
         private Renderer sphereRend;
         [HideInInspector]
         public Camera DestinationCamera;
@@ -38,7 +37,6 @@ namespace TC.GPConquest.Player
 
         private void Awake()
         {
-            AssetLoaderController = FindObjectOfType<AssetLoaderController>();
             sphereRend = sphere.GetComponent<Renderer>();
         }
 
@@ -239,10 +237,8 @@ namespace TC.GPConquest.Player
         //Function used to destroy this object. NOTE : It will also destroy the avator connected
         public void DestroyDestinationController()
         {
-            AssetBundle.UnloadAllAssetBundles(true);
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
-            Application.Quit();
         }
     }
 }

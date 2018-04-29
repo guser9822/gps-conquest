@@ -2,6 +2,7 @@
 using MarkLight;
 using System;
 using TC.GPConquest.Server;
+using TC.Common;
 
 namespace TC.GPConquest.MarkLight4GPConquest
 {
@@ -27,7 +28,7 @@ namespace TC.GPConquest.MarkLight4GPConquest
                     ServerOptions.ServerPort,
                     (string)ServerOptions.XProtocol.Value);
 
-                FindMultiplayerController().RequestServerConnection(ConnectionInfo);
+                FindServerProcessController(CommonNames.SERVER_OBJ_CONTROLLER_TAG).RequestServerConnection(ConnectionInfo);
             }
             else
             {
@@ -38,7 +39,7 @@ namespace TC.GPConquest.MarkLight4GPConquest
 
         public void StopServer()
         {
-            FindMultiplayerController().RequestServerDisconnection();
+            FindServerProcessController(CommonNames.SERVER_OBJ_CONTROLLER_TAG).RequestServerDisconnection();
         }
 
         /** :::: NOTE ::::
@@ -47,11 +48,11 @@ namespace TC.GPConquest.MarkLight4GPConquest
          * will need to be tagged first(not necessary but It's better), in order to find that specific object and then 
          * 'find' everytime.
         */
-        private ServerProcessController FindMultiplayerController()
+        private ServerProcessController FindServerProcessController(string _tag)
         {
             return Array.Find<ServerProcessController>(
                     FindObjectsOfType<ServerProcessController>(),
-                        s => s.gameObject.tag.Equals("ServerController") &&
+                        s => s.gameObject.tag.Equals(_tag) &&
                         s.gameObject.GetComponent<ServerProcessController>()
                     );
         }

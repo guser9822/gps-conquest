@@ -9,6 +9,7 @@ TagManager:
   - Tile
   - ClientController
   - Tower
+  - GameStatusController
   layers:
   - Default
   - TransparentFX
