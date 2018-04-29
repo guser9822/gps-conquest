@@ -13,12 +13,13 @@ namespace TC.GPConquest.Server {
     {
 
         public string OwnerFaction;
+        public Vector2 GPSCoords;//used just for visualization in the inspector
 
         public void InitTowerEntityController(Vector2 _GPSCoords)
         {
             if (!networkObject.IsOwner) return;
 
-            networkObject.towerGPSCoords = _GPSCoords;
+            GPSCoords = networkObject.towerGPSCoords = _GPSCoords;
 
             //Calculates the tower position in Unity given the GPS coordinates
             var _towerPos = GPSHelper.LatLongToUnityCoords(_GPSCoords.x, _GPSCoords.y);
@@ -32,18 +33,6 @@ namespace TC.GPConquest.Server {
             networkObject.SendRpc(RPC_UPDATE_TOWER_ATTRRIBUTES,
                Receivers.AllBuffered,
                OwnerFaction);
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         public override void UpdateTowerAttrributes(RpcArgs args)

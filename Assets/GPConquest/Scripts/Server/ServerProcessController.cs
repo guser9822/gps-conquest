@@ -7,14 +7,14 @@ using TC.Common;
 namespace TC.GPConquest.Server
 {
     /**
-     * This class is used just for the same kind of initializations that
-     * takes place in GameStatusController class
+     * This class is used for initialize and manage the server process
      ***/
     public class ServerProcessController : MonoBehaviour
     {
 
         protected AssetLoaderController AssetLoaderController;
         protected TowersController TowersController;
+        private List<TowerEntityController> ListOfTowers;
 
         List<Vector2> TowersGPSCoords = new List<Vector2>
         {
@@ -22,8 +22,6 @@ namespace TC.GPConquest.Server
             //new Vector2(40.856490f, 14.277192f),
             //new Vector2(40.856485f, 14.277171f)
         };
-
-        private List<TowerEntityController> ListOfTowers;
 
         private void Awake()
         {

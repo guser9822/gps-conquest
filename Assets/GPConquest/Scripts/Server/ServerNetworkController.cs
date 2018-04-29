@@ -48,6 +48,7 @@ namespace TC.GPConquest
             base.Connected(networker);
             //if (networker is IServer)
             //    NetworkObject.Flush(networker);
+            //TDOD : find a better solution in order to spawn the towers when the server is really started
             ServerProcessController.RequestTowersSpawn();
         }
 

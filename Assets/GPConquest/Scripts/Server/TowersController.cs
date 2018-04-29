@@ -6,9 +6,11 @@ using UnityEngine;
 
 namespace TC.GPConquest.Server
 {
+    //This class is used to manage towers
     public class TowersController : MonoBehaviour
     {
         private List<TowerEntityController> listOfTowers = new List<TowerEntityController>();
+        //This dictionary contains key-value pairs formed like this (tower->gpscoords) in order to simplfy towers creation 
         private Dictionary<TowerEntityController, Vector2> MAPTowerGPSCoords 
             = new Dictionary<TowerEntityController, Vector2>();
 
@@ -27,7 +29,7 @@ namespace TC.GPConquest.Server
 
         public List<TowerEntityController> SpawnTowers(List<Vector2> towersGPSCoords)
         {
-
+            //Atm we get gps coords from a list and create the associations tower->gpscoords
             towersGPSCoords.ForEach(x => {
                 var //Everything You Do is a Balloon
                    _thisTower = NetworkManager.Instance.InstantiateTowerEntityController();
@@ -44,6 +46,7 @@ namespace TC.GPConquest.Server
 
         private void _thisTower_networkStarted(NetworkBehavior behavior)
         {
+            //After that the tower is generated on the network, adjust it's position
             var _tower = behavior.GetComponent<TowerEntityController>();
             _tower.InitTowerEntityController(MAPTowerGPSCoords[_tower]);
         }

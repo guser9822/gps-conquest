@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace TC.Common {
 
+    //This class is used to convert between Unity coordinates system and GPS coordinates system
     public static class GPSHelper
     {
         //Level of detail of the pyramids of the tiles
