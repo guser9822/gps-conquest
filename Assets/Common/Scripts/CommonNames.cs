@@ -23,6 +23,8 @@ namespace TC.Common {
         #region Tags
         public static readonly string SERVER_OBJ_CONTROLLER_TAG = "ServerController";
         public static readonly string CLIENT_OBJ_CONTROLLER_TAG = "GameStatusController";
+        public static readonly string TILE_TAG = "Tile";
+        public static readonly string TOWER_TAG= "Tower";
         #endregion
     }
 

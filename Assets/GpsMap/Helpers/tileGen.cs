@@ -89,7 +89,7 @@ public class tileGen : MonoBehaviour
             //del giocatore ottenute all'avvio del gioco
             tiles[0, 0] = SimplePool.Spawn(tile, Vector3.zero, Quaternion.identity);
             //Coroutine che andrà a popolare direttamente il tile iniziale con le proprie costruzioni,strade,acque e parchi
-            //StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
+            StartCoroutine(tiles[0, 0].GetComponent<Assets.Tile>().CreateTile(new Vector2(Center.x, Center.y), Vector3.zero, 16));
 
             updateBoard();
             //Enable player UI after the scene is loaded
