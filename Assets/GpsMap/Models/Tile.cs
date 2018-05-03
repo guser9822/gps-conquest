@@ -37,143 +37,149 @@ namespace Assets
         public IEnumerator CreateTile(Vector2 realPos, Vector2 worldCenter, int zoom)
         {
             Vector3 tp = transform.position;
-            //realPos = TileHelper.CheckNearbyTile(tp, realPos, gameObject.name);
-            ////Tile will try to create itself from nearby tiles, otherwise it will not
-            if (Physics.CheckSphere(tp + Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("-r " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("-r " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.right;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp - Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("+r " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.right;
-                var collisions = Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("+r " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.right;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612, 0.5f))
-            {
-                //Debug.Log("+u " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up;
-                var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("+u " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.up;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612, 0.5f))
-            {
-                //Debug.Log("-u " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up;
-                var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("-u  " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.up;
-                        break;
-                    }
-                }
-            }
-            //diagonals
-            //honestly these should never really be called except for the beginning
-            //also may be somewhat broken atm
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("--d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("--d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.up - Vector2.right;
-                        break;
-                    }
-                }
 
-            }
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("-+d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up + Vector2.right;
-                var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("-+d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.up + Vector2.right;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("+-d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("+-d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.up - Vector2.right;
-                        break;
-                    }
-                }
+            TileHelper.CheckNearbyTileResult collisionResult = TileHelper.CheckNearbyTile(tp, gameObject.name);
 
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("++d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("++d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.up - Vector2.right;
-                        break;
-                    }
-                }
-            }
+            if (collisionResult.IsCollided)
+                cen = collisionResult.RealPosition;
+            else cen = realPos;
 
-            cen = realPos;
+            //Tile will try to create itself from nearby tiles, otherwise it will not
+            //if (Physics.CheckSphere(tp + Vector3.right * 612, 0.5f))
+            //{
+            //    //Debug.Log("-r " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.right;
+            //    var collisions = Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("-r " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen - Vector2.right;
+            //            break;
+            //        }
+            //    }
+            //}
+            //else if (Physics.CheckSphere(tp - Vector3.right * 612, 0.5f))
+            //{
+            //    //Debug.Log("+r " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.right;
+            //    var collisions = Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("+r " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen + Vector2.right;
+            //            break;
+            //        }
+            //    }
+            //}
+            //else if (Physics.CheckSphere(tp + Vector3.forward * 612, 0.5f))
+            //{
+            //    //Debug.Log("+u " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up;
+            //    var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("+u " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen + Vector2.up;
+            //            break;
+            //        }
+            //    }
+            //}
+            //else if (Physics.CheckSphere(tp - Vector3.forward * 612, 0.5f))
+            //{
+            //    //Debug.Log("-u " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up;
+            //    var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("-u  " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen - Vector2.up;
+            //            break;
+            //        }
+            //    }
+            //}
+            ////diagonals
+            ////honestly these should never really be called except for the beginning
+            ////also may be somewhat broken atm
+            //else if (Physics.CheckSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f))
+            //{
+            //    //Debug.Log("--d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up - Vector2.right;
+            //    var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("--d " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen - Vector2.up - Vector2.right;
+            //            break;
+            //        }
+            //    }
+
+            //}
+            //else if (Physics.CheckSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f))
+            //{
+            //    //Debug.Log("-+d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up + Vector2.right;
+            //    var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("-+d " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen - Vector2.up + Vector2.right;
+            //            break;
+            //        }
+            //    }
+            //}
+            //else if (Physics.CheckSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f))
+            //{
+            //    //Debug.Log("+-d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
+            //    var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("+-d " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen + Vector2.up - Vector2.right;
+            //            break;
+            //        }
+            //    }
+
+            //}
+            //else if (Physics.CheckSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f))
+            //{
+            //    //Debug.Log("++d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
+            //    //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
+            //    var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f);
+            //    foreach (var coll in collisions)
+            //    {
+            //        if (coll.CompareTag(CommonNames.TILE_TAG))
+            //        {
+            //            var t = coll.gameObject.GetComponent<Tile>();
+            //            Debug.Log("++d " + gameObject.name + " from " + t.name);
+            //            realPos = t.cen + Vector2.up - Vector2.right;
+            //            break;
+            //        }
+            //    }
+            //}
+
+            //cen = realPos;
 
             //setting up the URL
             var tilename = Application.persistentDataPath + "/" + realPos.x + "_" + realPos.y;
@@ -399,6 +405,7 @@ namespace Assets
 
         public enum TileOrientationTable
         {
+            NOT_INTERESTING_VALUE,
             MINUS_R,
             PLUS_R,
             MINUS_U,
@@ -409,153 +416,124 @@ namespace Assets
             PLUS_PLUS_D
         }
 
-        /*
-         * Check if a tile already exists nearby centerPosition given in input. 
-         * If yes, updates the center of the tile.
-         * **/
-        public static Vector2 CheckNearbyTile(Vector3 _tilePosition, 
-            Vector2 _realPos,
-            string _tileName)
-        {
+        public struct CheckNearbyTileResult {
 
-            var result = CheckSphereByOrientation(_tilePosition);
-
-            if (result.IsCollided)
-            {
-                _realPos = ApplyRecalculation(result.PositionCollision, 
-                    0.5f, 
-                    _realPos,
-                    result.TileOrientation,
-                    _tileName, true);
-            }
-
-            return _realPos;
-        }
-
-        private struct CheckSphereByOrientationResult
-        {
-
-            public CheckSphereByOrientationResult(TileOrientationTable _tileOrientation,
-             Vector3 _positionCollision,
-             bool _isCollided)
-            {
-                TileOrientation = _tileOrientation;
-                PositionCollision = _positionCollision;
-                IsCollided = _isCollided;
-            }
-
-            public void CalculatePositionToCheckByOrientation(TileOrientationTable _tileOrientation)
-            {
-                switch (_tileOrientation)
-                {
-                    case TileOrientationTable.MINUS_R:
-                        PositionCollision = PositionCollision - Vector3.right;
-                        break;
-                    case TileOrientationTable.PLUS_R:
-                        PositionCollision = PositionCollision + Vector3.right;
-                        break;
-                    case TileOrientationTable.MINUS_U:
-                        PositionCollision = PositionCollision - Vector3.up;
-                        break;
-                    case TileOrientationTable.PLUS_U:
-                        PositionCollision = PositionCollision + Vector3.up;
-                        break;
-                    case TileOrientationTable.MINUS_MINUS_D:
-                        PositionCollision = PositionCollision - Vector3.right - Vector3.up;
-                        break;
-                    case TileOrientationTable.PLUS_PLUS_D:
-                        PositionCollision = PositionCollision + Vector3.right + Vector3.up;
-                        break;                              
-                    case TileOrientationTable.MINUS_PLUS_D:
-                        PositionCollision = PositionCollision - Vector3.right + Vector3.up;
-                        break;                              
-                    case TileOrientationTable.PLUS_MINUS_D:
-                        PositionCollision = PositionCollision + Vector3.right - Vector3.up;
-                        break;
-                }
-            }
-
-            public TileOrientationTable TileOrientation;
-            public Vector3 PositionCollision;
             public bool IsCollided;
+            public Vector2 RealPosition;
+            public TileOrientationTable TileOrientationCollided;
+
+            public CheckNearbyTileResult(bool _isCollided=false) {
+                IsCollided = _isCollided;
+                RealPosition = Vector2.zero;
+                TileOrientationCollided = TileOrientationTable.NOT_INTERESTING_VALUE;
+            }
+
         }
 
-        private static CheckSphereByOrientationResult CheckSphereByOrientation(Vector3 _tilePosition)
+        public static CheckNearbyTileResult CheckNearbyTile(Vector3 _tilePosition,string _tileName)
         {
-            CheckSphereByOrientationResult result = 
-                new CheckSphereByOrientationResult(TileOrientationTable.MINUS_R,_tilePosition,false);
+            var checkResult = new CheckNearbyTileResult();
+            Vector3 _positionOfCollision = Vector3.zero;
+            foreach (var orientation in Enum.GetValues(typeof(TileOrientationTable)))
+            {
+                var tileOrien = (TileOrientationTable)orientation;
+                _positionOfCollision = CalculateCollisionPoint(tileOrien, _tilePosition);
 
-            foreach (var orientation in Enum.GetValues(typeof(TileOrientationTable))) {
-                result.CalculatePositionToCheckByOrientation((TileOrientationTable)orientation);
-                if (Physics.CheckSphere(result.PositionCollision, 0.5f))
+                if (!tileOrien.Equals(TileOrientationTable.NOT_INTERESTING_VALUE) && 
+                    Physics.CheckSphere(_positionOfCollision, 0.5f))
                 {
-                    result.IsCollided = true;
+                    checkResult.IsCollided = true;
+                    checkResult.TileOrientationCollided = tileOrien;
                     break;
                 }
             }
 
-            return result;
-        }
-
-        /*
-         * Recalculate position only if CheckNearbyTile founded a tile.
-         * **/
-        private static Vector2 ApplyRecalculation(Vector3 _centerCheckSphere,
-                    float _radiusCheckSphere,
-                    Vector2 _realPos,
-                    TileOrientationTable _tileOrientation,
-                    string tileName,
-                    bool _activateLog = false)
-
-        {
-            //Checks only for Tiles
-            var allOverlaps = Physics.OverlapSphere(_centerCheckSphere, _radiusCheckSphere);
-            var tileCollider = allOverlaps.FirstOrDefault(x => {
-                return x.CompareTag(CommonNames.TILE_TAG);
-            });
-
-            if (!ReferenceEquals(tileCollider, null))
+            if (checkResult.IsCollided)
             {
-                var tile = tileCollider.gameObject.GetComponent<Tile>();
-                if(_activateLog)
-                    Debug.Log(_tileOrientation.ToString() + " "+tileName + " from " + tile.name);
-
-                _realPos = RecalculatePositionByOrientation(_realPos, tile.cen ,_tileOrientation);
+                var collisions = Physics.OverlapSphere(_positionOfCollision, 0.5f);
+                foreach (var coll in collisions)
+                {
+                    if (coll.CompareTag(CommonNames.TILE_TAG))
+                    {
+                        var t = coll.gameObject.GetComponent<Tile>();
+                        Debug.Log("-r " + _tileName + " from " + t.name);
+                        checkResult.RealPosition = CalculateRealPosition(checkResult.TileOrientationCollided, t.cen);
+                        break;
+                    }
+                }
             }
-            return _realPos;
+        
+            return checkResult;
         }
 
-        private static Vector2 RecalculatePositionByOrientation(
-            Vector2 _pos,
-            Vector2 _cen,
-            TileOrientationTable _tileOrientation) {
-            switch (_tileOrientation) {
+        private static Vector3 CalculateCollisionPoint(TileOrientationTable _tileOrientation,Vector3 _tilePosition)
+        {
+            Vector3 tp = new Vector3(_tilePosition.x, _tilePosition.y, _tilePosition.z);
+            switch (_tileOrientation)
+            {
+                case TileOrientationTable.NOT_INTERESTING_VALUE:
+                    break;
                 case TileOrientationTable.MINUS_R:
-                    _pos = _cen - Vector2.right;
+                    tp += Vector3.right * 612;
                     break;
                 case TileOrientationTable.PLUS_R:
-                    _pos = _cen + Vector2.right;
+                    tp -= Vector3.right * 612;
                     break;
                 case TileOrientationTable.MINUS_U:
-                    _pos = _cen - Vector2.up;
+                    tp -= Vector3.forward * 612;
                     break;
                 case TileOrientationTable.PLUS_U:
-                    _pos = _cen + Vector2.up;
+                    tp += Vector3.forward * 612;
                     break;
                 case TileOrientationTable.MINUS_MINUS_D:
-                    _pos = _cen - Vector2.right - Vector2.up;
-                    break;
-                case TileOrientationTable.PLUS_PLUS_D:
-                    _pos = _cen + Vector2.right + Vector2.up;
+                    tp -= Vector3.forward * 612 - Vector3.right * 612;
                     break;
                 case TileOrientationTable.MINUS_PLUS_D:
-                    _pos = _cen - Vector2.right + Vector2.up;
+                    tp -= Vector3.forward * 612 + Vector3.right * 612;
                     break;
                 case TileOrientationTable.PLUS_MINUS_D:
-                    _pos = _cen + Vector2.right - Vector2.up;
+                    tp += Vector3.forward * 612 - Vector3.right * 612;
+                    break;
+                case TileOrientationTable.PLUS_PLUS_D:
+                    tp += Vector3.forward * 612 + Vector3.right * 612;
                     break;
             }
-            return _pos;
+            return tp;
+        }
+
+        private static Vector2 CalculateRealPosition(TileOrientationTable _tileOrientation, Vector2 _collTileCenter)
+        {
+            Vector2 realPos = new Vector2(_collTileCenter.x, _collTileCenter.y);
+            switch (_tileOrientation)
+            {
+                case TileOrientationTable.NOT_INTERESTING_VALUE:
+                    break;
+                case TileOrientationTable.MINUS_R:
+                    realPos -= Vector2.right;
+                    break;
+                case TileOrientationTable.PLUS_R:
+                    realPos += Vector2.right;
+                    break;
+                case TileOrientationTable.MINUS_U:
+                    realPos -= Vector2.up;
+                    break;
+                case TileOrientationTable.PLUS_U:
+                    realPos += Vector2.up;
+                    break;
+                case TileOrientationTable.MINUS_MINUS_D:
+                    realPos -= Vector2.up - Vector2.right;
+                    break;
+                case TileOrientationTable.MINUS_PLUS_D:
+                    realPos -= Vector2.up + Vector2.right;
+                    break;
+                case TileOrientationTable.PLUS_MINUS_D:
+                    realPos += Vector2.up - Vector2.right;
+                    break;
+                case TileOrientationTable.PLUS_PLUS_D:
+                    realPos += Vector2.up - Vector2.right;
+                    break;
+            }
+            return realPos;
         }
 
     }
