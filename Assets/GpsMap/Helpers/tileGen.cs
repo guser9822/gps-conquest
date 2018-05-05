@@ -193,25 +193,39 @@ public class tileGen : MonoBehaviour
     //checks if theres a tile in that location, if not then put one down
     void updateBoard()
     {
+        int newI = 0;
+        int newJ = 0;
+        Vector2 newCenter = Vector2.zero;
+        Vector3 newPosition = Vector3.zero;
+        Vector2 anotherCenter = Vector2.zero;
+        Tile thisTile = null;
+
         for (int i = -1; i <= 1; i++)
         {
             for (int j = -1; j <= 1; j++)
             {
-                localTerrain[i + 1, j + 1] = new Vector2(Center.x + i, Center.y + j);
+                newI = i + 1;
+                newJ = j + 1;
+                newCenter = new Vector2(Center.x + i, Center.y + j);
+                newPosition = new Vector3(currX + i * 612, 0, currZ + j * 612);
 
-                if (!Physics.CheckSphere(new Vector3(currX + i * 612, 0, currZ + j * 612), 0.4f))
+                localTerrain[newI, newJ] = newCenter;
+
+                if (!Physics.CheckSphere(newPosition, 0.4f))
                 {
-                    tiles[i + 1, j + 1] = SimplePool.Spawn(tile, new Vector3(currX + i * 612, 0f, currZ + j * 612), Quaternion.identity);
-                    StartCoroutine(tiles[i + 1, j + 1].GetComponent<Tile>().CreateTile(new Vector2(Center.x + i, Center.y - j), 
-                        new Vector3(currX + i * 612, 0f, currZ + j * 611), 
+                    tiles[newI,newJ] = SimplePool.Spawn(tile, new Vector3(newPosition.x, 0f, newPosition.z), Quaternion.identity);
+                    thisTile = tiles[newI, newJ].GetComponent<Tile>();
+                    anotherCenter = new Vector2(Center.x + i, Center.y - j);
+                    StartCoroutine(thisTile.CreateTile(anotherCenter, 
+                        new Vector3(newPosition.x, 0f, newPosition.z), 
                         16));
                 }
                 else {
                     //Collider[] temp = Physics.OverlapSphere(new Vector3(currX + i * 612, 0f, currZ + j * 612), 0.4f);
                     //tiles[i + 1, j + 1] = temp[0].gameObject;
-                     var tile = TileHelper.FindTile(new Vector3(currX + i * 612, 0f, currZ + j * 612), 0.4f);
+                    var tile = TileHelper.FindTile(new Vector3(newPosition.x, 0f, newPosition.z), 0.4f);
                     if(!ReferenceEquals(tile,null))
-                        tiles[i + 1, j + 1] = tile.gameObject;
+                        tiles[newI,newJ] = tile.gameObject;
                 }
             }
         }
