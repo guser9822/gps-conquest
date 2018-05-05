@@ -5,7 +5,7 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
-using TC.Common;
+using TC.GPConquest.GpsMap.Helpers;
 
 namespace TC.GPConquest.Server {
 
