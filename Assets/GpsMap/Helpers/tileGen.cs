@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using Assets;
 using TC.GPConquest.Player;
+using TC.GPConquest.GpsMap.Helpers;
 
 /// <summary>
 /// Breve introduzione : Il seguente progetto è in sostanza un clone di Pokemon-Go / Ingress con diverse aggiunte e personalizzazioni.
@@ -206,8 +207,11 @@ public class tileGen : MonoBehaviour
                         16));
                 }
                 else {
-                    Collider[] temp = Physics.OverlapSphere(new Vector3(currX + i * 612, 0f, currZ + j * 612), 0.4f);
-                    tiles[i + 1, j + 1] = temp[0].gameObject;
+                    //Collider[] temp = Physics.OverlapSphere(new Vector3(currX + i * 612, 0f, currZ + j * 612), 0.4f);
+                    //tiles[i + 1, j + 1] = temp[0].gameObject;
+                     var tile = TileHelper.FindTile(new Vector3(currX + i * 612, 0f, currZ + j * 612), 0.4f);
+                    if(!ReferenceEquals(tile,null))
+                        tiles[i + 1, j + 1] = tile.gameObject;
                 }
             }
         }

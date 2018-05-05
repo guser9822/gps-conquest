@@ -4,9 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TC.Common;
 using UnityEngine;
+using System.Linq;
 
 
-namespace TC.GPConquest.GpsMap.Helpers {
+namespace TC.GPConquest.GpsMap.Helpers{
 
     public static class TileHelper
     {
@@ -15,36 +16,45 @@ namespace TC.GPConquest.GpsMap.Helpers {
         {
             var checkResult = new CheckNearbyTileResult();
             Vector3 _positionOfCollision = Vector3.zero;
-            foreach (var orientation in Enum.GetValues(typeof(TileOrientationTable)))
-            {
-                var tileOrien = (TileOrientationTable)orientation;
-                _positionOfCollision = CalculateCollisionPoint(tileOrien, _tilePosition);
 
-                if (!tileOrien.Equals(TileOrientationTable.NOT_INTERESTING_VALUE) &&
-                    Physics.CheckSphere(_positionOfCollision, 0.5f))
-                {
-                    checkResult.IsCollided = true;
-                    checkResult.TileOrientationCollided = tileOrien;
-                    break;
-                }
-            }
+            checkResult.IsCollided = Enum.GetValues(typeof(TileOrientationTable)).
+                Cast<TileOrientationTable>().
+                Any<TileOrientationTable>(
+                    tileOrien =>
+                    {
+                        _positionOfCollision = CalculateCollisionPoint(tileOrien, _tilePosition);
+                        if (!tileOrien.Equals(TileOrientationTable.NOT_INTERESTING_VALUE) &&
+                            Physics.CheckSphere(_positionOfCollision, 0.5f))
+                        {
+                            checkResult.TileOrientationCollided = tileOrien;
+                            return true;
+                        }
+                    return false;
+                });
 
             if (checkResult.IsCollided)
             {
-                var collisions = Physics.OverlapSphere(_positionOfCollision, 0.5f);
-                foreach (var coll in collisions)
+                var tile = FindTile(_positionOfCollision, 0.5f);
+                if (!ReferenceEquals(tile, null))
                 {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log(checkResult.TileOrientationCollided.ToString() + " " + _tileName + " from " + t.name);
-                        checkResult.RealPosition = CalculateRealPosition(checkResult.TileOrientationCollided, t.cen);
-                        break;
-                    }
+                    Debug.Log(checkResult.TileOrientationCollided.ToString() + " " + _tileName + " from " + tile.name);
+                    checkResult.RealPosition = CalculateRealPosition(checkResult.TileOrientationCollided, tile.cen);
                 }
             }
 
             return checkResult;
+        }
+
+        /*
+         * Get the first tile, if exists, that collide with the given position and ray else null
+         * **/
+        public static Tile FindTile(Vector3 _positionOfCollision, float _ray) {
+            var collisions = Physics.OverlapSphere(_positionOfCollision, _ray);
+            var tileCollider = Enumerable.ToList<Collider>(collisions).FirstOrDefault<Collider>(x =>
+            {
+                return x.CompareTag(CommonNames.TILE_TAG);
+            });
+            return ReferenceEquals(tileCollider, null) ? null : tileCollider.gameObject.GetComponent<Tile>();
         }
 
         private static Vector3 CalculateCollisionPoint(TileOrientationTable _tileOrientation, Vector3 _tilePosition)
