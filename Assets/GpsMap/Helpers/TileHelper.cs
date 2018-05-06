@@ -45,18 +45,6 @@ namespace TC.GPConquest.GpsMap.Helpers{
             return checkResult;
         }
 
-        /*
-         * Get the first tile, if exists, that collide with the given position and ray else null
-         * **/
-        public static Tile FindTile(Vector3 _positionOfCollision, float _ray) {
-            var collisions = Physics.OverlapSphere(_positionOfCollision, _ray);
-            var tileCollider = Enumerable.ToList<Collider>(collisions).FirstOrDefault<Collider>(x =>
-            {
-                return x.CompareTag(CommonNames.TILE_TAG);
-            });
-            return ReferenceEquals(tileCollider, null) ? null : tileCollider.gameObject.GetComponent<Tile>();
-        }
-
         private static Vector3 CalculateCollisionPoint(TileOrientationTable _tileOrientation, Vector3 _tilePosition)
         {
             Vector3 tp = new Vector3(_tilePosition.x, _tilePosition.y, _tilePosition.z);
@@ -125,6 +113,19 @@ namespace TC.GPConquest.GpsMap.Helpers{
                     break;
             }
             return calcCen;
+        }
+
+        /*
+        * Get the first tile, if exists, that collide with the given position and ray else null
+        * **/
+        public static Tile FindTile(Vector3 _positionOfCollision, float _ray)
+        {
+            var collisions = Physics.OverlapSphere(_positionOfCollision, _ray);
+            var tileCollider = Enumerable.ToList<Collider>(collisions).FirstOrDefault<Collider>(x =>
+            {
+                return x.CompareTag(CommonNames.TILE_TAG);
+            });
+            return ReferenceEquals(tileCollider, null) ? null : tileCollider.gameObject.GetComponent<Tile>();
         }
 
         public enum TileOrientationTable

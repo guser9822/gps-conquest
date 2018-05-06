@@ -20,7 +20,6 @@ namespace Assets
         Dictionary<Vector3, WaterHolder> WaterDictionary { get; set; }
         Dictionary<Vector3, ParkHolder> ParkDictionary { get; set; }
         public bool DownlaodTiles;
-        private float radiusCheckSphere;
 
         private void Awake()
         {
@@ -39,146 +38,11 @@ namespace Assets
         {
             Vector3 tp = transform.position;
 
-            //TileHelper.CheckNearbyTileResult collisionResult = TileHelper.CheckNearbyTile(tp, gameObject.name);
+            TileHelper.CheckNearbyTileResult collisionResult = 
+                TileHelper.CheckNearbyTile(new Vector3(tp.x,tp.y,tp.z), gameObject.name);
 
-            //if (collisionResult.IsCollided)
-            //    cen = collisionResult.RealPosition;
-            //else cen = realPos;
-
-            //Tile will try to create itself from nearby tiles, otherwise it will not
-            if (Physics.CheckSphere(tp + Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("-r " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("-r " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.right;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp - Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("+r " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.right;
-                var collisions = Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("+r " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.right;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612, 0.5f))
-            {
-                //Debug.Log("+u " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up;
-                var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("+u " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.up;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612, 0.5f))
-            {
-                //Debug.Log("-u " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up;
-                var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("-u  " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.up;
-                        break;
-                    }
-                }
-            }
-            //diagonals
-            //honestly these should never really be called except for the beginning
-            //also may be somewhat broken atm
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("--d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("--d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.up - Vector2.right;
-                        break;
-                    }
-                }
-
-            }
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("-+d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up + Vector2.right;
-                var collisions = Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("-+d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen - Vector2.up + Vector2.right;
-                        break;
-                    }
-                }
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("+-d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("+-d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.up - Vector2.right;
-                        break;
-                    }
-                }
-
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f))
-            {
-                //Debug.Log("++d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
-                //realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
-                var collisions = Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f);
-                foreach (var coll in collisions)
-                {
-                    if (coll.CompareTag(CommonNames.TILE_TAG))
-                    {
-                        var t = coll.gameObject.GetComponent<Tile>();
-                        Debug.Log("++d " + gameObject.name + " from " + t.name);
-                        realPos = t.cen + Vector2.up - Vector2.right;
-                        break;
-                    }
-                }
-            }
+            if (collisionResult.IsCollided)
+                realPos = collisionResult.RealPosition;
 
             cen = realPos;
 
@@ -215,16 +79,6 @@ namespace Assets
                 Debug.Log("Tile downloaded..");
                 constructTiles(mapData, realPos, zoom, worldCenter);
             }
-
-            //gameObject.AddComponent<BoxCollider>();
-
-            //Rect = GM.TileBounds(realPos, zoom);
-
-            ////make em
-            //CreateBuildings(mapData["buildings"], worldCenter);
-            //CreateWater(mapData["water"], worldCenter);
-            //CreateParks(mapData["landuse"], worldCenter);
-            //CreateRoads(mapData["roads"], worldCenter);
             
         }
 

@@ -221,8 +221,6 @@ public class tileGen : MonoBehaviour
                         16));
                 }
                 else {
-                    //Collider[] temp = Physics.OverlapSphere(new Vector3(currX + i * 612, 0f, currZ + j * 612), 0.4f);
-                    //tiles[i + 1, j + 1] = temp[0].gameObject;
                     var tile = TileHelper.FindTile(new Vector3(newPosition.x, 0f, newPosition.z), 0.4f);
                     if(!ReferenceEquals(tile,null))
                         tiles[newI,newJ] = tile.gameObject;
