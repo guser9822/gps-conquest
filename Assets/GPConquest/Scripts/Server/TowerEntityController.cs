@@ -39,6 +39,8 @@ namespace TC.GPConquest.Server {
         {
             OwnerFaction = args.GetNext<string>();
 
+            GPSCoords = networkObject.towerGPSCoords;
+
             //Update tower position on network
             transform.position = networkObject.towerNetPosition;
         }
