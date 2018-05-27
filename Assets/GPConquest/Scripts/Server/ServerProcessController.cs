@@ -21,7 +21,7 @@ namespace TC.GPConquest.Server
         {
             new Vector2(40.856480f, 14.277191f),
             new Vector2(40.857330f, 14.278447f),
-            new Vector2(40.856883f, 14.278750f)
+            new Vector2(40.857128f, 14.278398f)
         };
 
         private void Awake()

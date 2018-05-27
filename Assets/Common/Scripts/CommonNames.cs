@@ -25,6 +25,7 @@ namespace TC.Common {
         public static readonly string CLIENT_OBJ_CONTROLLER_TAG = "GameStatusController";
         public static readonly string TILE_TAG = "Tile";
         public static readonly string TOWER_TAG= "Tower";
+        public static readonly string AVATOR_TAG = "Avator";
         #endregion
     }
 

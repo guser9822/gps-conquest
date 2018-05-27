@@ -10,6 +10,7 @@ TagManager:
   - ClientController
   - Tower
   - GameStatusController
+  - Avator
   layers:
   - Default
   - TransparentFX

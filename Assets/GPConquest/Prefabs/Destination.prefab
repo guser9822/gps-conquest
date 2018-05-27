@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114091747553171894}
   m_Layer: 0
   m_Name: Destination
-  m_TagString: Untagged
+  m_TagString: Destination
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,10 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a4628fe96f85d468985ab8378361a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DestinationCamera: {fileID: 0}
   editorMode: 1
   sphere: {fileID: 1656081818152400}
   cursorColor: {r: 0, g: 0, b: 0, a: 0}
-  playerName: 
+  PlayerName: 
   isGiantMode: 0
 --- !u!135 &135693041149910444
 SphereCollider:

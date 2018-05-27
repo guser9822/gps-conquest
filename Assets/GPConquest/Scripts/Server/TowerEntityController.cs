@@ -6,6 +6,7 @@ using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
 using TC.GPConquest.GpsMap.Helpers;
+using TC.Common;
 
 namespace TC.GPConquest.Server {
 
@@ -14,6 +15,7 @@ namespace TC.GPConquest.Server {
 
         public string OwnerFaction;
         public Vector2 GPSCoords;//used just for visualization in the inspector
+
 
         public void InitTowerEntityController(Vector2 _GPSCoords)
         {
@@ -58,5 +60,18 @@ namespace TC.GPConquest.Server {
             result = 13 * result + obj.networkObject.towerGPSCoords.GetHashCode();
             return result;
         }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag(CommonNames.AVATOR_TAG))
+                Debug.Log("Collision enter : " + other.gameObject.name);
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(CommonNames.AVATOR_TAG))
+                Debug.Log("Collision exit : " + other.gameObject.name);
+        }
+
     }
 }
