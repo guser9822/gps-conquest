@@ -5,6 +5,7 @@ using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
+using System.Linq;
 using TC.GPConquest.GpsMap.Helpers;
 using TC.Common;
 
@@ -15,7 +16,7 @@ namespace TC.GPConquest.Server {
 
         public string OwnerFaction;
         public Vector2 GPSCoords;//used just for visualization in the inspector
-
+        public HashSet<uint> PlayersCapturingTheTower = new HashSet<uint>();
 
         public void InitTowerEntityController(Vector2 _GPSCoords)
         {
@@ -63,15 +64,40 @@ namespace TC.GPConquest.Server {
 
         void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag(CommonNames.AVATOR_TAG))
+            if (other.CompareTag(CommonNames.AVATOR_TAG))
+            {
                 Debug.Log("Collision enter : " + other.gameObject.name);
+                var playerNetObj = other.GetComponent<PlayerAvatorControllerBehavior>().networkObject;
+                networkObject.SendRpc(RPC_SEND_PLAYER_NET_ID,Receivers.AllBuffered,playerNetObj.NetworkId,true);
+            }
         }
 
         void OnTriggerExit(Collider other)
         {
             if (other.CompareTag(CommonNames.AVATOR_TAG))
+            {
                 Debug.Log("Collision exit : " + other.gameObject.name);
+                var playerNetObj = other.GetComponent<PlayerAvatorControllerBehavior>().networkObject;
+                networkObject.SendRpc(RPC_SEND_PLAYER_NET_ID, Receivers.AllBuffered, playerNetObj.NetworkId, false);
+            }
         }
 
+        public override void SendPlayerNetId(RpcArgs args)
+        {
+            var playerNetId = args.GetNext<uint>();
+            bool isCapturing = args.GetNext<bool>();
+
+            if (isCapturing)
+            {
+                if (!PlayersCapturingTheTower.Contains(playerNetId))
+                    PlayersCapturingTheTower.Add(playerNetId);
+            }
+            else PlayersCapturingTheTower.Remove(playerNetId);
+            if (PlayersCapturingTheTower.Count > 0)
+            {
+                foreach (var x in PlayersCapturingTheTower)
+                    Debug.Log("Player Id : "+x);
+            }
+        }
     }
 }

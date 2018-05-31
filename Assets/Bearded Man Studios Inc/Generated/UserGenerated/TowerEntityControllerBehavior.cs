@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"string\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"_factionOwner\"]]")]
+	[GeneratedRPC("{\"types\":[[\"string\"][\"uint\", \"bool\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"_factionOwner\"][\"_playerNetId\", \"_isCapturing\"]]")]
 	public abstract partial class TowerEntityControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_TOWER_ATTRRIBUTES = 0 + 5;
+		public const byte RPC_SEND_PLAYER_NET_ID = 1 + 5;
 		
 		public TowerEntityControllerNetworkObject networkObject = null;
 
@@ -23,6 +24,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 			base.SetupHelperRpcs(networkObject);
 			networkObject.RegisterRpc("UpdateTowerAttrributes", UpdateTowerAttrributes, typeof(string));
+			networkObject.RegisterRpc("SendPlayerNetId", SendPlayerNetId, typeof(uint), typeof(bool));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -102,6 +104,12 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// string _factionOwner
 		/// </summary>
 		public abstract void UpdateTowerAttrributes(RpcArgs args);
+		/// <summary>
+		/// Arguments:
+		/// uint _playerNetId
+		/// bool _isCapturing
+		/// </summary>
+		public abstract void SendPlayerNetId(RpcArgs args);
 
 		// DO NOT TOUCH, THIS GETS GENERATED PLEASE EXTEND THIS CLASS IF YOU WISH TO HAVE CUSTOM CODE ADDITIONS
 	}
