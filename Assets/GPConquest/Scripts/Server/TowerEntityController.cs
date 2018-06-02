@@ -19,8 +19,12 @@ namespace TC.GPConquest.Server
         public string OwnerFaction;
         public Vector2 GPSCoords;//used just for visualization in the inspector
         private Dictionary<uint, string> DictPlayerNameCapturing = new Dictionary<uint, string>();
-        public List<string> PlayerCapturingTowerList = new List<string>();
 
+        //Table <Tuple2<NetworkId,Nickname>,Time spent in the capture of the tower>>
+        private Dictionary<GPSConqTuple2<string, uint>,double> PlayerNetIdNameCaptureTimeTable = 
+            new Dictionary<GPSConqTuple2<string, uint>,double>();
+
+        public List<string> PlayerCapturingTowerList = new List<string>();
         private void ActivateBoxColliders(bool _activate)
         {
             var boxColls = GetComponents<BoxCollider>();
@@ -32,6 +36,7 @@ namespace TC.GPConquest.Server
 
             if (!networkObject.IsOwner) return;
 
+            //Box colliders are disabled by default in the prefab in order to avoid to add them to the tower capture at spawn time
             ActivateBoxColliders(true);
 
             GPSCoords = networkObject.towerGPSCoords = _GPSCoords;
@@ -61,6 +66,27 @@ namespace TC.GPConquest.Server
 
             ActivateBoxColliders(true);
 
+        }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as TowerEntityController;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return this.networkObject.NetworkId == item.networkObject.NetworkId &&
+                this.networkObject.towerGPSCoords == item.networkObject.towerGPSCoords;
+        }
+
+        public override int GetHashCode()
+        {
+            int result = 89;
+            result = 13 * result + this.networkObject.NetworkId.GetHashCode();
+            result = 13 * result + this.networkObject.towerGPSCoords.GetHashCode();
+            return result;
         }
 
         public bool Equals(TowerEntityController x, TowerEntityController y)
@@ -100,7 +126,7 @@ namespace TC.GPConquest.Server
                     , playerNetId
                     , _isCapturing);
 
-                networkObject.SendRpc(RPC_SEND_PLAYER_NET_ID
+                networkObject.SendRpc(RPC_SEND_PLAYER_INFO
                     , Receivers.AllBuffered
                     , playerNetId
                     , _isCapturing
@@ -113,33 +139,33 @@ namespace TC.GPConquest.Server
                                                         ,uint _playerNetId
                                                         ,bool _isCapturing)
         {
-            string playerNicknameNetId;
-            string nickName;
+            GPSConqTuple2<string, uint> playerKey = new GPSConqTuple2<string,uint>(_name,_playerNetId);
+            var playerKeyString = playerKey.ToString();
+            double val = 0d;
             bool exists;
 
             if (_isCapturing)
             {
-                exists = DictPlayerNameCapturing.TryGetValue(_playerNetId, out nickName);
+                exists = PlayerNetIdNameCaptureTimeTable.TryGetValue(playerKey, out val);
                 if (!exists)
                 {
-                    DictPlayerNameCapturing.Add(_playerNetId, _name);
-                    playerNicknameNetId = _name.ToString() + " - " + _playerNetId.ToString();
-                    PlayerCapturingTowerList.Add(playerNicknameNetId);
+                    PlayerNetIdNameCaptureTimeTable.Add(playerKey, 0d);
+                    PlayerCapturingTowerList.Add(playerKeyString);
                 }
             }
             else
             {
-                exists = DictPlayerNameCapturing.TryGetValue(_playerNetId, out nickName);
+                exists = PlayerNetIdNameCaptureTimeTable.TryGetValue(playerKey, out val);
                 if (exists)
                 {
                     DictPlayerNameCapturing.Remove(_playerNetId);
-                    playerNicknameNetId = nickName.ToString() + " - " + _playerNetId.ToString();
-                    PlayerCapturingTowerList.Remove(playerNicknameNetId);
+                    PlayerNetIdNameCaptureTimeTable.Remove(playerKey);
+                    PlayerCapturingTowerList.Remove(playerKeyString);
                 }
             }
         }
 
-        public override void SendPlayerNetId(RpcArgs args)
+        public override void SendPlayerInfo(RpcArgs args)
         {
             var playerNetId = args.GetNext<uint>();
             var isCapturing = args.GetNext<bool>();
