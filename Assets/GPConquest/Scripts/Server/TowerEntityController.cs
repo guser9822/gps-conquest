@@ -90,11 +90,11 @@ namespace TC.GPConquest.Server
         private void MangeCollision(Collider other, bool _isCapturing)
         {
 
-            if (other.CompareTag(CommonNames.AVATOR_TAG))
+            if (other.CompareTag(CommonNames.DESTINATION_TAG))
             {
-                var playerAvatorComponent = other.GetComponent<AvatorController>();
-                var playerNetId = playerAvatorComponent.networkObject.NetworkId;
-                var playerNickname = playerAvatorComponent.PlayerEntity.username;
+                var playerDestinationComponent = other.GetComponent<DestinationController>();
+                var playerNetId = playerDestinationComponent.networkObject.NetworkId;
+                var playerNickname = playerDestinationComponent.AvatorController.PlayerEntity.username;
 
                 AddOrDeletePlayerToTheCapturing(playerNickname
                     , playerNetId

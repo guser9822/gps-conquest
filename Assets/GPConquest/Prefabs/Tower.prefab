@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23946278823835514}
   - component: {fileID: 114658291459291444}
   - component: {fileID: 65581846774011442}
-  - component: {fileID: 54258371799032304}
+  - component: {fileID: 54679502774507456}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -154,7 +154,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1569749010823948}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54258371799032304
+--- !u!54 &54679502774507456
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -165,7 +165,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0

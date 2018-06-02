@@ -112,6 +112,7 @@ namespace TC.GPConquest.Player
             CurrentUserInfo = _destinationController.CurrentUserInformations;
             DestinationTransform = _destinationController.gameObject.GetComponent<Transform>();
             CameraOnDestination = _destinationController.DestinationCamera;
+            _destinationController.AvatorController = this;
         }
 
 

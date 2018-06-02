@@ -25,6 +25,7 @@ namespace TC.GPConquest.Player
         public float destAvatorDestDist { get; protected set; }
         public string SelectedUma { get; protected set; }
         public UserInformations CurrentUserInformations { get; private set; }
+        public AvatorController AvatorController { get; set; }
         #endregion
 
         #region  Attributes dedicated to UnityEditor
