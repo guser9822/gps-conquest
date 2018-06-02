@@ -11,7 +11,6 @@ namespace TC.GPConquest.MarkLight4GPConquest
     {
         public void CallServer()
         {
-            Debug.Log("LOL");
             SceneManager.LoadScene(GPCSceneManager.GetSceneIndex(GPCSceneManager.GPCSceneEnum.SERVER_SCENE));
         }
 

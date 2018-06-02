@@ -8,19 +8,31 @@ using System;
 using System.Linq;
 using TC.GPConquest.GpsMap.Helpers;
 using TC.Common;
+using TC.GPConquest.Player;
 
-namespace TC.GPConquest.Server {
+namespace TC.GPConquest.Server
+{
 
-    public class TowerEntityController : TowerEntityControllerBehavior,IEqualityComparer<TowerEntityController>
+    public class TowerEntityController : TowerEntityControllerBehavior, IEqualityComparer<TowerEntityController>
     {
 
         public string OwnerFaction;
         public Vector2 GPSCoords;//used just for visualization in the inspector
-        public HashSet<uint> PlayersCapturingTheTower = new HashSet<uint>();
+        private Dictionary<uint, string> DictPlayerNameCapturing = new Dictionary<uint, string>();
+        public List<string> PlayerCapturingTowerList = new List<string>();
+
+        private void ActivateBoxColliders(bool _activate)
+        {
+            var boxColls = GetComponents<BoxCollider>();
+            boxColls.ToList<BoxCollider>().ForEach(x => { x.enabled = _activate; });
+        }
 
         public void InitTowerEntityController(Vector2 _GPSCoords)
         {
+
             if (!networkObject.IsOwner) return;
+
+            ActivateBoxColliders(true);
 
             GPSCoords = networkObject.towerGPSCoords = _GPSCoords;
 
@@ -46,6 +58,9 @@ namespace TC.GPConquest.Server {
 
             //Update tower position on network
             transform.position = networkObject.towerNetPosition;
+
+            ActivateBoxColliders(true);
+
         }
 
         public bool Equals(TowerEntityController x, TowerEntityController y)
@@ -64,40 +79,75 @@ namespace TC.GPConquest.Server {
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(CommonNames.AVATOR_TAG))
-            {
-                Debug.Log("Collision enter : " + other.gameObject.name);
-                var playerNetObj = other.GetComponent<PlayerAvatorControllerBehavior>().networkObject;
-                networkObject.SendRpc(RPC_SEND_PLAYER_NET_ID,Receivers.AllBuffered,playerNetObj.NetworkId,true);
-            }
+            MangeCollision(other, true);
         }
 
         void OnTriggerExit(Collider other)
         {
+            MangeCollision(other, false);
+        }
+
+        private void MangeCollision(Collider other, bool _isCapturing)
+        {
+
             if (other.CompareTag(CommonNames.AVATOR_TAG))
             {
-                Debug.Log("Collision exit : " + other.gameObject.name);
-                var playerNetObj = other.GetComponent<PlayerAvatorControllerBehavior>().networkObject;
-                networkObject.SendRpc(RPC_SEND_PLAYER_NET_ID, Receivers.AllBuffered, playerNetObj.NetworkId, false);
+                var playerAvatorComponent = other.GetComponent<AvatorController>();
+                var playerNetId = playerAvatorComponent.networkObject.NetworkId;
+                var playerNickname = playerAvatorComponent.PlayerEntity.username;
+
+                AddOrDeletePlayerToTheCapturing(playerNickname
+                    , playerNetId
+                    , _isCapturing);
+
+                networkObject.SendRpc(RPC_SEND_PLAYER_NET_ID
+                    , Receivers.AllBuffered
+                    , playerNetId
+                    , _isCapturing
+                    , playerNickname);
+            }
+
+        }
+
+        protected void AddOrDeletePlayerToTheCapturing(string _name
+                                                        ,uint _playerNetId
+                                                        ,bool _isCapturing)
+        {
+            string playerNicknameNetId;
+            string nickName;
+            bool exists;
+
+            if (_isCapturing)
+            {
+                exists = DictPlayerNameCapturing.TryGetValue(_playerNetId, out nickName);
+                if (!exists)
+                {
+                    DictPlayerNameCapturing.Add(_playerNetId, _name);
+                    playerNicknameNetId = _name.ToString() + " - " + _playerNetId.ToString();
+                    PlayerCapturingTowerList.Add(playerNicknameNetId);
+                }
+            }
+            else
+            {
+                exists = DictPlayerNameCapturing.TryGetValue(_playerNetId, out nickName);
+                if (exists)
+                {
+                    DictPlayerNameCapturing.Remove(_playerNetId);
+                    playerNicknameNetId = nickName.ToString() + " - " + _playerNetId.ToString();
+                    PlayerCapturingTowerList.Remove(playerNicknameNetId);
+                }
             }
         }
 
         public override void SendPlayerNetId(RpcArgs args)
         {
             var playerNetId = args.GetNext<uint>();
-            bool isCapturing = args.GetNext<bool>();
+            var isCapturing = args.GetNext<bool>();
+            var playerNickname = args.GetNext<string>();
 
-            if (isCapturing)
-            {
-                if (!PlayersCapturingTheTower.Contains(playerNetId))
-                    PlayersCapturingTheTower.Add(playerNetId);
-            }
-            else PlayersCapturingTheTower.Remove(playerNetId);
-            if (PlayersCapturingTheTower.Count > 0)
-            {
-                foreach (var x in PlayersCapturingTheTower)
-                    Debug.Log("Player Id : "+x);
-            }
+            AddOrDeletePlayerToTheCapturing(playerNickname
+                                            ,playerNetId
+                                            ,isCapturing);
         }
     }
 }

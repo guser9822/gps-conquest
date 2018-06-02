@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"string\"][\"uint\", \"bool\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"_factionOwner\"][\"_playerNetId\", \"_isCapturing\"]]")]
+	[GeneratedRPC("{\"types\":[[\"string\"][\"uint\", \"bool\", \"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"_factionOwner\"][\"_playerNetId\", \"_isCapturing\", \"_playerNickname\"]]")]
 	public abstract partial class TowerEntityControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_TOWER_ATTRRIBUTES = 0 + 5;
@@ -24,7 +24,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 			base.SetupHelperRpcs(networkObject);
 			networkObject.RegisterRpc("UpdateTowerAttrributes", UpdateTowerAttrributes, typeof(string));
-			networkObject.RegisterRpc("SendPlayerNetId", SendPlayerNetId, typeof(uint), typeof(bool));
+			networkObject.RegisterRpc("SendPlayerNetId", SendPlayerNetId, typeof(uint), typeof(bool), typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -108,6 +108,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// Arguments:
 		/// uint _playerNetId
 		/// bool _isCapturing
+		/// string _playerNickname
 		/// </summary>
 		public abstract void SendPlayerNetId(RpcArgs args);
 
