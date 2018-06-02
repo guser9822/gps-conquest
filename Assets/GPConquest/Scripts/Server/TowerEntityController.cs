@@ -116,22 +116,26 @@ namespace TC.GPConquest.Server
         private void MangeCollision(Collider other, bool _isCapturing)
         {
 
-            if (other.CompareTag(CommonNames.DESTINATION_TAG))
+            if (networkObject.IsOwner)
             {
-                var playerDestinationComponent = other.GetComponent<DestinationController>();
-                var playerNetId = playerDestinationComponent.networkObject.NetworkId;
-                var playerNickname = playerDestinationComponent.AvatorController.PlayerEntity.username;
+                if (other.CompareTag(CommonNames.DESTINATION_TAG))
+                {
+                    var playerDestinationComponent = other.GetComponent<DestinationController>();
+                    var playerNetId = playerDestinationComponent.networkObject.NetworkId;
+                    var playerNickname = playerDestinationComponent.AvatorController.PlayerEntity.username;
 
-                AddOrDeletePlayerToTheCapturing(playerNickname
-                    , playerNetId
-                    , _isCapturing);
+                    AddOrDeletePlayerToTheCapturing(playerNickname
+                        , playerNetId
+                        , _isCapturing);
 
-                networkObject.SendRpc(RPC_SEND_PLAYER_INFO
-                    , Receivers.AllBuffered
-                    , playerNetId
-                    , _isCapturing
-                    , playerNickname);
+                    networkObject.SendRpc(RPC_SEND_PLAYER_INFO
+                        , Receivers.AllBuffered
+                        , playerNetId
+                        , _isCapturing
+                        , playerNickname);
+                }
             }
+
 
         }
 
