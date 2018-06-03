@@ -44,9 +44,6 @@ namespace TC.GPConquest.Player
 
         public void InitAvatorController(DestinationController _destinationController)
         {
-            if (!networkObject.IsOwner)
-                return;
-
             //Update shared attributes according the choosen size of the avator
             if (_destinationController.isGiantMode)
             {

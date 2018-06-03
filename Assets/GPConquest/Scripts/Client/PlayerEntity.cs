@@ -34,9 +34,6 @@ namespace TC.GPConquest.Player
             uint avatorNetId, 
             Camera _cameraOnDestination)
         {
-            if (!networkObject.IsOwner)
-                return true;
-
             //Gets the AvatorController transform
             Transform parentTransform = _avatorControllerReference.gameObject.GetComponent<Transform>();
 
