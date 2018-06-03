@@ -21,6 +21,10 @@ namespace TC.GPConquest.Server
         public void InitTowerCaptureController(TowerEntityController _towerEntityController)
         {
             UpdateTowerCaptureControllerAttributes(_towerEntityController);
+
+            //Destroy this object when the Tower is destroyed
+            _towerEntityController.networkObject.onDestroy += NetworkObject_onDestroy;
+
             networkObject.SendRpc(RPC_UPDATE_CAPTURE_CONTROLLER_ON_NETWORK
                 , Receivers.AllBuffered);
         }
@@ -43,6 +47,12 @@ namespace TC.GPConquest.Server
             networkObject.TowerEntityNetId = _towerEntityController.networkObject.NetworkId;
             TowerEntityController = _towerEntityController;
             transform.SetParent(TowerEntityController.transform);
+        }
+
+        private void NetworkObject_onDestroy(NetWorker sender)
+        {
+            networkObject.ClearRpcBuffer();
+            networkObject.Destroy();
         }
 
     }

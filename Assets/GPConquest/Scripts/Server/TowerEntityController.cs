@@ -38,9 +38,6 @@ namespace TC.GPConquest.Server
 
         public void InitTowerEntityController(Vector2 _GPSCoords)
         {
-
-            if (!networkObject.IsOwner) return;
-
             //Box colliders are disabled by default in the prefab in order to avoid to add them to the tower capture at spawn time
             ActivateBoxColliders(true);
 
