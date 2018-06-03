@@ -56,8 +56,8 @@ MonoBehaviour:
   TestNetworkObject: []
   TowerEntityControllerNetworkObject:
   - {fileID: 1569749010823948, guid: 374b3bb271af4d6488ca420a686623d9, type: 2}
-  TowerCaptureNetworkObject:
-  - {fileID: 0}
+  TowerCaptureNetworkControllerNetworkObject:
+  - {fileID: 1867191916972572, guid: 1f3072104a10f5b4aa6a0548067267a0, type: 2}
   automaticScenes: 1
 --- !u!1001 &100100000
 Prefab:

@@ -49,6 +49,7 @@ namespace TC.GPConquest.Player
 
         protected void InitDestinationController()
         {
+            //This is necessary since we are overriding NetworkStart and the code then will be executed on proprietary and non process
             if (!networkObject.IsOwner)
                 return;
 

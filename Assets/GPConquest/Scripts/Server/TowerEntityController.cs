@@ -18,13 +18,18 @@ namespace TC.GPConquest.Server
 
         public string OwnerFaction;
         public Vector2 GPSCoords;//used just for visualization in the inspector
-        private Dictionary<uint, string> DictPlayerNameCapturing = new Dictionary<uint, string>();
+        public TowerCaptureController TowerCaptureController {get;set;}
 
         //Table <Tuple2<NetworkId,Nickname>,Time spent in the capture of the tower>>
         private Dictionary<GPSConqTuple2<string, uint>,double> PlayerNetIdNameCaptureTimeTable = 
             new Dictionary<GPSConqTuple2<string, uint>,double>();
 
+        //Map that contains the amount of time passed since each faction is trying to capture the tower
+        private Dictionary<string, double> FactionsCaptureTime = 
+            new Dictionary<string, double>();
+
         public List<string> PlayerCapturingTowerList = new List<string>();
+
         private void ActivateBoxColliders(bool _activate)
         {
             var boxColls = GetComponents<BoxCollider>();
@@ -50,22 +55,28 @@ namespace TC.GPConquest.Server
             //Update tower position on client
             transform.position = _towerPos;
 
+            //Spawn tower capture controller on the network on the same position of the tower
+            var towerCaptureController = NetworkManager.Instance.InstantiateTowerCaptureNetworkController(0,transform.position);
+            towerCaptureController.networkStarted += TowerCaptureController_networkStarted;
+
             networkObject.SendRpc(RPC_UPDATE_TOWER_ATTRRIBUTES,
                Receivers.AllBuffered,
                OwnerFaction);
         }
 
+        private void TowerCaptureController_networkStarted(NetworkBehavior behavior)
+        {
+            TowerCaptureController = behavior.GetComponent<TowerCaptureController>();
+            TowerCaptureController.InitTowerCaptureController(this);
+        }
+
         public override void UpdateTowerAttrributes(RpcArgs args)
         {
             OwnerFaction = args.GetNext<string>();
-
             GPSCoords = networkObject.towerGPSCoords;
-
             //Update tower position on network
             transform.position = networkObject.towerNetPosition;
-
             ActivateBoxColliders(true);
-
         }
 
         public override bool Equals(object obj)
@@ -162,7 +173,6 @@ namespace TC.GPConquest.Server
                 exists = PlayerNetIdNameCaptureTimeTable.TryGetValue(playerKey, out val);
                 if (exists)
                 {
-                    DictPlayerNameCapturing.Remove(_playerNetId);
                     PlayerNetIdNameCaptureTimeTable.Remove(playerKey);
                     PlayerCapturingTowerList.Remove(playerKeyString);
                 }
@@ -179,5 +189,6 @@ namespace TC.GPConquest.Server
                                             ,playerNetId
                                             ,isCapturing);
         }
+
     }
 }

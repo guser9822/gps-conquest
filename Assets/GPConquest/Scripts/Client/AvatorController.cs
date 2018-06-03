@@ -117,7 +117,7 @@ namespace TC.GPConquest.Player
 
 
         // Updates the UMA avator attached to this game object
-        private void CreateAndSpawnUMA(String _selectedUma)
+        private void CreateAndSpawnUMA(string _selectedUma)
         {
             UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
             //Create a UMA avator and bind it to the DynamicAvator of this object
