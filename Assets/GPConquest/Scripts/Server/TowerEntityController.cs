@@ -20,16 +20,6 @@ namespace TC.GPConquest.Server
         public Vector2 GPSCoords;//used just for visualization in the inspector
         public TowerCaptureController TowerCaptureController {get;set;}
 
-        //Table <Tuple2<NetworkId,Nickname>,Time spent in the capture of the tower>>
-        private Dictionary<GPSConqTuple2<string, uint>,double> PlayerNetIdNameCaptureTimeTable = 
-            new Dictionary<GPSConqTuple2<string, uint>,double>();
-
-        //Map that contains the amount of time passed since each faction is trying to capture the tower
-        private Dictionary<string, double> FactionsCaptureTime = 
-            new Dictionary<string, double>();
-
-        public List<string> PlayerCapturingTowerList = new List<string>();
-
         private void ActivateBoxColliders(bool _activate)
         {
             var boxColls = GetComponents<BoxCollider>();
@@ -129,62 +119,10 @@ namespace TC.GPConquest.Server
                 if (other.CompareTag(CommonNames.DESTINATION_TAG))
                 {
                     var playerDestinationComponent = other.GetComponent<DestinationController>();
-                    var playerNetId = playerDestinationComponent.networkObject.NetworkId;
-                    var playerNickname = playerDestinationComponent.AvatorController.PlayerEntity.username;
-
-                    AddOrDeletePlayerToTheCapturing(playerNickname
-                        , playerNetId
-                        , _isCapturing);
-
-                    networkObject.SendRpc(RPC_SEND_PLAYER_INFO
-                        , Receivers.AllBuffered
-                        , playerNetId
-                        , _isCapturing
-                        , playerNickname);
+                    TowerCaptureController.CheckForCapture(playerDestinationComponent, _isCapturing);
                 }
+
             }
-
-
-        }
-
-        protected void AddOrDeletePlayerToTheCapturing(string _name
-                                                        ,uint _playerNetId
-                                                        ,bool _isCapturing)
-        {
-            GPSConqTuple2<string, uint> playerKey = new GPSConqTuple2<string,uint>(_name,_playerNetId);
-            var playerKeyString = playerKey.ToString();
-            double val = 0d;
-            bool exists;
-
-            if (_isCapturing)
-            {
-                exists = PlayerNetIdNameCaptureTimeTable.TryGetValue(playerKey, out val);
-                if (!exists)
-                {
-                    PlayerNetIdNameCaptureTimeTable.Add(playerKey, 0d);
-                    PlayerCapturingTowerList.Add(playerKeyString);
-                }
-            }
-            else
-            {
-                exists = PlayerNetIdNameCaptureTimeTable.TryGetValue(playerKey, out val);
-                if (exists)
-                {
-                    PlayerNetIdNameCaptureTimeTable.Remove(playerKey);
-                    PlayerCapturingTowerList.Remove(playerKeyString);
-                }
-            }
-        }
-
-        public override void SendPlayerInfo(RpcArgs args)
-        {
-            var playerNetId = args.GetNext<uint>();
-            var isCapturing = args.GetNext<bool>();
-            var playerNickname = args.GetNext<string>();
-
-            AddOrDeletePlayerToTheCapturing(playerNickname
-                                            ,playerNetId
-                                            ,isCapturing);
         }
 
     }

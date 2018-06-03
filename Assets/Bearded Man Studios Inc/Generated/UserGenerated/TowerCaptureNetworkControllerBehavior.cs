@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[]]")]
+	[GeneratedRPC("{\"types\":[[][\"uint\", \"bool\", \"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[][\"_playerNetId\", \"_isCapturing\", \"_playerNickname\"]]")]
 	public abstract partial class TowerCaptureNetworkControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_CAPTURE_CONTROLLER_ON_NETWORK = 0 + 5;
+		public const byte RPC_UPDATE_CAPTURE_ON_NETWORK = 1 + 5;
 		
 		public TowerCaptureNetworkControllerNetworkObject networkObject = null;
 
@@ -23,6 +24,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 			base.SetupHelperRpcs(networkObject);
 			networkObject.RegisterRpc("UpdateCaptureControllerOnNetwork", UpdateCaptureControllerOnNetwork);
+			networkObject.RegisterRpc("UpdateCaptureOnNetwork", UpdateCaptureOnNetwork, typeof(uint), typeof(bool), typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -101,6 +103,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// Arguments:
 		/// </summary>
 		public abstract void UpdateCaptureControllerOnNetwork(RpcArgs args);
+		/// <summary>
+		/// Arguments:
+		/// </summary>
+		public abstract void UpdateCaptureOnNetwork(RpcArgs args);
 
 		// DO NOT TOUCH, THIS GETS GENERATED PLEASE EXTEND THIS CLASS IF YOU WISH TO HAVE CUSTOM CODE ADDITIONS
 	}
