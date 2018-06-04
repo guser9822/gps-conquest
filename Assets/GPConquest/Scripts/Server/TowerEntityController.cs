@@ -103,15 +103,15 @@ namespace TC.GPConquest.Server
 
         void OnTriggerEnter(Collider other)
         {
-            MangeCollision(other, true);
+            ManageCollision(other, true);
         }
 
         void OnTriggerExit(Collider other)
         {
-            MangeCollision(other, false);
+            ManageCollision(other, false);
         }
 
-        private void MangeCollision(Collider other, bool _isCapturing)
+        private void ManageCollision(Collider other, bool _isCapturing)
         {
 
             if (networkObject.IsOwner)
