@@ -15,19 +15,40 @@ namespace TC.GPConquest.Server
 {
     public class TowerCaptureController : TowerCaptureNetworkControllerBehavior
     {
-
         public TowerEntityController TowerEntityController { get; set; }
+
+        //Capture Times expressed in milliseconds
+        private enum TIMES {
+            PLAYER_CONQUEST_TIME = 10000,
+            FACTION_CONQUEST_TIME = 30000,
+        };
 
         //Table <Tuple2<NetworkId,Nickname>,Time spent in the capture of the tower>>
         private Dictionary<GPSConqTuple2<string, uint>, double> PlayerNetIdNameCaptureTimeTable =
             new Dictionary<GPSConqTuple2<string, uint>, double>();
 
-        //Map that contains the amount of time passed since each faction is trying to capture the tower
-        private Dictionary<string, double> FactionsCaptureTime =
-            new Dictionary<string, double>();
-
         //Just for log through inspector
         public List<string> PlayerCapturingTowerList = new List<string>();
+
+        private void Update()
+        {
+
+            var playersCapturingTower = PlayerNetIdNameCaptureTimeTable.ToList();
+
+            if (playersCapturingTower.Count > 0)
+            {
+                playersCapturingTower.ForEach(
+                    s => {
+                        double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
+                                    double timeAdd = +timePassed + Time.deltaTime; //Add time passed since last update
+                        PlayerNetIdNameCaptureTimeTable.Add(s.Key, timeAdd);
+                        double newTime = 0D;
+                        PlayerNetIdNameCaptureTimeTable.TryGetValue(s.Key, out newTime);
+                        Debug.Log("The player " + s.Key.GetFrist() + " spent secs " + newTime);
+                    });
+            }
+
+        }
 
         public void InitTowerCaptureController(TowerEntityController _towerEntityController)
         {
