@@ -41,7 +41,7 @@ namespace TC.GPConquest.Server
                     s => {
                         double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
                                     double timeAdd = +timePassed + Time.deltaTime; //Add time passed since last update
-                        PlayerNetIdNameCaptureTimeTable.Add(s.Key, timeAdd);
+                        PlayerNetIdNameCaptureTimeTable[s.Key] =  timeAdd;
                         double newTime = 0D;
                         PlayerNetIdNameCaptureTimeTable.TryGetValue(s.Key, out newTime);
                         Debug.Log("The player " + s.Key.GetFrist() + " spent secs " + newTime);
