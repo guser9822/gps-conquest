@@ -33,21 +33,35 @@ namespace TC.GPConquest.Server
         private void Update()
         {
 
-            var playersCapturingTower = PlayerNetIdNameCaptureTimeTable.ToList();
+            if (networkObject.IsOwner)
+                PlayerNetIdNameCaptureTimeTable = PlayerCapturingCounters(PlayerNetIdNameCaptureTimeTable);
 
+        }
+
+        protected Dictionary<GPSConqTuple2<string, uint>, double> PlayerCapturingCounters(
+            Dictionary<GPSConqTuple2<string, uint>, double> _playerNetIdNameCaptureTimeTable) {
+            var playersCapturingTower = _playerNetIdNameCaptureTimeTable.ToList();
             if (playersCapturingTower.Count > 0)
             {
                 playersCapturingTower.ForEach(
                     s => {
+
                         double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
-                                    double timeAdd = +timePassed + Time.deltaTime; //Add time passed since last update
-                        PlayerNetIdNameCaptureTimeTable[s.Key] =  timeAdd;
+                        double timeAdd = +timePassed + Time.deltaTime; //Add time passed since last update
+                        _playerNetIdNameCaptureTimeTable[s.Key] = timeAdd;
                         double newTime = 0D;
-                        PlayerNetIdNameCaptureTimeTable.TryGetValue(s.Key, out newTime);
-                        Debug.Log("The player " + s.Key.GetFrist() + " spent secs " + newTime);
+                        _playerNetIdNameCaptureTimeTable.TryGetValue(s.Key, out newTime);
+
+                        Debug.Log("[Owner]The player " + s.Key.GetFrist() + " spent secs " + newTime);
+
+                    networkObject.SendRpc(RPC_UPDATE_CAPTURE_TIME_FOR_PLAYER,
+                        Receivers.AllBuffered,
+                        s.Key.GetFrist(),
+                        s.Key.GetSecond(),
+                        newTime);
                     });
             }
-
+            return _playerNetIdNameCaptureTimeTable;
         }
 
         public void InitTowerCaptureController(TowerEntityController _towerEntityController)
@@ -144,6 +158,23 @@ namespace TC.GPConquest.Server
         {
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
+        }
+
+        public override void UpdateCaptureTimeForPlayer(RpcArgs args)
+        {
+            var playerUsername =  args.GetNext<string>();
+            var playerNetId = args.GetNext<uint>();
+            var captureTimePassed = args.GetNext<double>();
+            GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(playerUsername, playerNetId);
+            var previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
+            PlayerNetIdNameCaptureTimeTable[thisPlayerKey] = captureTimePassed + previousElapsedTime;
+            previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
+            Debug.Log("[Proxy]The player " + thisPlayerKey.GetFrist() + " spent secs " + previousElapsedTime);
+        }
+
+        public double HowMuchTimeISpentForCapturingThisTower(string _playerUsername, uint _playerNetId) {
+            GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(_playerUsername, _playerNetId);
+            return PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
         }
     }
 

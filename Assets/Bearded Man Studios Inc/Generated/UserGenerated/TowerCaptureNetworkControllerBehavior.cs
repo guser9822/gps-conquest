@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[][\"uint\", \"bool\", \"string\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[][\"_playerNetId\", \"_isCapturing\", \"_playerNickname\"]]")]
+	[GeneratedRPC("{\"types\":[[][\"uint\", \"bool\", \"string\"][\"string\", \"uint\", \"double\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[][\"_playerNetId\", \"_isCapturing\", \"_playerNickname\"][\"_playerUsername\", \"_playerNetId\", \"_playerCaptureTimePassed\"]]")]
 	public abstract partial class TowerCaptureNetworkControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_CAPTURE_CONTROLLER_ON_NETWORK = 0 + 5;
 		public const byte RPC_UPDATE_CAPTURE_ON_NETWORK = 1 + 5;
+		public const byte RPC_UPDATE_CAPTURE_TIME_FOR_PLAYER = 2 + 5;
 		
 		public TowerCaptureNetworkControllerNetworkObject networkObject = null;
 
@@ -25,6 +26,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			base.SetupHelperRpcs(networkObject);
 			networkObject.RegisterRpc("UpdateCaptureControllerOnNetwork", UpdateCaptureControllerOnNetwork);
 			networkObject.RegisterRpc("UpdateCaptureOnNetwork", UpdateCaptureOnNetwork, typeof(uint), typeof(bool), typeof(string));
+			networkObject.RegisterRpc("UpdateCaptureTimeForPlayer", UpdateCaptureTimeForPlayer, typeof(string), typeof(uint), typeof(double));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -107,6 +109,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// Arguments:
 		/// </summary>
 		public abstract void UpdateCaptureOnNetwork(RpcArgs args);
+		/// <summary>
+		/// Arguments:
+		/// </summary>
+		public abstract void UpdateCaptureTimeForPlayer(RpcArgs args);
 
 		// DO NOT TOUCH, THIS GETS GENERATED PLEASE EXTEND THIS CLASS IF YOU WISH TO HAVE CUSTOM CODE ADDITIONS
 	}
