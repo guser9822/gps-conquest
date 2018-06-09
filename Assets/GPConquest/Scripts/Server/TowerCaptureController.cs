@@ -18,10 +18,13 @@ namespace TC.GPConquest.Server
         public TowerEntityController TowerEntityController { get; set; }
 
         //Capture Times expressed in milliseconds
-        private enum TIMES {
-            PLAYER_CONQUEST_TIME = 10000,
-            FACTION_CONQUEST_TIME = 30000,
+        private struct TIMES {
+            public const double PLAYER_CONQUEST_TIME = 10000;
+            public const double FACTION_CONQUEST_TIME = 30000;
+            public const double UPDATE_NETWORK_TOWERS_TIME = 0.5;//Timer used to send RPC every half second
         };
+        //RPC send counter
+        private double RPCSendCounter = 0.0;
 
         //Table <Tuple2<NetworkId,Nickname>,Time spent in the capture of the tower>>
         private Dictionary<GPSConqTuple2<string, uint>, double> PlayerNetIdNameCaptureTimeTable =
@@ -40,6 +43,7 @@ namespace TC.GPConquest.Server
 
         protected Dictionary<GPSConqTuple2<string, uint>, double> PlayerCapturingCounters(
             Dictionary<GPSConqTuple2<string, uint>, double> _playerNetIdNameCaptureTimeTable) {
+
             var playersCapturingTower = _playerNetIdNameCaptureTimeTable.ToList();
             if (playersCapturingTower.Count > 0)
             {
@@ -49,18 +53,21 @@ namespace TC.GPConquest.Server
                         double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
                         double timeAdd = +timePassed + Time.deltaTime; //Add time passed since last update
                         _playerNetIdNameCaptureTimeTable[s.Key] = timeAdd;
-                        double newTime = 0D;
-                        _playerNetIdNameCaptureTimeTable.TryGetValue(s.Key, out newTime);
 
-                        Debug.Log("[Owner]The player " + s.Key.GetFrist() + " spent secs " + newTime);
-
-                    networkObject.SendRpc(RPC_UPDATE_CAPTURE_TIME_FOR_PLAYER,
-                        Receivers.AllBuffered,
-                        s.Key.GetFrist(),
-                        s.Key.GetSecond(),
-                        newTime);
+                        if(RPCSendCounter >= TIMES.UPDATE_NETWORK_TOWERS_TIME)
+                            networkObject.SendRpc(RPC_UPDATE_CAPTURE_TIME_FOR_PLAYER,
+                                Receivers.AllBuffered,
+                                s.Key.GetFrist(),
+                                s.Key.GetSecond(),
+                                timeAdd);
+                       
                     });
             }
+
+            //Increment the counter, else azzerate it.
+            RPCSendCounter = RPCSendCounter >= TIMES.UPDATE_NETWORK_TOWERS_TIME ? 
+                0.0 : RPCSendCounter + Time.deltaTime;
+
             return _playerNetIdNameCaptureTimeTable;
         }
 
@@ -166,9 +173,10 @@ namespace TC.GPConquest.Server
             var playerNetId = args.GetNext<uint>();
             var captureTimePassed = args.GetNext<double>();
             GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(playerUsername, playerNetId);
+            PlayerNetIdNameCaptureTimeTable[thisPlayerKey] = captureTimePassed;
             var previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
-            PlayerNetIdNameCaptureTimeTable[thisPlayerKey] = captureTimePassed + previousElapsedTime;
-            previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
+            //PlayerNetIdNameCaptureTimeTable[thisPlayerKey] = captureTimePassed + previousElapsedTime;
+            //previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
             Debug.Log("[Proxy]The player " + thisPlayerKey.GetFrist() + " spent secs " + previousElapsedTime);
         }
 

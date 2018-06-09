@@ -22,8 +22,13 @@ namespace TC.GPConquest.Server
 
         private void ActivateBoxColliders(bool _activate)
         {
-            var boxColls = GetComponents<BoxCollider>();
-            boxColls.ToList<BoxCollider>().ForEach(x => { x.enabled = _activate; });
+            //Activate box colliders only for the tower owner, because the latter it's designated 
+            //to send update to the towers on the network
+            if (networkObject.IsOwner) {
+                var boxColls = GetComponents<BoxCollider>();
+                boxColls.ToList<BoxCollider>().ForEach(x => { x.enabled = _activate; });
+            }
+
         }
 
         public void InitTowerEntityController(Vector2 _GPSCoords)
@@ -63,7 +68,7 @@ namespace TC.GPConquest.Server
             GPSCoords = networkObject.towerGPSCoords;
             //Update tower position on network
             transform.position = networkObject.towerNetPosition;
-            ActivateBoxColliders(true);
+            ActivateBoxColliders(true);//This call isn't necessary for the towers on the network but we don't care
         }
 
         public override bool Equals(object obj)
