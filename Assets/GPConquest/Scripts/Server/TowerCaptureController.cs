@@ -19,7 +19,6 @@ namespace TC.GPConquest.Server
 
         //Capture Times expressed in milliseconds
         private struct TIMES {
-            public const double PLAYER_CONQUEST_TIME = 10000;
             public const double FACTION_CONQUEST_TIME = 30000;
             public const double UPDATE_NETWORK_TOWERS_TIME = 0.5;//Timer used to send RPC every half second
         };
@@ -30,15 +29,59 @@ namespace TC.GPConquest.Server
         private Dictionary<GPSConqTuple2<string, uint>, double> PlayerNetIdNameCaptureTimeTable =
             new Dictionary<GPSConqTuple2<string, uint>, double>();
 
+        //Dictionary that contains for each faction the amount of time
+        //that the players of that same faction have spent during tower capturing
+        private Dictionary<string, double> FactionsConquestTimeDict = new Dictionary<string, double>();
+
         //Just for log through inspector
         public List<string> PlayerCapturingTowerList = new List<string>();
+
+        //Table <Tuple2<NetworkId,Nickname>,DestinationController>> NOTE : USED ONLY BY THE OWNER
+        private Dictionary<GPSConqTuple2<string, uint>, DestinationController> PlayerNetIdNameDestinationObj =
+            new Dictionary<GPSConqTuple2<string, uint>, DestinationController>();
 
         private void Update()
         {
 
             if (networkObject.IsOwner)
+            {
                 PlayerNetIdNameCaptureTimeTable = PlayerCapturingCounters(PlayerNetIdNameCaptureTimeTable);
+                FactionsConquestTimeDict = FactionsCaptureCounter(FactionsConquestTimeDict,
+                    PlayerNetIdNameCaptureTimeTable,
+                    PlayerNetIdNameDestinationObj);
+            }
 
+        }
+
+        protected Dictionary<string, double> FactionsCaptureCounter(Dictionary<string, double> _factionsConquestTimeDict,
+            Dictionary<GPSConqTuple2<string, uint>, double> _playerNetIdNameCaptureTimeTable,
+            Dictionary<GPSConqTuple2<string, uint>, DestinationController> _playerNetIdNameDestinationObj)
+        {
+            var playerList = _playerNetIdNameDestinationObj.ToList();
+
+            playerList.ForEach(s =>
+            {
+                var playerNameNetid = s.Key;
+                var destinationController = s.Value;
+                double timePlayerSpent;
+
+                if (_playerNetIdNameCaptureTimeTable.TryGetValue(playerNameNetid, out timePlayerSpent))
+                {
+                    var playerEntity = destinationController.gameObject.GetComponent<PlayerEntity>();
+                    var faction = playerEntity.faction;
+                    double factionTime;
+
+                    if (_factionsConquestTimeDict.TryGetValue(faction, out factionTime))
+                    {
+                        factionTime += timePlayerSpent;
+                        _factionsConquestTimeDict.Add(faction, factionTime);
+                    }
+
+                }
+
+            });
+
+            return _factionsConquestTimeDict;
         }
 
         protected Dictionary<GPSConqTuple2<string, uint>, double> PlayerCapturingCounters(
@@ -51,7 +94,10 @@ namespace TC.GPConquest.Server
                     s => {
 
                         double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
-                        double timeAdd = +timePassed + Time.deltaTime; //Add time passed since last update
+                        //  OLD FORMULA double timeAdd = +timePassed + Time.deltaTime; //Add time passed since last update 
+
+                        double timeAdd = Time.deltaTime; //Now we will sum the amount that the player spent in the capture of the tower
+                                                         //of time directly in the total time of the faction
                         _playerNetIdNameCaptureTimeTable[s.Key] = timeAdd;
 
                         if(RPCSendCounter >= TIMES.UPDATE_NETWORK_TOWERS_TIME)
@@ -109,9 +155,10 @@ namespace TC.GPConquest.Server
             var playerNetId = _playerDestinationComponent.networkObject.NetworkId;
             var playerNickname = _playerDestinationComponent.AvatorController.PlayerEntity.username;
 
-            AddOrDeletePlayerToTheCapturing(playerNickname
-                , playerNetId
-                , _isCapturing);
+            AddOrDeletePlayerToTheCapturing(playerNickname,
+                playerNetId,
+                _isCapturing,
+                _playerDestinationComponent);
 
             //Keep updated also the network entities of this object
             networkObject.SendRpc(RPC_UPDATE_CAPTURE_ON_NETWORK
@@ -121,9 +168,10 @@ namespace TC.GPConquest.Server
                 , playerNickname);
         }
 
-        protected void AddOrDeletePlayerToTheCapturing(string _name
-                                                , uint _playerNetId
-                                                , bool _isCapturing)
+        protected void AddOrDeletePlayerToTheCapturing(string _name,
+            uint _playerNetId,
+            bool _isCapturing,
+            DestinationController _playerDestinationComponent)
         {
             GPSConqTuple2<string, uint> playerKey = new GPSConqTuple2<string, uint>(_name, _playerNetId);
             var playerKeyString = playerKey.ToString();
@@ -136,6 +184,7 @@ namespace TC.GPConquest.Server
                 if (!exists)
                 {
                     PlayerNetIdNameCaptureTimeTable.Add(playerKey, 0d);
+                    PlayerNetIdNameDestinationObj.Add(playerKey, _playerDestinationComponent);
                     PlayerCapturingTowerList.Add(playerKeyString);
                 }
             }
@@ -145,6 +194,7 @@ namespace TC.GPConquest.Server
                 if (exists)
                 {
                     PlayerNetIdNameCaptureTimeTable.Remove(playerKey);
+                    PlayerNetIdNameDestinationObj.Remove(playerKey);
                     PlayerCapturingTowerList.Remove(playerKeyString);
                 }
             }
@@ -156,9 +206,12 @@ namespace TC.GPConquest.Server
             var isCapturing = args.GetNext<bool>();
             var playerNickname = args.GetNext<string>();
 
-            AddOrDeletePlayerToTheCapturing(playerNickname
-                                            , playerNetId
-                                            , isCapturing);
+            //TODO Fix
+            //For the moment, the network towers will jsut put null as destination controller
+            AddOrDeletePlayerToTheCapturing(playerNickname,
+                playerNetId,
+                isCapturing,
+                null);
         }
 
         private void NetworkObject_onDestroy(NetWorker sender)
@@ -175,14 +228,20 @@ namespace TC.GPConquest.Server
             GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(playerUsername, playerNetId);
             PlayerNetIdNameCaptureTimeTable[thisPlayerKey] = captureTimePassed;
             var previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
-            //PlayerNetIdNameCaptureTimeTable[thisPlayerKey] = captureTimePassed + previousElapsedTime;
-            //previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
             Debug.Log("[Proxy]The player " + thisPlayerKey.GetFrist() + " spent secs " + previousElapsedTime);
         }
 
-        public double HowMuchTimeISpentForCapturingThisTower(string _playerUsername, uint _playerNetId) {
+        public double TimeISpentForCapturingThisTower(string _playerUsername, uint _playerNetId)
+        {
             GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(_playerUsername, _playerNetId);
             return PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
+        }
+
+        public double TimeSpentByMyFunctionForCapturingTheTower(string _myfaction)
+        {
+            double timeSpent;
+            FactionsConquestTimeDict.TryGetValue(_myfaction,out timeSpent);
+            return timeSpent;
         }
     }
 
