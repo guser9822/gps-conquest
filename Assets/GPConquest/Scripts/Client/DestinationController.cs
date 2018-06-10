@@ -17,7 +17,7 @@ namespace TC.GPConquest.Player
         [HideInInspector]
         public Camera DestinationCamera;
         protected tileGen TileGen;
-        public GameEntityRegister GameEntityRegister;
+        public GameEntityRegister GameEntityRegister { get; private set; }
         #endregion
 
         #region Attributes dedicated to the avator
@@ -53,12 +53,6 @@ namespace TC.GPConquest.Player
             //This is necessary since we are overriding NetworkStart and the code then will be executed on proprietary and non process
             if (!networkObject.IsOwner)
                 return;
-
-            //Find GameEntityRegister
-            GameEntityRegister = FindObjectOfType<GameEntityRegister>();
-
-            //Add this Destination controller to the register
-            GameEntityRegister.AddDestinationController(this);
 
             //Set up camera for GPConquest view
             DestinationCamera = FindObjectOfType<Camera>();
@@ -129,6 +123,12 @@ namespace TC.GPConquest.Player
             sphereRend.material.color = _cursorColor;
             sphere.transform.localScale = _cursorsDimension;
 
+            //Find GameEntityRegister
+            GameEntityRegister = FindObjectOfType<GameEntityRegister>();
+
+            //Add this Destination controller to the register
+            GameEntityRegister.AddEntity(this);
+
             //Register the callback for deleting the Destination controller from the register when it will disconnect
             networkObject.onDestroy += NetworkObject_onDestroyRemoveFromRegister;
         }
@@ -165,12 +165,6 @@ namespace TC.GPConquest.Player
             //of the owner of the client in order to let the UI (e.g. nickname labels) to point towards
             //the players owning the clients. 
             DestinationCamera = FindObjectOfType<Camera>();
-
-            //Find GameEntityRegister
-            GameEntityRegister = FindObjectOfType<GameEntityRegister>();
-
-            //Add this Destination controller to the register
-            GameEntityRegister.AddDestinationController(this);
 
             UpdateDestinationAttributes(_playerName,
                 _selectedUma,
@@ -239,16 +233,6 @@ namespace TC.GPConquest.Player
             networkObject.destNetRotation = transform.rotation;
         }
 
-        //void OnGUI()
-        //{
-        //    if (!networkObject.IsOwner)
-        //        return;
-
-        //    GUI.Label(new Rect(10, 10, 100, 20), playerName);
-        //    if (GUI.Button(new Rect(10, 30, 100, 20), "Exit"))
-        //        DestroyDestinationController();
-        //}
-
         //Function used to destroy this object. NOTE : It will also destroy the avator connected
         //NOTE 2 : It will not be executed on the non owner process
         public void DestroyDestinationController()
@@ -260,7 +244,7 @@ namespace TC.GPConquest.Player
 
         private void NetworkObject_onDestroyRemoveFromRegister(NetWorker sender)
         {
-            GameEntityRegister.RemoveDestinationController(this);
+            GameEntityRegister.RemoveEntity(this);
         }
     }
 }

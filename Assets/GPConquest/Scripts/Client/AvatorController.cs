@@ -8,6 +8,7 @@ using UMA;
 using TC.UM4GPConquest.Utility;
 using System;
 using System.Linq;
+using TC.Common;
 
 namespace TC.GPConquest.Player
 {
@@ -144,18 +145,19 @@ namespace TC.GPConquest.Player
         public override void UpdateAvatorOnNetwork(RpcArgs args)
         {
             string _selectedUma = args.GetNext<string>();
-
-            MainThreadManager.Run(() =>
-            {
-                //I'm the avator on the network, I shall find my destination in the scene using it's network id
-                DestinationController[] playersInTheScene = FindObjectsOfType<DestinationController>();
-
-                var destination = playersInTheScene.ToList().
-                    Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
-                
-                UpdateAvatorAttributes(destination);
-                CreateAndSpawnUMA(_selectedUma);
-            });
+            
+            /* TODO : Thou, Networked AvatorController, shalt be abolished
+             * 
+             * Since the AvatorController spawn on the network withouth eny reference to it's 
+             * destination controller, for the non owner process we must recover destination
+             * controller from the GameEntityRegister.
+             * 
+             * */
+            var gameRegister = FindObjectOfType<GameEntityRegister>();
+            var destination = (DestinationController)gameRegister.FindEntity(typeof(DestinationController),
+                x => ((DestinationController)x).networkObject.NetworkId.Equals(networkObject.destNetwId));
+            UpdateAvatorAttributes(destination);
+            CreateAndSpawnUMA(_selectedUma);
 
         }
 

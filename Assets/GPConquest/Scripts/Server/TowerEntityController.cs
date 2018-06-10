@@ -19,6 +19,8 @@ namespace TC.GPConquest.Server
         public string OwnerFaction;
         public Vector2 GPSCoords;//used just for visualization in the inspector
         public TowerCaptureController TowerCaptureController {get;set;}
+        public GameEntityRegister GameEntityRegister;
+
 
         private void ActivateBoxColliders(bool _activate)
         {
@@ -69,6 +71,20 @@ namespace TC.GPConquest.Server
             //Update tower position on network
             transform.position = networkObject.towerNetPosition;
             ActivateBoxColliders(true);//This call isn't necessary for the towers on the network but we don't care
+
+            //Find GameEntityRegister
+            GameEntityRegister = FindObjectOfType<GameEntityRegister>();
+
+            //Add this tower controller to the register
+            GameEntityRegister.AddEntity(this);
+
+            //Register the callback for deleting the Destination controller from the register when it will disconnect
+            networkObject.onDestroy += NetworkObject_onDestroyRemoveFromRegister;
+        }
+
+        private void NetworkObject_onDestroyRemoveFromRegister(NetWorker sender)
+        {
+            GameEntityRegister.RemoveEntity(this);
         }
 
         public override bool Equals(object obj)

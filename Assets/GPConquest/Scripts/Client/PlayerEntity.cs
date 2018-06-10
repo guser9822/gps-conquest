@@ -6,6 +6,7 @@ using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
 using System.Linq;
+using TC.Common;
 
 namespace TC.GPConquest.Player
 {
@@ -103,20 +104,20 @@ namespace TC.GPConquest.Player
                 _faction,
                 _selectedUma);
 
-            //Searches the owner avator in the scene and do setups
-            MainThreadManager.Run(() =>
-            {
-                AvatorController[] avatorsInTheScene = FindObjectsOfType<AvatorController>();
+            var gameRegister = FindObjectOfType<GameEntityRegister>();
+            var destination = (DestinationController)gameRegister.
+                FindEntity(typeof(DestinationController),
+                    x =>
+                    {
+                        var curAvator = ((DestinationController)x).AvatorController;
+                        return curAvator.networkObject.NetworkId.Equals(networkObject.avatorOwnerNetId);
+                    });
 
-                 var avator = avatorsInTheScene.ToList().
-                    Find(x => x.networkObject.NetworkId.Equals(networkObject.avatorOwnerNetId));
-
-                //sets this player entity as reference for the Avator founded
-                avator.PlayerEntity = this;
-                UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
-                GameUIController.InitializeGameUI(avator);
-
-            });
+            var avator = destination.AvatorController;
+            //sets this player entity as reference for the Avator founded
+            avator.PlayerEntity = this;
+            UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
+            GameUIController.InitializeGameUI(avator);
         }
 
         private void NetworkObject_onDestroy(NetWorker sender)
