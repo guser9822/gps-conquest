@@ -17,6 +17,7 @@ namespace TC.GPConquest.Player
         [HideInInspector]
         public Camera DestinationCamera;
         protected tileGen TileGen;
+        public GameEntityRegister GameEntityRegister;
         #endregion
 
         #region Attributes dedicated to the avator
@@ -52,6 +53,12 @@ namespace TC.GPConquest.Player
             //This is necessary since we are overriding NetworkStart and the code then will be executed on proprietary and non process
             if (!networkObject.IsOwner)
                 return;
+
+            //Find GameEntityRegister
+            GameEntityRegister = FindObjectOfType<GameEntityRegister>();
+
+            //Add this Destination controller to the register
+            GameEntityRegister.AddDestinationController(this);
 
             //Set up camera for GPConquest view
             DestinationCamera = FindObjectOfType<Camera>();
@@ -121,6 +128,9 @@ namespace TC.GPConquest.Player
             cursorColor = _cursorColor;
             sphereRend.material.color = _cursorColor;
             sphere.transform.localScale = _cursorsDimension;
+
+            //Register the callback for deleting the Destination controller from the register when it will disconnect
+            networkObject.onDestroy += NetworkObject_onDestroyRemoveFromRegister;
         }
 
         //Sets up values for the destination controller based on isGiantMode value
@@ -156,13 +166,16 @@ namespace TC.GPConquest.Player
             //the players owning the clients. 
             DestinationCamera = FindObjectOfType<Camera>();
 
-            MainThreadManager.Run(() =>
-            {
-                UpdateDestinationAttributes(_playerName,
-                    _selectedUma,
-                    networkObject.destNetColor,
-                    networkObject.destCursorDims);
-            });
+            //Find GameEntityRegister
+            GameEntityRegister = FindObjectOfType<GameEntityRegister>();
+
+            //Add this Destination controller to the register
+            GameEntityRegister.AddDestinationController(this);
+
+            UpdateDestinationAttributes(_playerName,
+                _selectedUma,
+                networkObject.destNetColor,
+                networkObject.destCursorDims);
         }
 
         //Once the avator object is created on the network, starts build it's avator character
@@ -237,10 +250,17 @@ namespace TC.GPConquest.Player
         //}
 
         //Function used to destroy this object. NOTE : It will also destroy the avator connected
+        //NOTE 2 : It will not be executed on the non owner process
         public void DestroyDestinationController()
         {
+            //This will remove the destination controller only from the owner process entity register 
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
+        }
+
+        private void NetworkObject_onDestroyRemoveFromRegister(NetWorker sender)
+        {
+            GameEntityRegister.RemoveDestinationController(this);
         }
     }
 }
