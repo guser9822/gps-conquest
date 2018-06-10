@@ -15,7 +15,7 @@ namespace TC.GPConquest.Server
 {
     public class TowerCaptureController : TowerCaptureNetworkControllerBehavior
     {
-        public TowerEntityController TowerEntityController { get; set; }
+        public TowerEntityController TowerEntityController;/* { get; set; }*/
 
         //Capture Times expressed in milliseconds
         private struct TIMES {
@@ -138,15 +138,12 @@ namespace TC.GPConquest.Server
 
         public override void UpdateCaptureControllerOnNetwork(RpcArgs args)
         {
-            MainThreadManager.Run(() =>
-            {
-                TowerEntityController[] playersInTheScene = FindObjectsOfType<TowerEntityController>();
-
-                var tower = playersInTheScene.ToList().
-                    Find(x => x.networkObject.NetworkId.Equals(networkObject.TowerEntityNetId));
-
-                UpdateTowerCaptureControllerAttributes(tower);
-            });
+            var gameRegister = FindObjectOfType<GameEntityRegister>();
+            var tower = (TowerEntityController)gameRegister.FindEntity(typeof(TowerEntityController),
+                x => {
+                    return ((TowerEntityController)x).networkObject.NetworkId.Equals(networkObject.TowerEntityNetId);
+                });
+            UpdateTowerCaptureControllerAttributes(tower);
         }
 
         //This method checks if the player is capturing the tower and updates this object internal structures

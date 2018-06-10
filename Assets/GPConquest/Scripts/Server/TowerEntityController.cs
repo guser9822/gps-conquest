@@ -19,8 +19,7 @@ namespace TC.GPConquest.Server
         public string OwnerFaction;
         public Vector2 GPSCoords;//used just for visualization in the inspector
         public TowerCaptureController TowerCaptureController {get;set;}
-        public GameEntityRegister GameEntityRegister;
-
+        public GameEntityRegister GameEntityRegister { get; private set; }
 
         private void ActivateBoxColliders(bool _activate)
         {
