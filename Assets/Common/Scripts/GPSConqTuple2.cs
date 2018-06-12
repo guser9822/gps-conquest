@@ -16,7 +16,7 @@ namespace TC.Common {
             Second = _second;
         }
 
-        public TFirst GetFrist() { return First; }
+        public TFirst GetFirst() { return First; }
         public TSecond GetSecond() { return Second; }
 
 
