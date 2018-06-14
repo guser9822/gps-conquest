@@ -26,12 +26,12 @@ namespace TC.GPConquest.Server
         private double RPCSendCounter = 0.0;
 
         //Table <Tuple2<NetworkId,Nickname>,Time spent in the capture of the tower>>
-        private Dictionary<GPSConqTuple2<string, uint>, double> PlayerNetIdNameCaptureTimeTable =
+        private Dictionary<GPSConqTuple2<string, uint>, double> PlayerCaptureTimeTable =
             new Dictionary<GPSConqTuple2<string, uint>, double>();
 
         //Dictionary that contains for each faction the amount of time
         //that the players of that same faction have spent during tower capturing
-        private Dictionary<string, double> FactionsConquestTimeDict = new Dictionary<string, double>();
+        private Dictionary<string, double> FactionsConquestTime = new Dictionary<string, double>();
 
         //Just for log through inspector
         public List<string> PlayerCapturingTowerList = new List<string>();
@@ -41,41 +41,9 @@ namespace TC.GPConquest.Server
 
             if (networkObject.IsOwner)
             {
-                PlayerNetIdNameCaptureTimeTable = PlayerCapturingCounters(PlayerNetIdNameCaptureTimeTable);
-                FactionsConquestTimeDict = FactionsCaptureCounter(FactionsConquestTimeDict,
-                    PlayerNetIdNameCaptureTimeTable);
+                PlayerCaptureTimeTable = PlayerCapturingCounters(PlayerCaptureTimeTable);
             }
 
-        }
-
-        protected Dictionary<string, double> FactionsCaptureCounter(Dictionary<string, double> _factionsConquestTimeDict,
-            Dictionary<GPSConqTuple2<string, uint>, double> _playerNetIdNameCaptureTimeTable)
-        {
-            var playerList = _playerNetIdNameDestinationObj.ToList();
-
-            playerList.ForEach(s =>
-            {
-                var playerNameNetid = s.Key;
-                var destinationController = s.Value;
-                double timePlayerSpent;
-
-                if (_playerNetIdNameCaptureTimeTable.TryGetValue(playerNameNetid, out timePlayerSpent))
-                {
-                    var playerEntity = destinationController.gameObject.GetComponent<PlayerEntity>();
-                    var faction = playerEntity.faction;
-                    double factionTime;
-
-                    if (_factionsConquestTimeDict.TryGetValue(faction, out factionTime))
-                    {
-                        factionTime += timePlayerSpent;
-                        _factionsConquestTimeDict.Add(faction, factionTime);
-                    }
-
-                }
-
-            });
-
-            return _factionsConquestTimeDict;
         }
 
         protected Dictionary<GPSConqTuple2<string, uint>, double> PlayerCapturingCounters(
@@ -169,19 +137,19 @@ namespace TC.GPConquest.Server
 
             if (_isCapturing)
             {
-                exists = PlayerNetIdNameCaptureTimeTable.TryGetValue(playerKey, out val);
+                exists = PlayerCaptureTimeTable.TryGetValue(playerKey, out val);
                 if (!exists)
                 {
-                    PlayerNetIdNameCaptureTimeTable.Add(playerKey, 0d);
+                    PlayerCaptureTimeTable.Add(playerKey, 0d);
                     PlayerCapturingTowerList.Add(playerKeyString);
                 }
             }
             else
             {
-                exists = PlayerNetIdNameCaptureTimeTable.TryGetValue(playerKey, out val);
+                exists = PlayerCaptureTimeTable.TryGetValue(playerKey, out val);
                 if (exists)
                 {
-                    PlayerNetIdNameCaptureTimeTable.Remove(playerKey);
+                    PlayerCaptureTimeTable.Remove(playerKey);
                     PlayerCapturingTowerList.Remove(playerKeyString);
                 }
             }
@@ -218,21 +186,21 @@ namespace TC.GPConquest.Server
             var playerNetId = args.GetNext<uint>();
             var captureTimePassed = args.GetNext<double>();
             GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(playerUsername, playerNetId);
-            PlayerNetIdNameCaptureTimeTable[thisPlayerKey] = captureTimePassed;
-            var previousElapsedTime = PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
+            PlayerCaptureTimeTable[thisPlayerKey] = captureTimePassed;
+            var previousElapsedTime = PlayerCaptureTimeTable[thisPlayerKey];
             Debug.Log("[Proxy]The player " + thisPlayerKey.GetFirst() + " spent secs " + previousElapsedTime);
         }
 
         public double TimeISpentForCapturingThisTower(string _playerUsername, uint _playerNetId)
         {
             GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(_playerUsername, _playerNetId);
-            return PlayerNetIdNameCaptureTimeTable[thisPlayerKey];
+            return PlayerCaptureTimeTable[thisPlayerKey];
         }
 
-        public double TimeSpentByMyFunctionForCapturingTheTower(string _myfaction)
+        public double TimeSpentByMyFactionForCapturingTheTower(string _myfaction)
         {
             double timeSpent;
-            FactionsConquestTimeDict.TryGetValue(_myfaction,out timeSpent);
+            FactionsConquestTime.TryGetValue(_myfaction,out timeSpent);
             return timeSpent;
         }
     }

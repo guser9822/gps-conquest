@@ -10,7 +10,7 @@ using TC.Common;
 
 namespace TC.GPConquest.Player
 {
-    public class DestinationController : PlayerDestinationControllerBehavior
+    public class DestinationController : PlayerDestinationControllerBehavior,IEqualityComparer<DestinationController>
     {
         #region Mix
         private Renderer sphereRend;
@@ -246,5 +246,44 @@ namespace TC.GPConquest.Player
         {
             GameEntityRegister.RemoveEntity(this);
         }
+
+        public bool Equals(DestinationController x, DestinationController y)
+        {
+            return x.networkObject.NetworkId == y.networkObject.NetworkId &&
+               x.PlayerName == y.PlayerName;
+        }
+
+        public int GetHashCode(DestinationController obj)
+        {
+            int result = 89;
+            result = 13 * result + obj.networkObject.NetworkId.GetHashCode();
+            result = 13 * result + obj.PlayerName.GetHashCode();
+            return result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as DestinationController;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return this.networkObject.NetworkId == item.networkObject.NetworkId &&
+                this.PlayerName == item.PlayerName;
+        }
+
+        public override int GetHashCode()
+        {
+            int result = 89;
+            result = 13 * result + this.networkObject.NetworkId.GetHashCode();
+            result = 13 * result + this.PlayerName.GetHashCode();
+            return result;
+        }
+
     }
+
+
+
 }
