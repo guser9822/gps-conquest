@@ -25,9 +25,8 @@ namespace TC.GPConquest.Server
         //RPC send counter
         private double RPCSendCounter = 0.0;
 
-        //Table <Tuple2<NetworkId,Nickname>,Time spent in the capture of the tower>>
-        private Dictionary<GPSConqTuple2<string, uint>, double> PlayerCaptureTimeTable =
-            new Dictionary<GPSConqTuple2<string, uint>, double>();
+        //Table <DestinationController,Time spent in the capture of the tower>
+        private Dictionary<DestinationController, double> PlayerCaptureTimeTable = new Dictionary<DestinationController, double>();
 
         //Dictionary that contains for each faction the amount of time
         //that the players of that same faction have spent during tower capturing
@@ -46,25 +45,25 @@ namespace TC.GPConquest.Server
 
         }
 
-        protected Dictionary<GPSConqTuple2<string, uint>, double> PlayerCapturingCounters(
-            Dictionary<GPSConqTuple2<string, uint>, double> _playerNetIdNameCaptureTimeTable) {
+        protected Dictionary<DestinationController, double> PlayerCapturingCounters(
+            Dictionary<DestinationController, double> _playerNetIdNameCaptureTimeTable) {
 
             var playersCapturingTower = _playerNetIdNameCaptureTimeTable.ToList();
             if (playersCapturingTower.Count > 0)
             {
                 playersCapturingTower.ForEach(
                     s => {
-
+                        var playerNetworkkId = s.Key.networkObject.NetworkId;
                         double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
                         double timeAdd = timePassed + Time.deltaTime; //Add time passed since last update 
 
                         _playerNetIdNameCaptureTimeTable[s.Key] = timeAdd;
 
-                        if(RPCSendCounter >= TIMES.UPDATE_NETWORK_TOWERS_TIME)
+                        //Update the towers on the network with new calculated times
+                        if (RPCSendCounter >= TIMES.UPDATE_NETWORK_TOWERS_TIME)
                             networkObject.SendRpc(RPC_UPDATE_CAPTURE_TIME_FOR_PLAYER,
                                 Receivers.AllBuffered,
-                                s.Key.GetFirst(),
-                                s.Key.GetSecond(),
+                                playerNetworkkId,
                                 timeAdd);
                        
                     });
@@ -110,46 +109,41 @@ namespace TC.GPConquest.Server
         public void CheckForCapture(DestinationController _playerDestinationComponent, bool _isCapturing)
         {
             var playerNetId = _playerDestinationComponent.networkObject.NetworkId;
-            var playerNickname = _playerDestinationComponent.AvatorController.PlayerEntity.username;
-
-            AddOrDeletePlayerToTheCapturing(playerNickname,
-                playerNetId,
-                _isCapturing,
-                _playerDestinationComponent);
+            AddOrDeletePlayerToTheCapturing(_playerDestinationComponent, _isCapturing);
 
             //Keep updated also the network entities of this object
             networkObject.SendRpc(RPC_UPDATE_CAPTURE_ON_NETWORK ,
                 Receivers.AllBuffered,
                 playerNetId,
-                _isCapturing,
-                playerNickname);
+                _isCapturing);
         }
 
-        protected void AddOrDeletePlayerToTheCapturing(string _name,
-            uint _playerNetId,
-            bool _isCapturing,
-            DestinationController _playerDestinationComponent)
+        protected void AddOrDeletePlayerToTheCapturing(DestinationController _playerDestinationComponent,
+            bool _isCapturing)
         {
-            GPSConqTuple2<string, uint> playerKey = new GPSConqTuple2<string, uint>(_name, _playerNetId);
-            var playerKeyString = playerKey.ToString();
             double val = 0d;
             bool exists;
 
+            var playerKeyString = 
+                _playerDestinationComponent.networkObject.NetworkId.ToString() + 
+                " - " 
+                + _playerDestinationComponent.PlayerName;
+
             if (_isCapturing)
             {
-                exists = PlayerCaptureTimeTable.TryGetValue(playerKey, out val);
+                exists = PlayerCaptureTimeTable.TryGetValue(_playerDestinationComponent, out val);
                 if (!exists)
                 {
-                    PlayerCaptureTimeTable.Add(playerKey, 0d);
+                    PlayerCaptureTimeTable.Add(_playerDestinationComponent, 0d);
                     PlayerCapturingTowerList.Add(playerKeyString);
                 }
             }
             else
             {
-                exists = PlayerCaptureTimeTable.TryGetValue(playerKey, out val);
+                exists = PlayerCaptureTimeTable.TryGetValue(_playerDestinationComponent, out val);
                 if (exists)
                 {
-                    PlayerCaptureTimeTable.Remove(playerKey);
+                    PlayerCaptureTimeTable.Remove(_playerDestinationComponent);
                     PlayerCapturingTowerList.Remove(playerKeyString);
                 }
             }
@@ -159,19 +153,16 @@ namespace TC.GPConquest.Server
         {
             var playerNetId = args.GetNext<uint>();
             var isCapturing = args.GetNext<bool>();
-            var playerNickname = args.GetNext<string>();
 
             //Find the player in the list
-            var player = (DestinationController) TowerEntityController.
+            var player = (DestinationController)TowerEntityController.
                 GameEntityRegister.
-                FindEntity(typeof(DestinationController),x => {
-                   return  ((DestinationController)x).networkObject.NetworkId.Equals(playerNetId);
+                FindEntity(typeof(DestinationController), x =>
+                {
+                    return ((DestinationController)x).networkObject.NetworkId.Equals(playerNetId);
                 });
 
-            AddOrDeletePlayerToTheCapturing(playerNickname,
-                playerNetId,
-                isCapturing,
-                player);
+            AddOrDeletePlayerToTheCapturing(player, isCapturing);
         }
 
         private void NetworkObject_onDestroy(NetWorker sender)
@@ -182,19 +173,25 @@ namespace TC.GPConquest.Server
 
         public override void UpdateCaptureTimeForPlayer(RpcArgs args)
         {
-            var playerUsername =  args.GetNext<string>();
             var playerNetId = args.GetNext<uint>();
             var captureTimePassed = args.GetNext<double>();
-            GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(playerUsername, playerNetId);
-            PlayerCaptureTimeTable[thisPlayerKey] = captureTimePassed;
-            var previousElapsedTime = PlayerCaptureTimeTable[thisPlayerKey];
-            Debug.Log("[Proxy]The player " + thisPlayerKey.GetFirst() + " spent secs " + previousElapsedTime);
+
+            //Find the player in the list
+            var player = (DestinationController)TowerEntityController.
+                GameEntityRegister.
+                FindEntity(typeof(DestinationController), x =>
+                {
+                    return ((DestinationController)x).networkObject.NetworkId.Equals(playerNetId);
+                });
+
+            PlayerCaptureTimeTable[player] = captureTimePassed;
+            var previousElapsedTime = PlayerCaptureTimeTable[player];
+            Debug.Log("[Proxy]The player " + player.PlayerName + " spent secs " + previousElapsedTime);
         }
 
-        public double TimeISpentForCapturingThisTower(string _playerUsername, uint _playerNetId)
+        public double TimeISpentForCapturingThisTower(DestinationController _destinationController)
         {
-            GPSConqTuple2<string, uint> thisPlayerKey = new GPSConqTuple2<string, uint>(_playerUsername, _playerNetId);
-            return PlayerCaptureTimeTable[thisPlayerKey];
+            return PlayerCaptureTimeTable[_destinationController];
         }
 
         public double TimeSpentByMyFactionForCapturingTheTower(string _myfaction)
@@ -203,6 +200,7 @@ namespace TC.GPConquest.Server
             FactionsConquestTime.TryGetValue(_myfaction,out timeSpent);
             return timeSpent;
         }
+
     }
 
 }
