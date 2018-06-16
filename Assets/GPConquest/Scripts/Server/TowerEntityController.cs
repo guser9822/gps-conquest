@@ -13,7 +13,9 @@ using TC.GPConquest.Player;
 namespace TC.GPConquest.Server
 {
 
-    public class TowerEntityController : TowerEntityControllerBehavior, IEqualityComparer<TowerEntityController>
+    public class TowerEntityController : TowerEntityControllerBehavior, 
+        IEqualityComparer<TowerEntityController>,
+        IRegistrable
     {
 
         public string OwnerFaction;
@@ -145,5 +147,9 @@ namespace TC.GPConquest.Server
             }
         }
 
+        public uint GetUniqueKey()
+        {
+            return networkObject.NetworkId;
+        }
     }
 }

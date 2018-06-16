@@ -9,7 +9,7 @@ using System.Linq;
 using TC.GPConquest.GpsMap.Helpers;
 using TC.Common;
 using TC.GPConquest.Player;
-
+using TC.GPConquest.Common;
 
 namespace TC.GPConquest.Server
 {
@@ -35,17 +35,39 @@ namespace TC.GPConquest.Server
         //Just for log through inspector
         public List<string> PlayerCapturingTowerList = new List<string>();
 
+        void Awake()
+        {
+            //Initialize the map factions/time passed
+            GameCommonNames.FACTIONS.ForEach(x =>
+            {
+                FactionsConquestTime.Add(x, 0D);
+            });
+        }
+
         private void Update()
         {
 
             if (networkObject.IsOwner)
             {
-                PlayerCaptureTimeTable = PlayerCapturingCounters(PlayerCaptureTimeTable);
+                PlayerCaptureTimeTable = PlayersCapturingCounter(PlayerCaptureTimeTable);
+
             }
 
         }
 
-        protected Dictionary<DestinationController, double> PlayerCapturingCounters(
+        protected Dictionary<string, double> FactionsCapturingCounter(Dictionary<string, double> _factionsTime,
+            Dictionary<DestinationController, double> _playerCaptureTimeTable) {
+
+            var players = _playerCaptureTimeTable.Keys.ToList<DestinationController>();
+            players.ForEach(player =>
+            {
+                
+            });
+
+            return _factionsTime;
+        }
+
+        protected Dictionary<DestinationController, double> PlayersCapturingCounter(
             Dictionary<DestinationController, double> _playerNetIdNameCaptureTimeTable) {
 
             var playersCapturingTower = _playerNetIdNameCaptureTimeTable.ToList();
@@ -98,10 +120,12 @@ namespace TC.GPConquest.Server
         public override void UpdateCaptureControllerOnNetwork(RpcArgs args)
         {
             var gameRegister = FindObjectOfType<GameEntityRegister>();
+            //var tower = (TowerEntityController)gameRegister.FindEntity(typeof(TowerEntityController),
+            //    x => {
+            //        return ((TowerEntityController)x).networkObject.NetworkId.Equals(networkObject.TowerEntityNetId);
+            //    });
             var tower = (TowerEntityController)gameRegister.FindEntity(typeof(TowerEntityController),
-                x => {
-                    return ((TowerEntityController)x).networkObject.NetworkId.Equals(networkObject.TowerEntityNetId);
-                });
+                networkObject.TowerEntityNetId);
             UpdateTowerCaptureControllerAttributes(tower);
         }
 
@@ -155,13 +179,13 @@ namespace TC.GPConquest.Server
             var isCapturing = args.GetNext<bool>();
 
             //Find the player in the list
-            var player = (DestinationController)TowerEntityController.
-                GameEntityRegister.
-                FindEntity(typeof(DestinationController), x =>
-                {
-                    return ((DestinationController)x).networkObject.NetworkId.Equals(playerNetId);
-                });
-
+            //var player = (DestinationController)TowerEntityController.
+            //    GameEntityRegister.
+            //    FindEntity(typeof(DestinationController), x =>
+            //    {
+            //        return ((DestinationController)x).networkObject.NetworkId.Equals(playerNetId);
+            //    });
+            var player = FindPlayerByNetId(playerNetId);
             AddOrDeletePlayerToTheCapturing(player, isCapturing);
         }
 
@@ -177,16 +201,22 @@ namespace TC.GPConquest.Server
             var captureTimePassed = args.GetNext<double>();
 
             //Find the player in the list
-            var player = (DestinationController)TowerEntityController.
-                GameEntityRegister.
-                FindEntity(typeof(DestinationController), x =>
-                {
-                    return ((DestinationController)x).networkObject.NetworkId.Equals(playerNetId);
-                });
-
+            //var player = (DestinationController)TowerEntityController.
+            //    GameEntityRegister.
+            //    FindEntity(typeof(DestinationController), x =>
+            //    {
+            //        return ((DestinationController)x).networkObject.NetworkId.Equals(playerNetId);
+            //    });
+            var player = FindPlayerByNetId(playerNetId);
             PlayerCaptureTimeTable[player] = captureTimePassed;
             var previousElapsedTime = PlayerCaptureTimeTable[player];
             Debug.Log("[Proxy]The player " + player.PlayerName + " spent secs " + previousElapsedTime);
+        }
+
+        protected DestinationController FindPlayerByNetId(uint _playerNetId)
+        {
+            var gameRegister = TowerEntityController.GameEntityRegister;
+            return (DestinationController)gameRegister.FindEntity(typeof(DestinationController), _playerNetId);
         }
 
         public double TimeISpentForCapturingThisTower(DestinationController _destinationController)

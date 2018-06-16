@@ -10,7 +10,9 @@ using TC.Common;
 
 namespace TC.GPConquest.Player
 {
-    public class DestinationController : PlayerDestinationControllerBehavior,IEqualityComparer<DestinationController>
+    public class DestinationController : PlayerDestinationControllerBehavior,
+        IEqualityComparer<DestinationController>,
+        IRegistrable
     {
         #region Mix
         private Renderer sphereRend;
@@ -282,6 +284,10 @@ namespace TC.GPConquest.Player
             return result;
         }
 
+        public uint GetUniqueKey()
+        {
+            return networkObject.NetworkId;
+        }
     }
 
 

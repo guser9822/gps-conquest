@@ -84,7 +84,6 @@ namespace TC.GPConquest.Player
             PlayerEntity = behavior.GetComponent<PlayerEntity>();
             PlayerEntity.InitializePlayerEntity(this,
                 CurrentUserInfo,
-                networkObject.NetworkId,
                 CameraOnDestination);
         }
 
@@ -146,16 +145,8 @@ namespace TC.GPConquest.Player
         {
             string _selectedUma = args.GetNext<string>();
             
-            /* TODO : Thou, Networked AvatorController, shalt be abolished
-             * 
-             * Since the AvatorController spawn on the network withouth eny reference to it's 
-             * destination controller, for the non owner process we must recover destination
-             * controller from the GameEntityRegister.
-             * 
-             * */
             var gameRegister = FindObjectOfType<GameEntityRegister>();
-            var destination = (DestinationController)gameRegister.FindEntity(typeof(DestinationController),
-                x => ((DestinationController)x).networkObject.NetworkId.Equals(networkObject.destNetwId));
+            var destination = (DestinationController)gameRegister.FindEntity(typeof(DestinationController), networkObject.destNetwId);
             UpdateAvatorAttributes(destination);
             CreateAndSpawnUMA(_selectedUma);
 

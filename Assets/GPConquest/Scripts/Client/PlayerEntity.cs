@@ -31,15 +31,19 @@ namespace TC.GPConquest.Player
         }
 
         public bool InitializePlayerEntity(AvatorController _avatorControllerReference, 
-            UserInformations _user, 
-            uint avatorNetId, 
+            UserInformations _user,
             Camera _cameraOnDestination)
         {
             //Gets the AvatorController transform
             Transform parentTransform = _avatorControllerReference.gameObject.GetComponent<Transform>();
 
+            //I'm sorry Demetra
+            var destinationOwnerNetId = _avatorControllerReference.
+                DestinationControllerReference.
+                networkObject.NetworkId;
+
             //Updates attributes of this networkObject
-            UpdatePlayerEntityNetworkAttributes(avatorNetId,
+            UpdatePlayerEntityNetworkAttributes(destinationOwnerNetId,
                 _user.username,
                 _user.password,
                 _user.email,
@@ -66,14 +70,14 @@ namespace TC.GPConquest.Player
             return true;
         }
 
-        protected bool UpdatePlayerEntityNetworkAttributes(uint _avatorNetId,
+        protected bool UpdatePlayerEntityNetworkAttributes(uint _destinationOwnerNetId,
             string _username,
             string _password,
             string _email,
             string _faction,
             string _selectedUma)
         {
-            networkObject.avatorOwnerNetId = _avatorNetId;
+            networkObject.DestinationOwnerNetId = _destinationOwnerNetId;
             username = _username;
             password = _password;
             email = _email;
@@ -97,7 +101,7 @@ namespace TC.GPConquest.Player
             string _faction = args.GetNext<string>();
             string _selectedUma = args.GetNext<string>();
 
-            UpdatePlayerEntityNetworkAttributes(networkObject.avatorOwnerNetId,
+            UpdatePlayerEntityNetworkAttributes(networkObject.DestinationOwnerNetId,
                 _username,
                 _password,
                 _email,
@@ -105,13 +109,8 @@ namespace TC.GPConquest.Player
                 _selectedUma);
 
             var gameRegister = FindObjectOfType<GameEntityRegister>();
-            var destination = (DestinationController)gameRegister.
-                FindEntity(typeof(DestinationController),
-                    x =>
-                    {
-                        var curAvator = ((DestinationController)x).AvatorController;
-                        return curAvator.networkObject.NetworkId.Equals(networkObject.avatorOwnerNetId);
-                    });
+            var destination = (DestinationController)gameRegister.FindEntity(typeof(DestinationController),
+                networkObject.DestinationOwnerNetId);
 
             var avator = destination.AvatorController;
             //sets this player entity as reference for the Avator founded
