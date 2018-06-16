@@ -9,12 +9,16 @@ using System;
 namespace TC.Common
 {
     //This class act as a register of specific game objects that are present in the process(server or client) scene.
-    public class GameEntityRegister : MonoBehaviour
+    public class GameEntityRegister : MonoBehaviour, ISerializationCallbackReceiver
     {
         protected Dictionary<uint, IRegistrable> AllDestinationsControllers = new Dictionary<uint, IRegistrable>();
         protected Dictionary<uint, IRegistrable> AllTowersEntityController = new Dictionary<uint, IRegistrable>();
         protected Dictionary<Type,Dictionary<uint, IRegistrable>> TypeRegisterMap = 
             new Dictionary<Type, Dictionary<uint, IRegistrable>>();
+
+        public List<TowerEntityController> TowersList = new List<TowerEntityController>();
+        public List<DestinationController> DestinationsList = new List<DestinationController>();
+
 
         private void Awake()
         {
@@ -42,6 +46,36 @@ namespace TC.Common
             return TypeRegisterMap[_entityType][_gameObjectUniqueKey];
         }
 
+        public void OnBeforeSerialize()
+        {
+            TowersList.Clear();
+            DestinationsList.Clear();
+
+            AllDestinationsControllers.ToList().ForEach(
+            x =>
+            {
+                DestinationsList.Add((DestinationController)x.Value);
+            });
+
+            AllTowersEntityController.ToList().ForEach(
+            x =>
+            {
+                TowersList.Add((TowerEntityController)x.Value);
+            });
+        }
+
+        public void OnAfterDeserialize()
+        {
+            TowersList.ForEach(x =>
+            {
+                AllTowersEntityController.Add(x.networkObject.NetworkId, x);
+            });
+
+            DestinationsList.ForEach(x =>
+            {
+                AllDestinationsControllers.Add(x.networkObject.NetworkId, x);
+            });
+        }
     }
 }
 
