@@ -13,7 +13,7 @@ namespace TC.Common
      *  and sometimes the application doesn't respond correctly. I suspect that the problem is bounded by the
      *  process of serialization/deserialization  and that GameEntityRegister isn't a Singleton. To investigate. 
      */
-    public class GameEntityRegister : MonoBehaviour/*, ISerializationCallbackReceiver*/
+    public class GameEntityRegister : MonoBehaviour, ISerializationCallbackReceiver
     {
         protected Dictionary<uint, IRegistrable> AllDestinationsControllers = new Dictionary<uint, IRegistrable>();
         protected Dictionary<uint, IRegistrable> AllTowersEntityController = new Dictionary<uint, IRegistrable>();
@@ -49,37 +49,43 @@ namespace TC.Common
         {
             return TypeRegisterMap[_entityType][_gameObjectUniqueKey];
         }
+    
+        public void OnBeforeSerialize()
+        {
+    #if UNITY_EDITOR
+            TowersList.Clear();
+            DestinationsList.Clear();
 
-        //public void OnBeforeSerialize()
-        //{
-        //    TowersList.Clear();
-        //    DestinationsList.Clear();
+            AllDestinationsControllers.ToList().ForEach(
+            x =>
+            {
+                DestinationsList.Add((DestinationController)x.Value);
+            });
 
-        //    AllDestinationsControllers.ToList().ForEach(
-        //    x =>
-        //    {
-        //        DestinationsList.Add((DestinationController)x.Value);
-        //    });
+            AllTowersEntityController.ToList().ForEach(
+            x =>
+            {
+                TowersList.Add((TowerEntityController)x.Value);
+            });
+#endif
+        }
 
-        //    AllTowersEntityController.ToList().ForEach(
-        //    x =>
-        //    {
-        //        TowersList.Add((TowerEntityController)x.Value);
-        //    });
-        //}
+        public void OnAfterDeserialize()
+        {
+#if UNITY_EDITOR
 
-        //public void OnAfterDeserialize()
-        //{
-        //    TowersList.ForEach(x =>
-        //    {
-        //        AllTowersEntityController.Add(x.networkObject.NetworkId, x);
-        //    });
+            TowersList.ForEach(x =>
+            {
+                AllTowersEntityController.Add(x.networkObject.NetworkId, x);
+            });
 
-        //    DestinationsList.ForEach(x =>
-        //    {
-        //        AllDestinationsControllers.Add(x.networkObject.NetworkId, x);
-        //    });
-        //}
+            DestinationsList.ForEach(x =>
+            {
+                AllDestinationsControllers.Add(x.networkObject.NetworkId, x);
+            });
+#endif
+        }
+
     }
 }
 

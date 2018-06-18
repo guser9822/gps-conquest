@@ -57,12 +57,21 @@ namespace TC.GPConquest.Server
         private void Update()
         {
 
+            RPCSendCounter += Time.deltaTime;
+
             if (networkObject.IsOwner && PlayerCaptureTimeTable.Count>0) 
             {
                 PlayerCaptureTimeTable = PlayersCapturingCounter(PlayerCaptureTimeTable);
-                //Let the owner of the towers fill the list and send updates on the network
-                CaptureInfoList = FillCaptureInfoList(PlayerCaptureTimeTable, CaptureInfoList);
-                CaptureInfoList = SendCaptureInfoOverTheNetwork(CaptureInfoList);
+
+                if (RPCSendCounter >= TIMES.UPDATE_NETWORK_TOWERS_TIME)
+                {
+
+                    //Let the owner of the towers fill the list and send updates on the network
+                    CaptureInfoList = FillCaptureInfoList(PlayerCaptureTimeTable, CaptureInfoList);
+                    CaptureInfoList = SendCaptureInfoOverTheNetwork(CaptureInfoList);
+                    RPCSendCounter = 0D;
+                }
+
                 FactionsConquestTime = FactionsCapturingCounter(FactionsConquestTime,PlayerCaptureTimeTable);
             }
 
@@ -79,6 +88,7 @@ namespace TC.GPConquest.Server
                 new object[] { bytes });
 
             _captureInfoList.Clear();
+
             return _captureInfoList;
         }
 
