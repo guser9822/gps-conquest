@@ -18,13 +18,19 @@ namespace TC.GPConquest.Server
     {
         public TowerEntityController TowerEntityController { get; set; }
 
+        public string FactionOwner;
+        public DestinationController lastOwner;
+
         //Capture Times expressed in milliseconds
         private struct TIMES {
             public const double FACTION_CONQUEST_TIME = 30000;
+            public const double WAITING_TIME_BEFORE_NEXT_CAPTURE = 30000;
             public const double UPDATE_NETWORK_TOWERS_TIME = 0.5;//Timer used to send RPC every half second
         };
-        //RPC send counter
-        private double RPCSendCounter = 0.0;
+
+        //Timers that keep time passed
+        private double WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED = 0.0;
+        private double UPDATE_NETWORK_TOWERS_TIME_PASSED = 0.0;
 
         //Table <DestinationController,Time spent in the capture of the tower>
         private Dictionary<DestinationController, double> PlayerCaptureTimeTable = new Dictionary<DestinationController, double>();
@@ -57,24 +63,59 @@ namespace TC.GPConquest.Server
         private void Update()
         {
 
-            RPCSendCounter += Time.deltaTime;
-
             if (networkObject.IsOwner && PlayerCaptureTimeTable.Count>0) 
             {
+                UPDATE_NETWORK_TOWERS_TIME_PASSED += Time.deltaTime;
+
                 PlayerCaptureTimeTable = PlayersCapturingCounter(PlayerCaptureTimeTable);
-
-                if (RPCSendCounter >= TIMES.UPDATE_NETWORK_TOWERS_TIME)
+                if (UPDATE_NETWORK_TOWERS_TIME_PASSED >= TIMES.UPDATE_NETWORK_TOWERS_TIME)
                 {
-
                     //Let the owner of the towers fill the list and send updates on the network
                     CaptureInfoList = FillCaptureInfoList(PlayerCaptureTimeTable, CaptureInfoList);
                     CaptureInfoList = SendCaptureInfoOverTheNetwork(CaptureInfoList);
-                    RPCSendCounter = 0D;
+                    UPDATE_NETWORK_TOWERS_TIME_PASSED = 0D;
                 }
-
                 FactionsConquestTime = FactionsCapturingCounter(FactionsConquestTime,PlayerCaptureTimeTable);
             }
 
+        }
+
+        protected bool CheckWinningConditions(Dictionary<string, double> _factionsConquestTime, 
+            Dictionary<DestinationController, double> _playerCaptureTimeTable)
+        {
+            //Find the first faction that reached the conquest time
+            var winningFaction = _factionsConquestTime.
+                Where(x => IsWinningFaction(x.Key, x.Value)).
+                FirstOrDefault();
+
+            if (!ReferenceEquals(null, winningFaction)) {
+                var winningFactionName = winningFaction.Key;
+                //Find the player of that faction with the more time spent on the capture of the tower
+                var winningPlayerPair = _playerCaptureTimeTable.Where(
+                    x =>
+                    {
+                        var avatorController = x.Key.AvatorController;
+                        var playerEntity = avatorController.PlayerEntity;
+                        return playerEntity.faction.Equals(winningFactionName);
+                    }).
+                    OrderByDescending<KeyValuePair<DestinationController, double>, double>( x => x.Value).
+                    FirstOrDefault();
+
+                if (!ReferenceEquals(null, winningPlayerPair)) {
+                    var winningPlayer = winningPlayerPair.Key;
+                    Debug.Log("[OWNER] We have the Winning Faction : " 
+                        + winningFactionName + 
+                        ", won by " + winningPlayer.PlayerName);
+
+                }
+
+            }
+            return true;
+        }
+
+        protected bool IsWinningFaction(string _factionName,double _captureTime)
+        {
+            return _captureTime >= TIMES.FACTION_CONQUEST_TIME ? true : false;
         }
 
         protected List<CaptureTransferInfo> SendCaptureInfoOverTheNetwork(List<CaptureTransferInfo> _captureInfoList)
@@ -257,7 +298,7 @@ namespace TC.GPConquest.Server
             var bytes = args.GetNext<Byte[]>();
             List<CaptureTransferInfo> captureInfos = (List<CaptureTransferInfo>)ByteArrayUtils.ByteArrayToObject(bytes);
 
-            //Update the capture time of the player on the CaptureController over the network
+            //Update the capture time of the players on the CaptureController over the network
             captureInfos.ForEach(x =>
             {
                 var uniqueId = x.uniqueId;
@@ -270,8 +311,6 @@ namespace TC.GPConquest.Server
                 var player = keyValuePlayer.Key;
                 //Set the new calculated time
                 PlayerCaptureTimeTable[player] = capturetime;
-                var time = PlayerCaptureTimeTable[player];
-                Debug.Log("[Proxy] The player " + player.PlayerName + " spent " + time + " secs.");
             });
 
             //Recalculate time for the factions

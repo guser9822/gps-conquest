@@ -7,6 +7,7 @@ using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
 using TC.Common;
+using TC.GPConquest.Common;
 
 namespace TC.GPConquest.Player
 {

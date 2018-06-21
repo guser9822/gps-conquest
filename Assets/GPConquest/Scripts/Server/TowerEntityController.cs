@@ -9,6 +9,7 @@ using System.Linq;
 using TC.GPConquest.GpsMap.Helpers;
 using TC.Common;
 using TC.GPConquest.Player;
+using TC.GPConquest.Common;
 
 namespace TC.GPConquest.Server
 {

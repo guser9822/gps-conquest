@@ -5,6 +5,7 @@ using TC.GPConquest.Server;
 using UnityEngine;
 using System.Linq;
 using System;
+using TC.GPConquest.Common;
 
 namespace TC.Common
 {
@@ -50,6 +51,9 @@ namespace TC.Common
             return TypeRegisterMap[_entityType][_gameObjectUniqueKey];
         }
     
+        /*
+         * Execute this code only in Editor mode, otherwise the application will be unstable
+         * **/
         public void OnBeforeSerialize()
         {
     #if UNITY_EDITOR
@@ -70,6 +74,9 @@ namespace TC.Common
 #endif
         }
 
+        /*
+        * Execute this code only in Editor mode, otherwise the application will be unstable
+        * **/
         public void OnAfterDeserialize()
         {
 #if UNITY_EDITOR
