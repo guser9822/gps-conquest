@@ -106,7 +106,6 @@ namespace TC.GPConquest.Server
                     Debug.Log("[OWNER] We have the Winning Faction : " 
                         + winningFactionName + 
                         ", won by " + winningPlayer.PlayerName);
-
                 }
 
             }
