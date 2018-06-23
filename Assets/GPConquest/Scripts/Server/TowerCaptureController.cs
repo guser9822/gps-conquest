@@ -51,7 +51,8 @@ namespace TC.GPConquest.Server
             //Initialize the map factions/time passed
             GameCommonNames.FACTIONS.ForEach(x =>
             {
-                _factionsConquestTime[x] = 0D;
+                if (!ReferenceEquals(x, null))
+                    _factionsConquestTime[x] = 0D;
             });
             return _factionsConquestTime;
         }
@@ -82,7 +83,8 @@ namespace TC.GPConquest.Server
                 }
 
                 //If the tower have been captured, starts the countdown in order to reactivate the capture game
-                if (IsCaptured) {
+                if (IsCaptured)
+                {
                     Debug.Log("Time to wait untill next capture : " + WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED);
                     WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED -= Time.deltaTime;
                     //If the timer gets azzerated, reactivates the capture game
@@ -116,14 +118,19 @@ namespace TC.GPConquest.Server
                     FirstOrDefault();
 
                 var winningPlayer = winningPlayerPair.Key;
-                if (!ReferenceEquals(null, winningPlayer))
+                var gameEntities = TowerEntityController.GameEntityRegister;
+                if (!ReferenceEquals(null, winningPlayer) &&
+                    !ReferenceEquals(gameEntities.FindEntity(typeof(DestinationController), winningPlayer.networkObject.NetworkId), null))
                 {
                     Debug.Log("[OWNER] We have the Winning Faction : "
                         + winningFactionName +
                         ", won by " + winningPlayer.PlayerName);
                     _isCaptured = true;
                 }
-                else Debug.LogWarning("The strange happened no winning player found for faction "+winningFactionName);
+                else {
+                    Debug.LogWarning("The strange happened no winning player found for faction " + winningFactionName);
+                    PlayersCaptureTimeTable.Remove(winningPlayer);
+                }
             }
             return _isCaptured;
         }
@@ -137,31 +144,52 @@ namespace TC.GPConquest.Server
         {
             //Convert the list of the informations into an array of bytes
             var bytes = ByteArrayUtils.ObjectToByteArray(_captureInfoList);
+            if (!ReferenceEquals(bytes, null) && bytes.Length > 0)
+            {
+                networkObject.SendRpc(RPC_UPDATE_CAPTURES_TIMES_ON_NETWORK,
+                                        true,
+                                        Receivers.All,
+                                        new object[] { bytes });
 
-            networkObject.SendRpc(RPC_UPDATE_CAPTURES_TIMES_ON_NETWORK,
-                true,
-                Receivers.All,
-                new object[] { bytes });
-
-            _captureInfoList.Clear();
-
+                _captureInfoList.Clear();
+            }
+            else Debug.LogWarning("Capture infos array of bytes is null or empty");
             return _captureInfoList;
         }
 
         protected List<CaptureTransferInfo> FillCaptureInfoList(Dictionary<DestinationController, double> _playerCaptureTimeTable,
             List<CaptureTransferInfo> _captureInfoList)
         {
-            _playerCaptureTimeTable.ToList().ForEach(x =>
+            var playerList = _playerCaptureTimeTable.ToList();
+            if (!ReferenceEquals(playerList, null) && playerList.Count > 0)
             {
-                var player = x.Key;
-                CaptureTransferInfo newCaptureInfo = new CaptureTransferInfo()
+                playerList.ForEach(x =>
                 {
-                    uniqueId = player.networkObject.NetworkId,
-                    captureTime = x.Value
-                };
+                    if (!ReferenceEquals(x, null))
+                    {
+                        var player = x.Key;
+                        var gameEntities = TowerEntityController.GameEntityRegister;
+                        if (!ReferenceEquals(player, null) &&
+                                !ReferenceEquals(gameEntities.FindEntity(typeof(DestinationController), player.networkObject.NetworkId), null))
+                        {
+                            CaptureTransferInfo newCaptureInfo = new CaptureTransferInfo()
+                            {
+                                uniqueId = player.networkObject.NetworkId,
+                                captureTime = x.Value
+                            };
+                            _captureInfoList.Add(newCaptureInfo);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Player is null while filling capture infos");
+                            PlayersCaptureTimeTable.Remove(player);
+                        }
+                    }
+                    else Debug.LogWarning("PlayerKeyPair is null while filling capture infos");
+                });
+            }
+            else Debug.LogWarning("Players list is empty while filling capture informations list");
 
-                _captureInfoList.Add(newCaptureInfo);
-            });
             return _captureInfoList;
         }
 
@@ -172,32 +200,67 @@ namespace TC.GPConquest.Server
             _factionsTime = InitializeFactionsConquestTime(_factionsTime);
 
             var players = _playerCaptureTimeTable.Keys.ToList<DestinationController>();
-            players.ForEach(player =>
+            if (!ReferenceEquals(players, null) && players.Count > 0)
             {
-                var playerEntity = player.AvatorController.PlayerEntity;
-                var faction = playerEntity.faction;
-                var playerTime = _playerCaptureTimeTable[player];
-                var newTime = _factionsTime[faction] + playerTime;
-                _factionsTime[faction] = newTime;
-            });
+                players.ForEach(player =>
+                {
+                    if (!ReferenceEquals(player, null))
+                    {
+                        var playerEntity = player.AvatorController.PlayerEntity;
+                        var faction = playerEntity.faction;
+
+                        var gameEntities = TowerEntityController.GameEntityRegister;
+                        if (_playerCaptureTimeTable.ContainsKey(player) &&
+                                !ReferenceEquals(gameEntities.FindEntity(typeof(DestinationController), player.networkObject.NetworkId), null))
+                        {
+                            var playerTime = _playerCaptureTimeTable[player];
+                            var newTime = _factionsTime[faction] + playerTime;
+                            _factionsTime[faction] = newTime;
+                        }
+                        else {
+                            Debug.LogWarning("Players/times table doesn't contain the player");
+                            PlayersCaptureTimeTable.Remove(player);
+                        }
+                    }
+                    else
+                        Debug.LogWarning("Found a destination controller null");
+                });
+            }
+            else Debug.LogWarning("Player list is null or empty");
+
             return _factionsTime;
         }
 
         protected Dictionary<DestinationController, double> PlayersCapturingCounter(
             Dictionary<DestinationController, double> _playerNetIdNameCaptureTimeTable)
         {
-
             var playersCapturingTower = _playerNetIdNameCaptureTimeTable.ToList();
-            if (playersCapturingTower.Count > 0)
+            if (!ReferenceEquals(playersCapturingTower, null) && playersCapturingTower.Count > 0)
             {
                 playersCapturingTower.ForEach(
                     s =>
                     {
-                        var playerNetworkkId = s.Key.networkObject.NetworkId;
-                        double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
-                        double timeAdd = timePassed + Time.deltaTime; //Add time passed since last update 
+                        if (!ReferenceEquals(s, null))
+                        {
+                            var player = s.Key;
+                            var gameEntities = TowerEntityController.GameEntityRegister;
+                            if (!ReferenceEquals(player, null) &&
+                                    !ReferenceEquals(gameEntities.FindEntity(typeof(DestinationController), player.networkObject.NetworkId), null))
+                            {
+                                var playerNetworkkId = s.Key.networkObject.NetworkId;
+                                double timePassed = s.Value; //Time passed since the player is stayed in the capture zone
+                                double timeAdd = timePassed + Time.deltaTime; //Add time passed since last update 
 
-                        _playerNetIdNameCaptureTimeTable[s.Key] = timeAdd;
+                                _playerNetIdNameCaptureTimeTable[s.Key] = timeAdd;
+                            }
+                            else
+                            {
+                                Debug.LogWarning("Null player in the players/times table");
+                                PlayersCaptureTimeTable.Remove(player);
+                            }
+                        }
+                        else Debug.LogWarning("Null KeyPair in the players/times table");
+
                     });
             }
 
@@ -206,25 +269,40 @@ namespace TC.GPConquest.Server
 
         public void InitTowerCaptureController(TowerEntityController _towerEntityController)
         {
-            UpdateTowerCaptureControllerAttributes(_towerEntityController);
+            if (!ReferenceEquals(_towerEntityController, null))
+            {
+                UpdateTowerCaptureControllerAttributes(_towerEntityController);
 
-            //Destroy this object when the Tower is destroyed
-            _towerEntityController.networkObject.onDestroy += NetworkObject_onDestroy;
+                //Destroy this object when the Tower is destroyed
+                _towerEntityController.networkObject.onDestroy += NetworkObject_onDestroy;
 
-            networkObject.SendRpc(RPC_UPDATE_CAPTURE_CONTROLLER_ON_NETWORK, Receivers.AllBuffered);
+                networkObject.SendRpc(RPC_UPDATE_CAPTURE_CONTROLLER_ON_NETWORK, Receivers.AllBuffered);
+            }
+            else Debug.LogWarning("Can't use a null tower entity controller for initializations");
+
         }
 
         private void UpdateTowerCaptureControllerAttributes(TowerEntityController _towerEntityController)
         {
-            networkObject.TowerEntityNetId = _towerEntityController.networkObject.NetworkId;
-            TowerEntityController = _towerEntityController;
-            _towerEntityController.TowerCaptureController = this;
-            transform.SetParent(TowerEntityController.transform);
+            if (!ReferenceEquals(_towerEntityController, null))
+            {
+                networkObject.TowerEntityNetId = _towerEntityController.networkObject.NetworkId;
+                TowerEntityController = _towerEntityController;
+                _towerEntityController.TowerCaptureController = this;
+                transform.SetParent(TowerEntityController.transform);
+            }
+            else Debug.LogWarning("Tower entity controller null");
+
         }
 
         //Update the capture controller on the network after initialization 
         public override void UpdateCaptureControllerOnNetwork(RpcArgs args)
         {
+            /*
+             * The tower entity has a connection to the GameRegisterEntity,
+             * but for finding the tower entity of this capture controller
+             * we must firstly find the GameRegister
+             * **/
             var gameRegister = FindObjectOfType<GameEntityRegister>();
 
             var tower = (TowerEntityController)gameRegister.FindEntity(typeof(TowerEntityController),
@@ -235,45 +313,52 @@ namespace TC.GPConquest.Server
         //This method checks if the player is capturing the tower and updates this object internal structures
         public void CheckForCapture(DestinationController _playerDestinationComponent, bool _isCapturing)
         {
-            var playerNetId = _playerDestinationComponent.networkObject.NetworkId;
-            AddOrDeletePlayerToTheCapturing(_playerDestinationComponent, _isCapturing);
+            if (!ReferenceEquals(_playerDestinationComponent, null))
+            {
+                var playerNetId = _playerDestinationComponent.networkObject.NetworkId;
+                AddOrDeletePlayerToTheCapturing(_playerDestinationComponent, _isCapturing);
 
-            //Keep updated also the network entities of this object
-            networkObject.SendRpc(RPC_UPDATE_CAPTURE_ON_NETWORK,
-                Receivers.AllBuffered,
-                playerNetId,
-                _isCapturing);
+                //Keep updated also the network entities of this object
+                networkObject.SendRpc(RPC_UPDATE_CAPTURE_ON_NETWORK,
+                    Receivers.AllBuffered,
+                    playerNetId,
+                    _isCapturing);
+            }
+            else Debug.LogWarning("Can't check the capture status of a null destination controller");
+
         }
 
         protected void AddOrDeletePlayerToTheCapturing(DestinationController _playerDestinationComponent,
             bool _isCapturing)
         {
-            double val = 0d;
             bool exists;
-
-            var playerKeyString =
-                _playerDestinationComponent.networkObject.NetworkId.ToString() +
-                " - "
-                + _playerDestinationComponent.PlayerName;
-
-            if (_isCapturing)
+            if (!ReferenceEquals(_playerDestinationComponent, null))
             {
-                exists = PlayersCaptureTimeTable.TryGetValue(_playerDestinationComponent, out val);
-                if (!exists)
+                var playerKeyString =
+                    _playerDestinationComponent.networkObject.NetworkId.ToString() +
+                    " - "
+                    + _playerDestinationComponent.PlayerName;
+
+                if (_isCapturing)
                 {
-                    PlayersCaptureTimeTable.Add(_playerDestinationComponent, 0d);
-                    PlayerCapturingTowerList.Add(playerKeyString);
+                    exists = PlayersCaptureTimeTable.ContainsKey(_playerDestinationComponent);
+                    if (!exists)
+                    {
+                        PlayersCaptureTimeTable.Add(_playerDestinationComponent, 0d);
+                        PlayerCapturingTowerList.Add(playerKeyString);
+                    }
+                }
+                else
+                {
+                    exists = PlayersCaptureTimeTable.ContainsKey(_playerDestinationComponent);
+                    if (exists)
+                    {
+                        PlayersCaptureTimeTable.Remove(_playerDestinationComponent);
+                        PlayerCapturingTowerList.Remove(playerKeyString);
+                    }
                 }
             }
-            else
-            {
-                exists = PlayersCaptureTimeTable.TryGetValue(_playerDestinationComponent, out val);
-                if (exists)
-                {
-                    PlayersCaptureTimeTable.Remove(_playerDestinationComponent);
-                    PlayerCapturingTowerList.Remove(playerKeyString);
-                }
-            }
+            else Debug.LogWarning("Can't add or remove a null destination controller");
         }
 
         //Update the list of the players on the network that are capturing the tower
@@ -313,25 +398,47 @@ namespace TC.GPConquest.Server
         public override void UpdateCapturesTimesOnNetwork(RpcArgs args)
         {
             var bytes = args.GetNext<Byte[]>();
-            List<CaptureTransferInfo> captureInfos = (List<CaptureTransferInfo>)ByteArrayUtils.ByteArrayToObject(bytes);
 
-            //Update the capture time of the players on the CaptureController over the network
-            captureInfos.ForEach(x =>
+            if (!ReferenceEquals(bytes, null))
             {
-                var uniqueId = x.uniqueId;
-                var capturetime = x.captureTime;
-                //Find the player with this networkid
-                var keyValuePlayer = PlayersCaptureTimeTable.First(y =>
-                {
-                    return y.Key.networkObject.NetworkId.Equals(uniqueId);
-                });
-                var player = keyValuePlayer.Key;
-                //Set the new calculated time
-                PlayersCaptureTimeTable[player] = capturetime;
-            });
 
-            //Recalculate time for the factions
-            FactionsConquestTime = FactionsCapturingCounter(FactionsConquestTime, PlayersCaptureTimeTable);
+                List<CaptureTransferInfo> captureInfos = (List<CaptureTransferInfo>)ByteArrayUtils.ByteArrayToObject(bytes);
+                if (!ReferenceEquals(captureInfos, null) && captureInfos.Capacity > 0)
+                {
+                    //Update the capture time of the players on the CaptureController over the network
+                    captureInfos.ForEach(x =>
+                    {
+                        if (!ReferenceEquals(x, null))
+                        {
+                            var uniqueId = x.uniqueId;
+                            var capturetime = x.captureTime;
+                            //Find the player with this networkid
+                            var keyValuePlayer = PlayersCaptureTimeTable.FirstOrDefault(y =>
+                            {
+                                return y.Key.networkObject.NetworkId.Equals(uniqueId);
+                            });
+
+                            if (!ReferenceEquals(keyValuePlayer, null))
+                            {
+                                var player = keyValuePlayer.Key;
+                                if (!ReferenceEquals(player, null))
+                                {
+                                    //Set the new calculated time
+                                    PlayersCaptureTimeTable[player] = capturetime;
+                                }
+                                else Debug.LogWarning("Player with networkId " + uniqueId + " not found");
+                            }
+                            else Debug.LogWarning("KeyValuePair player is null");
+                        }
+                        else Debug.LogWarning("Capture null is null");
+                    });
+                    captureInfos = null; //I hope this helps garbage collection
+                                         //Recalculate time for the factions
+                    FactionsConquestTime = FactionsCapturingCounter(FactionsConquestTime, PlayersCaptureTimeTable);
+                }
+                else Debug.LogWarning("Capture infos list is empty or null");
+            }
+            else Debug.LogWarning("Bytes array is null");
         }
     }
 

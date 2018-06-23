@@ -12,24 +12,34 @@ namespace TC.GPConquest.Utility
     {
         public static byte[] ObjectToByteArray(Object obj)
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
+            byte[] res = null;
+            if (!ReferenceEquals(obj, null))
             {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
+                BinaryFormatter bf = new BinaryFormatter();
+                using (var ms = new MemoryStream())
+                {
+                    bf.Serialize(ms, obj);
+                    res = ms.ToArray();
+                }
             }
+            return res;
         }
 
         public static Object ByteArrayToObject(byte[] arrBytes)
         {
-            using (var memStream = new MemoryStream())
+            object res = null;
+            if (!ReferenceEquals(arrBytes, null) && arrBytes.Length>0)
             {
-                var binForm = new BinaryFormatter();
-                memStream.Write(arrBytes, 0, arrBytes.Length);
-                memStream.Seek(0, SeekOrigin.Begin);
-                var obj = binForm.Deserialize(memStream);
-                return obj;
+                using (var memStream = new MemoryStream())
+                {
+                    var binForm = new BinaryFormatter();
+                    memStream.Write(arrBytes, 0, arrBytes.Length);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    var obj = binForm.Deserialize(memStream);
+                    res = obj;
+                }
             }
+            return res;
         }
     }
 }

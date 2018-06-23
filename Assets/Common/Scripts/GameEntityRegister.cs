@@ -45,10 +45,23 @@ namespace TC.Common
             var networkId = _entity.GetUniqueKey();
             return TypeRegisterMap[aEntityType].Remove(networkId);
         }
-
+        /*
+         * Return the entity otherwise null
+         * **/
         public IRegistrable FindEntity(Type _entityType,uint _gameObjectUniqueKey)
         {
-            return TypeRegisterMap[_entityType][_gameObjectUniqueKey];
+            IRegistrable result = null;
+            if (TypeRegisterMap.ContainsKey(_entityType))
+            {
+                var mapType = TypeRegisterMap[_entityType];
+                if (mapType.ContainsKey(_gameObjectUniqueKey))
+                    result = mapType[_gameObjectUniqueKey];
+                else Debug.LogWarning("Player with netword id " + _gameObjectUniqueKey + " not found");
+            }
+            else {
+                Debug.LogWarning("Type "+ _entityType.ToString() + " not found in the types map");
+            }
+            return result;
         }
     
         /*
@@ -71,7 +84,7 @@ namespace TC.Common
             {
                 TowersList.Add((TowerEntityController)x.Value);
             });
-#endif
+    #endif
         }
 
         /*
@@ -79,7 +92,7 @@ namespace TC.Common
         * **/
         public void OnAfterDeserialize()
         {
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
 
             TowersList.ForEach(x =>
             {
@@ -90,7 +103,7 @@ namespace TC.Common
             {
                 AllDestinationsControllers.Add(x.networkObject.NetworkId, x);
             });
-#endif
+    #endif
         }
 
     }

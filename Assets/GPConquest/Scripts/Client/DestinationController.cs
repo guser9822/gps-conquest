@@ -236,11 +236,12 @@ namespace TC.GPConquest.Player
             networkObject.destNetRotation = transform.rotation;
         }
 
-        //Function used to destroy this object. NOTE : It will also destroy the avator connected
-        //NOTE 2 : It will not be executed on the non owner process
+        //Function used to destroy this object. 
+        //NOTE 1: It will also destroy the avator connected
+        //NOTE 2: It will not be executed on the non owner process
         public void DestroyDestinationController()
         {
-            //This will remove the destination controller only from the owner process entity register 
+            //This will remove the destination controller only from the owner process entities register 
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
         }
