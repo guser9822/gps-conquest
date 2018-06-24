@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 143818969398987818}
   m_Layer: 0
   m_Name: UMABaseAvator
-  m_TagString: Untagged
+  m_TagString: Avator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a152bb66aea83a44acd6c96362733a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DestinationControllerReference: {fileID: 0}
   SpeedParamenter: Forward
+  PlayerEntity: {fileID: 0}
+  CameraOnDestination: {fileID: 0}
 --- !u!114 &114968922958424096
 MonoBehaviour:
   m_ObjectHideFlags: 1

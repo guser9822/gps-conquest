@@ -1,0 +1,6 @@
+<ServerAndClient xmlns="MarkLight">
+  <UserInterface>
+    <ServerAndClientUI BackgroundColor="grey" />
+  </UserInterface>
+  <EventSystem />
+</ServerAndClient>

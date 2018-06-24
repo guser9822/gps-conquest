@@ -7,6 +7,8 @@ using System.Text;
 using Assets.Helpers;
 using Assets.Models;
 using UnityEngine;
+using TC.Common;
+using TC.GPConquest.GpsMap.Helpers;
 
 namespace Assets
 {
@@ -36,54 +38,11 @@ namespace Assets
         {
             Vector3 tp = transform.position;
 
-            //Tile will try to create itself from nearby tiles, otherwise it will not
-            if (Physics.CheckSphere(tp + Vector3.right * 612, 0.5f))
-            {
-                Debug.Log("-r " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.right;
-            }
-            else if (Physics.CheckSphere(tp - Vector3.right * 612, 0.5f))
-            {
-                Debug.Log("+r " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.right;
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612, 0.5f))
-            {
-                Debug.Log("+u " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp + Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up;
-            }
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612, 0.5f))
-            {
-                Debug.Log("-u " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp - Vector3.forward * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up;
-            }
-            //diagonals
-            //honestly these should never really be called except for the beginning
-            //also may be somewhat broken atm
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f))
-            {
-                Debug.Log("--d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up - Vector2.right;
+            TileHelper.CheckNearbyTileResult collisionResult = 
+                TileHelper.CheckNearbyTile(new Vector3(tp.x,tp.y,tp.z), gameObject.name);
 
-            }
-            else if (Physics.CheckSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f))
-            {
-                Debug.Log("-+d " + gameObject.name + " from " + Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp - Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen - Vector2.up + Vector2.right;
-
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f))
-            {
-                Debug.Log("+-d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 - Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
-
-            }
-            else if (Physics.CheckSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f))
-            {
-                Debug.Log("++d " + gameObject.name + " from " + Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].name);
-                realPos = Physics.OverlapSphere(tp + Vector3.forward * 612 + Vector3.right * 612, 0.5f)[0].GetComponent<Tile>().cen + Vector2.up - Vector2.right;
-
-            }
+            if (collisionResult.IsCollided)
+                realPos = collisionResult.RealPosition;
 
             cen = realPos;
 
@@ -120,16 +79,6 @@ namespace Assets
                 Debug.Log("Tile downloaded..");
                 constructTiles(mapData, realPos, zoom, worldCenter);
             }
-
-            //gameObject.AddComponent<BoxCollider>();
-
-            //Rect = GM.TileBounds(realPos, zoom);
-
-            ////make em
-            //CreateBuildings(mapData["buildings"], worldCenter);
-            //CreateWater(mapData["water"], worldCenter);
-            //CreateParks(mapData["landuse"], worldCenter);
-            //CreateRoads(mapData["roads"], worldCenter);
             
         }
 

@@ -7,17 +7,20 @@ using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Unity;
 using System;
 using TC.Common;
+using TC.GPConquest.Common;
 
 namespace TC.GPConquest.Player
 {
-    public class DestinationController : PlayerDestinationControllerBehavior
+    public class DestinationController : PlayerDestinationControllerBehavior,
+        IEqualityComparer<DestinationController>,
+        IRegistrable
     {
         #region Mix
-        public AssetLoaderController AssetLoaderController { get; private set; }
         private Renderer sphereRend;
         [HideInInspector]
         public Camera DestinationCamera;
         protected tileGen TileGen;
+        public GameEntityRegister GameEntityRegister { get; private set; }
         #endregion
 
         #region Attributes dedicated to the avator
@@ -26,6 +29,7 @@ namespace TC.GPConquest.Player
         public float destAvatorDestDist { get; protected set; }
         public string SelectedUma { get; protected set; }
         public UserInformations CurrentUserInformations { get; private set; }
+        public AvatorController AvatorController { get; set; }
         #endregion
 
         #region  Attributes dedicated to UnityEditor
@@ -38,7 +42,6 @@ namespace TC.GPConquest.Player
 
         private void Awake()
         {
-            AssetLoaderController = FindObjectOfType<AssetLoaderController>();
             sphereRend = sphere.GetComponent<Renderer>();
         }
 
@@ -50,6 +53,7 @@ namespace TC.GPConquest.Player
 
         protected void InitDestinationController()
         {
+            //This is necessary since we are overriding NetworkStart and the code then will be executed on proprietary and non process
             if (!networkObject.IsOwner)
                 return;
 
@@ -121,6 +125,15 @@ namespace TC.GPConquest.Player
             cursorColor = _cursorColor;
             sphereRend.material.color = _cursorColor;
             sphere.transform.localScale = _cursorsDimension;
+
+            //Find GameEntityRegister
+            GameEntityRegister = FindObjectOfType<GameEntityRegister>();
+
+            //Add this Destination controller to the register
+            GameEntityRegister.AddEntity(this);
+
+            //Register the callback for deleting the Destination controller from the register when it will disconnect
+            networkObject.onDestroy += NetworkObject_onDestroyRemoveFromRegister;
         }
 
         //Sets up values for the destination controller based on isGiantMode value
@@ -156,13 +169,10 @@ namespace TC.GPConquest.Player
             //the players owning the clients. 
             DestinationCamera = FindObjectOfType<Camera>();
 
-            MainThreadManager.Run(() =>
-            {
-                UpdateDestinationAttributes(_playerName,
-                    _selectedUma,
-                    networkObject.destNetColor,
-                    networkObject.destCursorDims);
-            });
+            UpdateDestinationAttributes(_playerName,
+                _selectedUma,
+                networkObject.destNetColor,
+                networkObject.destCursorDims);
         }
 
         //Once the avator object is created on the network, starts build it's avator character
@@ -226,23 +236,62 @@ namespace TC.GPConquest.Player
             networkObject.destNetRotation = transform.rotation;
         }
 
-        //void OnGUI()
-        //{
-        //    if (!networkObject.IsOwner)
-        //        return;
-
-        //    GUI.Label(new Rect(10, 10, 100, 20), playerName);
-        //    if (GUI.Button(new Rect(10, 30, 100, 20), "Exit"))
-        //        DestroyDestinationController();
-        //}
-
-        //Function used to destroy this object. NOTE : It will also destroy the avator connected
+        //Function used to destroy this object. 
+        //NOTE 1: It will also destroy the avator connected
+        //NOTE 2: It will not be executed on the non owner process
         public void DestroyDestinationController()
         {
-            AssetBundle.UnloadAllAssetBundles(true);
+            //This will remove the destination controller only from the owner process entities register 
             networkObject.ClearRpcBuffer();
             networkObject.Destroy();
-            Application.Quit();
+        }
+
+        private void NetworkObject_onDestroyRemoveFromRegister(NetWorker sender)
+        {
+            GameEntityRegister.RemoveEntity(this);
+        }
+
+        public bool Equals(DestinationController x, DestinationController y)
+        {
+            return x.networkObject.NetworkId == y.networkObject.NetworkId &&
+               x.PlayerName == y.PlayerName;
+        }
+
+        public int GetHashCode(DestinationController obj)
+        {
+            int result = 89;
+            result = 13 * result + obj.networkObject.NetworkId.GetHashCode();
+            result = 13 * result + obj.PlayerName.GetHashCode();
+            return result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as DestinationController;
+
+            if (ReferenceEquals(item,null))
+            {
+                return false;
+            }
+
+            return this.networkObject.NetworkId == item.networkObject.NetworkId &&
+                this.PlayerName == item.PlayerName;
+        }
+
+        public override int GetHashCode()
+        {
+            int result = 89;
+            result = 13 * result + this.networkObject.NetworkId.GetHashCode();
+            result = 13 * result + this.PlayerName.GetHashCode();
+            return result;
+        }
+
+        public uint GetUniqueKey()
+        {
+            return networkObject.NetworkId;
         }
     }
+
+
+
 }
