@@ -14,12 +14,13 @@ namespace TC.GPConquest.Server
     public class TowerCaptureController : TowerCaptureNetworkControllerBehavior,ISerializationCallbackReceiver
     {
         public TowerEntityController TowerEntityController { get; set; }
+        private string WinningOrNoFaction;//used only by the owner of the tower to contain the winning faction or the NO_FACTION name
 
         //Times expressed in seconds
         private struct TIMES
         {
-            public const double FACTION_CONQUEST_TIME = 30;
-            public const double WAITING_TIME_BEFORE_NEXT_CAPTURE = 30;
+            public const double FACTION_CONQUEST_TIME = 10;
+            public const double WAITING_TIME_BEFORE_NEXT_CAPTURE = 10;
             public const double UPDATE_NETWORK_CAPT_CONTROLLERS_TIME = 0.5;//Timer used to send RPC every half second
         };
 
@@ -75,17 +76,22 @@ namespace TC.GPConquest.Server
                         UPDATE_NETWORK_TOWERS_TIME_PASSED = 0D;
                     }
                     FactionsConquestTime = FactionsCapturingCounter(FactionsConquestTime, PlayersCaptureTimeTable);
-                    IsCaptured = CheckWinningConditions(FactionsConquestTime, PlayersCaptureTimeTable);
+                    IsCaptured = CheckWinningConditions(FactionsConquestTime, PlayersCaptureTimeTable, WinningOrNoFaction);
 
                     //If the tower have been captured, sets a timer that blocks the capture game untill it's value will be 0
                     if (IsCaptured)
+                    {
                         WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED = TIMES.WAITING_TIME_BEFORE_NEXT_CAPTURE;
+                        //Sets the winner
+                        //TowerEntityController.OwnerFaction = WinningOrNoFaction;
+                        SetTheWinnerFaction(TowerEntityController, WinningOrNoFaction);
+                    }
+                        
                 }
 
                 //If the tower have been captured, starts the countdown in order to reactivate the capture game
                 if (IsCaptured)
                 {
-                    Debug.Log("Time to wait untill next capture : " + WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED);
                     WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED -= Time.deltaTime;
                     //If the timer gets azzerated, reactivates the capture game
                     if (WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED <= 0.0f) IsCaptured = false;
@@ -93,8 +99,28 @@ namespace TC.GPConquest.Server
             }
         }
 
+        /// <summary>
+        /// Set the winning faction on the TowerEntityController for both Owner/Non-Owners
+        /// </summary>
+        /// <param name="_towerEntityController"></param>
+        /// <param name="_winner"></param>
+        protected void SetTheWinnerFaction(TowerEntityController _towerEntityController, string _winner)
+        {
+            if (!ReferenceEquals(_towerEntityController, null) && 
+                !ReferenceEquals(_winner, null))
+            {
+                var towerEntityNetObj = _towerEntityController.networkObject;
+                towerEntityNetObj.SendRpc(TowerEntityControllerBehavior.RPC_UPDATE_TOWER_ATTRRIBUTES,
+                    true,
+                    Receivers.AllBuffered,
+                    WinningOrNoFaction);
+            }
+            else Debug.LogWarning("Winner faction or tower entity are null");
+        }
+
         protected bool CheckWinningConditions(Dictionary<string, double> _factionsConquestTime,
-            Dictionary<DestinationController, double> _playerCaptureTimeTable)
+            Dictionary<DestinationController, double> _playerCaptureTimeTable,
+            string _winningOrNoFaction)
         {
             bool _isCaptured = false;
 
@@ -106,6 +132,7 @@ namespace TC.GPConquest.Server
             var winningFactionName = winningFaction.Key;
             if (!ReferenceEquals(null, winningFactionName))
             {
+                WinningOrNoFaction = winningFactionName;
                 //Find the player of that faction with the more time spent on the capture of the tower
                 var winningPlayerPair = _playerCaptureTimeTable.Where(
                     x =>
@@ -370,7 +397,6 @@ namespace TC.GPConquest.Server
             var playerToDelete = playerToDeletePair.Key;
             if (!ReferenceEquals(playerToDelete, null))
             {
-                Debug.Log("[NON-OWNER] Removing player with networkd id" + networkId + " from the table.");
                 PlayersCaptureTimeTable.Remove(playerToDelete);
                 removed = true;
             }
