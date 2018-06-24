@@ -129,7 +129,7 @@ namespace TC.GPConquest.Server
                 }
                 else {
                     Debug.LogWarning("The strange happened no winning player found for faction " + winningFactionName);
-                    //PlayersCaptureTimeTable.Remove(winningPlayer);
+                    CheckForCapture(winningPlayer, false);
                 }
             }
             return _isCaptured;
@@ -182,7 +182,7 @@ namespace TC.GPConquest.Server
                         else
                         {
                             Debug.LogWarning("Player is null while filling capture infos");
-                            //PlayersCaptureTimeTable.Remove(player);
+                            CheckForCapture(player, false);
                         }
                     }
                     else Debug.LogWarning("PlayerKeyPair is null while filling capture infos");
@@ -218,7 +218,7 @@ namespace TC.GPConquest.Server
                         }
                         else {
                             Debug.LogWarning("Players/times table doesn't contain the player");
-                            //PlayersCaptureTimeTable.Remove(player);
+                            CheckForCapture(player, false);
                         }
                     }
                     else
@@ -255,7 +255,7 @@ namespace TC.GPConquest.Server
                             else
                             {
                                 Debug.LogWarning("Null player in the players/times table");
-                                //PlayersCaptureTimeTable.Remove(player);
+                                CheckForCapture(player,false);
                             }
                         }
                         else Debug.LogWarning("Null KeyPair in the players/times table");
@@ -349,6 +349,34 @@ namespace TC.GPConquest.Server
             else Debug.LogWarning("Can't add or remove a null destination controller");
         }
 
+        /// <summary>
+        /// This function is used in order to remove player from PlayersCaptureTimeTable in the case
+        /// them have been disconnected or their client crashed while they where in capture zone
+        /// of a tower.
+        /// </summary>
+        /// <param name="networkId">Network id of the player to delete</param>
+        /// <returns>true if the player was rimoved,false otherwise</returns>
+        protected bool TryRemovePlayer(uint networkId)
+        {
+            bool removed = false;
+            var playerToDeletePair = PlayersCaptureTimeTable.Where(x =>
+            {
+                var player = x.Key;
+                var netId = player.networkObject.NetworkId;
+                return netId.Equals(networkId);
+            }).
+            SingleOrDefault();
+
+            var playerToDelete = playerToDeletePair.Key;
+            if (!ReferenceEquals(playerToDelete, null))
+            {
+                Debug.Log("[NON-OWNER] Removing player with networkd id" + networkId + " from the table.");
+                PlayersCaptureTimeTable.Remove(playerToDelete);
+                removed = true;
+            }
+            return removed;
+        }
+
         //Update the list of the players on the network that are capturing the tower
         public override void UpdateCaptureOnNetwork(RpcArgs args)
         {
@@ -356,7 +384,18 @@ namespace TC.GPConquest.Server
             var isCapturing = args.GetNext<bool>();
 
             var player = FindPlayerByNetId(playerNetId);
-            AddOrDeletePlayerToTheCapturing(player, isCapturing);
+            if (!ReferenceEquals(player, null))
+                AddOrDeletePlayerToTheCapturing(player, isCapturing);
+            else if(isCapturing==false)//this ensure that the player have been crashed or disconnected in the capture zone
+            {
+                /*
+                 * This is the case that occur when a player for example crash in the
+                 * capture zone of the tower, we have to remove manually the player
+                 * from the table by networkId (couse if the player doesn't exists
+                 * anymore in the scene, FindPlayerByNetId result is null)
+                 * **/
+                TryRemovePlayer(playerNetId);
+            }
         }
 
         private void NetworkObject_onDestroy(NetWorker sender)
