@@ -1,0 +1,9 @@
+<ServerAndClientUI xmlns="MarkLight">
+  <Group>
+    <Group Spacing="8px">
+      <Button Id="ServerButton" Text="Server" Click="CallServer"></Button>
+      <Button Id="ClientButton" Text="Client" Click="CallClient"></Button>
+      <Button Id="ExitButton" Text="Exit" Click="CallExit"></Button>
+    </Group>
+  </Group>
+</ServerAndClientUI >

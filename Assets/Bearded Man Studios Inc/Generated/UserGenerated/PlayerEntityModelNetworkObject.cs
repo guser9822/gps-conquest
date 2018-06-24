@@ -75,35 +75,35 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			if (IsInGameChanged != null) IsInGameChanged(_IsInGame, timestep);
 			if (fieldAltered != null) fieldAltered("IsInGame", _IsInGame, timestep);
 		}
-		private uint _avatorOwnerNetId;
-		public event FieldEvent<uint> avatorOwnerNetIdChanged;
-		public Interpolated<uint> avatorOwnerNetIdInterpolation = new Interpolated<uint>() { LerpT = 0f, Enabled = false };
-		public uint avatorOwnerNetId
+		private uint _DestinationOwnerNetId;
+		public event FieldEvent<uint> DestinationOwnerNetIdChanged;
+		public Interpolated<uint> DestinationOwnerNetIdInterpolation = new Interpolated<uint>() { LerpT = 0f, Enabled = false };
+		public uint DestinationOwnerNetId
 		{
-			get { return _avatorOwnerNetId; }
+			get { return _DestinationOwnerNetId; }
 			set
 			{
 				// Don't do anything if the value is the same
-				if (_avatorOwnerNetId == value)
+				if (_DestinationOwnerNetId == value)
 					return;
 
 				// Mark the field as dirty for the network to transmit
 				_dirtyFields[0] |= 0x4;
-				_avatorOwnerNetId = value;
+				_DestinationOwnerNetId = value;
 				hasDirtyFields = true;
 			}
 		}
 
-		public void SetavatorOwnerNetIdDirty()
+		public void SetDestinationOwnerNetIdDirty()
 		{
 			_dirtyFields[0] |= 0x4;
 			hasDirtyFields = true;
 		}
 
-		private void RunChange_avatorOwnerNetId(ulong timestep)
+		private void RunChange_DestinationOwnerNetId(ulong timestep)
 		{
-			if (avatorOwnerNetIdChanged != null) avatorOwnerNetIdChanged(_avatorOwnerNetId, timestep);
-			if (fieldAltered != null) fieldAltered("avatorOwnerNetId", _avatorOwnerNetId, timestep);
+			if (DestinationOwnerNetIdChanged != null) DestinationOwnerNetIdChanged(_DestinationOwnerNetId, timestep);
+			if (fieldAltered != null) fieldAltered("DestinationOwnerNetId", _DestinationOwnerNetId, timestep);
 		}
 
 		protected override void OwnershipChanged()
@@ -116,7 +116,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		{
 			PlayerLevelInterpolation.current = PlayerLevelInterpolation.target;
 			IsInGameInterpolation.current = IsInGameInterpolation.target;
-			avatorOwnerNetIdInterpolation.current = avatorOwnerNetIdInterpolation.target;
+			DestinationOwnerNetIdInterpolation.current = DestinationOwnerNetIdInterpolation.target;
 		}
 
 		public override int UniqueIdentity { get { return IDENTITY; } }
@@ -125,7 +125,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		{
 			UnityObjectMapper.Instance.MapBytes(data, _PlayerLevel);
 			UnityObjectMapper.Instance.MapBytes(data, _IsInGame);
-			UnityObjectMapper.Instance.MapBytes(data, _avatorOwnerNetId);
+			UnityObjectMapper.Instance.MapBytes(data, _DestinationOwnerNetId);
 
 			return data;
 		}
@@ -140,10 +140,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			IsInGameInterpolation.current = _IsInGame;
 			IsInGameInterpolation.target = _IsInGame;
 			RunChange_IsInGame(timestep);
-			_avatorOwnerNetId = UnityObjectMapper.Instance.Map<uint>(payload);
-			avatorOwnerNetIdInterpolation.current = _avatorOwnerNetId;
-			avatorOwnerNetIdInterpolation.target = _avatorOwnerNetId;
-			RunChange_avatorOwnerNetId(timestep);
+			_DestinationOwnerNetId = UnityObjectMapper.Instance.Map<uint>(payload);
+			DestinationOwnerNetIdInterpolation.current = _DestinationOwnerNetId;
+			DestinationOwnerNetIdInterpolation.target = _DestinationOwnerNetId;
+			RunChange_DestinationOwnerNetId(timestep);
 		}
 
 		protected override BMSByte SerializeDirtyFields()
@@ -156,7 +156,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			if ((0x2 & _dirtyFields[0]) != 0)
 				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _IsInGame);
 			if ((0x4 & _dirtyFields[0]) != 0)
-				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _avatorOwnerNetId);
+				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _DestinationOwnerNetId);
 
 			// Reset all the dirty fields
 			for (int i = 0; i < _dirtyFields.Length; i++)
@@ -201,15 +201,15 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			}
 			if ((0x4 & readDirtyFlags[0]) != 0)
 			{
-				if (avatorOwnerNetIdInterpolation.Enabled)
+				if (DestinationOwnerNetIdInterpolation.Enabled)
 				{
-					avatorOwnerNetIdInterpolation.target = UnityObjectMapper.Instance.Map<uint>(data);
-					avatorOwnerNetIdInterpolation.Timestep = timestep;
+					DestinationOwnerNetIdInterpolation.target = UnityObjectMapper.Instance.Map<uint>(data);
+					DestinationOwnerNetIdInterpolation.Timestep = timestep;
 				}
 				else
 				{
-					_avatorOwnerNetId = UnityObjectMapper.Instance.Map<uint>(data);
-					RunChange_avatorOwnerNetId(timestep);
+					_DestinationOwnerNetId = UnityObjectMapper.Instance.Map<uint>(data);
+					RunChange_DestinationOwnerNetId(timestep);
 				}
 			}
 		}
@@ -229,10 +229,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 				_IsInGame = (bool)IsInGameInterpolation.Interpolate();
 				//RunChange_IsInGame(IsInGameInterpolation.Timestep);
 			}
-			if (avatorOwnerNetIdInterpolation.Enabled && !avatorOwnerNetIdInterpolation.current.UnityNear(avatorOwnerNetIdInterpolation.target, 0.0015f))
+			if (DestinationOwnerNetIdInterpolation.Enabled && !DestinationOwnerNetIdInterpolation.current.UnityNear(DestinationOwnerNetIdInterpolation.target, 0.0015f))
 			{
-				_avatorOwnerNetId = (uint)avatorOwnerNetIdInterpolation.Interpolate();
-				//RunChange_avatorOwnerNetId(avatorOwnerNetIdInterpolation.Timestep);
+				_DestinationOwnerNetId = (uint)DestinationOwnerNetIdInterpolation.Interpolate();
+				//RunChange_DestinationOwnerNetId(DestinationOwnerNetIdInterpolation.Timestep);
 			}
 		}
 

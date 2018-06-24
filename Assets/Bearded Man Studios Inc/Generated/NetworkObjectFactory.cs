@@ -55,6 +55,14 @@ namespace BeardedManStudios.Forge.Networking.Generated
 						availableCallback = true;
 						obj = new TestNetworkObject(networker, id, frame);
 						break;
+					case TowerCaptureNetworkControllerNetworkObject.IDENTITY:
+						availableCallback = true;
+						obj = new TowerCaptureNetworkControllerNetworkObject(networker, id, frame);
+						break;
+					case TowerEntityControllerNetworkObject.IDENTITY:
+						availableCallback = true;
+						obj = new TowerEntityControllerNetworkObject(networker, id, frame);
+						break;
 				}
 
 				if (!availableCallback)

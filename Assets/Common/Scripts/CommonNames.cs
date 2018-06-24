@@ -19,6 +19,15 @@ namespace TC.Common {
         //uma avators name
         public static readonly string[] avators = new string[] { "HumanMale", "HumanMale 1", "HumanMale 2", "HumanMale 3", "HumanMale 4"
             , "HumanFemale" , "HumanFemale 1", "HumanFemale 2", "HumanFemale 3", "HumanFemale 4"};
+
+        #region Tags
+        public static readonly string SERVER_OBJ_CONTROLLER_TAG = "ServerController";
+        public static readonly string CLIENT_OBJ_CONTROLLER_TAG = "GameStatusController";
+        public static readonly string TILE_TAG = "Tile";
+        public static readonly string TOWER_TAG= "Tower";
+        public static readonly string AVATOR_TAG = "Avator";
+        public static readonly string DESTINATION_TAG = "Destination";
+        #endregion
     }
 
 }

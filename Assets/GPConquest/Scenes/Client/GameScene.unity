@@ -347,9 +347,10 @@ GameObject:
   - component: {fileID: 824745312}
   - component: {fileID: 824745313}
   - component: {fileID: 824745314}
+  - component: {fileID: 824745315}
   m_Layer: 0
   m_Name: Client
-  m_TagString: Untagged
+  m_TagString: GameStatusController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,6 +417,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177f39f8f4d266c46b25881921d7c7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &824745315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 824745309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc12e87411b8de46968ea4f5d44470b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestinationsControllerList: []
 --- !u!1 &832602813
 GameObject:
   m_ObjectHideFlags: 0
