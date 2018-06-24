@@ -8,6 +8,7 @@ using UMA;
 using TC.UM4GPConquest.Utility;
 using System;
 using System.Linq;
+using TC.Common;
 
 namespace TC.GPConquest.Player
 {
@@ -44,9 +45,6 @@ namespace TC.GPConquest.Player
 
         public void InitAvatorController(DestinationController _destinationController)
         {
-            if (!networkObject.IsOwner)
-                return;
-
             //Update shared attributes according the choosen size of the avator
             if (_destinationController.isGiantMode)
             {
@@ -86,7 +84,6 @@ namespace TC.GPConquest.Player
             PlayerEntity = behavior.GetComponent<PlayerEntity>();
             PlayerEntity.InitializePlayerEntity(this,
                 CurrentUserInfo,
-                networkObject.NetworkId,
                 CameraOnDestination);
         }
 
@@ -112,11 +109,12 @@ namespace TC.GPConquest.Player
             CurrentUserInfo = _destinationController.CurrentUserInformations;
             DestinationTransform = _destinationController.gameObject.GetComponent<Transform>();
             CameraOnDestination = _destinationController.DestinationCamera;
+            _destinationController.AvatorController = this;
         }
 
 
         // Updates the UMA avator attached to this game object
-        private void CreateAndSpawnUMA(String _selectedUma)
+        private void CreateAndSpawnUMA(string _selectedUma)
         {
             UMADynamicAvatar thisUmaDynamicAvator = gameObject.GetComponent<UMADynamicAvatar>();
             //Create a UMA avator and bind it to the DynamicAvator of this object
@@ -146,18 +144,11 @@ namespace TC.GPConquest.Player
         public override void UpdateAvatorOnNetwork(RpcArgs args)
         {
             string _selectedUma = args.GetNext<string>();
-
-            MainThreadManager.Run(() =>
-            {
-                //I'm the avator on the network, I shall find my destination in the scene using it's network id
-                DestinationController[] playersInTheScene = FindObjectsOfType<DestinationController>();
-
-                var destination = playersInTheScene.ToList().
-                    Find(x => x.networkObject.NetworkId.Equals(networkObject.destNetwId));
-                
-                UpdateAvatorAttributes(destination);
-                CreateAndSpawnUMA(_selectedUma);
-            });
+            
+            var gameRegister = FindObjectOfType<GameEntityRegister>();
+            var destination = (DestinationController)gameRegister.FindEntity(typeof(DestinationController), networkObject.destNetwId);
+            UpdateAvatorAttributes(destination);
+            CreateAndSpawnUMA(_selectedUma);
 
         }
 

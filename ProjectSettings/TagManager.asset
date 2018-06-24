@@ -8,6 +8,9 @@ TagManager:
   - ServerController
   - Tile
   - ClientController
+  - Tower
+  - GameStatusController
+  - Avator
   layers:
   - Default
   - TransparentFX

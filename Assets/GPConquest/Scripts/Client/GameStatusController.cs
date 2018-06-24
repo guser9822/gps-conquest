@@ -32,6 +32,14 @@ namespace TC.GPConquest {
             PlayerClient = NetworkManager.Instance.InstantiatePlayerDestinationController(0);
         }
 
+        public void RequestPlayerDisconnection(DestinationController _destinationController)
+        {
+            _destinationController.DestroyDestinationController();
+            AssetBundle.UnloadAllAssetBundles(true);
+            ClientNetworkController.CloseMultiplayerBase();
+            Application.Quit();
+        }
+
     }
 
 }

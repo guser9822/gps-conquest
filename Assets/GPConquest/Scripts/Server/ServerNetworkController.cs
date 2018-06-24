@@ -1,10 +1,19 @@
 ﻿using BeardedManStudios.Forge.Networking;
+using TC.GPConquest.Server;
 using UnityEngine;
 
 namespace TC.GPConquest
 {
     public class ServerNetworkController : CustomNetworkController
     {
+
+        protected ServerProcessController ServerProcessController;
+
+        private void Awake()
+        {
+            ServerProcessController = GetComponent<ServerProcessController>();
+        }
+
         public override void StartCustomNetworkController(ConnectionInfo _connectionInfo)
         {
             base.StartCustomNetworkController(_connectionInfo);
@@ -39,6 +48,8 @@ namespace TC.GPConquest
             base.Connected(networker);
             //if (networker is IServer)
             //    NetworkObject.Flush(networker);
+            //TDOD : find a better solution in order to spawn the towers when the server is really started
+            ServerProcessController.RequestTowersSpawn();
         }
 
     }
