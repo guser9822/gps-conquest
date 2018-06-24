@@ -93,7 +93,7 @@ namespace TC.GPConquest.Server
         {
             var item = obj as TowerEntityController;
 
-            if (item == null)
+            if (ReferenceEquals(item,null))
             {
                 return false;
             }
