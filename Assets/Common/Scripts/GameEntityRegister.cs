@@ -87,25 +87,12 @@ namespace TC.Common
     #endif
         }
 
-        /*
-        * Execute this code only in Editor mode, otherwise the application will be unstable
-        * **/
         public void OnAfterDeserialize()
         {
-    #if UNITY_EDITOR
-
-            TowersList.ForEach(x =>
-            {
-                AllTowersEntityController.Add(x.networkObject.NetworkId, x);
-            });
-
-            DestinationsList.ForEach(x =>
-            {
-                AllDestinationsControllers.Add(x.networkObject.NetworkId, x);
-            });
-    #endif
+#if UNITY_EDITOR
+            Debug.Log("OnAfterDeserialize not implemented for GameEntityRegister");
+#endif
         }
-
     }
 }
 

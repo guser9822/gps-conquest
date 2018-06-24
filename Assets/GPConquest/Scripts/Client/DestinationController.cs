@@ -269,7 +269,7 @@ namespace TC.GPConquest.Player
         {
             var item = obj as DestinationController;
 
-            if (item == null)
+            if (ReferenceEquals(item,null))
             {
                 return false;
             }

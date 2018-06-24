@@ -11,7 +11,7 @@ using TC.GPConquest.Utility;
 
 namespace TC.GPConquest.Server
 {
-    public class TowerCaptureController : TowerCaptureNetworkControllerBehavior
+    public class TowerCaptureController : TowerCaptureNetworkControllerBehavior,ISerializationCallbackReceiver
     {
         public TowerEntityController TowerEntityController { get; set; }
 
@@ -35,7 +35,7 @@ namespace TC.GPConquest.Server
         private Dictionary<string, double> FactionsConquestTime = new Dictionary<string, double>();
 
         //Just for log through inspector
-        public List<string> PlayerCapturingTowerList = new List<string>();
+        public List<DestinationController> PlayerCapturingTowerList = new List<DestinationController>();
 
         List<CaptureTransferInfo> CaptureInfoList = new List<CaptureTransferInfo>();
         private bool IsCaptured = false;
@@ -129,7 +129,7 @@ namespace TC.GPConquest.Server
                 }
                 else {
                     Debug.LogWarning("The strange happened no winning player found for faction " + winningFactionName);
-                    PlayersCaptureTimeTable.Remove(winningPlayer);
+                    //PlayersCaptureTimeTable.Remove(winningPlayer);
                 }
             }
             return _isCaptured;
@@ -182,7 +182,7 @@ namespace TC.GPConquest.Server
                         else
                         {
                             Debug.LogWarning("Player is null while filling capture infos");
-                            PlayersCaptureTimeTable.Remove(player);
+                            //PlayersCaptureTimeTable.Remove(player);
                         }
                     }
                     else Debug.LogWarning("PlayerKeyPair is null while filling capture infos");
@@ -198,7 +198,6 @@ namespace TC.GPConquest.Server
         {
             //Set the timer at 0 for each faction
             _factionsTime = InitializeFactionsConquestTime(_factionsTime);
-
             var players = _playerCaptureTimeTable.Keys.ToList<DestinationController>();
             if (!ReferenceEquals(players, null) && players.Count > 0)
             {
@@ -219,7 +218,7 @@ namespace TC.GPConquest.Server
                         }
                         else {
                             Debug.LogWarning("Players/times table doesn't contain the player");
-                            PlayersCaptureTimeTable.Remove(player);
+                            //PlayersCaptureTimeTable.Remove(player);
                         }
                     }
                     else
@@ -256,7 +255,7 @@ namespace TC.GPConquest.Server
                             else
                             {
                                 Debug.LogWarning("Null player in the players/times table");
-                                PlayersCaptureTimeTable.Remove(player);
+                                //PlayersCaptureTimeTable.Remove(player);
                             }
                         }
                         else Debug.LogWarning("Null KeyPair in the players/times table");
@@ -334,28 +333,17 @@ namespace TC.GPConquest.Server
             bool exists;
             if (!ReferenceEquals(_playerDestinationComponent, null))
             {
-                var playerKeyString =
-                    _playerDestinationComponent.networkObject.NetworkId.ToString() +
-                    " - "
-                    + _playerDestinationComponent.PlayerName;
-
                 if (_isCapturing)
                 {
                     exists = PlayersCaptureTimeTable.ContainsKey(_playerDestinationComponent);
                     if (!exists)
-                    {
                         PlayersCaptureTimeTable.Add(_playerDestinationComponent, 0d);
-                        PlayerCapturingTowerList.Add(playerKeyString);
-                    }
                 }
                 else
                 {
                     exists = PlayersCaptureTimeTable.ContainsKey(_playerDestinationComponent);
                     if (exists)
-                    {
                         PlayersCaptureTimeTable.Remove(_playerDestinationComponent);
-                        PlayerCapturingTowerList.Remove(playerKeyString);
-                    }
                 }
             }
             else Debug.LogWarning("Can't add or remove a null destination controller");
@@ -439,6 +427,21 @@ namespace TC.GPConquest.Server
                 else Debug.LogWarning("Capture infos list is empty or null");
             }
             else Debug.LogWarning("Bytes array is null");
+        }
+
+        public void OnBeforeSerialize()
+        {
+#if UNITY_EDITOR
+            PlayerCapturingTowerList.Clear();
+            PlayersCaptureTimeTable.Keys.ToList().ForEach(x => PlayerCapturingTowerList.Add(x));
+#endif
+        }
+
+        public void OnAfterDeserialize()
+        {
+#if UNITY_EDITOR
+            Debug.Log("OnAfterDeserialize not implemented for TowerCaptureController");
+#endif
         }
     }
 

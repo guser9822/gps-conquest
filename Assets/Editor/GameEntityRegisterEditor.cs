@@ -11,10 +11,8 @@ namespace TC.GPConquest.GPConquestEditor{
     [CustomEditor(typeof(GameEntityRegister))]
     public class GameEntityRegisterEditor : Editor
     {
-
         public bool showTowers = false;
         public bool showPlayer = false;
-
 
         public override void OnInspectorGUI()
         {
@@ -27,7 +25,6 @@ namespace TC.GPConquest.GPConquestEditor{
             {
                 GUIContent towerLabel = new GUIContent("Towers");
                 showTowers = EditorGUILayout.Foldout(showTowers, towerLabel);
-
                 if (showTowers)
                 {
                     EditorGUILayout.BeginHorizontal();
@@ -51,7 +48,6 @@ namespace TC.GPConquest.GPConquestEditor{
             {
                 GUIContent playerLabel = new GUIContent("Players");
                 showPlayer = EditorGUILayout.Foldout(showPlayer, playerLabel);
-
                 if (showPlayer)
                 {
                     EditorGUILayout.BeginHorizontal();

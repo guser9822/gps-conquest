@@ -14,7 +14,6 @@ namespace TC.GPConquest.Server
 
         protected AssetLoaderController AssetLoaderController;
         protected TowersController TowersController;
-        private List<TowerEntityController> ListOfTowers;
         private ServerNetworkController ServerNetworkController;
 
         List<Vector2> TowersGPSCoords = new List<Vector2>
@@ -46,7 +45,7 @@ namespace TC.GPConquest.Server
 
         public void RequestTowersSpawn()
         {
-            ListOfTowers = TowersController.SpawnTowers(TowersGPSCoords);
+            TowersController.SpawnTowers(TowersGPSCoords);
         }
 
         public void RequestServerConnection(ConnectionInfo _connectionInfo) {
