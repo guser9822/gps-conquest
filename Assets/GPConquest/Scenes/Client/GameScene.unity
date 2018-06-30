@@ -428,7 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc12e87411b8de46968ea4f5d44470b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestinationsControllerList: []
+  TowersList: []
+  DestinationsList: []
 --- !u!1 &832602813
 GameObject:
   m_ObjectHideFlags: 0

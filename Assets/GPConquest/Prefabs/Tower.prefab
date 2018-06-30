@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1817931817029528}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: -0.0000000041877577}
-  m_LocalScale: {x: 5, y: 5, z: 4.8387675}
+  m_LocalScale: {x: 3, y: 3, z: 2.838768}
   m_Children: []
   m_Father: {fileID: 4448855688724710}
   m_RootOrder: 0
@@ -206,4 +206,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OwnerFaction: 
   GPSCoords: {x: 0, y: 0}
-  PlayerCapturingTowerList: []

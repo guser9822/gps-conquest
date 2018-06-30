@@ -89,7 +89,7 @@ namespace TC.GPConquest.Player
             {
                 networkObject.destCursorDims = new Vector3(0.4f, 0.4f, 0.4f);
 
-                UpdateDestinationAttributes(new Vector3(0, 4.45f, -5),
+                UpdateDestinationAttributes(new Vector3(0, 6.45f, -6),
                     Quaternion.AngleAxis(-40.0f, Vector3.left),
                     10.0f,
                     networkObject.destCursorDims,
