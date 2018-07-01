@@ -14,6 +14,9 @@ using MarkLight.Views;
 
 namespace TC.GPConquest.Player
 {
+    /// <summary>
+    /// This class is used in order to manage the Game UI for the player in a networked manner
+    /// </summary>
     public class GameUINetworkController : GameUINetworkEntityBehavior
     {
 

@@ -7,6 +7,9 @@ using MarkLight;
 
 namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
+    /// <summary>
+    /// This UI is used for all the stuffs regarding the character of the player (eg. it's nickname)
+    /// </summary>
     public class AvatorUI : UIView
     {
 
