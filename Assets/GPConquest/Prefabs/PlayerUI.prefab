@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.9689655, g: 0.6764706, b: 0.125, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1538,12 +1538,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7e32502acf79b4f43ac7dd6b964821b5, type: 3}
-    m_FontSize: 22
-    m_FontStyle: 0
+    m_FontSize: 48
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MinSize: 4
+    m_MaxSize: 48
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -32845,6 +32845,7 @@ MonoBehaviour:
     _isSet: 0
     _internalValue: {r: 0, g: 0, b: 0, a: 0}
   NicknameLabel: {fileID: 114223385261132272}
+  CameraOnDestination: {fileID: 0}
   UsernameText:
     ParentView: {fileID: 114356396009202228}
     ViewFieldPath: UsernameText
