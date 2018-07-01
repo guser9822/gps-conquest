@@ -41,14 +41,19 @@ namespace TC.GPConquest.Player
             var server = FindObjectOfType<ServerNetworkController>();
             if ((!ReferenceEquals(server, null) && server.gameObject.tag == "ServerController"))
                 ServerProcess = true;
+            /*
+             *  Putting the Instantiate of a normal objet (not networked like the Forge ones) seems to be 
+             *  the only way in order to avoid strange initialization and instantiation errors on the owner 
+             *  and non owner process
+             * **/
+            if (!ServerProcess) AvatorUIViewPresenter = Instantiate<GameObject>(PrefabPlayerUI);
+
         }
 
         protected void UpdateGameUINetworkControllerAttributes(AvatorController _avatorControllerReference)
         {
 
             if (ServerProcess) return; //Do not execute any initialization for the ServerController process
-
-            AvatorUIViewPresenter = Instantiate<GameObject>(PrefabPlayerUI);
 
             //Gets the AvatorUI
             AvatorUI = AvatorUIViewPresenter.GetComponentInChildren<AvatorUI>();
