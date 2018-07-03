@@ -21,7 +21,8 @@ namespace TC.GPConquest.Player
     {
 
         public GameObject PrefabPlayerUI;//prefabs of the UI, used only for instantiation
-        public GameObject AvatorUIViewPresenter;//instantiated UI
+        [HideInInspector]
+        public GameObject InstantiatedPlayerUI;//instantiated UI
         [HideInInspector]
         public Camera CameraOnDestination;//camera of the DestinationController object
         [HideInInspector]
@@ -42,24 +43,26 @@ namespace TC.GPConquest.Player
             if ((!ReferenceEquals(server, null) && server.gameObject.tag == "ServerController"))
                 ServerProcess = true;
             /*
-             *  Putting the Instantiate of a normal objet (not networked like the Forge ones) seems to be 
+             *  Putting the Instantiate of a normal object (not networked like the Forge ones) seems to be 
              *  the only way in order to avoid strange initialization and instantiation errors on the owner 
              *  and non owner process
              * **/
-            if (!ServerProcess) AvatorUIViewPresenter = Instantiate<GameObject>(PrefabPlayerUI);
+            if (!ServerProcess) InstantiatedPlayerUI = Instantiate<GameObject>(PrefabPlayerUI);
 
         }
 
         protected void UpdateGameUINetworkControllerAttributes(AvatorController _avatorControllerReference)
         {
 
+            _avatorControllerReference.networkObject.onDestroy += NetworkObject_onDestroy;
+
             if (ServerProcess) return; //Do not execute any initialization for the ServerController process
 
             //Gets the AvatorUI
-            AvatorUI = AvatorUIViewPresenter.GetComponentInChildren<AvatorUI>();
+            AvatorUI = InstantiatedPlayerUI.GetComponentInChildren<AvatorUI>();
 
             //Gets the PlayerUI 
-            PlayerUI = AvatorUIViewPresenter.GetComponentInChildren<PlayerUI>();
+            PlayerUI = InstantiatedPlayerUI.GetComponentInChildren<PlayerUI>();
 
             AvatorControllerReference = _avatorControllerReference;
             PlayerEntity = AvatorControllerReference.PlayerEntity;
@@ -72,10 +75,10 @@ namespace TC.GPConquest.Player
             CameraOnDestination = AvatorControllerReference.CameraOnDestination;
 
             //Puts the UI under the hieararchy of the GameUIController object
-            AvatorUIViewPresenter.transform.SetParent(_avatorTransform);
+            InstantiatedPlayerUI.transform.SetParent(_avatorTransform);
 
             //Sets the correct position for the UI
-            AvatorUIViewPresenter.transform.localPosition =
+            InstantiatedPlayerUI.transform.localPosition =
                 new Vector3(0.0f,
                 0,
                 0f);
@@ -87,13 +90,19 @@ namespace TC.GPConquest.Player
                 PlayerUI.gameObject.SetActive(false);
 
                 //Deactivates the EventSystem
-                var eventSystem = AvatorUIViewPresenter.GetComponentInChildren<EventSystem>();
+                var eventSystem = InstantiatedPlayerUI.GetComponentInChildren<EventSystem>();
                 eventSystem.gameObject.SetActive(false);
 
             }
             else PlayerUI.InitPlayerUI(AvatorControllerReference);
 
             AvatorUI.InitAvatorUI(CameraOnDestination, PlayerEntity);
+        }
+
+        private void NetworkObject_onDestroy(NetWorker sender)
+        {
+            networkObject.ClearRpcBuffer();
+            networkObject.Destroy();
         }
 
         public bool InitializeNetworkGameUI(AvatorController _avatorControllerReference)
