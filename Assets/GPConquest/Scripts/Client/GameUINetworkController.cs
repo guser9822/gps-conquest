@@ -1,14 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
-using BeardedManStudios.Forge.Networking.Unity;
-using System;
-using System.Linq;
 using TC.Common;
-using TC.GPConquest.Player;
-using TC.GPConquest;
 using TC.GPConquest.MarkLight4GPConquest.Player;
 using MarkLight.Views;
 

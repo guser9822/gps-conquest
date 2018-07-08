@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TC.GPConquest.MarkLight4GPConquest.Common
+namespace TC.GPConquest.MarkLight4GPConquest.Server
 {
     /// <summary>
     /// This class manage the graphic interface of tower entities

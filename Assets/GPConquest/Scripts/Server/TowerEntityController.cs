@@ -10,6 +10,7 @@ using TC.GPConquest.GpsMap.Helpers;
 using TC.Common;
 using TC.GPConquest.Player;
 using TC.GPConquest.Common;
+using TC.GPConquest.MarkLight4GPConquest.Common;
 
 namespace TC.GPConquest.Server
 {
@@ -23,6 +24,7 @@ namespace TC.GPConquest.Server
         public Vector2 GPSCoords;//used just for visualization in the inspector
         public TowerCaptureController TowerCaptureController {get;set;}
         public GameEntityRegister GameEntityRegister { get; private set; }
+        public TowerUINetworkController TowerUINetworkController { get; set; }
 
         private void ActivateBoxColliders(bool _activate)
         {
@@ -53,14 +55,24 @@ namespace TC.GPConquest.Server
 
             //Spawn tower capture controller on the network on the same position of the tower
             var towerCaptureController = NetworkManager.Instance.InstantiateTowerCaptureNetworkController(0,transform.position);
-            towerCaptureController.networkStarted += TowerCaptureController_networkStarted;
+            towerCaptureController.networkStarted += TowerComponents_networkStarted;
+
+            //Spawn on the network a NetworkUI contrller
+            var towerNetUIController = NetworkManager.Instance.InstantiateTowerUIEntity(0, transform.position);
+            towerNetUIController.networkStarted += TowerNetUIController_networkStarted;
 
             networkObject.SendRpc(RPC_UPDATE_TOWER_ATTRRIBUTES,
                Receivers.AllBuffered,
                OwnerFaction);
         }
 
-        private void TowerCaptureController_networkStarted(NetworkBehavior behavior)
+        private void TowerNetUIController_networkStarted(NetworkBehavior behavior)
+        {
+            TowerUINetworkController = behavior.GetComponent<TowerUINetworkController>();
+            TowerUINetworkController.InitializeTowerUINetworkController(this);
+        }
+
+        private void TowerComponents_networkStarted(NetworkBehavior behavior)
         {
             TowerCaptureController = behavior.GetComponent<TowerCaptureController>();
             TowerCaptureController.InitTowerCaptureController(this);
@@ -152,5 +164,6 @@ namespace TC.GPConquest.Server
         {
             return networkObject.NetworkId;
         }
+
     }
 }
