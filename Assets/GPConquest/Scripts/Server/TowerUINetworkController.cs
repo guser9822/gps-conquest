@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using TC.Common;
 using MarkLight.Views;
+using TC.GPConquest.MarkLight4GPConquest.Server;
 
 namespace TC.GPConquest.Server {
 
@@ -18,6 +19,7 @@ namespace TC.GPConquest.Server {
         public GameEntityRegister GameEntityRegister { get; set; }
         public GameObject TowerUIPrefab;
         public GameObject TowerUIInstantiated;
+        public TowerEntityGameUI TowerEntityGameUI;
         private bool isServerProcess; 
 
         private void Awake()
@@ -28,7 +30,11 @@ namespace TC.GPConquest.Server {
             if ((!ReferenceEquals(server, null) && server.gameObject.tag == "ServerController"))
                 isServerProcess = true;
 
-            TowerUIInstantiated = Instantiate<GameObject>(TowerUIPrefab);
+            if (!isServerProcess)
+            {
+                TowerUIInstantiated = Instantiate<GameObject>(TowerUIPrefab);
+                TowerEntityGameUI = TowerUIInstantiated.GetComponentInChildren<TowerEntityGameUI>();
+            } 
         }
 
         public void InitializeTowerUINetworkController(TowerEntityController _towerEntityController) {
@@ -57,7 +63,7 @@ namespace TC.GPConquest.Server {
             if (!isServerProcess && !networkObject.IsOwner) {
 
                 Debug.Log("Non owner initializations");
-
+                TowerUIInstantiated.gameObject.transform.SetParent(this.gameObject.transform);
                 //Deactivates the EventSystem
                 var eventSystem = TowerUIInstantiated.GetComponentInChildren<EventSystem>();
                 eventSystem.gameObject.SetActive(false);

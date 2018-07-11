@@ -165,5 +165,13 @@ namespace TC.GPConquest.Server
             return networkObject.NetworkId;
         }
 
+        private void OnMouseDown()
+        {
+            //if(!networkObject.IsOwner /* and not serverProcess */)
+            //{
+                Debug.Log("On Mouse Click");
+                TowerUINetworkController.TowerEntityGameUI.ToggleWindow();
+            //}
+        }
     }
 }

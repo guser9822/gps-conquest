@@ -1,6 +1,6 @@
-<TowerEntityUI xmlns="MarkLight">
+<TowerEntityGameUI xmlns="MarkLight">
   <Window Id="TowerUIWindow" Title="Infomation" Width="350px" Height="250px">
     <Label Style="ShowcaseDescription" AdjustToText="WidthAndHeight"
        TextAlignment="Center" Text="{TowerFaction}" />
   </Window>
-</TowerEntityUI>
+</TowerEntityGameUI>

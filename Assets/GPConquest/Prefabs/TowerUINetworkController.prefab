@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f25fdda85ca474a99628c790d11804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerUIPrefab: {fileID: 1957584084738116, guid: 424862f0510c71e45995db7e4bad5524,
+  TowerUIPrefab: {fileID: 1708495202277576, guid: da8418bc30abf784eab4ce9164e30f5e,
     type: 2}
   TowerUIInstantiated: {fileID: 0}
