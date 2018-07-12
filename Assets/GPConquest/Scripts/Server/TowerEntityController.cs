@@ -172,5 +172,70 @@ namespace TC.GPConquest.Server
                 TowerUINetworkController.TowerEntityGameUI.ToggleWindow();
             }
          }
+
+        /// <summary>
+        /// This function is called from outiside (e.g. TowerCaptureController) in order to 
+        /// change the state of the tower entity after the capure
+        /// </summary>
+        /// <param name="_winningFaction"></param>
+        public void ChangeTowerEntityStatusAfterCapure(string _winningFaction)
+        {
+            if (networkObject.IsOwner)
+            {
+                if (!ReferenceEquals(_winningFaction, null))
+                {
+                    SetAttributesAfterCapture(_winningFaction);
+                    //Update tower entities on network
+                    networkObject.SendRpc(RPC_CHANGE_TOWER_STATUS_ON_NETWORK,
+                        true,
+                        Receivers.AllBuffered,
+                        _winningFaction);
+                }
+                else
+                {
+                    Debug.LogError("Faction name cannot be null");
+                }
+            }
+        }
+
+        /// <summary>
+        /// This is an internal function used for changing attributes of the tower
+        /// after the capture and it is invoked by both owner e non owner of the entity
+        /// </summary>
+        protected void SetAttributesAfterCapture(string factionName)
+        {
+            if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
+            {
+                OwnerFaction = factionName;
+            }
+            else
+            {
+                Debug.LogError("Faction name is null or empty string. ");
+            }
+        }
+
+        /// <summary>
+        /// RPC used to alter the tower status on the network
+        /// </summary>
+        /// <param name="args"></param>
+        public override void ChangeTowerStatusOnNetwork(RpcArgs args)
+        {
+            if (!ReferenceEquals(args, null))
+            {
+                var factionName = args.GetNext<string>();
+                if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
+                {
+                    SetAttributesAfterCapture(factionName);
+                }
+                else
+                {
+                    Debug.LogError("Faction name is null or empty string");
+                }
+            }
+            else
+            {
+                Debug.LogError("Arguments array from the nwetwork is null.");
+            }
+        }
     }
 }

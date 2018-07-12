@@ -84,7 +84,7 @@ namespace TC.GPConquest.Server
                         WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED = TIMES.WAITING_TIME_BEFORE_NEXT_CAPTURE;
                         //Sets the winner
                         //TowerEntityController.OwnerFaction = WinningOrNoFaction;
-                        SetTheWinnerFaction(TowerEntityController, WinningOrNoFaction);
+                        NotifyCaptured(TowerEntityController, WinningOrNoFaction);
                     }
                         
                 }
@@ -104,16 +104,17 @@ namespace TC.GPConquest.Server
         /// </summary>
         /// <param name="_towerEntityController"></param>
         /// <param name="_winner"></param>
-        protected void SetTheWinnerFaction(TowerEntityController _towerEntityController, string _winner)
+        protected void NotifyCaptured(TowerEntityController _towerEntityController, string _winner)
         {
             if (!ReferenceEquals(_towerEntityController, null) && 
                 !ReferenceEquals(_winner, null))
             {
-                var towerEntityNetObj = _towerEntityController.networkObject;
-                towerEntityNetObj.SendRpc(TowerEntityControllerBehavior.RPC_UPDATE_TOWER_ATTRRIBUTES,
-                    true,
-                    Receivers.AllBuffered,
-                    WinningOrNoFaction);
+                //var towerEntityNetObj = _towerEntityController.networkObject;
+                //towerEntityNetObj.SendRpc(TowerEntityControllerBehavior.RPC_UPDATE_TOWER_ATTRRIBUTES,
+                //    true,
+                //    Receivers.AllBuffered,
+                //    WinningOrNoFaction);
+                _towerEntityController.ChangeTowerEntityStatusAfterCapure(_winner);
             }
             else Debug.LogWarning("Winner faction or tower entity are null");
         }
