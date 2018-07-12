@@ -167,11 +167,10 @@ namespace TC.GPConquest.Server
 
         private void OnMouseDown()
         {
-            //if(!networkObject.IsOwner /* and not serverProcess */)
-            //{
-                Debug.Log("On Mouse Click");
+            if (!networkObject.IsOwner /* and not serverProcess */)
+            {
                 TowerUINetworkController.TowerEntityGameUI.ToggleWindow();
-            //}
-        }
+            }
+         }
     }
 }

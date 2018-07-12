@@ -61,8 +61,6 @@ namespace TC.GPConquest.Server {
 
             // Set Tower UI only for non owner process
             if (!isServerProcess && !networkObject.IsOwner) {
-
-                Debug.Log("Non owner initializations");
                 TowerUIInstantiated.gameObject.transform.SetParent(this.gameObject.transform);
                 //Deactivates the EventSystem
                 var eventSystem = TowerUIInstantiated.GetComponentInChildren<EventSystem>();
