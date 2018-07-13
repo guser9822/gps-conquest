@@ -185,32 +185,20 @@ namespace TC.GPConquest.Server
                 if (!ReferenceEquals(_winningFaction, null))
                 {
                     SetAttributesAfterCapture(_winningFaction);
+
                     //Update tower entities on network
                     networkObject.SendRpc(RPC_CHANGE_TOWER_STATUS_ON_NETWORK,
                         true,
                         Receivers.AllBuffered,
                         _winningFaction);
+
+                    //Update UI
+                    TowerUINetworkController.CallChangeUIStatus(_winningFaction);
                 }
                 else
                 {
                     Debug.LogError("Faction name cannot be null");
                 }
-            }
-        }
-
-        /// <summary>
-        /// This is an internal function used for changing attributes of the tower
-        /// after the capture and it is invoked by both owner e non owner of the entity
-        /// </summary>
-        protected void SetAttributesAfterCapture(string factionName)
-        {
-            if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
-            {
-                OwnerFaction = factionName;
-            }
-            else
-            {
-                Debug.LogError("Faction name is null or empty string. ");
             }
         }
 
@@ -235,6 +223,22 @@ namespace TC.GPConquest.Server
             else
             {
                 Debug.LogError("Arguments array from the nwetwork is null.");
+            }
+        }
+
+        /// <summary>
+        /// This is an internal function used for changing attributes of the tower
+        /// after the capture and it is invoked by both owner e non owner of the entity
+        /// </summary>
+        protected void SetAttributesAfterCapture(string factionName)
+        {
+            if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
+            {
+                OwnerFaction = factionName;
+            }
+            else
+            {
+                Debug.LogError("Faction name is null or empty string. ");
             }
         }
     }

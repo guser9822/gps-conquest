@@ -20,7 +20,7 @@ namespace TC.GPConquest.Server {
         public GameObject TowerUIPrefab;
         public GameObject TowerUIInstantiated;
         public TowerEntityGameUI TowerEntityGameUI;
-        private bool isServerProcess; 
+        private bool isServerProcess;
 
         private void Awake()
         {
@@ -34,10 +34,11 @@ namespace TC.GPConquest.Server {
             {
                 TowerUIInstantiated = Instantiate<GameObject>(TowerUIPrefab);
                 TowerEntityGameUI = TowerUIInstantiated.GetComponentInChildren<TowerEntityGameUI>();
-            } 
+            }
         }
 
-        public void InitializeTowerUINetworkController(TowerEntityController _towerEntityController) {
+        public void InitializeTowerUINetworkController(TowerEntityController _towerEntityController)
+        {
 
             //Update all attributes of this UI
             UpdateTowerUINetController(_towerEntityController);
@@ -60,7 +61,8 @@ namespace TC.GPConquest.Server {
             transform.SetParent(towerEntityTransf);
 
             // Set Tower UI only for non owner process
-            if (!isServerProcess && !networkObject.IsOwner) {
+            if (!isServerProcess && !networkObject.IsOwner)
+            {
                 TowerUIInstantiated.gameObject.transform.SetParent(this.gameObject.transform);
                 //Deactivates the EventSystem
                 var eventSystem = TowerUIInstantiated.GetComponentInChildren<EventSystem>();
@@ -80,10 +82,52 @@ namespace TC.GPConquest.Server {
 
             //Find GameEntityRegister
             var gameEntityRegister = FindObjectOfType<GameEntityRegister>();
-            var towerEntity = (TowerEntityController) gameEntityRegister.FindEntity(typeof(TowerEntityController),towerEntityID);
+            var towerEntity = (TowerEntityController)gameEntityRegister.FindEntity(typeof(TowerEntityController), towerEntityID);
 
             UpdateTowerUINetController(towerEntity);
         }
-    }
 
+        public void CallChangeUIStatus(string _factionName)
+        {
+            if (!ReferenceEquals(_factionName, null) && _factionName.Length>0)
+            {
+                /*Call an RPC in order to update TowerUIController on the network
+                 * since, on the server process, there's no UI prefab instantiated
+                 */
+                networkObject.SendRpc(RPC_CHANGE_U_I_STATUS_ON_NETWORK,
+                    true,
+                    Receivers.AllBuffered,
+                    _factionName);
+            }
+            else
+            {
+                Debug.LogError("Faction name cannot be null or empty. ");
+            }
+        }
+
+        public override void ChangeUIStatusOnNetwork(RpcArgs args)
+        {
+            //this if statement is just for fortify the assertion that this code must be executed only on non owner process
+            //but it's not necessary since the nature of this call imply that
+            if (!networkObject.IsOwner)
+            {
+                if (!ReferenceEquals(args, null))
+                {
+                    var factionName = args.GetNext<string>();
+                    if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
+                    {
+                        TowerEntityGameUI.ChangeTowerUIStatus(factionName);
+                    }
+                    else
+                    {
+                        Debug.LogError("Faction name is null or empty string");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Arguments array from the nwetwork is null.");
+                }
+            }
+        }
+    }
 }

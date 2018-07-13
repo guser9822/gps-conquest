@@ -109,11 +109,6 @@ namespace TC.GPConquest.Server
             if (!ReferenceEquals(_towerEntityController, null) && 
                 !ReferenceEquals(_winner, null))
             {
-                //var towerEntityNetObj = _towerEntityController.networkObject;
-                //towerEntityNetObj.SendRpc(TowerEntityControllerBehavior.RPC_UPDATE_TOWER_ATTRRIBUTES,
-                //    true,
-                //    Receivers.AllBuffered,
-                //    WinningOrNoFaction);
                 _towerEntityController.ChangeTowerEntityStatusAfterCapure(_winner);
             }
             else Debug.LogWarning("Winner faction or tower entity are null");
