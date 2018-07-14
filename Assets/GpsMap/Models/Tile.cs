@@ -20,6 +20,10 @@ namespace Assets
         Dictionary<Vector3, WaterHolder> WaterDictionary { get; set; }
         Dictionary<Vector3, ParkHolder> ParkDictionary { get; set; }
         public bool DownlaodTiles;
+        public Material RoadMaterial;
+        public Material BuildingMaterial;
+        public Material WaterMaterial;
+        public Material ParkMaterial;
 
         private void Awake()
         {
@@ -128,7 +132,7 @@ namespace Assets
                         }
                         BuildingDictionary.Add(center, bh);
 
-                        var m = bh.CreateModel();
+                        var m = bh.CreateModel(BuildingMaterial);
                         m.name = "building";
                         m.transform.parent = this.transform;
                         center = new Vector3(center.x, center.y, center.z);
@@ -167,7 +171,7 @@ namespace Assets
                         }
                         WaterDictionary.Add(center, bh);
 
-                        var m = bh.CreateModel();
+                        var m = bh.CreateModel(WaterMaterial);
                         m.name = "water";
                         m.transform.parent = this.transform;
                         center = new Vector3(center.x, center.y, center.z);
@@ -206,7 +210,7 @@ namespace Assets
                         }
                         ParkDictionary.Add(center, bh);
 
-                        var m = bh.CreateModel();
+                        var m = bh.CreateModel(ParkMaterial);
                         m.name = "park";
                         m.transform.parent = this.transform;
                         center = new Vector3(center.x, center.y, center.z);
@@ -238,7 +242,7 @@ namespace Assets
                 m.transform.parent = this.transform;
                 try
                 {
-                    m.Initialize(geo["properties"]["id"].str, this, l, geo["properties"]["kind"].str);
+                    m.Initialize(geo["properties"]["id"].str, this, l, geo["properties"]["kind"].str,RoadMaterial);
                 }
                 catch (Exception ex)
                 {

@@ -24,7 +24,7 @@ namespace Assets
         public RoadType Type { get; set; }
         private List<Vector3> _verts;
 
-        public void Initialize(string id, Tile tile, List<Vector3> verts, string halfWidth)
+        public void Initialize(string id, Tile tile, List<Vector3> verts, string halfWidth, Material roadMaterial)
         {
             Id = id;
             _tile = tile;
@@ -34,8 +34,8 @@ namespace Assets
             {
                 
              GameObject roadPlane = CreateMesh(5);
-             roadPlane.GetComponent<Renderer>().material = Resources.Load("roadMaterial") as Material;
-             
+             roadPlane.GetComponent<Renderer>().material = roadMaterial;
+                //Material mat = new Material(roadMaterial);
                 roadPlane.transform.position = tile.transform.position + ((verts[i] + verts[i-1]) / 2);
                 Vector3 scale = roadPlane.transform.localScale;
                 scale.z = Vector3.Distance(verts[i], verts[i-1]) / 10;
