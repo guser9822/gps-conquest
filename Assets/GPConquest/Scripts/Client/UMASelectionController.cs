@@ -38,14 +38,14 @@ public class UMASelectionController : MonoBehaviour {
         createdUmas = UMAGenericHelper.SpawnAllAvator(createdUmas,
             AssetLoaderController,
             CommonNames.avators,
-            transform,
+            null,
             Vector3.zero,      
             Quaternion.Euler(0, 180, 0),
             x =>
             {
                 //Deactivate shadows production and reception
                 x.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().shadowCastingMode =
-                    UnityEngine.Rendering.ShadowCastingMode.Off;
+                    UnityEngine.Rendering.ShadowCastingMode.On;
                 x.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().receiveShadows = false;
             });
 

@@ -78,7 +78,8 @@ namespace TC.UM4GPConquest.Utility
                     umasSet[x].gameObject.GetComponent<UMADynamicAvatar>(),
                     onCharacterCreatedCallbac);
 
-                umasSet[x].transform.parent = _parent;
+                if(_parent!=null)
+                    umasSet[x].transform.parent = _parent;
                 umasSet[x].transform.position = umasPosition;
                 umasSet[x].transform.rotation = umasRotation;
             }

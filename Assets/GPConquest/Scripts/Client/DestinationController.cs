@@ -8,6 +8,7 @@ using BeardedManStudios.Forge.Networking.Unity;
 using System;
 using TC.Common;
 using TC.GPConquest.Common;
+using System.Linq;
 
 namespace TC.GPConquest.Player
 {
@@ -51,6 +52,19 @@ namespace TC.GPConquest.Player
             InitDestinationController();
         }
 
+        private Camera FindMainCamera(Camera[] cameras) {
+
+            Camera foundedMainCamera = null;
+
+            if (!ReferenceEquals(cameras, null) && cameras.Length > 0)
+            {
+                foundedMainCamera = foundedMainCamera = cameras.FirstOrDefault(x => x.gameObject.CompareTag(CommonNames.MAIN_CAMERA_TAG));
+            }
+            else throw new Exception("Invalid cameras arrays");
+
+            return foundedMainCamera;
+        } 
+
         protected void InitDestinationController()
         {
             //This is necessary since we are overriding NetworkStart and the code then will be executed on proprietary and non process
@@ -58,7 +72,7 @@ namespace TC.GPConquest.Player
                 return;
 
             //Set up camera for GPConquest view
-            DestinationCamera = FindObjectOfType<Camera>();
+            DestinationCamera = FindMainCamera(FindObjectsOfType<Camera>());
             DestinationCamera.gameObject.GetComponent<Transform>().SetParent(transform);
 
             //Gets a reference to the user account informations
