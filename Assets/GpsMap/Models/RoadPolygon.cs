@@ -41,6 +41,9 @@ namespace Assets
                 Vector3 scale = roadPlane.transform.localScale;
                 scale.z = Vector3.Distance(verts[i], verts[i-1]) / 10;
                 roadPlane.transform.localScale = scale;
+                /**
+                 * 
+                 * **/
                 renderer.material.mainTextureScale = new Vector2(scale.z, scale.x);
                 roadPlane.transform.LookAt(tile.transform.position + verts[i-1]);
                 roadPlane.transform.parent = tile.transform;

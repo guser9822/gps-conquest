@@ -1,0 +1,17 @@
+1)Create an empty scene
+2)Click on the main menu bar the menu button 'Uma4GPConquest'
+3)Click on 'Init Uma' (This will init Uma core)
+4) Start scene and then in the same menu 'Uma4GPConquest'
+click 'Create a Uma'. With this a new UMA character Male or 
+Female will be created with random features (skin,hair etc.)
+This new uma will be automatically saved as ScriptableObject in the folder
+gps-conquest\Assets\UM4GPConquest\SavedRecipes.
+5)Create as many characters you want
+6)In the same menu 'Uma4GPConquest' click on
+'Build Uma Asset' and choose the platform (mine is Windows X64).
+This will automatically save all the scriptable uma characters
+into as asset bundle in the folder 'gps-conquest\Assets\StreamingAssets'
+7)Go into Register scene in the game for test your new characters.
+
+NOTE : Everytime UMA gets updtated, you must recreate UMA core object
+in each scene you used it (  'Init Uma' )

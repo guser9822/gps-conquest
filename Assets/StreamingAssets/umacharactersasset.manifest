@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4003479760
+CRC: 1071200899
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4b9593a999d8e78abe62cf10d3dc0492
+    Hash: d8c8381aa9bd807c689377e5455d3e13
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8d1c48a1f52504077809b58af43f969c
+    Hash: cced16d37a3c25c19c129b57fdd7d8fd
 HashAppended: 0
 ClassTypes:
 - Class: 74
@@ -18,15 +18,57 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 9.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanFemale 2.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanMale.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 7.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 26.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 27.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 21.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 11.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanFemale 1.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 14.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 19.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 25.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 12.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 5.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 7.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanMale 4.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 13.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 12.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 17.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanFemale 3.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 14.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 6.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanMale 2.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 9.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 16.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 5.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanFemale.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 22.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 8.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanFemale 4.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 15.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 10.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 21.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanMale 3.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 13.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 18.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 20.asset
 - Assets/UM4GPConquest/SavedRecipes/HumanMale 1.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 8.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 11.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 20.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 22.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 16.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 23.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 18.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 24.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 23.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 6.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 10.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanFemale 15.asset
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 17.asset
 - Assets/Standard Assets/Characters/ThirdPersonCharacter/Animator/ThirdPersonAnimatorController.controller
+- Assets/UM4GPConquest/SavedRecipes/HumanMale 19.asset
 Dependencies: []
