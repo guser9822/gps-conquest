@@ -58,7 +58,7 @@ namespace TC.GPConquest.Player
 
             if (!ReferenceEquals(cameras, null) && cameras.Length > 0)
             {
-                foundedMainCamera = foundedMainCamera = cameras.FirstOrDefault(x => x.gameObject.CompareTag(CommonNames.MAIN_CAMERA_TAG));
+                foundedMainCamera = cameras.FirstOrDefault(x => x.gameObject.CompareTag(CommonNames.MAIN_CAMERA_TAG));
             }
             else throw new Exception("Invalid cameras arrays");
 
