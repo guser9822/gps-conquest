@@ -115,7 +115,8 @@ namespace TC.GPConquest.Player
             var destination = (DestinationController)gameRegister.FindEntity(typeof(DestinationController),
                 _destinationNetId);
             var avator = destination.AvatorController;
-
+            //set this ui to the PLayerEntity in the non owner process 
+            avator.PlayerEntity.GameUINetworkController = this;
             UpdateGameUINetworkControllerAttributes(avator);
 
         }
