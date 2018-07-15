@@ -89,7 +89,8 @@ namespace TC.GPConquest.Player
             }
             else PlayerUI.InitPlayerUI(AvatorControllerReference);
 
-            AvatorUI.InitAvatorUI(CameraOnDestination, PlayerEntity);
+            if(!ReferenceEquals(AvatorUI,null))
+                AvatorUI.InitAvatorUI(CameraOnDestination, PlayerEntity);
         }
 
         private void NetworkObject_onDestroy(NetWorker sender)

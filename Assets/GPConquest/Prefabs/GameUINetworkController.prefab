@@ -51,5 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c8045deef30ae41af1d2c193106b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabPlayerUI: {fileID: 1883274793934354, guid: c8e7dffdc877e6040b2cb0c8c36b4244,
+  PrefabPlayerUI: {fileID: 1251472862824228, guid: 866c0ac223a9a7048b79c5a14cf7c5c9,
     type: 2}
+  InstantiatedPlayerUI: {fileID: 0}
+  CameraOnDestination: {fileID: 0}
+  AvatorUI: {fileID: 0}
+  PlayerUI: {fileID: 0}
+  AvatorControllerReference: {fileID: 0}
+  PlayerEntity: {fileID: 0}
