@@ -14,11 +14,14 @@ namespace TC.GPConquest.Player
     {
 
         public GameObject PrefabPlayerUI;//prefabs of the UI, used only for instantiation
+        public GameObject PrefabAvatorUI;//prefabs of the UI, used only for instantiation
         [HideInInspector]
         public GameObject InstantiatedPlayerUI;//instantiated UI
         [HideInInspector]
-        public Camera CameraOnDestination;//camera of the DestinationController object
+        public GameObject InstantiatedAvatorUI;//instantiated UI
         [HideInInspector]
+        public Camera CameraOnDestination;//camera of the DestinationController object
+        //[HideInInspector]
         public AvatorUI AvatorUI;//UI on the avator/character
         [HideInInspector]
         public PlayerUI PlayerUI;//Fixed 2D UI of the player
@@ -40,7 +43,10 @@ namespace TC.GPConquest.Player
              *  the only way in order to avoid strange initialization and instantiation errors on the owner 
              *  and non owner process
              * **/
-            if (!ServerProcess) InstantiatedPlayerUI = Instantiate<GameObject>(PrefabPlayerUI);
+            if (!ServerProcess) {
+                InstantiatedPlayerUI = Instantiate<GameObject>(PrefabPlayerUI);
+                InstantiatedAvatorUI = Instantiate<GameObject>(PrefabAvatorUI);
+            }
 
         }
 
@@ -52,7 +58,7 @@ namespace TC.GPConquest.Player
             if (ServerProcess) return; //Do not execute any initialization for the ServerController process
 
             //Gets the AvatorUI
-            AvatorUI = InstantiatedPlayerUI.GetComponentInChildren<AvatorUI>();
+            AvatorUI = InstantiatedAvatorUI.GetComponentInChildren<AvatorUI>();
 
             //Gets the PlayerUI 
             PlayerUI = InstantiatedPlayerUI.GetComponentInChildren<PlayerUI>();
@@ -69,6 +75,10 @@ namespace TC.GPConquest.Player
 
             //Puts the UI under the hieararchy of the GameUIController object
             InstantiatedPlayerUI.transform.SetParent(_avatorTransform);
+
+            //Puts AvatorUI under avator hierarchy
+            InstantiatedAvatorUI.transform.SetParent(_avatorTransform);
+            InstantiatedAvatorUI.transform.localPosition = new Vector3(0, 2, 0);
 
             //Sets the correct position for the UI
             InstantiatedPlayerUI.transform.localPosition =

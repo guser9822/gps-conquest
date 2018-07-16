@@ -24,7 +24,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
         public override void Initialize()
         {
             base.Initialize();
-            NicknameLabel.Position.Value = new Vector3(0, 220, 0);
+            //NicknameLabel.Position.Value = new Vector3(0, 50, 0);
         }
 
         // This method must be called with the appropriate parameters in order to
@@ -46,7 +46,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
                      Quaternion.RotateTowards(NicknameLabel.transform.rotation,
                      CameraOnDestination.transform.rotation, 360);
 
-                NicknameLabel.RectTransform.localPosition = new Vector3(0, 220, 0);
+                //NicknameLabel.RectTransform.localPosition = new Vector3(0, 50, 0);
 
             }
         }
