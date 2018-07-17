@@ -27,7 +27,7 @@ namespace TC.GPConquest.Player
         protected UserInformations CurrentUserInfo;
         [HideInInspector]
         public PlayerEntity PlayerEntity;
-        [HideInInspector]
+        //[HideInInspector]
         public Camera CameraOnDestination;
 
         private void Awake()

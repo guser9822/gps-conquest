@@ -15,19 +15,19 @@ namespace TC.GPConquest.Player
 
         public GameObject PrefabPlayerUI;//prefabs of the UI, used only for instantiation
         public GameObject PrefabAvatorUI;//prefabs of the UI, used only for instantiation
-        [HideInInspector]
+        //[HideInInspector]
         public GameObject InstantiatedPlayerUI;//instantiated UI
-        [HideInInspector]
+        //[HideInInspector]
         public GameObject InstantiatedAvatorUI;//instantiated UI
-        [HideInInspector]
+        //[HideInInspector]
         public Camera CameraOnDestination;//camera of the DestinationController object
         //[HideInInspector]
         public AvatorUI AvatorUI;//UI on the avator/character
-        [HideInInspector]
+        //[HideInInspector]
         public PlayerUI PlayerUI;//Fixed 2D UI of the player
-        [HideInInspector]
+        //[HideInInspector]
         public AvatorController AvatorControllerReference;
-        [HideInInspector]
+        //[HideInInspector]
         public PlayerEntity PlayerEntity;
         protected bool ServerProcess;
 

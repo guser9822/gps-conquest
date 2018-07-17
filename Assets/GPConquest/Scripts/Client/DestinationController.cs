@@ -18,7 +18,7 @@ namespace TC.GPConquest.Player
     {
         #region Mix
         private Renderer sphereRend;
-        [HideInInspector]
+        //[HideInInspector]
         public Camera DestinationCamera;
         protected tileGen TileGen;
         public GameEntityRegister GameEntityRegister { get; private set; }
@@ -52,7 +52,7 @@ namespace TC.GPConquest.Player
             InitDestinationController();
         }
 
-        private Camera FindMainCamera(Camera[] cameras) {
+        protected Camera FindMainCamera(Camera[] cameras) {
 
             Camera foundedMainCamera = null;
 
@@ -181,7 +181,7 @@ namespace TC.GPConquest.Player
             //Find the main camera. For my entity on the network, the camera will be the same
             //of the owner of the client in order to let the UI (e.g. nickname labels) to point towards
             //the players owning the clients. 
-            DestinationCamera = FindObjectOfType<Camera>();
+            DestinationCamera = FindMainCamera(FindObjectsOfType<Camera>());
 
             UpdateDestinationAttributes(_playerName,
                 _selectedUma,

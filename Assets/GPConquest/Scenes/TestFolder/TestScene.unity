@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3fff8f73b15fbf41b3d86abd0f0fbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camerA: {fileID: 0}
+  camerA: {fileID: 1875954248}
   AvatorUIPrefab: {fileID: 1051642458675168, guid: a1c429a7f8d1a15448b95060e5cce44a,
     type: 2}
   InstantiatedAvatorUI: {fileID: 0}

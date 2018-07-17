@@ -14,7 +14,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
     {
 
         public Label NicknameLabel;
-        [HideInInspector]
+        //[HideInInspector]
         public Camera CameraOnDestination;
         private PlayerEntity PlayerEntity;
         [MapTo("NicknameLabel.Text")]
@@ -24,7 +24,6 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
         public override void Initialize()
         {
             base.Initialize();
-            //NicknameLabel.Position.Value = new Vector3(0, 50, 0);
         }
 
         // This method must be called with the appropriate parameters in order to
@@ -45,8 +44,6 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
                 NicknameLabel.transform.rotation =
                      Quaternion.RotateTowards(NicknameLabel.transform.rotation,
                      CameraOnDestination.transform.rotation, 360);
-
-                //NicknameLabel.RectTransform.localPosition = new Vector3(0, 50, 0);
 
             }
         }
