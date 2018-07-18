@@ -78,7 +78,8 @@ namespace TC.GPConquest.Player
 
             //Puts AvatorUI under avator hierarchy
             InstantiatedAvatorUI.transform.SetParent(_avatorTransform);
-            InstantiatedAvatorUI.transform.localPosition = new Vector3(0, 2, 0);
+            //Set the AvatorUI(nickname) on the head of the avator character
+            InstantiatedAvatorUI.transform.localPosition = new Vector3(0, 2.3f, 0);
 
             //Sets the correct position for the UI
             InstantiatedPlayerUI.transform.localPosition =
