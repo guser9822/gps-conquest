@@ -18,7 +18,7 @@ namespace TC.GPConquest.Player
     {
         #region Mix
         private Renderer sphereRend;
-        //[HideInInspector]
+        [HideInInspector]
         public Camera DestinationCamera;
         protected tileGen TileGen;
         public GameEntityRegister GameEntityRegister { get; private set; }

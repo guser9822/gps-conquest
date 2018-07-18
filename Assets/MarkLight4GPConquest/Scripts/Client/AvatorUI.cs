@@ -14,7 +14,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
     {
 
         public Label NicknameLabel;
-        //[HideInInspector]
+        [HideInInspector]
         public Camera CameraOnDestination;
         private PlayerEntity PlayerEntity;
         [MapTo("NicknameLabel.Text")]
