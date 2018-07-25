@@ -50,7 +50,7 @@ namespace Assets
                 /**
                  * After that the polygon have been scaled, we use it's scale
                  * to adjust the texture previously created. Since texture are 2D, 
-                 * we only care about z (x) and x (y)
+                 * we only care about z (x) and x (y).
                  * **/
                 renderer.material.mainTextureScale = new Vector2(scale.z, scale.x);
 
