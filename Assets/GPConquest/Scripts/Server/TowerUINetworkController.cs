@@ -18,7 +18,9 @@ namespace TC.GPConquest.Server {
         public TowerEntityController TowerEntityController { get; set; }
         public GameEntityRegister GameEntityRegister { get; set; }
         public GameObject TowerUIPrefab;
+        [HideInInspector]
         public GameObject TowerUIInstantiated;
+        [HideInInspector]
         public TowerEntityGameUI TowerEntityGameUI;
         private bool isServerProcess;
 
