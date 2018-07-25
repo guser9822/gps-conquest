@@ -34,6 +34,11 @@ namespace Assets
             for (int i = 1; i < _verts.Count; i++)
             {
                 GameObject roadPlane = CreateMesh(5);
+
+                /*
+                 * Since each road polygon have it's own dimension, we have to create each time a 
+                 * new material from roadMaterial given in input
+                 * **/
                 MaterialCreated = new Material(roadMaterial);
                 var renderer = roadPlane.GetComponent<Renderer>();
                 renderer.material = MaterialCreated;
@@ -41,10 +46,14 @@ namespace Assets
                 Vector3 scale = roadPlane.transform.localScale;
                 scale.z = Vector3.Distance(verts[i], verts[i-1]) / 10;
                 roadPlane.transform.localScale = scale;
+
                 /**
-                 * 
+                 * After that the polygon have been scaled, we use it's scale
+                 * to adjust the texture previously created. Since texture are 2D, 
+                 * we only care about z (x) and x (y)
                  * **/
                 renderer.material.mainTextureScale = new Vector2(scale.z, scale.x);
+
                 roadPlane.transform.LookAt(tile.transform.position + verts[i-1]);
                 roadPlane.transform.parent = tile.transform;
 
