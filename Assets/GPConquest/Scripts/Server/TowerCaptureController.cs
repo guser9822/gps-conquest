@@ -105,7 +105,7 @@ namespace TC.GPConquest.Server
                 }
                 else if (PlayersCaptureTimeTable.Count <= 0) {
                     //Change the Towers colors when the capture is suspended by the players
-                    CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, STARTUP_STATE);
+                    CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, CurrentCaptureState);
                 }
 
                 //If the tower have been captured, starts the countdown in order to reactivate the capture game
@@ -117,9 +117,8 @@ namespace TC.GPConquest.Server
                     if (WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED <= 0.0f)
                     {
                         IsCaptured = false;
-
                         //Change the Towers colors when it's time to restart the capture of the tower
-                        CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, STARTUP_STATE);
+                        CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, CurrentCaptureState);
                     }
                 }
 
