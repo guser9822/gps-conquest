@@ -181,6 +181,7 @@ namespace TC.GPConquest.Server
         /// <param name="_actionName"></param>
         public void ChangeTowerEntityStatus(string _winningFaction, string _actionName)
         {
+            //This check is just for fortify the fact that in this case, this call must be made by the owner
             if (networkObject.IsOwner)
             {
                 if (!ReferenceEquals(_winningFaction, null) && 

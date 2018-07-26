@@ -71,7 +71,9 @@ namespace TC.GPConquest.Server
                 {
                     UPDATE_NETWORK_TOWERS_TIME_PASSED += Time.deltaTime;
 
-                    //This check and this call are used to update just once the color of the tower effect
+                    //This check and this call are used to update just once the color of the tower effect.
+                    //If the tower is under capture, call repeatly NotifyChangeInTower consumes bandwidth 
+                    //because some RPCs are involded.
                     if (!CurrentTowerPhase.Equals(CAPTURE_IN_PROGRES))
                     {
                         CurrentTowerPhase = CAPTURE_IN_PROGRES;
@@ -122,7 +124,7 @@ namespace TC.GPConquest.Server
         }
 
         /// <summary>
-        /// Notify the tower entity to change it's state
+        /// Notify the tower entity to change it's state.
         /// </summary>
         /// <param name="_towerEntityController"></param>
         /// <param name="_winner"></param>

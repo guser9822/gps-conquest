@@ -86,7 +86,6 @@ namespace TC.GPConquest.Server {
             else Debug.LogError("Action given in input is null.");
         }
 
-
         public void InitializeTowerUINetworkController(TowerEntityController _towerEntityController)
         {
 
@@ -157,7 +156,8 @@ namespace TC.GPConquest.Server {
                 networkObject.SendRpc(RPC_CHANGE_U_I_STATUS_ON_NETWORK,
                     true,
                     Receivers.AllBuffered,
-                    _factionName);
+                    _factionName,
+                    _actionName);
             }
             else
             {
@@ -182,6 +182,7 @@ namespace TC.GPConquest.Server {
                     if (!ReferenceEquals(factionName, null) && factionName.Length > 0 &&
                         !ReferenceEquals(actionName, null) && actionName.Length > 0)
                     {
+                        //Sets the winner faction in the pop of the tower
                         TowerEntityGameUI.ChangeTowerUIStatus(factionName);
                         SetTowerEffectColor(actionName);
                     }
