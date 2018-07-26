@@ -1,5 +1,7 @@
 <Server xmlns="MarkLight">
-  <UserInterface>
+  <UserInterface UIScaleMode = "ScaleWithScreenSize"
+                 ReferenceResolution = "1280,760"
+                 CanvasScaler.screenMatchMode="Expand">
     <ServerUI />
   </UserInterface>
   <EventSystem />

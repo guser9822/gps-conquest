@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9448878e2e40f1a4c9f8fd2b56832b13, type: 3}
+  m_Name: HumanMale 20
+  m_EditorClassIdentifier: 
+  recipeType: Standard
+  DisplayValue: 
+  compatibleRaces: []
+  wardrobeRecipeThumbs: []
+  wardrobeSlot: None
+  Hides: []
+  suppressWardrobeSlots: []
+  activeWardrobeSet: []
+  MeshHideAssets: []
+  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"MaleEyes","scale":100,"copyIdx":-1,"overlays":[{"id":"EyeOverlay","colorIdx":4,"rect":[0,0,0,0],"data":[]},{"id":"EyeOverlayAdjust","colorIdx":5,"rect":[64,64,128,128],"data":[]}]},{"id":"MaleFace","scale":100,"copyIdx":-1,"overlays":[{"id":"MaleHead02","colorIdx":1,"rect":[0,0,0,0],"data":[]},{"id":"MaleEyebrow02","colorIdx":0,"rect":[384,256,256,64],"data":[]}]},{"id":"MaleTorso","scale":100,"copyIdx":-1,"overlays":[{"id":"MaleBody02","colorIdx":1,"rect":[0,0,0,0],"data":[]},{"id":"MaleShirt01","colorIdx":2,"rect":[0,512,1024,512],"data":[]}]},{"id":"MaleHands","scale":100,"copyIdx":2,"overlays":[]},{"id":"MaleInnerMouth","scale":100,"copyIdx":-1,"overlays":[{"id":"InnerMouth","colorIdx":4,"rect":[0,0,0,0],"data":[]}]},{"id":"","scale":1,"copyIdx":-1,"overlays":[]},{"id":"MaleFeet","scale":100,"copyIdx":2,"overlays":[]},{"id":"MaleJeans01","scale":100,"copyIdx":-1,"overlays":[{"id":"MaleJeans01","colorIdx":3,"rect":[0,0,0,0],"data":[]}]}],"colors":[],"fColors":[{"name":"Hair","colors":[4,1,19,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Skin","colors":[170,162,148,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Shirt","colors":[189,107,33,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Pants","colors":[55,106,185,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[68,196,37,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]}],"sharedColorCount":4,"race":"HumanMale","packedDna":[{"dnaType":"UMADnaHumanoid","dnaTypeHash":-212795365,"packedDna":"{\"height\":123,\"headSize\":133,\"headWidth\":120,\"neckThickness\":126,\"armLength\":136,\"forearmLength\":129,\"armWidth\":121,\"forearmWidth\":120,\"handsSize\":117,\"feetSize\":122,\"legSeparation\":139,\"upperMuscle\":134,\"lowerMuscle\":135,\"upperWeight\":125,\"lowerWeight\":121,\"legsSize\":139,\"belly\":139,\"waist\":137,\"gluteusSize\":125,\"earsSize\":129,\"earsPosition\":128,\"earsRotation\":119,\"noseSize\":120,\"noseCurve\":124,\"noseWidth\":132,\"noseInclination\":130,\"nosePosition\":127,\"nosePronounced\":131,\"noseFlatten\":128,\"chinSize\":128,\"chinPronounced\":116,\"chinPosition\":120,\"mandibleSize\":126,\"jawsSize\":127,\"jawsPosition\":124,\"cheekSize\":140,\"cheekPosition\":140,\"lowCheekPronounced\":127,\"lowCheekPosition\":116,\"foreheadSize\":122,\"foreheadPosition\":127,\"lipsSize\":124,\"mouthSize\":130,\"eyeRotation\":123,\"eyeSize\":140,\"breastSize\":128}"},{"dnaType":"UMADnaTutorial","dnaTypeHash":-1679007774,"packedDna":"{\"eyeSpacing\":128}"}],"wardrobeSet":[],"packedRecipeType":"Standard"}'

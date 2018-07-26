@@ -1,5 +1,7 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace UMA
 {
@@ -27,6 +29,9 @@ namespace UMA
 		/// </summary>
 		private List<OverlayData> overlayList = new List<OverlayData>();
 
+		//For MeshHide system, this can get added at runtime and is the filtered HideMask that the combiner uses.
+		public BitArray[] meshHideMask;
+
 		/// <summary>
 		/// Constructor for slot using the given asset.
 		/// </summary>
@@ -36,6 +41,17 @@ namespace UMA
 			this.asset = asset;
 			overlayScale = asset.overlayScale;
 		}
+
+        /// <summary>
+        /// Property to return overlay hash so it is visible in debugger.
+        /// </summary>
+        public int OverlayHash
+        {
+            get
+            {
+                return GetOverlayList().GetHashCode();
+            }
+        }
 
 		/// <summary>
 		/// Deep copy of the SlotData.
@@ -176,6 +192,16 @@ namespace UMA
 		/// <param name="newOverlayList">The overlay list.</param>
 		public void SetOverlayList(List<OverlayData> newOverlayList)
 		{
+                this.overlayList = newOverlayList;
+		}
+
+        /// <summary>
+        /// Sets the complete list of overlays.
+        /// Reuses the overlay list if it exists.
+        /// </summary>
+        /// <param name="newOverlayList">The overlay list.</param>
+        public void UpdateOverlayList(List<OverlayData> newOverlayList)
+        {
             if (this.overlayList.Count == newOverlayList.Count)
             {
                 // keep the list, and just set the overlays so that merging continues to work.
@@ -326,7 +352,8 @@ namespace UMA
 
 		public void OnAfterDeserialize()
 		{
-			if (overlayList == null) overlayList = new List<OverlayData>();
+			if (overlayList == null)
+                overlayList = new List<OverlayData>();
 		}
 
 		public void OnBeforeSerialize()

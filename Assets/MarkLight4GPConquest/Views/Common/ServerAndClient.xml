@@ -1,5 +1,5 @@
 <ServerAndClient xmlns="MarkLight">
-  <UserInterface>
+  <UserInterface UIScaleMode = "ScaleWithScreenSize" ReferenceResolution = "1280,760" MatchWidthOrHeight="0.50">
     <ServerAndClientUI BackgroundColor="grey" />
   </UserInterface>
   <EventSystem />

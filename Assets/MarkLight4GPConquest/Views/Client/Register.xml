@@ -1,5 +1,8 @@
 <Register xmlns="MarkLight">
-  <UserInterface>
+  <!-- ReferenceResolution = "1280,760" it's a 2D array-->
+  <UserInterface UIScaleMode = "ScaleWithScreenSize"
+                 ReferenceResolution = "1280,760"
+                 CanvasScaler.screenMatchMode="Expand">
     <RegisterUI/>
   </UserInterface>
   <EventSystem />

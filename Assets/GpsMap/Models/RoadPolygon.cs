@@ -23,8 +23,9 @@ namespace Assets
         public string Id { get; set; }
         public RoadType Type { get; set; }
         private List<Vector3> _verts;
+        public Material MaterialCreated;
 
-        public void Initialize(string id, Tile tile, List<Vector3> verts, string halfWidth)
+        public void Initialize(string id, Tile tile, List<Vector3> verts, string halfWidth, Material roadMaterial)
         {
             Id = id;
             _tile = tile;
@@ -32,16 +33,30 @@ namespace Assets
             _verts = verts;
             for (int i = 1; i < _verts.Count; i++)
             {
-                
-             GameObject roadPlane = CreateMesh(5);
-             roadPlane.GetComponent<Renderer>().material = Resources.Load("roadMaterial") as Material;
-             
+                GameObject roadPlane = CreateMesh(5);
+
+                /*
+                 * Since each road polygon have it's own dimension, we have to create each time a 
+                 * new material from roadMaterial given in input
+                 * **/
+                MaterialCreated = new Material(roadMaterial);
+                var renderer = roadPlane.GetComponent<Renderer>();
+                renderer.material = MaterialCreated;
                 roadPlane.transform.position = tile.transform.position + ((verts[i] + verts[i-1]) / 2);
                 Vector3 scale = roadPlane.transform.localScale;
                 scale.z = Vector3.Distance(verts[i], verts[i-1]) / 10;
                 roadPlane.transform.localScale = scale;
+
+                /**
+                 * After that the polygon have been scaled, we use it's scale
+                 * to adjust the texture previously created. Since texture are 2D, 
+                 * we only care about z (x) and x (y).
+                 * **/
+                renderer.material.mainTextureScale = new Vector2(scale.z, scale.x);
+
                 roadPlane.transform.LookAt(tile.transform.position + verts[i-1]);
                 roadPlane.transform.parent = tile.transform;
+
             }
         }
         

@@ -1,5 +1,7 @@
 <ClientMenu xmlns="MarkLight">
-  <UserInterface>
+  <UserInterface UIScaleMode = "ScaleWithScreenSize"
+                 ReferenceResolution = "1280,760"
+                 CanvasScaler.screenMatchMode="Expand">
     <ClientMenuUI/>
   </UserInterface>
   <EventSystem />

@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 402782}
-  - 114: {fileID: 11416372}
+  - component: {fileID: 402782}
+  - component: {fileID: 11416372}
   m_Layer: 0
   m_Name: tile
   m_TagString: Tile
@@ -21,12 +21,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 447828}
-  - 33: {fileID: 3388676}
-  - 65: {fileID: 6533104}
-  - 23: {fileID: 2351504}
+  - component: {fileID: 447828}
+  - component: {fileID: 3388676}
+  - component: {fileID: 6533104}
+  - component: {fileID: 2351504}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -43,11 +43,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -65.18543, y: -155.39772, z: 19.47349}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 447828}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &447828
 Transform:
   m_ObjectHideFlags: 1
@@ -57,10 +57,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 402782}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2351504
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -70,22 +70,28 @@ MeshRenderer:
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &3388676
 MeshFilter:
@@ -124,6 +130,11 @@ MonoBehaviour:
     width: 0
     height: 0
   cen: {x: 0, y: 0}
+  DownlaodTiles: 0
+  RoadMaterial: {fileID: 2100000, guid: af90906033a373a40b290f053bc89b7b, type: 2}
+  BuildingMaterial: {fileID: 2100000, guid: 3f18660c8a7b15e4d95805263e1b464e, type: 2}
+  WaterMaterial: {fileID: 2100000, guid: e2c5bdd5928832742851c3256717055b, type: 2}
+  ParkMaterial: {fileID: 2100000, guid: aa39f0a32728bbc48ad3b250599daa79, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -45,6 +45,8 @@ MonoBehaviour:
   CubeForgeGameNetworkObject: []
   ExampleProximityPlayerNetworkObject:
   - {fileID: 1000012738253334, guid: feb25ecf90a8d8b4ab922a455249997b, type: 2}
+  GameUINetworkEntityNetworkObject:
+  - {fileID: 1902845314838984, guid: c7a40c6c109b3dc4385a65b0515d0b4e, type: 2}
   NetworkCameraNetworkObject:
   - {fileID: 139536, guid: 661f29f0c0c86fa47b6015bd602d0ac6, type: 2}
   PlayerAvatorControllerNetworkObject:
@@ -54,10 +56,12 @@ MonoBehaviour:
   PlayerEntityModelNetworkObject:
   - {fileID: 1822585560048946, guid: c0e02c606f850a54bbc6ac64bd52c34a, type: 2}
   TestNetworkObject: []
-  TowerEntityControllerNetworkObject:
-  - {fileID: 1569749010823948, guid: 374b3bb271af4d6488ca420a686623d9, type: 2}
   TowerCaptureNetworkControllerNetworkObject:
   - {fileID: 1867191916972572, guid: 1f3072104a10f5b4aa6a0548067267a0, type: 2}
+  TowerEntityControllerNetworkObject:
+  - {fileID: 1569749010823948, guid: 374b3bb271af4d6488ca420a686623d9, type: 2}
+  TowerUIEntityNetworkObject:
+  - {fileID: 1874035569711360, guid: 658e531c252769a4986a64bfd94a15bf, type: 2}
   automaticScenes: 1
 --- !u!1001 &100100000
 Prefab:

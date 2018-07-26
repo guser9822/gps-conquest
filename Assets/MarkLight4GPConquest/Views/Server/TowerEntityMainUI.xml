@@ -1,0 +1,6 @@
+<TowerEntityMainUI xmlns="MarkLight">
+  <UserInterface RenderMode="ScreenSpaceOverlay">
+    <TowerEntityGameUI />
+  </UserInterface>
+  <EventSystem />
+</TowerEntityMainUI>

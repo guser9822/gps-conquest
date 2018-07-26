@@ -8,6 +8,7 @@ using BeardedManStudios.Forge.Networking.Unity;
 using System;
 using TC.Common;
 using TC.GPConquest.Common;
+using System.Linq;
 
 namespace TC.GPConquest.Player
 {
@@ -51,6 +52,19 @@ namespace TC.GPConquest.Player
             InitDestinationController();
         }
 
+        protected Camera FindMainCamera(Camera[] cameras) {
+
+            Camera foundedMainCamera = null;
+
+            if (!ReferenceEquals(cameras, null) && cameras.Length > 0)
+            {
+                foundedMainCamera = cameras.FirstOrDefault(x => x.gameObject.CompareTag(CommonNames.MAIN_CAMERA_TAG));
+            }
+            else throw new Exception("Invalid cameras arrays");
+
+            return foundedMainCamera;
+        } 
+
         protected void InitDestinationController()
         {
             //This is necessary since we are overriding NetworkStart and the code then will be executed on proprietary and non process
@@ -58,7 +72,7 @@ namespace TC.GPConquest.Player
                 return;
 
             //Set up camera for GPConquest view
-            DestinationCamera = FindObjectOfType<Camera>();
+            DestinationCamera = FindMainCamera(FindObjectsOfType<Camera>());
             DestinationCamera.gameObject.GetComponent<Transform>().SetParent(transform);
 
             //Gets a reference to the user account informations
@@ -89,7 +103,7 @@ namespace TC.GPConquest.Player
             {
                 networkObject.destCursorDims = new Vector3(0.4f, 0.4f, 0.4f);
 
-                UpdateDestinationAttributes(new Vector3(0, 4.45f, -5),
+                UpdateDestinationAttributes(new Vector3(0, 6.45f, -6),
                     Quaternion.AngleAxis(-40.0f, Vector3.left),
                     10.0f,
                     networkObject.destCursorDims,
@@ -153,7 +167,7 @@ namespace TC.GPConquest.Player
             //Sets up the camera attributes
             DestinationCamera.gameObject.GetComponent<Transform>().position = _cameraPosition;
             DestinationCamera.gameObject.GetComponent<Transform>().rotation = _cameraRotation;
-
+        
             //Sets up cursor attributes
             networkObject.destCursorSpeed = _cursorSpeed;
             networkObject.destCursorDims = _cursorDimensions;
@@ -167,7 +181,7 @@ namespace TC.GPConquest.Player
             //Find the main camera. For my entity on the network, the camera will be the same
             //of the owner of the client in order to let the UI (e.g. nickname labels) to point towards
             //the players owning the clients. 
-            DestinationCamera = FindObjectOfType<Camera>();
+            DestinationCamera = FindMainCamera(FindObjectsOfType<Camera>());
 
             UpdateDestinationAttributes(_playerName,
                 _selectedUma,

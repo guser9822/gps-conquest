@@ -9,6 +9,9 @@ using TC.Common;
 
 namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
+    /// <summary>
+    /// This is the static UI for the player
+    /// </summary>
     public class PlayerUI : UIView
     {
 

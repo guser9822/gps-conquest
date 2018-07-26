@@ -23,22 +23,24 @@ namespace TC.GPConquest.Player
         public string email;
         public string faction;
         public string selectedUma;
-        public GameUIController GameUIController;
-        
+        [HideInInspector]
+        public GameUINetworkController GameUINetworkController;
+        [HideInInspector]
+        public AvatorController AvatorControllerReference;
+
         private void Awake()
         {
-            GameUIController = GetComponent<GameUIController>();
         }
 
         public bool InitializePlayerEntity(AvatorController _avatorControllerReference, 
             UserInformations _user,
             Camera _cameraOnDestination)
         {
-            //Gets the AvatorController transform
-            Transform parentTransform = _avatorControllerReference.gameObject.GetComponent<Transform>();
+            //Updates attributes of this GameObject
+            UpdatePlayerEntityAttributes(_avatorControllerReference);
 
             //I'm sorry Demetra
-            var destinationOwnerNetId = _avatorControllerReference.
+            var destinationOwnerNetId = AvatorControllerReference.
                 DestinationControllerReference.
                 networkObject.NetworkId;
 
@@ -50,14 +52,12 @@ namespace TC.GPConquest.Player
                 _user.faction,
                 _user.selectedUma);
 
-            //Updates attributes of this GameObject
-            UpdatePlayerEntityAttributes(parentTransform);
-
             //When the avator controller is destroyed, destroy also the player entity
-            _avatorControllerReference.networkObject.onDestroy += NetworkObject_onDestroy;
+            AvatorControllerReference.networkObject.onDestroy += NetworkObject_onDestroy;
 
-            //Init and create the game UI
-            GameUIController.InitializeGameUI(_avatorControllerReference);
+            //Create the Game UI Controller Entity in the network
+            var gameUiNetworkController = NetworkManager.Instance.InstantiateGameUINetworkEntity(0, transform.position);
+            gameUiNetworkController.networkStarted += GameUiNetworkController_networkStarted;
 
             networkObject.SendRpc(RPC_UPDATE_PLAYER_ENTITY,
                 Receivers.AllBuffered,
@@ -68,6 +68,12 @@ namespace TC.GPConquest.Player
             _user.selectedUma);
 
             return true;
+        }
+
+        private void GameUiNetworkController_networkStarted(NetworkBehavior behavior)
+        {
+            GameUINetworkController = behavior.GetComponent<GameUINetworkController>();
+            GameUINetworkController.InitializeNetworkGameUI(AvatorControllerReference);
         }
 
         protected bool UpdatePlayerEntityNetworkAttributes(uint _destinationOwnerNetId,
@@ -86,9 +92,14 @@ namespace TC.GPConquest.Player
             return true;
         }
 
-        protected bool UpdatePlayerEntityAttributes(Transform _parentTransform)
+        protected bool UpdatePlayerEntityAttributes(AvatorController _avatorControllerReference)
         {
+            AvatorControllerReference = _avatorControllerReference;
+
+            //Gets the AvatorController transform
+            var _parentTransform = AvatorControllerReference.gameObject.GetComponent<Transform>();
             transform.SetParent(_parentTransform);
+
             return true;
         }
 
@@ -115,8 +126,7 @@ namespace TC.GPConquest.Player
             var avator = destination.AvatorController;
             //sets this player entity as reference for the Avator founded
             avator.PlayerEntity = this;
-            UpdatePlayerEntityAttributes(avator.GetComponent<Transform>());
-            GameUIController.InitializeGameUI(avator);
+            UpdatePlayerEntityAttributes(avator);
         }
 
         private void NetworkObject_onDestroy(NetWorker sender)

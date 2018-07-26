@@ -7,6 +7,9 @@ using MarkLight;
 
 namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
+    /// <summary>
+    /// This UI is used for all the stuffs regarding the character of the player (eg. it's nickname)
+    /// </summary>
     public class AvatorUI : UIView
     {
 
@@ -21,7 +24,6 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
         public override void Initialize()
         {
             base.Initialize();
-            NicknameLabel.Position.Value = new Vector3(0, 220, 0);
         }
 
         // This method must be called with the appropriate parameters in order to
@@ -42,8 +44,6 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
                 NicknameLabel.transform.rotation =
                      Quaternion.RotateTowards(NicknameLabel.transform.rotation,
                      CameraOnDestination.transform.rotation, 360);
-
-                NicknameLabel.RectTransform.localPosition = new Vector3(0, 220, 0);
 
             }
         }

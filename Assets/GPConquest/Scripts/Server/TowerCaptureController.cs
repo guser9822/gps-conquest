@@ -14,8 +14,12 @@ namespace TC.GPConquest.Server
     public class TowerCaptureController : TowerCaptureNetworkControllerBehavior,ISerializationCallbackReceiver
     {
         public TowerEntityController TowerEntityController { get; set; }
-        private string WinningOrNoFaction;//used only by the owner of the tower to contain the winning faction or the NO_FACTION name
+        private string WinningOrNoFaction = GameCommonNames.NO_FACTION;//used only by the owner of the tower to contain the winning faction or the NO_FACTION name
 
+        public static readonly string CAPTURE_IN_PROGRES = "CAPTURE_IN_PROGRESS";
+        public static readonly string CAPTURED_BY_FACTION = "CAPTURED_BY_FACTION";
+        public static readonly string STARTUP_STATE = "INITIAL_STATE";
+        protected string CurrentTowerPhase = STARTUP_STATE;
         //Times expressed in seconds
         private struct TIMES
         {
@@ -43,6 +47,7 @@ namespace TC.GPConquest.Server
 
         void Awake()
         {
+            WinningOrNoFaction = GameCommonNames.NO_FACTION;
             FactionsConquestTime = InitializeFactionsConquestTime(FactionsConquestTime);
         }
 
@@ -60,13 +65,22 @@ namespace TC.GPConquest.Server
 
         private void Update()
         {
-
             if (networkObject.IsOwner)
             {
                 if (PlayersCaptureTimeTable.Count > 0 && !IsCaptured)
                 {
                     UPDATE_NETWORK_TOWERS_TIME_PASSED += Time.deltaTime;
 
+                    //This check and this call are used to update just once the color of the tower effect.
+                    //If the tower is under capture, call repeatly NotifyChangeInTower consumes bandwidth 
+                    //because some RPCs are involded.
+                    if (!CurrentTowerPhase.Equals(CAPTURE_IN_PROGRES))
+                    {
+                        CurrentTowerPhase = CAPTURE_IN_PROGRES;
+                        NotifyChangeInTower(TowerEntityController, WinningOrNoFaction, CurrentTowerPhase);
+                    }
+
+                    //Count the time spent by each player during the capture
                     PlayersCaptureTimeTable = PlayersCapturingCounter(PlayersCaptureTimeTable);
                     if (UPDATE_NETWORK_TOWERS_TIME_PASSED >= TIMES.UPDATE_NETWORK_CAPT_CONTROLLERS_TIME)
                     {
@@ -75,18 +89,21 @@ namespace TC.GPConquest.Server
                         CaptureInfoList = SendCaptureInfoOverTheNetwork(CaptureInfoList);
                         UPDATE_NETWORK_TOWERS_TIME_PASSED = 0D;
                     }
+                    //Sums the time spent by players for each faction
                     FactionsConquestTime = FactionsCapturingCounter(FactionsConquestTime, PlayersCaptureTimeTable);
+                    //Checks if one faction reached the winning time
                     IsCaptured = CheckWinningConditions(FactionsConquestTime, PlayersCaptureTimeTable, WinningOrNoFaction);
 
                     //If the tower have been captured, sets a timer that blocks the capture game untill it's value will be 0
                     if (IsCaptured)
                     {
                         WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED = TIMES.WAITING_TIME_BEFORE_NEXT_CAPTURE;
-                        //Sets the winner
-                        //TowerEntityController.OwnerFaction = WinningOrNoFaction;
-                        SetTheWinnerFaction(TowerEntityController, WinningOrNoFaction);
+                        CurrentTowerPhase = CAPTURED_BY_FACTION;
+                        //Sets the winner : update the faction name and the color of the tower effect
+                        //NOTE : the TowerUINetworkController have an internal dictionary that ,for each faction, have the corresponding color
+                        NotifyChangeInTower(TowerEntityController, WinningOrNoFaction, WinningOrNoFaction);
                     }
-                        
+
                 }
 
                 //If the tower have been captured, starts the countdown in order to reactivate the capture game
@@ -94,26 +111,31 @@ namespace TC.GPConquest.Server
                 {
                     WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED -= Time.deltaTime;
                     //If the timer gets azzerated, reactivates the capture game
-                    if (WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED <= 0.0f) IsCaptured = false;
+                    if (WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED <= 0.0f)
+                    {
+                        IsCaptured = false;
+                        CurrentTowerPhase = STARTUP_STATE;
+                        //Activate the tower capture game, but keep the tower faction and that faction color
+                        NotifyChangeInTower(TowerEntityController, WinningOrNoFaction, WinningOrNoFaction);
+                    }
                 }
+
             }
         }
 
         /// <summary>
-        /// Set the winning faction on the TowerEntityController for both Owner/Non-Owners
+        /// Notify the tower entity to change it's state.
         /// </summary>
         /// <param name="_towerEntityController"></param>
         /// <param name="_winner"></param>
-        protected void SetTheWinnerFaction(TowerEntityController _towerEntityController, string _winner)
+        /// <param name="_actionName"></param>
+        protected void NotifyChangeInTower(TowerEntityController _towerEntityController, string _winner, string _actionName)
         {
             if (!ReferenceEquals(_towerEntityController, null) && 
-                !ReferenceEquals(_winner, null))
+                !ReferenceEquals(_winner, null) &&
+                !ReferenceEquals(_actionName,null))
             {
-                var towerEntityNetObj = _towerEntityController.networkObject;
-                towerEntityNetObj.SendRpc(TowerEntityControllerBehavior.RPC_UPDATE_TOWER_ATTRRIBUTES,
-                    true,
-                    Receivers.AllBuffered,
-                    WinningOrNoFaction);
+                _towerEntityController.ChangeTowerEntityStatus(_winner,_actionName);
             }
             else Debug.LogWarning("Winner faction or tower entity are null");
         }

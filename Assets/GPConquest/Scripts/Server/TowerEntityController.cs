@@ -10,6 +10,7 @@ using TC.GPConquest.GpsMap.Helpers;
 using TC.Common;
 using TC.GPConquest.Player;
 using TC.GPConquest.Common;
+using TC.GPConquest.MarkLight4GPConquest.Common;
 
 namespace TC.GPConquest.Server
 {
@@ -23,6 +24,7 @@ namespace TC.GPConquest.Server
         public Vector2 GPSCoords;//used just for visualization in the inspector
         public TowerCaptureController TowerCaptureController {get;set;}
         public GameEntityRegister GameEntityRegister { get; private set; }
+        public TowerUINetworkController TowerUINetworkController { get; set; }
 
         private void ActivateBoxColliders(bool _activate)
         {
@@ -53,14 +55,24 @@ namespace TC.GPConquest.Server
 
             //Spawn tower capture controller on the network on the same position of the tower
             var towerCaptureController = NetworkManager.Instance.InstantiateTowerCaptureNetworkController(0,transform.position);
-            towerCaptureController.networkStarted += TowerCaptureController_networkStarted;
+            towerCaptureController.networkStarted += TowerComponents_networkStarted;
+
+            //Spawn on the network a NetworkUI contrller
+            var towerNetUIController = NetworkManager.Instance.InstantiateTowerUIEntity(0, transform.position);
+            towerNetUIController.networkStarted += TowerNetUIController_networkStarted;
 
             networkObject.SendRpc(RPC_UPDATE_TOWER_ATTRRIBUTES,
                Receivers.AllBuffered,
                OwnerFaction);
         }
 
-        private void TowerCaptureController_networkStarted(NetworkBehavior behavior)
+        private void TowerNetUIController_networkStarted(NetworkBehavior behavior)
+        {
+            TowerUINetworkController = behavior.GetComponent<TowerUINetworkController>();
+            TowerUINetworkController.InitializeTowerUINetworkController(this);
+        }
+
+        private void TowerComponents_networkStarted(NetworkBehavior behavior)
         {
             TowerCaptureController = behavior.GetComponent<TowerCaptureController>();
             TowerCaptureController.InitTowerCaptureController(this);
@@ -151,6 +163,94 @@ namespace TC.GPConquest.Server
         public uint GetUniqueKey()
         {
             return networkObject.NetworkId;
+        }
+
+        private void OnMouseDown()
+        {
+            if (!networkObject.IsOwner /* and not serverProcess */)
+            {
+                TowerUINetworkController.TowerEntityGameUI.ToggleWindow();
+            }
+         }
+
+        /// <summary>
+        /// This function is called from outside (e.g. TowerCaptureController) in order to 
+        /// change the state of the tower entity
+        /// </summary>
+        /// <param name="_winningFaction"></param>
+        /// <param name="_actionName"></param>
+        public void ChangeTowerEntityStatus(string _winningFaction, string _actionName)
+        {
+            //This check is just for fortify the fact that in this case, this call must be made by the owner
+            if (networkObject.IsOwner)
+            {
+                if (!ReferenceEquals(_winningFaction, null) && 
+                    !ReferenceEquals(_actionName, null))
+                {
+                    ApplyChangesToTowerEntity(_winningFaction);
+
+                    //Update tower entities on network
+                    networkObject.SendRpc(RPC_CHANGE_TOWER_STATUS_ON_NETWORK,
+                        true,
+                        Receivers.AllBuffered,
+                        _winningFaction);
+
+                    //Update UI
+                    TowerUINetworkController.CallChangeUIStatus(_winningFaction,_actionName);
+                }
+                else
+                {
+                    Debug.LogError("Faction name cannot be null");
+                }
+            }
+        }
+
+        /// <summary>
+        /// RPC used to alter the tower status on the network
+        /// </summary>
+        /// <param name="args"></param>
+        public override void ChangeTowerStatusOnNetwork(RpcArgs args)
+        {
+            if (!ReferenceEquals(args, null))
+            {
+                var factionName = args.GetNext<string>();
+                if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
+                {
+                    ApplyChangesToTowerEntity(factionName);
+                }
+                else
+                {
+                    Debug.LogError("Faction name is null or empty string");
+                }
+            }
+            else
+            {
+                Debug.LogError("Arguments array from the nwetwork is null.");
+            }
+        }
+
+        /// <summary>
+        /// This is an internal function used for changing attributes of the tower
+        /// after the capture and it is invoked by both owner e non owner of the entity
+        /// </summary>
+        protected void ApplyChangesToTowerEntity(string factionName)
+        {
+            if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
+            {
+                OwnerFaction = factionName;
+            }
+            else
+            {
+                Debug.LogError("Faction name is null or empty string. ");
+            }
+        }
+
+        public void RequestChangeTowerUI(string _actionName)
+        {
+            if (!ReferenceEquals(_actionName, null) && _actionName.Length > 0)
+            {
+            }
+            else Debug.LogError("Action name is null or empty");
         }
     }
 }

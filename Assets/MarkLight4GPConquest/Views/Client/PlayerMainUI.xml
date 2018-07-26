@@ -1,0 +1,8 @@
+<PlayerMainUI xmlns="MarkLight">
+  <UserInterface UIScaleMode = "ScaleWithScreenSize"
+                 ReferenceResolution = "1280,760"
+                 CanvasScaler.screenMatchMode="Expand">
+    <PlayerUI />
+  </UserInterface>
+  <EventSystem />
+</PlayerMainUI>
