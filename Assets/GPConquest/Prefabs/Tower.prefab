@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4184586925134814}
   - component: {fileID: 33430759127354056}
   - component: {fileID: 23345725255160902}
+  - component: {fileID: 114324954756025962}
   m_Layer: 0
   m_Name: fancy_tower
   m_TagString: Untagged
@@ -57,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 1817931817029528}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: -0.0000000041877577}
-  m_LocalScale: {x: 5, y: 5, z: 4.8387675}
+  m_LocalScale: {x: 3, y: 3, z: 2.838768}
   m_Children: []
   m_Father: {fileID: 4448855688724710}
   m_RootOrder: 0
@@ -176,8 +177,8 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1569749010823948}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -193,6 +194,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114324954756025962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817931817029528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114658291459291444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,4 +222,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OwnerFaction: 
   GPSCoords: {x: 0, y: 0}
-  PlayerCapturingTowerList: []

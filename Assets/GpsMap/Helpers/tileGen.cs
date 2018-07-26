@@ -54,7 +54,7 @@ public class tileGen : MonoBehaviour
     // Punto di partenza del gioco. La funzione Start() può essere una coroutine.
     public IEnumerator StartTiling()
     {
-        if (!DestinationController.networkObject.IsOwner)
+        if (!ReferenceEquals(DestinationController,null) && !DestinationController.networkObject.IsOwner)
             yield return null;
 
         Screen.sleepTimeout = (int)SleepTimeout.NeverSleep;
@@ -82,6 +82,7 @@ public class tileGen : MonoBehaviour
             /*
              * Move the destination controller on the network
              * **/
+             if(!ReferenceEquals(DestinationController, null))
             DestinationController.MovePlayerDestination(CalcPlayerPosition);
             Debug.Log("Calculated player position in the tile :"+CalcPlayerPosition);
             status = "no location service";
@@ -167,13 +168,14 @@ public class tileGen : MonoBehaviour
         /*
          * Move the destination controller on the network
          * **/
+         if(!ReferenceEquals(DestinationController, null))
         DestinationController.MovePlayerDestination(CalcPlayerPosition);
     }
 
     // checks if movement is greate than a single tile space, if so update the board
     void Update()
     {
-        if (!DestinationController.networkObject.IsOwner) return;
+        if (!ReferenceEquals(DestinationController, null) && !DestinationController.networkObject.IsOwner) return;
 
         if (canStartUpdate)
         {

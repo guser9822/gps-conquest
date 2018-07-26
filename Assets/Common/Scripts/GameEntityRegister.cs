@@ -63,6 +63,22 @@ namespace TC.Common
             }
             return result;
         }
+
+        public List<IRegistrable> GetAllEntity(Type _entityType)
+        {
+            List<IRegistrable> result = new List<IRegistrable>();
+            if (TypeRegisterMap.ContainsKey(_entityType))
+            {
+                var mapType = TypeRegisterMap[_entityType];
+                var entityList = mapType.Values.ToList<IRegistrable>();
+                result = entityList.Count > 0 ? entityList : result;
+            }
+            else
+            {
+                Debug.LogWarning("Type " + _entityType.ToString() + " not found in the types map");
+            }
+            return result;
+        }
     
         /*
          * Execute this code only in Editor mode, otherwise the application will be unstable

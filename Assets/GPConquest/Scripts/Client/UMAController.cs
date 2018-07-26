@@ -41,7 +41,8 @@ namespace TC.GPConquest.Player
         void Update()
         {
 
-            if (animator || (animator = GetComponent<Animator>()) && destinationTransform)
+            if (!ReferenceEquals(animator,null) || 
+                (animator = GetComponent<Animator>()) && !ReferenceEquals(destinationTransform,null))
             {
                 if (Vector3.Distance(destinationTransform.position, animator.rootPosition) > 5)
                 {
@@ -70,7 +71,7 @@ namespace TC.GPConquest.Player
             //TODO : To Find a better way to scale up the UMA's scale
             if (dimension == false)
             {
-                transform.localScale = new Vector3(25, 25, 25);
+                transform.localScale = new Vector3(1, 1, 1);
                 dimension = true;
             }
         }

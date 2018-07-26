@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9448878e2e40f1a4c9f8fd2b56832b13, type: 3}
+  m_Name: HumanFemale 12
+  m_EditorClassIdentifier: 
+  recipeType: Standard
+  DisplayValue: 
+  compatibleRaces: []
+  wardrobeRecipeThumbs: []
+  wardrobeSlot: None
+  Hides: []
+  suppressWardrobeSlots: []
+  activeWardrobeSet: []
+  MeshHideAssets: []
+  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"FemaleEyes","scale":100,"copyIdx":-1,"overlays":[{"id":"Eye
+    Overlay","colorIdx":6,"rect":[0,0,0,0],"data":[]},{"id":"Default Eye Adjust","colorIdx":2,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleEyelashfix","scale":100,"copyIdx":-1,"overlays":[{"id":"FemaleEyelash","colorIdx":7,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleInnerMouth","scale":100,"copyIdx":-1,"overlays":[{"id":"InnerMouth","colorIdx":8,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleHands","scale":100,"copyIdx":-1,"overlays":[{"id":"F_H_Bod","colorIdx":0,"rect":[0,0,0,0],"data":[]},{"id":"FemaleUnderwear01","colorIdx":3,"rect":[0,1024,2048,1024],"data":[]},{"id":"FemaleShirt02","colorIdx":4,"rect":[0,1024,2048,1024],"data":[]},{"id":"FemaleJeans01","colorIdx":5,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleFeet","scale":100,"copyIdx":3,"overlays":[]},{"id":"FemaleLegs","scale":100,"copyIdx":3,"overlays":[]},{"id":"FemaleTorso","scale":100,"copyIdx":3,"overlays":[]},{"id":"F_High
+    poly head","scale":100,"copyIdx":-1,"overlays":[{"id":"F_H_Head","colorIdx":0,"rect":[0,0,0,0],"data":[]}]},{"id":"F_High
+    poly Eyebrows","scale":100,"copyIdx":-1,"overlays":[{"id":"F_HighPoly_EyeBrow","colorIdx":1,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleLongHair01","scale":100,"copyIdx":-1,"overlays":[{"id":"FemaleLongHair01","colorIdx":1,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleLongHair01_Module","scale":100,"copyIdx":-1,"overlays":[{"id":"FemaleLongHair01_Module","colorIdx":1,"rect":[0,0,0,0],"data":[]}]}],"colors":[],"fColors":[{"name":"Skin","colors":[112,107,105,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Hair","colors":[203,147,67,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Eyes","colors":[255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Underwear","colors":[234,39,77,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Shirt","colors":[255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Pants","colors":[100,144,120,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[234,234,234,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[37,37,37,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[234,234,234,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]}],"sharedColorCount":6,"race":"HumanFemale","packedDna":[{"dnaType":"UMADnaHumanoid","dnaTypeHash":-212795365,"packedDna":"{\"height\":111,\"headSize\":130,\"headWidth\":112,\"neckThickness\":124,\"armLength\":130,\"forearmLength\":113,\"armWidth\":128,\"forearmWidth\":138,\"handsSize\":122,\"feetSize\":146,\"legSeparation\":137,\"upperMuscle\":134,\"lowerMuscle\":96,\"upperWeight\":147,\"lowerWeight\":110,\"legsSize\":142,\"belly\":181,\"waist\":151,\"gluteusSize\":167,\"earsSize\":114,\"earsPosition\":140,\"earsRotation\":111,\"noseSize\":110,\"noseCurve\":145,\"noseWidth\":144,\"noseInclination\":144,\"nosePosition\":114,\"nosePronounced\":110,\"noseFlatten\":144,\"chinSize\":122,\"chinPronounced\":143,\"chinPosition\":109,\"mandibleSize\":136,\"jawsSize\":128,\"jawsPosition\":128,\"cheekSize\":142,\"cheekPosition\":118,\"lowCheekPronounced\":116,\"lowCheekPosition\":141,\"foreheadSize\":124,\"foreheadPosition\":128,\"lipsSize\":141,\"mouthSize\":123,\"eyeRotation\":123,\"eyeSize\":124,\"breastSize\":161}"},{"dnaType":"UMADnaTutorial","dnaTypeHash":-1679007774,"packedDna":"{\"eyeSpacing\":128}"}],"wardrobeSet":[],"packedRecipeType":"Standard"}'

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9448878e2e40f1a4c9f8fd2b56832b13, type: 3}
+  m_Name: HumanFemale 6
+  m_EditorClassIdentifier: 
+  recipeType: Standard
+  DisplayValue: 
+  compatibleRaces: []
+  wardrobeRecipeThumbs: []
+  wardrobeSlot: None
+  Hides: []
+  suppressWardrobeSlots: []
+  activeWardrobeSet: []
+  MeshHideAssets: []
+  recipeString: '{"version":3,"packedSlotDataList":[],"slotsV2":[],"slotsV3":[{"id":"FemaleEyes","scale":100,"copyIdx":-1,"overlays":[{"id":"Eye
+    Overlay","colorIdx":5,"rect":[0,0,0,0],"data":[]},{"id":"Default Eye Adjust","colorIdx":2,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleEyelashfix","scale":100,"copyIdx":-1,"overlays":[{"id":"FemaleEyelash","colorIdx":6,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleInnerMouth","scale":100,"copyIdx":-1,"overlays":[{"id":"InnerMouth","colorIdx":7,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleHands","scale":100,"copyIdx":-1,"overlays":[{"id":"F_H_Bod","colorIdx":0,"rect":[0,0,0,0],"data":[]},{"id":"FemaleJeans01","colorIdx":4,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleFeet","scale":100,"copyIdx":3,"overlays":[]},{"id":"FemaleLegs","scale":100,"copyIdx":3,"overlays":[]},{"id":"FemaleTorso","scale":100,"copyIdx":3,"overlays":[]},{"id":"F_High
+    poly head","scale":100,"copyIdx":-1,"overlays":[{"id":"F_H_Head","colorIdx":0,"rect":[0,0,0,0],"data":[]}]},{"id":"F_High
+    poly Eyebrows","scale":100,"copyIdx":-1,"overlays":[{"id":"F_HighPoly_EyeBrow","colorIdx":1,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleTshirt01","scale":100,"copyIdx":-1,"overlays":[{"id":"FemaleTshirt01","colorIdx":3,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleLongHair01","scale":100,"copyIdx":-1,"overlays":[{"id":"FemaleLongHair01","colorIdx":1,"rect":[0,0,0,0],"data":[]}]},{"id":"FemaleLongHair01_Module","scale":100,"copyIdx":-1,"overlays":[{"id":"FemaleLongHair01_Module","colorIdx":1,"rect":[0,0,0,0],"data":[]}]}],"colors":[],"fColors":[{"name":"Skin","colors":[238,224,211,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Hair","colors":[83,39,0,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Eyes","colors":[255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Shirt","colors":[94,172,74,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"Pants","colors":[28,26,24,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[234,234,234,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[37,37,37,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]},{"name":"-","colors":[234,234,234,255,0,0,0,0,255,255,255,255,0,0,0,0,255,255,255,255,0,0,0,0]}],"sharedColorCount":5,"race":"HumanFemale","packedDna":[{"dnaType":"UMADnaHumanoid","dnaTypeHash":-212795365,"packedDna":"{\"height\":138,\"headSize\":127,\"headWidth\":128,\"neckThickness\":108,\"armLength\":130,\"forearmLength\":128,\"armWidth\":110,\"forearmWidth\":123,\"handsSize\":139,\"feetSize\":135,\"legSeparation\":143,\"upperMuscle\":101,\"lowerMuscle\":147,\"upperWeight\":93,\"lowerWeight\":122,\"legsSize\":103,\"belly\":192,\"waist\":126,\"gluteusSize\":175,\"earsSize\":120,\"earsPosition\":142,\"earsRotation\":134,\"noseSize\":110,\"noseCurve\":147,\"noseWidth\":122,\"noseInclination\":132,\"nosePosition\":128,\"nosePronounced\":130,\"noseFlatten\":110,\"chinSize\":109,\"chinPronounced\":111,\"chinPosition\":143,\"mandibleSize\":109,\"jawsSize\":125,\"jawsPosition\":124,\"cheekSize\":144,\"cheekPosition\":139,\"lowCheekPronounced\":110,\"lowCheekPosition\":125,\"foreheadSize\":146,\"foreheadPosition\":127,\"lipsSize\":126,\"mouthSize\":141,\"eyeRotation\":138,\"eyeSize\":136,\"breastSize\":141}"},{"dnaType":"UMADnaTutorial","dnaTypeHash":-1679007774,"packedDna":"{\"eyeSpacing\":128}"}],"wardrobeSet":[],"packedRecipeType":"Standard"}'

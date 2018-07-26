@@ -21,14 +21,14 @@ namespace Assets.Models
             _verts = verts;
         }
 
-        public GameObject CreateModel()
+        public GameObject CreateModel(Material _waterMaterial)
         {
             if (IsModelCreated)
                 return null;
 
             var m = new GameObject().AddComponent<WaterPolygon>();
             m.gameObject.transform.position = Center;
-            m.gameObject.GetComponent<Renderer>().material = Resources.Load("waterMaterial") as Material;
+            m.gameObject.GetComponent<Renderer>().material = /*Resources.Load("waterMaterial") as Material*/_waterMaterial;
             m.Initialize(_verts);
             IsModelCreated = true;
             return m.gameObject;

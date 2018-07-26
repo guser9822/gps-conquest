@@ -35,6 +35,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 						availableCallback = true;
 						obj = new ExampleProximityPlayerNetworkObject(networker, id, frame);
 						break;
+					case GameUINetworkEntityNetworkObject.IDENTITY:
+						availableCallback = true;
+						obj = new GameUINetworkEntityNetworkObject(networker, id, frame);
+						break;
 					case NetworkCameraNetworkObject.IDENTITY:
 						availableCallback = true;
 						obj = new NetworkCameraNetworkObject(networker, id, frame);
@@ -62,6 +66,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					case TowerEntityControllerNetworkObject.IDENTITY:
 						availableCallback = true;
 						obj = new TowerEntityControllerNetworkObject(networker, id, frame);
+						break;
+					case TowerUIEntityNetworkObject.IDENTITY:
+						availableCallback = true;
+						obj = new TowerUIEntityNetworkObject(networker, id, frame);
 						break;
 				}
 

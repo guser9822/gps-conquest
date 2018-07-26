@@ -1530,10 +1530,10 @@
     <xs:attribute name="IsDestroyed" type="xs:string" />
     <xs:attribute name="IsDynamic" type="xs:string" />
     <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
-    <xs:attribute name="EndDrag" type="xs:string" />
     <xs:attribute name="BeginDrag" type="xs:string" />
-    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
     <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
     <xs:attribute name="Cancel" type="xs:string" />
     <xs:attribute name="Deselect" type="xs:string" />
     <xs:attribute name="Drop" type="xs:string" />
@@ -2036,9 +2036,9 @@
     <xs:attribute name="IsDestroyed" type="xs:string" />
     <xs:attribute name="IsDynamic" type="xs:string" />
     <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="ItemDeselected" type="xs:string" />
     <xs:attribute name="ItemSelected" type="xs:string" />
     <xs:attribute name="ListChanged" type="xs:string" />
-    <xs:attribute name="ItemDeselected" type="xs:string" />
     <xs:attribute name="Cancel" type="xs:string" />
     <xs:attribute name="Deselect" type="xs:string" />
     <xs:attribute name="Drop" type="xs:string" />
@@ -5388,82 +5388,6 @@
     <xs:anyAttribute processContents="skip" />
   </xs:complexType>
 
-  <xs:element name="GenericPopUp" type="GenericPopUp" />
-  <xs:complexType name="GenericPopUp">
-    <xs:sequence>
-      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
-    </xs:sequence>
-    <xs:attribute name="Id" type="xs:string" />
-    <xs:attribute name="Style" type="xs:string" />
-    <xs:attribute name="BasedOn" type="xs:string" />
-    <xs:attribute name="Theme" type="xs:string" />
-    <xs:attribute name="BaseDirectory" type="xs:string" />
-    <xs:attribute name="UnitSize" type="xs:string" />
-    <xs:attribute name="LayoutRoot" type="xs:string" />
-    <xs:attribute name="IsInitialized" type="xs:string" />
-    <xs:attribute name="runInEditMode" type="xs:string" />
-    <xs:attribute name="GenericPopUpMessage" type="xs:string" />
-    <xs:attribute name="Width" type="xs:string" />
-    <xs:attribute name="Height" type="xs:string" />
-    <xs:attribute name="OverrideWidth" type="xs:string" />
-    <xs:attribute name="OverrideHeight" type="xs:string" />
-    <xs:attribute name="Alignment" type="EnumElementAlignment" />
-    <xs:attribute name="Margin" type="xs:string" />
-    <xs:attribute name="Offset" type="xs:string" />
-    <xs:attribute name="OffsetFromParent" type="xs:string" />
-    <xs:attribute name="Pivot" type="xs:string" />
-    <xs:attribute name="RaycastBlockMode" type="EnumRaycastBlockMode" />
-    <xs:attribute name="Alpha" type="xs:string" />
-    <xs:attribute name="IsVisible" type="xs:string" />
-    <xs:attribute name="SortIndex" type="xs:string" />
-    <xs:attribute name="UpdateRectTransform" type="xs:string" />
-    <xs:attribute name="UpdateBackground" type="xs:string" />
-    <xs:attribute name="BackgroundImageEventAlphaThreshold" type="xs:string" />
-    <xs:attribute name="BackgroundImageFillAmount" type="xs:string" />
-    <xs:attribute name="BackgroundImageFillCenter" type="xs:string" />
-    <xs:attribute name="BackgroundImageFillClockwise" type="xs:string" />
-    <xs:attribute name="BackgroundImageFillMethod" type="EnumFillMethod" />
-    <xs:attribute name="BackgroundImageFillOrigin" type="xs:string" />
-    <xs:attribute name="BackgroundImageOverrideSprite" type="xs:string" />
-    <xs:attribute name="BackgroundImagePreserveAspect" type="xs:string" />
-    <xs:attribute name="BackgroundImage" type="xs:string" />
-    <xs:attribute name="BackgroundImageType" type="EnumType" />
-    <xs:attribute name="BackgroundMaterial" type="xs:string" />
-    <xs:attribute name="BackgroundImageMaskable" type="xs:string" />
-    <xs:attribute name="BackgroundColor" type="xs:string" />
-    <xs:attribute name="State" type="xs:string" />
-    <xs:attribute name="IsActive" type="xs:string" />
-    <xs:attribute name="HideFlags" type="EnumHideFlags" />
-    <xs:attribute name="Position" type="xs:string" />
-    <xs:attribute name="Rotation" type="xs:string" />
-    <xs:attribute name="Scale" type="xs:string" />
-    <xs:attribute name="Item" type="xs:string" />
-    <xs:attribute name="IsTemplate" type="xs:string" />
-    <xs:attribute name="IsDestroyed" type="xs:string" />
-    <xs:attribute name="IsDynamic" type="xs:string" />
-    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
-    <xs:attribute name="Cancel" type="xs:string" />
-    <xs:attribute name="Deselect" type="xs:string" />
-    <xs:attribute name="Drop" type="xs:string" />
-    <xs:attribute name="Move" type="xs:string" />
-    <xs:attribute name="Click" type="xs:string" />
-    <xs:attribute name="BeginDrag" type="xs:string" />
-    <xs:attribute name="EndDrag" type="xs:string" />
-    <xs:attribute name="Drag" type="xs:string" />
-    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
-    <xs:attribute name="MouseDown" type="xs:string" />
-    <xs:attribute name="MouseEnter" type="xs:string" />
-    <xs:attribute name="MouseExit" type="xs:string" />
-    <xs:attribute name="MouseUp" type="xs:string" />
-    <xs:attribute name="Scroll" type="xs:string" />
-    <xs:attribute name="Select" type="xs:string" />
-    <xs:attribute name="Submit" type="xs:string" />
-    <xs:attribute name="UpdateSelected" type="xs:string" />
-    <xs:attribute name="Activated" type="xs:string" />
-    <xs:attribute name="Deactivated" type="xs:string" />
-    <xs:anyAttribute processContents="skip" />
-  </xs:complexType>
-
   <xs:element name="AvatorUI" type="AvatorUI" />
   <xs:complexType name="AvatorUI">
     <xs:sequence>
@@ -5478,6 +5402,7 @@
     <xs:attribute name="LayoutRoot" type="xs:string" />
     <xs:attribute name="IsInitialized" type="xs:string" />
     <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="UsernameText" type="xs:string" />
     <xs:attribute name="Width" type="xs:string" />
     <xs:attribute name="Height" type="xs:string" />
     <xs:attribute name="OverrideWidth" type="xs:string" />
@@ -5660,6 +5585,82 @@
     <xs:anyAttribute processContents="skip" />
   </xs:complexType>
 
+  <xs:element name="GenericPopUp" type="GenericPopUp" />
+  <xs:complexType name="GenericPopUp">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="LayoutRoot" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="GenericPopUpMessage" type="xs:string" />
+    <xs:attribute name="Width" type="xs:string" />
+    <xs:attribute name="Height" type="xs:string" />
+    <xs:attribute name="OverrideWidth" type="xs:string" />
+    <xs:attribute name="OverrideHeight" type="xs:string" />
+    <xs:attribute name="Alignment" type="EnumElementAlignment" />
+    <xs:attribute name="Margin" type="xs:string" />
+    <xs:attribute name="Offset" type="xs:string" />
+    <xs:attribute name="OffsetFromParent" type="xs:string" />
+    <xs:attribute name="Pivot" type="xs:string" />
+    <xs:attribute name="RaycastBlockMode" type="EnumRaycastBlockMode" />
+    <xs:attribute name="Alpha" type="xs:string" />
+    <xs:attribute name="IsVisible" type="xs:string" />
+    <xs:attribute name="SortIndex" type="xs:string" />
+    <xs:attribute name="UpdateRectTransform" type="xs:string" />
+    <xs:attribute name="UpdateBackground" type="xs:string" />
+    <xs:attribute name="BackgroundImageEventAlphaThreshold" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillAmount" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillCenter" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillClockwise" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillMethod" type="EnumFillMethod" />
+    <xs:attribute name="BackgroundImageFillOrigin" type="xs:string" />
+    <xs:attribute name="BackgroundImageOverrideSprite" type="xs:string" />
+    <xs:attribute name="BackgroundImagePreserveAspect" type="xs:string" />
+    <xs:attribute name="BackgroundImage" type="xs:string" />
+    <xs:attribute name="BackgroundImageType" type="EnumType" />
+    <xs:attribute name="BackgroundMaterial" type="xs:string" />
+    <xs:attribute name="BackgroundImageMaskable" type="xs:string" />
+    <xs:attribute name="BackgroundColor" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
   <xs:element name="LoginUI" type="LoginUI" />
   <xs:complexType name="LoginUI">
     <xs:sequence>
@@ -5748,6 +5749,81 @@
     <xs:attribute name="UnitSize" type="xs:string" />
     <xs:attribute name="IsInitialized" type="xs:string" />
     <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
+  <xs:element name="PlayerMenuWindow" type="PlayerMenuWindow" />
+  <xs:complexType name="PlayerMenuWindow">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="LayoutRoot" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="Width" type="xs:string" />
+    <xs:attribute name="Height" type="xs:string" />
+    <xs:attribute name="OverrideWidth" type="xs:string" />
+    <xs:attribute name="OverrideHeight" type="xs:string" />
+    <xs:attribute name="Alignment" type="EnumElementAlignment" />
+    <xs:attribute name="Margin" type="xs:string" />
+    <xs:attribute name="Offset" type="xs:string" />
+    <xs:attribute name="OffsetFromParent" type="xs:string" />
+    <xs:attribute name="Pivot" type="xs:string" />
+    <xs:attribute name="RaycastBlockMode" type="EnumRaycastBlockMode" />
+    <xs:attribute name="Alpha" type="xs:string" />
+    <xs:attribute name="IsVisible" type="xs:string" />
+    <xs:attribute name="SortIndex" type="xs:string" />
+    <xs:attribute name="UpdateRectTransform" type="xs:string" />
+    <xs:attribute name="UpdateBackground" type="xs:string" />
+    <xs:attribute name="BackgroundImageEventAlphaThreshold" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillAmount" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillCenter" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillClockwise" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillMethod" type="EnumFillMethod" />
+    <xs:attribute name="BackgroundImageFillOrigin" type="xs:string" />
+    <xs:attribute name="BackgroundImageOverrideSprite" type="xs:string" />
+    <xs:attribute name="BackgroundImagePreserveAspect" type="xs:string" />
+    <xs:attribute name="BackgroundImage" type="xs:string" />
+    <xs:attribute name="BackgroundImageType" type="EnumType" />
+    <xs:attribute name="BackgroundMaterial" type="xs:string" />
+    <xs:attribute name="BackgroundImageMaskable" type="xs:string" />
+    <xs:attribute name="BackgroundColor" type="xs:string" />
     <xs:attribute name="State" type="xs:string" />
     <xs:attribute name="IsActive" type="xs:string" />
     <xs:attribute name="HideFlags" type="EnumHideFlags" />
@@ -5981,6 +6057,127 @@
 
   <xs:element name="Register" type="Register" />
   <xs:complexType name="Register">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
+  <xs:element name="ServerAndClientUI" type="ServerAndClientUI" />
+  <xs:complexType name="ServerAndClientUI">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="LayoutRoot" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="Width" type="xs:string" />
+    <xs:attribute name="Height" type="xs:string" />
+    <xs:attribute name="OverrideWidth" type="xs:string" />
+    <xs:attribute name="OverrideHeight" type="xs:string" />
+    <xs:attribute name="Alignment" type="EnumElementAlignment" />
+    <xs:attribute name="Margin" type="xs:string" />
+    <xs:attribute name="Offset" type="xs:string" />
+    <xs:attribute name="OffsetFromParent" type="xs:string" />
+    <xs:attribute name="Pivot" type="xs:string" />
+    <xs:attribute name="RaycastBlockMode" type="EnumRaycastBlockMode" />
+    <xs:attribute name="Alpha" type="xs:string" />
+    <xs:attribute name="IsVisible" type="xs:string" />
+    <xs:attribute name="SortIndex" type="xs:string" />
+    <xs:attribute name="UpdateRectTransform" type="xs:string" />
+    <xs:attribute name="UpdateBackground" type="xs:string" />
+    <xs:attribute name="BackgroundImageEventAlphaThreshold" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillAmount" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillCenter" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillClockwise" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillMethod" type="EnumFillMethod" />
+    <xs:attribute name="BackgroundImageFillOrigin" type="xs:string" />
+    <xs:attribute name="BackgroundImageOverrideSprite" type="xs:string" />
+    <xs:attribute name="BackgroundImagePreserveAspect" type="xs:string" />
+    <xs:attribute name="BackgroundImage" type="xs:string" />
+    <xs:attribute name="BackgroundImageType" type="EnumType" />
+    <xs:attribute name="BackgroundMaterial" type="xs:string" />
+    <xs:attribute name="BackgroundImageMaskable" type="xs:string" />
+    <xs:attribute name="BackgroundColor" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
+  <xs:element name="ServerAndClient" type="ServerAndClient" />
+  <xs:complexType name="ServerAndClient">
     <xs:sequence>
       <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
@@ -6303,6 +6500,250 @@
 
   <xs:element name="Server" type="Server" />
   <xs:complexType name="Server">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
+  <xs:element name="TowerEntityUI" type="TowerEntityUI" />
+  <xs:complexType name="TowerEntityUI">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="LayoutRoot" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="TowerFaction" type="xs:string" />
+    <xs:attribute name="Width" type="xs:string" />
+    <xs:attribute name="Height" type="xs:string" />
+    <xs:attribute name="OverrideWidth" type="xs:string" />
+    <xs:attribute name="OverrideHeight" type="xs:string" />
+    <xs:attribute name="Alignment" type="EnumElementAlignment" />
+    <xs:attribute name="Margin" type="xs:string" />
+    <xs:attribute name="Offset" type="xs:string" />
+    <xs:attribute name="OffsetFromParent" type="xs:string" />
+    <xs:attribute name="Pivot" type="xs:string" />
+    <xs:attribute name="RaycastBlockMode" type="EnumRaycastBlockMode" />
+    <xs:attribute name="Alpha" type="xs:string" />
+    <xs:attribute name="IsVisible" type="xs:string" />
+    <xs:attribute name="SortIndex" type="xs:string" />
+    <xs:attribute name="UpdateRectTransform" type="xs:string" />
+    <xs:attribute name="UpdateBackground" type="xs:string" />
+    <xs:attribute name="BackgroundImageEventAlphaThreshold" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillAmount" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillCenter" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillClockwise" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillMethod" type="EnumFillMethod" />
+    <xs:attribute name="BackgroundImageFillOrigin" type="xs:string" />
+    <xs:attribute name="BackgroundImageOverrideSprite" type="xs:string" />
+    <xs:attribute name="BackgroundImagePreserveAspect" type="xs:string" />
+    <xs:attribute name="BackgroundImage" type="xs:string" />
+    <xs:attribute name="BackgroundImageType" type="EnumType" />
+    <xs:attribute name="BackgroundMaterial" type="xs:string" />
+    <xs:attribute name="BackgroundImageMaskable" type="xs:string" />
+    <xs:attribute name="BackgroundColor" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
+  <xs:element name="TowerEntity" type="TowerEntity" />
+  <xs:complexType name="TowerEntity">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
+  <xs:element name="TowerEntityGameUI" type="TowerEntityGameUI" />
+  <xs:complexType name="TowerEntityGameUI">
+    <xs:sequence>
+      <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Style" type="xs:string" />
+    <xs:attribute name="BasedOn" type="xs:string" />
+    <xs:attribute name="Theme" type="xs:string" />
+    <xs:attribute name="BaseDirectory" type="xs:string" />
+    <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="LayoutRoot" type="xs:string" />
+    <xs:attribute name="IsInitialized" type="xs:string" />
+    <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="TowerFaction" type="xs:string" />
+    <xs:attribute name="Width" type="xs:string" />
+    <xs:attribute name="Height" type="xs:string" />
+    <xs:attribute name="OverrideWidth" type="xs:string" />
+    <xs:attribute name="OverrideHeight" type="xs:string" />
+    <xs:attribute name="Alignment" type="EnumElementAlignment" />
+    <xs:attribute name="Margin" type="xs:string" />
+    <xs:attribute name="Offset" type="xs:string" />
+    <xs:attribute name="OffsetFromParent" type="xs:string" />
+    <xs:attribute name="Pivot" type="xs:string" />
+    <xs:attribute name="RaycastBlockMode" type="EnumRaycastBlockMode" />
+    <xs:attribute name="Alpha" type="xs:string" />
+    <xs:attribute name="IsVisible" type="xs:string" />
+    <xs:attribute name="SortIndex" type="xs:string" />
+    <xs:attribute name="UpdateRectTransform" type="xs:string" />
+    <xs:attribute name="UpdateBackground" type="xs:string" />
+    <xs:attribute name="BackgroundImageEventAlphaThreshold" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillAmount" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillCenter" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillClockwise" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillMethod" type="EnumFillMethod" />
+    <xs:attribute name="BackgroundImageFillOrigin" type="xs:string" />
+    <xs:attribute name="BackgroundImageOverrideSprite" type="xs:string" />
+    <xs:attribute name="BackgroundImagePreserveAspect" type="xs:string" />
+    <xs:attribute name="BackgroundImage" type="xs:string" />
+    <xs:attribute name="BackgroundImageType" type="EnumType" />
+    <xs:attribute name="BackgroundMaterial" type="xs:string" />
+    <xs:attribute name="BackgroundImageMaskable" type="xs:string" />
+    <xs:attribute name="BackgroundColor" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="IsActive" type="xs:string" />
+    <xs:attribute name="HideFlags" type="EnumHideFlags" />
+    <xs:attribute name="Position" type="xs:string" />
+    <xs:attribute name="Rotation" type="xs:string" />
+    <xs:attribute name="Scale" type="xs:string" />
+    <xs:attribute name="Item" type="xs:string" />
+    <xs:attribute name="IsTemplate" type="xs:string" />
+    <xs:attribute name="IsDestroyed" type="xs:string" />
+    <xs:attribute name="IsDynamic" type="xs:string" />
+    <xs:attribute name="PropagateChildLayoutChanges" type="xs:string" />
+    <xs:attribute name="Cancel" type="xs:string" />
+    <xs:attribute name="Deselect" type="xs:string" />
+    <xs:attribute name="Drop" type="xs:string" />
+    <xs:attribute name="Move" type="xs:string" />
+    <xs:attribute name="Click" type="xs:string" />
+    <xs:attribute name="BeginDrag" type="xs:string" />
+    <xs:attribute name="EndDrag" type="xs:string" />
+    <xs:attribute name="Drag" type="xs:string" />
+    <xs:attribute name="InitializePotentialDrag" type="xs:string" />
+    <xs:attribute name="MouseDown" type="xs:string" />
+    <xs:attribute name="MouseEnter" type="xs:string" />
+    <xs:attribute name="MouseExit" type="xs:string" />
+    <xs:attribute name="MouseUp" type="xs:string" />
+    <xs:attribute name="Scroll" type="xs:string" />
+    <xs:attribute name="Select" type="xs:string" />
+    <xs:attribute name="Submit" type="xs:string" />
+    <xs:attribute name="UpdateSelected" type="xs:string" />
+    <xs:attribute name="Activated" type="xs:string" />
+    <xs:attribute name="Deactivated" type="xs:string" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:complexType>
+
+  <xs:element name="TowerEntityMainUI" type="TowerEntityMainUI" />
+  <xs:complexType name="TowerEntityMainUI">
     <xs:sequence>
       <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>

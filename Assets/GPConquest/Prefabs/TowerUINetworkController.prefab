@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1874035569711360}
+  m_IsPrefabParent: 1
+--- !u!1 &1874035569711360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4763433866641322}
+  - component: {fileID: 114017459602536180}
+  m_Layer: 0
+  m_Name: TowerUINetworkController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4763433866641322
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1874035569711360}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 107.002686, y: 43.560272, z: 44.64624}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114017459602536180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1874035569711360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f25fdda85ca474a99628c790d11804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerUIPrefab: {fileID: 1708495202277576, guid: da8418bc30abf784eab4ce9164e30f5e,
+    type: 2}
+  TowerUIInstantiated: {fileID: 0}
+  TowerEntityGameUI: {fileID: 0}
+  TowerEffect: {fileID: 1387070498115022, guid: 6ea90e6ae7a799d4d9c67d228969902d,
+    type: 2}
+  InstantiatedTowerEffect: {fileID: 0}

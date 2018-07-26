@@ -1,0 +1,5 @@
+<AvatorMainUI xmlns="MarkLight">
+  <UserInterface RenderMode="WorldSpace">
+    <AvatorUI Scale="0.01" />
+  </UserInterface>
+</AvatorMainUI>

@@ -21,14 +21,14 @@ namespace Assets.Models
             _verts = verts;
         }
 
-        public GameObject CreateModel()
+        public GameObject CreateModel(Material _buildingMaterial)
         {
             if (IsModelCreated)
                 return null;
 
             var m = new GameObject().AddComponent<BuildingPolygon>();
             m.gameObject.transform.position = Center;
-            m.gameObject.GetComponent<Renderer>().material = Resources.Load("buildingMaterial") as Material;
+            m.gameObject.GetComponent<Renderer>().material = /*Resources.Load("buildingMaterial") as Material*/_buildingMaterial;
             m.Initialize(_verts);
             IsModelCreated = true;
             return m.gameObject;
