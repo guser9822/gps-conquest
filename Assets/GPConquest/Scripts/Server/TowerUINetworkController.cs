@@ -9,6 +9,7 @@ using System.Linq;
 using TC.Common;
 using MarkLight.Views;
 using TC.GPConquest.MarkLight4GPConquest.Server;
+using TC.GPConquest.Common;
 
 namespace TC.GPConquest.Server {
 
@@ -23,6 +24,23 @@ namespace TC.GPConquest.Server {
         [HideInInspector]
         public TowerEntityGameUI TowerEntityGameUI;
         private bool isServerProcess;
+        public GameObject TowerEffect;
+        [HideInInspector]
+        public GameObject InstantiatedTowerEffect;
+
+        //List of particle systems used for changing the color of the tower effect
+        protected List<ParticleSystem> TowerEffectParticleSystems;
+
+        //Keep in one place the color associated with each faction or actions like "capture of the tower"
+        public static readonly Dictionary<string, Color> ColorsDictionary =
+            new Dictionary<string, Color>()
+            {
+                { GameCommonNames.RED_FACTION,Color.red },
+                { GameCommonNames.GREEN_FACTION, Color.green},
+                { GameCommonNames.NO_FACTION, Color.cyan},
+                { TowerCaptureController.STARTUP_STATE, Color.cyan},
+                { TowerCaptureController.CAPTURE_IN_PROGRES, Color.yellow}
+            };
 
         private void Awake()
         {
@@ -36,8 +54,38 @@ namespace TC.GPConquest.Server {
             {
                 TowerUIInstantiated = Instantiate<GameObject>(TowerUIPrefab);
                 TowerEntityGameUI = TowerUIInstantiated.GetComponentInChildren<TowerEntityGameUI>();
+
+                InstantiatedTowerEffect = Instantiate(TowerEffect);
+                //Collects all the particle systems in order change the color of the tower effect
+                TowerEffectParticleSystems.Add(InstantiatedTowerEffect.GetComponent<ParticleSystem>());
+                TowerEffectParticleSystems.AddRange(InstantiatedTowerEffect.GetComponentsInChildren<ParticleSystem>());
+                SetTowerEffectColor(GameCommonNames.NO_FACTION);
             }
         }
+
+        /// <summary>
+        /// Given a string, picks the color used for the effect of the tower.
+        /// The string can be used for getting the faction color, or, for example
+        /// the color associated with the capture of the tower.
+        /// </summary>
+        /// <param name="_actionName"></param>
+        public void SetTowerEffectColor(string _actionName)
+        {
+            if (!ReferenceEquals(_actionName, null))
+            {
+                Color outColor;
+                ColorsDictionary.TryGetValue(_actionName, out outColor);
+                if (!ReferenceEquals(outColor, null))
+                {
+                    TowerEffectParticleSystems.ForEach(x => {
+                        var mainModule = x.main;
+                        mainModule.startColor = outColor;
+                    });
+                }
+            }
+            else Debug.LogError("Action given in input is null.");
+        }
+
 
         public void InitializeTowerUINetworkController(TowerEntityController _towerEntityController)
         {
@@ -62,13 +110,16 @@ namespace TC.GPConquest.Server {
             GameEntityRegister = _towerEntityController.GameEntityRegister;
             transform.SetParent(towerEntityTransf);
 
-            // Set Tower UI only for non owner process
+            // Set Tower UI only for non owner process (client of the player)
             if (!isServerProcess && !networkObject.IsOwner)
             {
                 TowerUIInstantiated.gameObject.transform.SetParent(this.gameObject.transform);
                 //Deactivates the EventSystem
                 var eventSystem = TowerUIInstantiated.GetComponentInChildren<EventSystem>();
                 eventSystem.gameObject.SetActive(false);
+
+                //set the towerEntity as the parent of tower effect
+                InstantiatedTowerEffect.transform.SetParent(_towerEntityController.transform);
             }
         }
 
@@ -89,7 +140,7 @@ namespace TC.GPConquest.Server {
             UpdateTowerUINetController(towerEntity);
         }
 
-        public void CallChangeUIStatus(string _factionName)
+        public void CallChangeUIStatus(string _factionName, string _actionName, Receivers _receivers)
         {
             if (!ReferenceEquals(_factionName, null) && _factionName.Length>0)
             {
@@ -98,7 +149,7 @@ namespace TC.GPConquest.Server {
                  */
                 networkObject.SendRpc(RPC_CHANGE_U_I_STATUS_ON_NETWORK,
                     true,
-                    Receivers.AllBuffered,
+                    _receivers,
                     _factionName);
             }
             else
@@ -116,9 +167,12 @@ namespace TC.GPConquest.Server {
                 if (!ReferenceEquals(args, null))
                 {
                     var factionName = args.GetNext<string>();
-                    if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
+                    var actionName = args.GetNext<string>();
+                    if (!ReferenceEquals(factionName, null) && factionName.Length > 0 &&
+                        !ReferenceEquals(actionName, null) && actionName.Length > 0)
                     {
                         TowerEntityGameUI.ChangeTowerUIStatus(factionName);
+                        SetTowerEffectColor(actionName);
                     }
                     else
                     {

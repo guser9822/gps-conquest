@@ -174,17 +174,18 @@ namespace TC.GPConquest.Server
          }
 
         /// <summary>
-        /// This function is called from outiside (e.g. TowerCaptureController) in order to 
-        /// change the state of the tower entity after the capure
+        /// This function is called from outside (e.g. TowerCaptureController) in order to 
+        /// change the state of the tower entity
         /// </summary>
         /// <param name="_winningFaction"></param>
-        public void ChangeTowerEntityStatusAfterCapure(string _winningFaction)
+        /// <param name="_actionName"></param>
+        public void ChangeTowerEntityStatus(string _winningFaction, string _actionName)
         {
             if (networkObject.IsOwner)
             {
                 if (!ReferenceEquals(_winningFaction, null))
                 {
-                    SetAttributesAfterCapture(_winningFaction);
+                    ApplyChangesToTowerEntity(_winningFaction);
 
                     //Update tower entities on network
                     networkObject.SendRpc(RPC_CHANGE_TOWER_STATUS_ON_NETWORK,
@@ -193,7 +194,9 @@ namespace TC.GPConquest.Server
                         _winningFaction);
 
                     //Update UI
-                    TowerUINetworkController.CallChangeUIStatus(_winningFaction);
+                    TowerUINetworkController.CallChangeUIStatus(_winningFaction,
+                        _actionName,
+                        Receivers.AllBuffered);
                 }
                 else
                 {
@@ -213,7 +216,7 @@ namespace TC.GPConquest.Server
                 var factionName = args.GetNext<string>();
                 if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
                 {
-                    SetAttributesAfterCapture(factionName);
+                    ApplyChangesToTowerEntity(factionName);
                 }
                 else
                 {
@@ -230,7 +233,7 @@ namespace TC.GPConquest.Server
         /// This is an internal function used for changing attributes of the tower
         /// after the capture and it is invoked by both owner e non owner of the entity
         /// </summary>
-        protected void SetAttributesAfterCapture(string factionName)
+        protected void ApplyChangesToTowerEntity(string factionName)
         {
             if (!ReferenceEquals(factionName, null) && factionName.Length > 0)
             {
@@ -240,6 +243,14 @@ namespace TC.GPConquest.Server
             {
                 Debug.LogError("Faction name is null or empty string. ");
             }
+        }
+
+        public void RequestChangeTowerUI(string _actionName)
+        {
+            if (!ReferenceEquals(_actionName, null) && _actionName.Length > 0)
+            {
+            }
+            else Debug.LogError("Action name is null or empty");
         }
     }
 }

@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"string\", \"string\"][\"string\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"_playerName\", \"_selectedUma\"][\"_actionName\"]]")]
+	[GeneratedRPC("{\"types\":[[\"string\", \"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"_playerName\", \"_selectedUma\"]]")]
 	public abstract partial class PlayerDestinationControllerBehavior : NetworkBehavior
 	{
 		public const byte RPC_INIT_NET_DESTINATION = 0 + 5;
-		public const byte RPC_UPDATE_OUTLINE_COLOR_ON_NETWORK = 1 + 5;
 		
 		public PlayerDestinationControllerNetworkObject networkObject = null;
 
@@ -24,7 +23,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 			base.SetupHelperRpcs(networkObject);
 			networkObject.RegisterRpc("InitNetDestination", InitNetDestination, typeof(string), typeof(string));
-			networkObject.RegisterRpc("UpdateOutlineColorOnNetwork", UpdateOutlineColorOnNetwork, typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -105,11 +103,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// string _selectedUma
 		/// </summary>
 		public abstract void InitNetDestination(RpcArgs args);
-		/// <summary>
-		/// Arguments:
-		/// string _actionName
-		/// </summary>
-		public abstract void UpdateOutlineColorOnNetwork(RpcArgs args);
 
 		// DO NOT TOUCH, THIS GETS GENERATED PLEASE EXTEND THIS CLASS IF YOU WISH TO HAVE CUSTOM CODE ADDITIONS
 	}

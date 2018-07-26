@@ -54,3 +54,7 @@ MonoBehaviour:
   TowerUIPrefab: {fileID: 1708495202277576, guid: da8418bc30abf784eab4ce9164e30f5e,
     type: 2}
   TowerUIInstantiated: {fileID: 0}
+  TowerEntityGameUI: {fileID: 0}
+  TowerEffect: {fileID: 1387070498115022, guid: 6ea90e6ae7a799d4d9c67d228969902d,
+    type: 2}
+  InstantiatedTowerEffect: {fileID: 0}

@@ -14,14 +14,12 @@ namespace TC.GPConquest.Server
     public class TowerCaptureController : TowerCaptureNetworkControllerBehavior,ISerializationCallbackReceiver
     {
         public TowerEntityController TowerEntityController { get; set; }
-        private string WinningOrNoFaction;//used only by the owner of the tower to contain the winning faction or the NO_FACTION name
+        private string WinningOrNoFaction = GameCommonNames.NO_FACTION;//used only by the owner of the tower to contain the winning faction or the NO_FACTION name
 
         public static readonly string CAPTURE_IN_PROGRES = "CAPTURE_IN_PROGRESS";
         public static readonly string CAPTURED_BY_FACTION = "CAPTURED_BY_FACTION";
         public static readonly string STARTUP_STATE = "INITIAL_STATE";
-
-        public string CurrentCaptureState;
-
+        protected string CurrentTowerPhase = STARTUP_STATE;
         //Times expressed in seconds
         private struct TIMES
         {
@@ -49,7 +47,6 @@ namespace TC.GPConquest.Server
 
         void Awake()
         {
-            CurrentCaptureState = STARTUP_STATE;
             WinningOrNoFaction = GameCommonNames.NO_FACTION;
             FactionsConquestTime = InitializeFactionsConquestTime(FactionsConquestTime);
         }
@@ -74,8 +71,12 @@ namespace TC.GPConquest.Server
                 {
                     UPDATE_NETWORK_TOWERS_TIME_PASSED += Time.deltaTime;
 
-                    //Change the Towers colors when the capture start
-                    CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, CAPTURE_IN_PROGRES);
+                    //This check and thi call is used eto update just one the color of the tower effect
+                    if (!CurrentTowerPhase.Equals(CAPTURE_IN_PROGRES))
+                    {
+                        CurrentTowerPhase = CAPTURE_IN_PROGRES;
+                        NotifyChangeInTower(TowerEntityController, WinningOrNoFaction, CurrentTowerPhase);
+                    }
 
                     //Count the time spent by each player during the capture
                     PlayersCaptureTimeTable = PlayersCapturingCounter(PlayersCaptureTimeTable);
@@ -95,30 +96,25 @@ namespace TC.GPConquest.Server
                     if (IsCaptured)
                     {
                         WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED = TIMES.WAITING_TIME_BEFORE_NEXT_CAPTURE;
-                        //Sets the winner
-                        NotifyCaptured(TowerEntityController, WinningOrNoFaction);
-
-                        //Change the Towers colors when a faction captured the tower
-                        CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, WinningOrNoFaction);
+                        CurrentTowerPhase = CAPTURED_BY_FACTION;
+                        //Sets the winner : update the faction name and the color of the tower effect
+                        //NOTE : the TowerUINetworkController have an internal dictionary that ,for each faction, have the corresponding color
+                        NotifyChangeInTower(TowerEntityController, WinningOrNoFaction, WinningOrNoFaction);
                     }
 
-                }
-                else if (PlayersCaptureTimeTable.Count <= 0) {
-                    //Change the Towers colors when the capture is suspended by the players
-                    CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, CurrentCaptureState);
                 }
 
                 //If the tower have been captured, starts the countdown in order to reactivate the capture game
                 if (IsCaptured)
                 {
                     WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED -= Time.deltaTime;
-
                     //If the timer gets azzerated, reactivates the capture game
                     if (WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED <= 0.0f)
                     {
                         IsCaptured = false;
-                        //Change the Towers colors when it's time to restart the capture of the tower
-                        CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, CurrentCaptureState);
+                        CurrentTowerPhase = STARTUP_STATE;
+                        //Activate the tower capture game, but keep the tower faction and that faction color
+                        NotifyChangeInTower(TowerEntityController, WinningOrNoFaction, WinningOrNoFaction);
                     }
                 }
 
@@ -126,51 +122,18 @@ namespace TC.GPConquest.Server
         }
 
         /// <summary>
-        /// This function requires an update of the color of the towers
-        /// for each destination controller object on owner process. Since 
-        /// this function is going to call an RPC, it checks if the next 
-        /// state is different from the previuous one, in order to avoid 
-        /// useless calls.
-        /// </summary>
-        /// <param name="_playersCaptureTimeTable"></param>
-        /// <param name="_currentState"></param>
-        /// <param name="_nextState"></param>
-        /// <returns>The updated capture status</returns>
-        public string CallColorUpdateForTowersPlayer(Dictionary<DestinationController, double> _playersCaptureTimeTable,
-            string _currentState,
-            string _nextState)
-        {
-            if (!_currentState.Equals(_nextState))
-            {
-                _currentState = _nextState;
-                var gameRegister = TowerEntityController.GameEntityRegister;
-                var onlinePlayerList = gameRegister.GetAllEntity(typeof(DestinationController));
-
-                if (onlinePlayerList.Count > 0)
-                {
-                    onlinePlayerList.ForEach(x =>
-                    {
-                        var player = (DestinationController)x;
-                        //Request an update of the color only for owners of the destination controller object
-                        player.RequestColorUpdate(_nextState, Receivers.Owner);
-                    });
-                }
-
-            }
-            return _currentState;
-        }
-
-        /// <summary>
-        /// Set the winning faction on the TowerEntityController for both Owner/Non-Owners
+        /// Notify the tower entity to change it's state
         /// </summary>
         /// <param name="_towerEntityController"></param>
         /// <param name="_winner"></param>
-        protected void NotifyCaptured(TowerEntityController _towerEntityController, string _winner)
+        /// <param name="_actionName"></param>
+        protected void NotifyChangeInTower(TowerEntityController _towerEntityController, string _winner, string _actionName)
         {
             if (!ReferenceEquals(_towerEntityController, null) && 
-                !ReferenceEquals(_winner, null))
+                !ReferenceEquals(_winner, null) &&
+                !ReferenceEquals(_actionName,null))
             {
-                _towerEntityController.ChangeTowerEntityStatusAfterCapure(_winner);
+                _towerEntityController.ChangeTowerEntityStatus(_winner,_actionName);
             }
             else Debug.LogWarning("Winner faction or tower entity are null");
         }
