@@ -29,7 +29,7 @@ namespace TC.GPConquest.Server {
         public GameObject InstantiatedTowerEffect;
 
         //List of particle systems used for changing the color of the tower effect
-        protected List<ParticleSystem> TowerEffectParticleSystems;
+        protected List<ParticleSystem> TowerEffectParticleSystems = new List<ParticleSystem>();
 
         //Keep in one place the color associated with each faction or actions like "capture of the tower"
         public static readonly Dictionary<string, Color> ColorsDictionary =
