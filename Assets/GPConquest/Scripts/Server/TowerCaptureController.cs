@@ -74,15 +74,10 @@ namespace TC.GPConquest.Server
                 {
                     UPDATE_NETWORK_TOWERS_TIME_PASSED += Time.deltaTime;
 
-                    //Change the brightness color of the tower for each player, but only if it's the first time
-                    //since we are going to call RPC's for each player on non owners process.
-                    if (!CurrentCaptureState.Equals(CAPTURE_IN_PROGRES))
-                    {
-                        CurrentCaptureState = CAPTURE_IN_PROGRES;
-                        var _playersCaptureTimeTable = PlayersCaptureTimeTable.ToList();
-                        CallColorUpdateForTowersPlayer(_playersCaptureTimeTable, CurrentCaptureState);
-                    }
+                    //Change the Towers colors when the capture start
+                    CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, CAPTURE_IN_PROGRES);
 
+                    //Count the time spent by each player during the capture
                     PlayersCaptureTimeTable = PlayersCapturingCounter(PlayersCaptureTimeTable);
                     if (UPDATE_NETWORK_TOWERS_TIME_PASSED >= TIMES.UPDATE_NETWORK_CAPT_CONTROLLERS_TIME)
                     {
@@ -91,7 +86,9 @@ namespace TC.GPConquest.Server
                         CaptureInfoList = SendCaptureInfoOverTheNetwork(CaptureInfoList);
                         UPDATE_NETWORK_TOWERS_TIME_PASSED = 0D;
                     }
+                    //Sums the time spent by players for each faction
                     FactionsConquestTime = FactionsCapturingCounter(FactionsConquestTime, PlayersCaptureTimeTable);
+                    //Checks if one faction reached the winning time
                     IsCaptured = CheckWinningConditions(FactionsConquestTime, PlayersCaptureTimeTable, WinningOrNoFaction);
 
                     //If the tower have been captured, sets a timer that blocks the capture game untill it's value will be 0
@@ -99,23 +96,30 @@ namespace TC.GPConquest.Server
                     {
                         WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED = TIMES.WAITING_TIME_BEFORE_NEXT_CAPTURE;
                         //Sets the winner
-                        //TowerEntityController.OwnerFaction = WinningOrNoFaction;
                         NotifyCaptured(TowerEntityController, WinningOrNoFaction);
+
+                        //Change the Towers colors when a faction captured the tower
+                        CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, WinningOrNoFaction);
                     }
 
                 }
-                else if(PlayersCaptureTimeTable.Count <= 0) CurrentCaptureState = STARTUP_STATE;
+                else if (PlayersCaptureTimeTable.Count <= 0) {
+                    //Change the Towers colors when the capture is suspended by the players
+                    CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, STARTUP_STATE);
+                }
 
                 //If the tower have been captured, starts the countdown in order to reactivate the capture game
                 if (IsCaptured)
                 {
                     WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED -= Time.deltaTime;
-                    CurrentCaptureState = CAPTURED_BY_FACTION;
+
                     //If the timer gets azzerated, reactivates the capture game
                     if (WAITING_TIME_BEFORE_NEXT_CAPTURE_PASSED <= 0.0f)
                     {
                         IsCaptured = false;
-                        CurrentCaptureState = STARTUP_STATE;
+
+                        //Change the Towers colors when it's time to restart the capture of the tower
+                        CurrentCaptureState = CallColorUpdateForTowersPlayer(PlayersCaptureTimeTable, CurrentCaptureState, STARTUP_STATE);
                     }
                 }
 
@@ -123,32 +127,38 @@ namespace TC.GPConquest.Server
         }
 
         /// <summary>
-        /// This function request an update of the color of the towers
-        /// for each player on non owner process.
+        /// This function requires an update of the color of the towers
+        /// for each destination controller object on owner process. Since 
+        /// this function is going to call an RPC, it checks if the next 
+        /// state is different from the previuous one, in order to avoid 
+        /// useless calls.
         /// </summary>
-        public void CallColorUpdateForTowersPlayer(List<KeyValuePair<DestinationController, double>> _playersCaptureTimeTable,
-            string _actionForColor)
+        /// <param name="_playersCaptureTimeTable"></param>
+        /// <param name="_currentState"></param>
+        /// <param name="_nextState"></param>
+        /// <returns>The updated capture status</returns>
+        public string CallColorUpdateForTowersPlayer(Dictionary<DestinationController, double> _playersCaptureTimeTable,
+            string _currentState,
+            string _nextState)
         {
-            if (_playersCaptureTimeTable.Count > 0)
+            if (!_currentState.Equals(_nextState))
             {
-                _playersCaptureTimeTable.ForEach(x =>
-                {
-                    var player = x.Key;
-                    //check if the player is still online and active
-                    var gameEntities = TowerEntityController.GameEntityRegister;
-                    if (!ReferenceEquals(player, null) &&
-                            !ReferenceEquals(gameEntities.FindEntity(typeof(DestinationController), player.networkObject.NetworkId), null))
-                    {
-                        //CALL method for changing color on destination
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Null player in the players/times table");
-                        CheckForCapture(player, false);
-                    }
+                _currentState = _nextState;
+                var gameRegister = TowerEntityController.GameEntityRegister;
+                var onlinePlayerList = gameRegister.GetAllEntity(typeof(DestinationController));
 
-                });
+                if (onlinePlayerList.Count > 0)
+                {
+                    onlinePlayerList.ForEach(x =>
+                    {
+                        var player = (DestinationController)x;
+                        //Request an update of the color only for owners of the destination controller object
+                        player.RequestColorUpdate(_nextState, Receivers.Owner);
+                    });
+                }
+
             }
+            return _currentState;
         }
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace TC.GPConquest.Player
         public Camera DestinationCamera;
         protected tileGen TileGen;
         public GameEntityRegister GameEntityRegister { get; private set; }
-        [HideInInspector]
+        //[HideInInspector]
         public OutlineTowerColorController OutlineTowerColorController;
         #endregion
 
@@ -308,6 +308,43 @@ namespace TC.GPConquest.Player
         public uint GetUniqueKey()
         {
             return networkObject.NetworkId;
+        }
+
+        /// <summary>
+        /// This function is called externally by TowerCaptureController in order to
+        /// request an update of the colors of the towers through an RPC called
+        /// specifically on the Owner of the this destination controller.
+        /// </summary>
+        /// <param name="_actionColor"></param>
+        public void RequestColorUpdate(string _actionColor, Receivers _receivers)
+        {
+            if (!ReferenceEquals(_actionColor, null) && _actionColor.Length > 0)
+            {
+                networkObject.SendRpc(RPC_UPDATE_OUTLINE_COLOR_ON_NETWORK,
+                    true,
+                    _receivers,
+                    _actionColor);
+            }
+            else Debug.LogError("Action is null or empty. ");
+        }
+
+        /// <summary>
+        /// This RPC is used in order to ask to the OutlineTowerColorController
+        /// to change the color for the outline component.
+        /// </summary>
+        /// <param name="args"></param>
+        public override void UpdateOutlineColorOnNetwork(RpcArgs args)
+        {
+            if (!ReferenceEquals(args, null))
+            {
+                var _actionName = args.GetNext<string>();
+                if (!ReferenceEquals(_actionName, null) && _actionName.Length > 0)
+                {
+                    OutlineTowerColorController.SetOutlineColor(_actionName);
+                }
+                else Debug.LogError("Action name is null or empty. ");
+            }
+            else Debug.LogError("Network arguments are null");
         }
     }
 

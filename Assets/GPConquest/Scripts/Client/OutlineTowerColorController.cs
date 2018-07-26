@@ -28,6 +28,7 @@ namespace TC.GPConquest.Player {
         private void Awake()
         {
             OutLineEffect = GetComponent<OutlineEffect>();
+            OutLineEffect.lineColor0 = ColorsDictionary[GameCommonNames.NO_FACTION];
         }
 
         // Use this for initialization
@@ -42,6 +43,13 @@ namespace TC.GPConquest.Player {
 
         }
 
+        /// <summary>
+        /// This function is used for changing the outline color.
+        /// Since that if you keep chaning color (e.g. in Update fuction),
+        /// the outline component doesn't work anymore, we cache (PreviousSelectedAction)
+        /// the previuous selection in order to avoid repeating changes.
+        /// </summary>
+        /// <param name="_actionName"></param>
         public void SetOutlineColor(string _actionName)
         {
             if (!ReferenceEquals(_actionName, null))
@@ -49,6 +57,7 @@ namespace TC.GPConquest.Player {
 
                 if (!PreviousSelectedAction.Equals(_actionName))
                 {
+                    PreviousSelectedAction = _actionName;
                     Color outColor;
                     ColorsDictionary.TryGetValue(_actionName, out outColor);
                     if (!ReferenceEquals(outColor, null))
