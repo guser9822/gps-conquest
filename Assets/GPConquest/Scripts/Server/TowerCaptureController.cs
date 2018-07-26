@@ -123,7 +123,7 @@ namespace TC.GPConquest.Server
         }
 
         /// <summary>
-        /// This function just call an update of the color of the towers
+        /// This function request an update of the color of the towers
         /// for each player on non owner process.
         /// </summary>
         public void CallColorUpdateForTowersPlayer(List<KeyValuePair<DestinationController, double>> _playersCaptureTimeTable,

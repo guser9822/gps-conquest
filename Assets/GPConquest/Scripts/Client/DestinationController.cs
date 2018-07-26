@@ -22,6 +22,8 @@ namespace TC.GPConquest.Player
         public Camera DestinationCamera;
         protected tileGen TileGen;
         public GameEntityRegister GameEntityRegister { get; private set; }
+        [HideInInspector]
+        public OutlineTowerColorController OutlineTowerColorController;
         #endregion
 
         #region Attributes dedicated to the avator
@@ -148,6 +150,9 @@ namespace TC.GPConquest.Player
 
             //Register the callback for deleting the Destination controller from the register when it will disconnect
             networkObject.onDestroy += NetworkObject_onDestroyRemoveFromRegister;
+
+            //Find the OutlineColor controller
+            OutlineTowerColorController = DestinationCamera.gameObject.GetComponent<OutlineTowerColorController>();
         }
 
         //Sets up values for the destination controller based on isGiantMode value
@@ -167,7 +172,7 @@ namespace TC.GPConquest.Player
             //Sets up the camera attributes
             DestinationCamera.gameObject.GetComponent<Transform>().position = _cameraPosition;
             DestinationCamera.gameObject.GetComponent<Transform>().rotation = _cameraRotation;
-
+        
             //Sets up cursor attributes
             networkObject.destCursorSpeed = _cursorSpeed;
             networkObject.destCursorDims = _cursorDimensions;
