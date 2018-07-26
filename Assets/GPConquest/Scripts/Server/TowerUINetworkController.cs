@@ -140,16 +140,23 @@ namespace TC.GPConquest.Server {
             UpdateTowerUINetController(towerEntity);
         }
 
-        public void CallChangeUIStatus(string _factionName, string _actionName, Receivers _receivers)
+        /// <summary>
+        /// This method updates the Tower UI and visual effect of the towers on non 
+        /// owners processes (on players client) using an RPC.
+        /// </summary>
+        /// <param name="_factionName"></param>
+        /// <param name="_actionName"></param>
+        public void CallChangeUIStatus(string _factionName, string _actionName)
         {
-            if (!ReferenceEquals(_factionName, null) && _factionName.Length>0)
+            if (!ReferenceEquals(_factionName, null) && _factionName.Length>0 &&
+                !ReferenceEquals(_actionName, null) && _actionName.Length > 0)
             {
                 /*Call an RPC in order to update TowerUIController on the network
                  * since, on the server process, there's no UI prefab instantiated
                  */
                 networkObject.SendRpc(RPC_CHANGE_U_I_STATUS_ON_NETWORK,
                     true,
-                    _receivers,
+                    Receivers.AllBuffered,
                     _factionName);
             }
             else
@@ -158,6 +165,10 @@ namespace TC.GPConquest.Server {
             }
         }
 
+        /// <summary>
+        /// RPC used by CallChangeUIStatus for changing Towers state on the network.
+        /// </summary>
+        /// <param name="args"></param>
         public override void ChangeUIStatusOnNetwork(RpcArgs args)
         {
             //this if statement is just for fortify the assertion that this code must be executed only on non owner process

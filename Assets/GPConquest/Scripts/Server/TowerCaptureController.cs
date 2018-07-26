@@ -71,7 +71,7 @@ namespace TC.GPConquest.Server
                 {
                     UPDATE_NETWORK_TOWERS_TIME_PASSED += Time.deltaTime;
 
-                    //This check and thi call is used eto update just one the color of the tower effect
+                    //This check and this call are used to update just once the color of the tower effect
                     if (!CurrentTowerPhase.Equals(CAPTURE_IN_PROGRES))
                     {
                         CurrentTowerPhase = CAPTURE_IN_PROGRES;

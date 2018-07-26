@@ -183,7 +183,8 @@ namespace TC.GPConquest.Server
         {
             if (networkObject.IsOwner)
             {
-                if (!ReferenceEquals(_winningFaction, null))
+                if (!ReferenceEquals(_winningFaction, null) && 
+                    !ReferenceEquals(_actionName, null))
                 {
                     ApplyChangesToTowerEntity(_winningFaction);
 
@@ -194,9 +195,7 @@ namespace TC.GPConquest.Server
                         _winningFaction);
 
                     //Update UI
-                    TowerUINetworkController.CallChangeUIStatus(_winningFaction,
-                        _actionName,
-                        Receivers.AllBuffered);
+                    TowerUINetworkController.CallChangeUIStatus(_winningFaction,_actionName);
                 }
                 else
                 {
