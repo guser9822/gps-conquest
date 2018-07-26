@@ -116,9 +116,9 @@ namespace TC.GPConquest.Server {
                 //Deactivates the EventSystem
                 var eventSystem = TowerUIInstantiated.GetComponentInChildren<EventSystem>();
                 eventSystem.gameObject.SetActive(false);
-
                 //set the towerEntity as the parent of tower effect
-                InstantiatedTowerEffect.transform.SetParent(_towerEntityController.transform);
+                InstantiatedTowerEffect.transform.SetParent(TowerEntityController.transform);
+                InstantiatedTowerEffect.transform.localPosition = Vector3.zero;
             }
         }
 
@@ -128,6 +128,10 @@ namespace TC.GPConquest.Server {
             networkObject.Destroy();
         }
 
+        /// <summary>
+        /// RPC used for update the tower ui network controller on the network
+        /// </summary>
+        /// <param name="args"></param>
         public override void UpdateTowerUINetControllerOnNetwork(RpcArgs args)
         {
             var towerEntityID = args.GetNext<uint>();
@@ -197,5 +201,6 @@ namespace TC.GPConquest.Server {
                 }
             }
         }
+
     }
 }

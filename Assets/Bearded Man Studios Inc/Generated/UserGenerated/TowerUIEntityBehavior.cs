@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"uint\"][\"string\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"_towerEntityID\"][\"_factionName\"]]")]
+	[GeneratedRPC("{\"types\":[[\"uint\"][\"string\", \"string\"]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[\"_towerEntityID\"][\"_factionName\", \"_actionName\"]]")]
 	public abstract partial class TowerUIEntityBehavior : NetworkBehavior
 	{
 		public const byte RPC_UPDATE_TOWER_U_I_NET_CONTROLLER_ON_NETWORK = 0 + 5;
@@ -24,7 +24,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 			base.SetupHelperRpcs(networkObject);
 			networkObject.RegisterRpc("UpdateTowerUINetControllerOnNetwork", UpdateTowerUINetControllerOnNetwork, typeof(uint));
-			networkObject.RegisterRpc("ChangeUIStatusOnNetwork", ChangeUIStatusOnNetwork, typeof(string));
+			networkObject.RegisterRpc("ChangeUIStatusOnNetwork", ChangeUIStatusOnNetwork, typeof(string), typeof(string));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -107,6 +107,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		/// <summary>
 		/// Arguments:
 		/// string _factionName
+		/// string _actionName
 		/// </summary>
 		public abstract void ChangeUIStatusOnNetwork(RpcArgs args);
 
