@@ -27,6 +27,8 @@ namespace TC.GPConquest.Player
         public GameUINetworkController GameUINetworkController;
         [HideInInspector]
         public AvatorController AvatorControllerReference;
+        [HideInInspector]
+        public GameEntityRegister GameEntityRegister;
 
         private void Awake()
         {
@@ -100,6 +102,8 @@ namespace TC.GPConquest.Player
             var _parentTransform = AvatorControllerReference.gameObject.GetComponent<Transform>();
             transform.SetParent(_parentTransform);
 
+            //Get the GameEntityRegister 
+            GameEntityRegister = _avatorControllerReference.GameEntityRegister;
             return true;
         }
 
