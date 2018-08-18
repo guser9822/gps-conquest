@@ -72,8 +72,11 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
                     var nearestTower = FindNearestTower(GameEntityRegister);
                     if (!ReferenceEquals(nearestTower, null))
                     {
-                        CompassGameObject.LookAt(nearestTower.transform);
-                        CompassItem.LookAt(nearestTower.transform);
+                        var nearesTTowerTransform = nearestTower.transform;
+
+                        CompassGameObject.LookAt(nearesTTowerTransform);
+                        CompassItem.LookAt(nearesTTowerTransform);
+
                     }
 
                 }
@@ -81,6 +84,13 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
             }
         }
 
+        //TODO : This function must be moved somewhere else
+        /// <summary>
+        /// Find the nerest tower to the Player position that is not captured
+        /// by no faction
+        /// </summary>
+        /// <param name="_gameEntityRegister"></param>
+        /// <returns>The nearest tower entity controller found</returns>
         protected TowerEntityController FindNearestTower(GameEntityRegister _gameEntityRegister)
         {
             TowerEntityController res = null;
@@ -89,7 +99,7 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
                 var allTowersReg = _gameEntityRegister.GetAllEntity(typeof(TowerEntityController));
                 var allTowers = allTowersReg.Cast<TowerEntityController>();
 
-                res = allTowers.
+                res = allTowers.Where<TowerEntityController>(x => !x.IsTowerCaptured()).
                     OrderBy<TowerEntityController, double>(x => Vector3.Distance(transform.position, x.transform.position)).
                     FirstOrDefault<TowerEntityController>();
             }
