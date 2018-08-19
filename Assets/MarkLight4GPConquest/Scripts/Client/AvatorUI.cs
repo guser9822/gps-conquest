@@ -7,6 +7,7 @@ using TC.GPConquest.Player;
 using MarkLight;
 using TC.Common;
 using TC.GPConquest.Server;
+using TC.Common.Helper;
 
 namespace TC.GPConquest.MarkLight4GPConquest.Player
 {
@@ -27,6 +28,10 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
         protected Transform CompassGameObject;//Game object used for the rotation of the compass
         protected Transform CompassItem;// model of the compass
         protected GameEntityRegister GameEntityRegister;
+
+        #region AVATOR_UI SETTINGS
+        public int HIDE_DISTANCE_COMPASS = 5;
+        #endregion
 
         public override void Initialize()
         {
@@ -69,44 +74,32 @@ namespace TC.GPConquest.MarkLight4GPConquest.Player
 
                 if (IsCompassOwner)
                 {
-                    var nearestTower = FindNearestTower(GameEntityRegister);
-                    if (!ReferenceEquals(nearestTower, null))
-                    {
-                        var nearesTTowerTransform = nearestTower.transform;
-
-                        CompassGameObject.LookAt(nearesTTowerTransform);
-                        CompassItem.LookAt(nearesTTowerTransform);
-
-                    }
-
+                    AdjustCompassDirection();
                 }
 
             }
         }
 
-        //TODO : This function must be moved somewhere else
         /// <summary>
-        /// Find the nerest tower to the Player position that is not captured
-        /// by no faction
+        /// Make the compass point in the right direction. If the player is too near the nearest tower, deactivae it
         /// </summary>
-        /// <param name="_gameEntityRegister"></param>
-        /// <returns>The nearest tower entity controller found</returns>
-        protected TowerEntityController FindNearestTower(GameEntityRegister _gameEntityRegister)
-        {
-            TowerEntityController res = null;
-            if (!ReferenceEquals(_gameEntityRegister, null))
+        protected void AdjustCompassDirection() {
+            var nearestTower = AvatorUIHelper.FindNearestTower(GameEntityRegister,transform.position);
+            if (!ReferenceEquals(nearestTower, null))
             {
-                var allTowersReg = _gameEntityRegister.GetAllEntity(typeof(TowerEntityController));
-                var allTowers = allTowersReg.Cast<TowerEntityController>();
-
-                res = allTowers.Where<TowerEntityController>(x => !x.IsTowerCaptured()).
-                    OrderBy<TowerEntityController, double>(x => Vector3.Distance(transform.position, x.transform.position)).
-                    FirstOrDefault<TowerEntityController>();
+                var nearesTTowerTransform = nearestTower.transform;
+                if (Vector3.Distance(transform.position, nearesTTowerTransform.position) >= HIDE_DISTANCE_COMPASS)
+                {
+                    CompassGameObject.gameObject.SetActive(true);
+                    CompassGameObject.LookAt(nearesTTowerTransform);
+                    CompassItem.LookAt(nearesTTowerTransform);
+                }
+                else {
+                    /* Hide the compass when the player is too near the tower*/
+                    CompassGameObject.gameObject.SetActive(false);
+                }
             }
-            else Debug.LogError("No game entity register supplied.");
-            return res;
         }
-
 
     }
 }
