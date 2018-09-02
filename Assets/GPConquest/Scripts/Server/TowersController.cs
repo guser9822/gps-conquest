@@ -58,5 +58,11 @@ namespace TC.GPConquest.Server
                 x.networkObject.Destroy();
             });
         }
+
+        public void ResetAllTowers()
+        {
+            //######## to implement
+        }
+
     }
 }

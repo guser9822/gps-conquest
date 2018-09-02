@@ -62,6 +62,8 @@ MonoBehaviour:
   - {fileID: 1569749010823948, guid: 374b3bb271af4d6488ca420a686623d9, type: 2}
   TowerUIEntityNetworkObject:
   - {fileID: 1874035569711360, guid: 658e531c252769a4986a64bfd94a15bf, type: 2}
+  GameFactionsNetworkControllerNetworkObject:
+  - {fileID: 1325067557097884, guid: f1ebb821314eac84b98eb8a90991d0b0, type: 2}
   automaticScenes: 1
 --- !u!1001 &100100000
 Prefab:

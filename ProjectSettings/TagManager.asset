@@ -12,6 +12,7 @@ TagManager:
   - GameStatusController
   - Avator
   - GameUINetController
+  - GameFactionsController
   layers:
   - Default
   - TransparentFX

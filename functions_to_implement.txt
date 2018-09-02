@@ -1,0 +1,2 @@
+1) ResetAllTowers() (TC.GPConquest.Server.TowersController)
+2) NotifyWinningFaction(string) (TC.GPConquest.Player.DestinationController)

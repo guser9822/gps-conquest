@@ -304,6 +304,13 @@ namespace TC.GPConquest.Player
         {
             return networkObject.NetworkId;
         }
+
+        
+        public void NotifyWinningFaction(string winninFaction)
+        {
+            //######## to implement
+        }
+
     }
 
 

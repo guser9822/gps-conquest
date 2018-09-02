@@ -78,7 +78,8 @@ namespace TC.Common {
         public static readonly string TOWER_TAG= "Tower";
         public static readonly string AVATOR_TAG = "Avator";
         public static readonly string DESTINATION_TAG = "Destination"; 
-        public static readonly string MAIN_CAMERA_TAG = "MainCamera"; 
+        public static readonly string MAIN_CAMERA_TAG = "MainCamera";
+        public static readonly string GAME_FACTIONS_CONTROLLER = "GameFactionsController";
 
         #endregion
     }
