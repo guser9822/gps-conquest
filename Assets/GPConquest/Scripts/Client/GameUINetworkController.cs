@@ -15,6 +15,7 @@ namespace TC.GPConquest.Player
 
         public GameObject PrefabPlayerUI;//prefabs of the UI, used only for instantiation
         public GameObject PrefabAvatorUI;//prefabs of the UI, used only for instantiation
+        public GameObject CompassPrefab;//prefabs of the UI, used only for instantiation
         [HideInInspector]
         public GameObject InstantiatedPlayerUI;//instantiated UI
         [HideInInspector]
@@ -31,6 +32,9 @@ namespace TC.GPConquest.Player
         public PlayerEntity PlayerEntity;
         protected bool ServerProcess;
 
+        [HideInInspector]
+        public GameObject InstantiatedCompassPrefab;
+
         public void Awake()
         {
             //AvatorUI conflict with the UI that reside on the server process.
@@ -46,6 +50,7 @@ namespace TC.GPConquest.Player
             if (!ServerProcess) {
                 InstantiatedPlayerUI = Instantiate<GameObject>(PrefabPlayerUI);
                 InstantiatedAvatorUI = Instantiate<GameObject>(PrefabAvatorUI);
+                InstantiatedCompassPrefab = Instantiate<GameObject>(CompassPrefab);
             }
 
         }
@@ -80,14 +85,17 @@ namespace TC.GPConquest.Player
             InstantiatedAvatorUI.transform.SetParent(_avatorTransform);
             //Set the AvatorUI(nickname) on the head of the avator character
             InstantiatedAvatorUI.transform.localPosition = new Vector3(0, 2.3f, 0);
-
             //Sets the correct position for the UI
             InstantiatedPlayerUI.transform.localPosition =
                 new Vector3(0.0f,
                 0,
                 0f);
 
-            //If the code isn't executed by the owner or the process is the Server, deactivate the 2D GUI and the avator ui
+            //Set the Compass 
+            InstantiatedCompassPrefab.transform.SetParent(_avatorTransform);
+            InstantiatedCompassPrefab.transform.localPosition = new Vector3(0, 1.0f, 0);
+
+            //If the code isn't executed by the owner or the process is the Server, deactivate the 2D GUI
             if (!networkObject.IsOwner)
             {
                 //Deactivates static parts of the UI
@@ -97,11 +105,16 @@ namespace TC.GPConquest.Player
                 var eventSystem = InstantiatedPlayerUI.GetComponentInChildren<EventSystem>();
                 eventSystem.gameObject.SetActive(false);
 
+                //Deactivate the Compass object, the others player must not see it
+                InstantiatedCompassPrefab.gameObject.SetActive(false);
+
             }
             else PlayerUI.InitPlayerUI(AvatorControllerReference);
 
             if(!ReferenceEquals(AvatorUI,null))
-                AvatorUI.InitAvatorUI(CameraOnDestination, PlayerEntity);
+                AvatorUI.InitAvatorUI(CameraOnDestination, 
+                    PlayerEntity,
+                    InstantiatedCompassPrefab.transform);
         }
 
         private void NetworkObject_onDestroy(NetWorker sender)

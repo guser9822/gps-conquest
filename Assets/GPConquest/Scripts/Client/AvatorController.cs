@@ -29,6 +29,8 @@ namespace TC.GPConquest.Player
         public PlayerEntity PlayerEntity;
         [HideInInspector]
         public Camera CameraOnDestination;
+        [HideInInspector]
+        public GameEntityRegister GameEntityRegister;
 
         private void Awake()
         {
@@ -110,6 +112,7 @@ namespace TC.GPConquest.Player
             DestinationTransform = _destinationController.gameObject.GetComponent<Transform>();
             CameraOnDestination = _destinationController.DestinationCamera;
             _destinationController.AvatorController = this;
+            GameEntityRegister = _destinationController.GameEntityRegister;
         }
 
 
