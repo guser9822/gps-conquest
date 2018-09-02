@@ -252,5 +252,16 @@ namespace TC.GPConquest.Server
             }
             else Debug.LogError("Action name is null or empty");
         }
+
+        /// <summary>
+        /// This function return true if the tower is actually captured by a one faction
+        /// </summary>
+        /// <returns>true if the faction that own this tower is GameCommonNames.NO_FACTION </returns>
+        public bool IsTowerCaptured() {
+            return !ReferenceEquals(OwnerFaction, null) &&
+                OwnerFaction.Length > 0 &&
+                GameCommonNames.FACTIONS.Contains<string>(OwnerFaction) &&
+                !OwnerFaction.Equals(GameCommonNames.NO_FACTION);
+        }
     }
 }

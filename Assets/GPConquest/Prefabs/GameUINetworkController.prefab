@@ -62,3 +62,6 @@ MonoBehaviour:
   PlayerUI: {fileID: 0}
   AvatorControllerReference: {fileID: 0}
   PlayerEntity: {fileID: 0}
+  CompassPrefab: {fileID: 1978666917934468, guid: f512721680647ad478435a7cd3e67f6f,
+    type: 2}
+  InstantiatedCompassPrefab: {fileID: 0}

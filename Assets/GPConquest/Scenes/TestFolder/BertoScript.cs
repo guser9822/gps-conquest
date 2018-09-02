@@ -6,25 +6,22 @@ using UnityEngine;
 
 public class BertoScript : MonoBehaviour {
 
-    public Camera camerA;
-    public GameObject AvatorUIPrefab;
-    public GameObject InstantiatedAvatorUI;
-    public string myName;
-    public AvatorUI avatorUI;
+    public GameObject CompassPrefab;
+    [HideInInspector]
+    public GameObject InstantiatedCompassPrefab;
+    public GameObject CubeToFollow;
+    protected Transform DaggerTransf;
 
     // Use this for initialization
     void Start () {
-        InstantiatedAvatorUI = Instantiate(AvatorUIPrefab);
-        InstantiatedAvatorUI.transform.SetParent(this.transform);
-        InstantiatedAvatorUI.transform.localPosition = new Vector3(0, 2, 0);
-        PlayerEntity p = new PlayerEntity();
-        p.username = myName;
-        avatorUI = InstantiatedAvatorUI.GetComponentInChildren<AvatorUI>();
-        avatorUI.InitAvatorUI(camerA, p);
+        InstantiatedCompassPrefab = Instantiate(CompassPrefab,transform);
+        DaggerTransf = InstantiatedCompassPrefab.transform;
+        //DaggerTransf.localPosition = new Vector3(0.0f, 2f,0.0f);
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        transform.LookAt(CubeToFollow.transform);
+        DaggerTransf.LookAt(CubeToFollow.transform);
+    }
 }
