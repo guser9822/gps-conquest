@@ -21,10 +21,10 @@ namespace TC.GPConquest.Server
         private GameEntityRegister GameEntityRegister;
 
         List<Vector2> TowersGPSCoords = new List<Vector2>
-        {
-            new Vector2(40.856480f, 14.277191f),
-            new Vector2(40.857330f, 14.278447f),
-            new Vector2(40.857128f, 14.278398f)
+        { 
+            new Vector2(40.857155f, 14.278515f),
+            //new Vector2(40.857330f, 14.278447f),
+            //new Vector2(40.857128f, 14.278398f)
         };
 
         private void Awake()

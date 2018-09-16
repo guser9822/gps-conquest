@@ -67,8 +67,8 @@ public class tileGen : MonoBehaviour
         {
             //CDN 40.857133f, 14.278698f
             //Bologna 44.490346 11.327496
-            float lat = 40.857133f;
-            float longi = 14.278698f;
+            float lat = 40.857140f;
+            float longi = 14.278677f;
             
             LatLng = new Vector2(lat, longi);
             Center = calcTile(lat, longi);

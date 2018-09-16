@@ -38,8 +38,8 @@ namespace TC.GPConquest.Player
         private void Start()
         {
             //Adds two fake account for testing purpose only
-            AddNewUser("viper9","a","a",GameCommonNames.GREEN_FACTION, "HumanMale 2");
-            AddNewUser("zam72", "a", "a", GameCommonNames.RED_FACTION, "HumanFemale 3");
+            AddNewUser("rick072","a","a",GameCommonNames.GREEN_FACTION, "HumanMale 2");
+            AddNewUser("anto902", "a", "a", GameCommonNames.RED_FACTION, "HumanFemale 3");
         }
 
         public bool AddNewUser(string _username,

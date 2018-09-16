@@ -23,7 +23,7 @@ namespace TC.GPConquest.Server
         //Times expressed in seconds
         private struct TIMES
         {
-            public const double FACTION_CONQUEST_TIME = 10;
+            public const double FACTION_CONQUEST_TIME = 30;
             public const double WAITING_TIME_BEFORE_NEXT_CAPTURE = 10;
             public const double UPDATE_NETWORK_CAPT_CONTROLLERS_TIME = 0.5;//Timer used to send RPC every half second
         };
