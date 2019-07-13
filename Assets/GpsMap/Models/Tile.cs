@@ -27,7 +27,7 @@ namespace Assets
 
         private void Awake()
         {
-            DownlaodTiles = false;
+            //DownlaodTiles = false;
         }
 
         public Tile()
@@ -54,9 +54,9 @@ namespace Assets
             var tilename = Application.persistentDataPath + "/" + realPos.x + "_" + realPos.y;
             var tileurl = realPos.x + "/" + realPos.y;
 
-            var url = "http://tile.mapzen.com/mapzen/vector/v1/water,earth,buildings,roads,landuse/" + zoom + "/";
+            //var url = "http://tile.mapzen.com/mapzen/vector/v1/water,earth,buildings,roads,landuse/" + zoom + "/"; old url
+            var url = "https://tile.nextzen.org/tilezen/vector/v1/all/" + zoom + "/";
 
-            //Debug.Log(url);
             JSONObject mapData;
 
             //If the tile has been created in the past, load from memory
@@ -72,7 +72,10 @@ namespace Assets
             }
             else if(DownlaodTiles)
             {
-                var www = new WWW(url + tileurl + ".json?api_key=mapzen-Mrq2fyY");
+                var completeUrl = url + tileurl + ".json?api_key=YOUR_NEXTZEN_API_KEY";
+                Debug.Log(" Generated URL for tile nextzen : " + completeUrl);
+                //var www = new WWW(url + tileurl + ".json?api_key=mapzen-Mrq2fyY"); mapzen api key
+                var www = new WWW(completeUrl);//nextzen api key
                 yield return www;
 
                 var sr = File.CreateText(tilename);
@@ -110,6 +113,16 @@ namespace Assets
             //filter to just polygons
             foreach (var geo in mapData["features"].list.Where(x => x["geometry"]["type"].str == "Polygon"))
             {
+
+                var buildIngNameOBJ = geo["properties"]["name"]; //.str == "G1"
+                var buildingNameStr = "";
+                if (!ReferenceEquals(buildIngNameOBJ, null))
+                {
+                    buildingNameStr = buildIngNameOBJ.str;
+                    if (buildingNameStr=="G1")
+                        Debug.Log("Stop");
+                }
+
                 //convert and add points
                 var l = new List<Vector3>();
                 for (int i = 0; i < geo["geometry"]["coordinates"][0].list.Count - 1; i++)
@@ -133,7 +146,7 @@ namespace Assets
                         BuildingDictionary.Add(center, bh);
 
                         var m = bh.CreateModel(BuildingMaterial);
-                        m.name = "building";
+                        m.name = "building "+ buildingNameStr;
                         m.transform.parent = this.transform;
                         center = new Vector3(center.x, center.y, center.z);
                         m.transform.localPosition = center;
